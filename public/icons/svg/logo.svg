@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- Created with Vectornator (http://vectornator.io/) -->
+<svg height="100%" stroke-miterlimit="10" style="fill-rule:nonzero;clip-rule:evenodd;stroke-linecap:round;stroke-linejoin:round;" version="1.1" viewBox="0 0 1024 1024" width="100%" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:vectornator="http://vectornator.io" xmlns:xlink="http://www.w3.org/1999/xlink">
+<defs>
+<filter color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse" height="156.245" id="Filter" width="182.318" x="594.027" y="106.251">
+<feDropShadow dx="0" dy="0" flood-color="#1e3a8a" flood-opacity="0.5" in="SourceGraphic" result="Shadow" stdDeviation="1.61448"/>
+</filter>
+<filter color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse" height="139.91" id="Filter_2" width="169.496" x="543.13" y="163.052">
+<feDropShadow dx="0" dy="0" flood-color="#1e40af" flood-opacity="0.5" in="SourceGraphic" result="Shadow" stdDeviation="1.61448"/>
+</filter>
+<filter color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse" height="216.628" id="Filter_3" width="425.778" x="99.1409" y="68">
+<feDropShadow dx="0" dy="0" flood-color="#2563eb" flood-opacity="0.5" in="SourceGraphic" result="Shadow" stdDeviation="1"/>
+</filter>
+<filter color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse" height="758.062" id="Filter_4" width="653.531" x="46.4688" y="68.0625">
+<feDropShadow dx="0" dy="0" flood-color="#0f172a" flood-opacity="0.5" in="SourceGraphic" result="Shadow" stdDeviation="1"/>
+</filter>
+<filter color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse" height="513.796" id="Filter_5" width="764.742" x="238.018" y="456.443">
+<feDropShadow dx="0" dy="0" flood-color="#0f172a" flood-opacity="0.5" in="SourceGraphic" result="Shadow" stdDeviation="1"/>
+</filter>
+<path d="M516.28 713.341C516.28 655.843 562.891 609.232 620.389 609.232C677.887 609.232 724.498 655.843 724.498 713.341C724.498 770.839 677.887 817.45 620.389 817.45C562.891 817.45 516.28 770.839 516.28 713.341Z" id="Fill"/>
+<filter color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse" height="313.218" id="Filter_6" width="313.218" x="463.78" y="556.732">
+<feDropShadow dx="0" dy="0" flood-color="#0f172a" flood-opacity="0.5" in="SourceGraphic" result="Shadow" stdDeviation="1"/>
+</filter>
+<filter color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse" height="168.41" id="Filter_7" width="114.53" x="562.139" y="630.217">
+<feDropShadow dx="0" dy="0" flood-color="#0f172a" flood-opacity="0.5" in="SourceGraphic" result="Shadow" stdDeviation="1"/>
+</filter>
+</defs>
+<g id="logo" vectornator:layerName="logo">
+<g opacity="1">
+<path d="M751.812 118.36L687.027 137.611C681.378 139.29 672.945 143.475 668.191 146.96L661.723 151.702C656.97 155.186 650.439 161.968 647.137 166.85L609.273 222.827L645.379 247.251L684.694 189.129C687.195 185.432 692.692 181.404 696.971 180.132L764.237 160.144" fill="#1e3a8a" fill-rule="nonzero" filter="url(#Filter)" stroke="#1e3a8a" stroke-linecap="butt" stroke-linejoin="miter" stroke-width="16.1448" vectornator:shadowAngle="0" vectornator:shadowColor="#1e3a8a" vectornator:shadowOffset="0" vectornator:shadowOpacity="0.5" vectornator:shadowRadius="3.22897"/>
+<path d="M575.406 167.088L547.167 208.836L580.682 231.507L572.908 242.999L639.104 287.775L646.877 276.283L680.351 298.925L708.591 257.177L575.406 167.088Z" fill="#1e40af" fill-rule="nonzero" filter="url(#Filter_2)" stroke="none" vectornator:shadowAngle="0" vectornator:shadowColor="#1e40af" vectornator:shadowOffset="0" vectornator:shadowOpacity="0.5" vectornator:shadowRadius="3.22897"/>
+</g>
+<path d="M141.641 110.5L416.525 110.5L482.419 242.128" fill="none" filter="url(#Filter_3)" stroke="#2563eb" stroke-linecap="round" stroke-linejoin="round" stroke-width="80" vectornator:shadowAngle="0" vectornator:shadowColor="#2563eb" vectornator:shadowOffset="0" vectornator:shadowOpacity="0.5" vectornator:shadowRadius="2"/>
+<path d="M143.5 110.562C113.385 110.562 88.9688 113.881 88.9688 141.438L88.9688 733.719C88.9688 761.276 113.385 783.625 143.5 783.625L280.531 783.625L280.531 519.625C280.531 508.2 288.813 498.938 299.031 498.938L657.5 498.938L657.5 347.594L527.188 256.062C527.187 256.062 386.663 256.062 310.031 256.062C186.752 249.564 143.5 110.563 143.5 110.562Z" fill="none" filter="url(#Filter_4)" stroke="#3b82f6" stroke-linecap="butt" stroke-linejoin="round" stroke-width="80" vectornator:shadowAngle="0" vectornator:shadowColor="#0f172a" vectornator:shadowOffset="0" vectornator:shadowOpacity="0.5" vectornator:shadowRadius="2"/>
+<path d="M299.02 498.943L663.384 498.943L941.758 498.943C951.976 498.943 960.26 508.205 960.26 519.63L960.26 907.052C960.26 918.477 951.976 927.739 941.758 927.739L299.02 927.739C288.801 927.739 280.518 918.477 280.518 907.052L280.518 519.63C280.518 508.205 288.801 498.943 299.02 498.943Z" fill="none" filter="url(#Filter_5)" stroke="#2563eb" stroke-linecap="butt" stroke-linejoin="round" stroke-width="80" vectornator:layerName="Rectangle" vectornator:shadowAngle="0" vectornator:shadowColor="#0f172a" vectornator:shadowOffset="0" vectornator:shadowOpacity="0.5" vectornator:shadowRadius="2"/>
+<g filter="url(#Filter_6)" vectornator:layerName="circle" vectornator:shadowAngle="0" vectornator:shadowColor="#0f172a" vectornator:shadowOffset="0" vectornator:shadowOpacity="0.5" vectornator:shadowRadius="2">
+<mask height="308.218" id="StrokeMask" maskUnits="userSpaceOnUse" width="308.218" x="466.28" y="559.232">
+<rect fill="#ffffff" height="308.218" stroke="none" width="308.218" x="466.28" y="559.232"/>
+<use fill="#000000" fill-rule="evenodd" stroke="none" xlink:href="#Fill"/>
+</mask>
+<use fill="none" mask="url(#StrokeMask)" stroke="#2563eb" stroke-linecap="butt" stroke-linejoin="round" stroke-width="100" xlink:href="#Fill"/>
+</g>
+<path d="M611.62 796.127C610.334 796.127 609.252 795.688 608.374 794.81C607.497 793.933 607.058 792.851 607.058 791.565L607.058 778.969C597.783 777.834 590.028 775.493 583.795 771.944C577.561 768.396 572.851 764.122 569.666 759.121C566.482 754.121 564.806 748.867 564.639 743.359C564.639 742.315 565.021 741.411 565.786 740.647C566.55 739.883 567.476 739.501 568.566 739.501L591.489 739.501C593.153 739.501 594.431 739.807 595.324 740.42C596.217 741.033 597.064 741.823 597.866 742.792C598.804 744.592 600.147 746.325 601.895 747.989C603.642 749.653 605.957 751 608.839 752.029C611.722 753.058 615.243 753.572 619.404 753.572C626.425 753.572 631.732 752.483 635.325 750.304C638.919 748.125 640.716 745.182 640.716 741.475C640.716 738.752 639.747 736.531 637.811 734.814C635.874 733.097 632.757 731.55 628.46 730.173C624.163 728.796 618.421 727.336 611.234 725.792C602.035 723.916 594.197 721.439 587.721 718.36C581.245 715.281 576.328 711.226 572.969 706.195C569.61 701.164 567.93 694.903 567.93 687.414C567.93 677.685 571.41 669.424 578.37 662.63C585.33 655.836 594.893 651.6 607.058 649.92L607.058 637.279C607.058 635.993 607.497 634.911 608.374 634.033C609.252 633.156 610.334 632.717 611.62 632.717L626.644 632.717C627.93 632.717 629.012 633.156 629.89 634.033C630.767 634.911 631.206 635.993 631.206 637.279L631.206 650.329C639.619 651.736 646.658 654.323 652.325 658.091C657.991 661.858 662.318 666.106 665.307 670.835C668.295 675.563 669.85 680.106 669.971 684.463C669.971 685.462 669.611 686.355 668.893 687.142C668.174 687.928 667.262 688.322 666.158 688.322L642.1 688.322C640.814 688.322 639.679 688.08 638.696 687.595C637.712 687.111 636.835 686.294 636.063 685.144C635.412 682.496 633.521 680.189 630.389 678.222C627.257 676.255 623.217 675.272 618.27 675.272C613.019 675.272 608.892 676.213 605.889 678.097C602.886 679.981 601.384 682.822 601.384 686.62C601.384 689.116 602.201 691.246 603.835 693.008C605.469 694.771 608.215 696.322 612.074 697.661C615.932 699 621.175 700.419 627.802 701.916C638.771 703.914 647.657 706.459 654.458 709.554C661.259 712.648 666.245 716.642 669.415 721.537C672.584 726.432 674.169 732.586 674.169 740C674.169 747.157 672.376 753.462 668.79 758.917C665.205 764.372 660.189 768.786 653.743 772.16C647.298 775.534 639.785 777.789 631.206 778.923L631.206 791.565C631.206 792.851 630.767 793.933 629.89 794.81C629.012 795.688 627.93 796.127 626.644 796.127L611.62 796.127Z" fill="#2563eb" filter="url(#Filter_7)" stroke="none" vectornator:layerName="money" vectornator:shadowAngle="0" vectornator:shadowColor="#0f172a" vectornator:shadowOffset="0" vectornator:shadowOpacity="0.5" vectornator:shadowRadius="2"/>
+</g>
+</svg>

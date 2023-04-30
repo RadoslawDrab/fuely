@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
-<!-- Created with Vectornator (http://vectornator.io/) -->
-<svg height="100%" stroke-miterlimit="10" style="fill-rule:nonzero;clip-rule:evenodd;stroke-linecap:round;stroke-linejoin:round;" version="1.1" viewBox="0 0 1024 1024" width="100%" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:vectornator="http://vectornator.io" xmlns:xlink="http://www.w3.org/1999/xlink">
-<defs/>
-<g id="person.fill" vectornator:layerName="person.fill">
-<path d="M512.977 513.105C614.051 513.105 691.199 426.679 691.199 314.374C691.199 208.906 612.098 120.039 512.977 120.039C413.855 120.039 333.777 208.906 334.754 314.374C334.754 426.679 412.391 513.105 512.977 513.105ZM201.453 927.167L823.035 927.167C867.957 927.167 893.348 913.984 893.348 874.433C893.348 757.246 746.863 595.624 512 595.624C277.137 595.624 130.652 757.246 130.652 874.433C130.652 913.984 156.043 927.167 201.453 927.167Z" fill="#000000" opacity="1" stroke="none" vectornator:layerName="Text"/>
-</g>
-</svg>
