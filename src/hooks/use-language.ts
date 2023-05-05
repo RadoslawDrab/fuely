@@ -13,6 +13,12 @@ function useLanguage(): LanguageObject {
 		// Changes language based on language set in browser
 		setCurrentLanguage(() => navigator.language.split('-')[0])
 	}, [])
+	useEffect(() => {
+		// Changes `html` element language based on current language
+		const htmlElement = document.querySelector('html')
+		if (htmlElement) htmlElement.lang = currentLang
+	}, [currentLang])
+
 	// Sets language
 	function setLanguage(lang: Languages) {
 		setCurrentLanguage(() => lang)
