@@ -1,10 +1,10 @@
 import React from 'react'
 
 import { exampleLanguageObject } from '@/hooks/use-language'
-import { LanguageObject } from '@/hooks/use-language.modal'
+import { LanguageObject } from '@type/hooks/use-language.modal'
 
 import { exampleThemeObject } from '@/hooks/use-theme'
-import { Theme } from '@/hooks/use-theme.modal'
+import { Theme } from '@type/hooks/use-theme.modal'
 
 interface AppContext {
 	Language: LanguageObject

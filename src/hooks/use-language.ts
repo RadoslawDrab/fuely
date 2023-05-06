@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import translations from '@data/translations.json'
 
-import { LanguageObject, Languages, Texts, Translations } from './use-language.modal'
+import { LanguageObject, Languages, Texts, Translations } from '@type/hooks/use-language.modal'
 
 const translationsObject: Translations = translations
 
