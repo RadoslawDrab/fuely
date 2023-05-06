@@ -14,10 +14,11 @@
 		"isolatedModules": true,
 		"jsx": "preserve",
 		"incremental": true,
+		"allowImportingTsExtensions": true,
 		"paths": {
 			"@/*": ["./src/*"],
-			"@styles/*": ["./src/styles/*"],
-			"@comp-styles/*": ["./src/styles/components/*"],
+			"@styles/*": ["./src/styles/components/*"],
+			"@type/*": ["./src/types/*"],
 			"@comp/*": ["./src/components/*"],
 			"@pages/*": ["./src/pages/*"],
 			"@api/*": ["./src/pages/api/*"],
