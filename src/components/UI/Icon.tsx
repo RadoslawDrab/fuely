@@ -1,6 +1,8 @@
 import React from 'react'
-import styles from './Icon.module.scss'
+import styles from '@comp-styles/UI/Icon.module.scss'
 import Image from 'next/image'
+
+const icons = require('/public/icons/svg/logo.svg')
 
 import logo from '../../../../public/icons/svg/logo.svg'
 
