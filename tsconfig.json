@@ -17,6 +17,7 @@
 		"paths": {
 			"@/*": ["./src/*"],
 			"@styles/*": ["./src/styles/*"],
+			"@comp-styles/*": ["./src/styles/components/*"],
 			"@comp/*": ["./src/components/*"],
 			"@pages/*": ["./src/pages/*"],
 			"@api/*": ["./src/pages/api/*"],
