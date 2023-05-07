@@ -1,0 +1,13 @@
+@use '@/styles/library' as *;
+.button {
+	border: none;
+	border-radius: 5px;
+
+	background-color: $grey-200;
+	color: $grey-800;
+
+	box-shadow: 0 0 0.09rem 0.1rem rgba($color: $grey-950, $alpha: 0.1);
+
+	display: flex;
+	gap: 1.5em;
+}
