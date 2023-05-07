@@ -1,0 +1,14 @@
+@use 'sass:list';
+
+@mixin theme($themes, $properties...) {
+	:global(html.light-theme) & {
+		@each $property in $properties {
+			#{$property}: list.nth($themes, 1);
+		}
+	}
+	:global(html.dark-theme) & {
+		@each $property in $properties {
+			#{$property}: list.nth($themes, 2);
+		}
+	}
+}
