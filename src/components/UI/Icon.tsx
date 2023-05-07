@@ -1,16 +1,22 @@
 import React from 'react'
-import styles from '@comp-styles/UI/Icon.module.scss'
 import Image from 'next/image'
 
-const icons = require('/public/icons/svg/logo.svg')
+import { Props } from '@type/components/UI/Icon.modal'
 
-import logo from '../../../../public/icons/svg/logo.svg'
+import styles from '@styles/UI/Icon.module.scss'
 
-interface Props {
-	width: number
-	height: number
-	alt: string
-}
 export default function Icon(props: Props) {
-	return <Image src={logo.src} alt={props.alt} width={props.width} height={props.height}></Image>
+	const iconStyles = `${styles.icon} ${props.className ?? ''}`.trim()
+
+	// Imports icon based on `type` from `props`
+	const icon = require(`/public/icons/svg/${props.type}.svg`)
+
+	// Checks if icon contains any source
+	if (!icon?.default?.src) {
+		return <>No icon found</>
+	}
+
+	const iconSource = icon.default.src
+
+	return <Image className={iconStyles} src={iconSource} alt={props.alt} width={props.width} height={props.height} />
 }
