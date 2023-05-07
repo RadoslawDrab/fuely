@@ -10,3 +10,14 @@ export function getRandomKey(digitsCount: number = 6): string {
 	const str = digits.reduce((acc, val) => (acc += val), '')
 	return str
 }
+
+export function className(...classNames: (string | undefined)[]): string {
+	const classes: string[] = classNames.filter((c): c is string => !!c)
+	const style = classes
+		.reduce((acc, val) => {
+			if (!val) return acc
+			return (acc += `${val} `)
+		}, '')
+		.trim()
+	return style
+}
