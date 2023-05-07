@@ -1,4 +1,6 @@
 @use 'sass:list';
+@use 'sass:meta';
+@use 'sass:map';
 
 @mixin theme($themes, $properties...) {
 	:global(html.light-theme) & {
@@ -9,6 +11,35 @@
 	:global(html.dark-theme) & {
 		@each $property in $properties {
 			#{$property}: list.nth($themes, 2);
+		}
+	}
+}
+
+@mixin theme-content($colors) {
+	@if meta.content-exists() {
+		$props: ();
+		@each $color in $colors {
+			$prop: list.nth($color, 1);
+			$prop-clrs: map.get($colors, $prop);
+			$props: list.append($props, $prop);
+		}
+		:global(html.light-theme) & {
+			$themes: ();
+			@each $prop in $props {
+				$prop-colors: map.get($colors, $prop);
+				$color: list.nth($prop-colors, 1);
+				$themes: list.append($themes, $color);
+			}
+			@content ($themes...);
+		}
+		:global(html.dark-theme) & {
+			$themes: ();
+			@each $prop in $props {
+				$prop-colors: map.get($colors, $prop);
+				$color: list.nth($prop-colors, 2);
+				$themes: list.append($themes, $color);
+			}
+			@content ($themes...);
 		}
 	}
 }
