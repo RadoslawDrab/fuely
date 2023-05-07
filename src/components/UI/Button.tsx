@@ -1,6 +1,16 @@
 import React from 'react'
-import styles from '@comp-styles/UI/Button.module.scss'
+import { className } from '@/utils'
 
-export default function Button(props: any) {
-	return <button></button>
+import { Props } from '@/types/components/UI/Button.modal'
+
+import styles from '@styles/UI/Button.module.scss'
+
+export default function Button(props: Props) {
+	const buttonClass = className(styles.button, props.className)
+
+	return (
+		<button className={buttonClass} onClick={props.onClick} onFocus={props.onFocus} onBlur={props.onBlur}>
+			{props.children}
+		</button>
+	)
 }
