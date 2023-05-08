@@ -8,25 +8,17 @@
 
 	padding: 1em 2em;
 
-	nav {
-		position: absolute;
-		top: calc(100% + 1em);
-		right: 0;
-		background-color: inherit;
-		color: $grey-950;
-		padding: 1em 2em;
-
-		transition: all $anim-duration-500;
-		@include global('.hidden', true) {
-			opacity: 0;
-			pointer-events: none;
-		}
-	}
 	@include global('.logo-button') {
 		background-color: transparent;
 		box-shadow: none;
 		@include global('.icon') {
 			filter: none;
+		}
+	}
+
+	@media screen and (min-width: 600px) {
+		@include global('.nav-button') {
+			display: none;
 		}
 	}
 }
