@@ -43,3 +43,10 @@
 		}
 	}
 }
+@mixin transition-all($duration, $properties...) {
+	$exceptions: ();
+	@each $property in $properties {
+		$exceptions: list.append($exceptions, $property + ' 0s', $separator: 'comma');
+	}
+	transition: all $duration, $exceptions;
+}
