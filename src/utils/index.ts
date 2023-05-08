@@ -1,3 +1,5 @@
+import { Languages } from '@type/hooks/use-language.modal'
+
 export function isClient() {
 	return typeof window !== 'undefined'
 }
@@ -20,4 +22,24 @@ export function className(...classNames: (string | undefined)[]): string {
 		}, '')
 		.trim()
 	return style
+}
+
+export function setLocalStorage(data: Partial<AppSettings>, overwrite = false) {
+	if (!isClient()) return
+	const newData = overwrite ? data : { ...getLocalStorage(), ...data }
+	localStorage.setItem('FUELY_APP', JSON.stringify(newData))
+}
+export function getLocalStorage(): AppSettings | null {
+	const data = localStorage.getItem('FUELY_APP')
+
+	if (!data) {
+		return null
+	}
+
+	return JSON.parse(data)
+}
+
+export interface AppSettings {
+	theme: 'light' | 'dark'
+	language: Languages
 }
