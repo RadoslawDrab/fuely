@@ -1,0 +1,25 @@
+@use '@/styles/library' as *;
+.header {
+	position: sticky;
+
+	background-color: $grey-50;
+	display: flex;
+	justify-content: space-between;
+
+	padding: 1em 2em;
+
+	nav {
+		position: absolute;
+		top: calc(100% + 1em);
+		right: 0;
+		background-color: inherit;
+		color: $grey-950;
+		padding: 1em 2em;
+
+		transition: all 0.4s;
+		&:global(.hidden) {
+			opacity: 0;
+			pointer-events: none;
+		}
+	}
+}
