@@ -1,12 +1,14 @@
 import React from 'react'
 import Image from 'next/image'
 
+import { className } from '@/utils'
+
 import { Props } from '@type/components/UI/Icon.modal'
 
 import styles from '@styles/UI/Icon.module.scss'
 
 export default function Icon(props: Props) {
-	const iconStyles = `${styles.icon} ${props.className ?? ''}`.trim()
+	const iconStyles = className(styles.icon, 'icon', props.className)
 
 	// Imports icon based on `type` from `props`
 	const icon = require(`/public/icons/svg/${props.type}.svg`)
