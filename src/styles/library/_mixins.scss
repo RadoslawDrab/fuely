@@ -50,3 +50,15 @@
 	}
 	transition: all $duration, $exceptions;
 }
+
+@mixin global($selector, $onCurrent: false) {
+	@if $onCurrent {
+		&:global(#{$selector}) {
+			@content;
+		}
+	} @else {
+		:global(#{$selector}) {
+			@content;
+		}
+	}
+}
