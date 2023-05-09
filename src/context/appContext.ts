@@ -1,12 +1,12 @@
 import React from 'react'
 
 import { exampleLanguageObject } from '@/hooks/use-language'
-import { LanguageObject } from '@type/hooks/use-language.modal'
+import { LanguageObject } from '@/hooks/use-language.modal'
 
 import { exampleThemeObject } from '@/hooks/use-theme'
-import { Theme } from '@type/hooks/use-theme.modal'
+import { Theme } from '@/hooks/use-theme.modal'
 
-import { Navigation } from '@/types/hooks/use-navigation.modal'
+import { Navigation } from '@/hooks/use-navigation.modal'
 import { exampleNavigationObject } from '@/hooks/use-navigation'
 
 interface AppContext {

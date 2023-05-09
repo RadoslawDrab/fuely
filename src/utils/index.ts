@@ -1,4 +1,4 @@
-import { Languages } from '@type/hooks/use-language.modal'
+import { Languages } from '@/hooks/use-language.modal'
 
 export function isClient() {
 	return typeof window !== 'undefined'
