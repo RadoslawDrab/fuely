@@ -6,4 +6,5 @@ export interface Props {
 	onBlur?: (event: React.FocusEvent<HTMLButtonElement>) => void
 	children?: any
 	className?: string
+	data?: { [key: string]: string | number | object | boolean }
 }
