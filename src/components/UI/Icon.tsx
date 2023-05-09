@@ -3,7 +3,7 @@ import Image from 'next/image'
 
 import { className } from '@/utils'
 
-import { Props } from '@type/components/UI/Icon.modal'
+import { Props } from '@/types/UI/Icon.modal'
 
 import styles from '@styles/UI/Icon.module.scss'
 
