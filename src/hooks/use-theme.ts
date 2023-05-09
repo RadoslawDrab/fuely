@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { Theme } from '@/hooks/use-theme.modal'
+import { Theme } from '@/hooks/Theme.modal'
 
 import { isClient } from '../utils'
 
