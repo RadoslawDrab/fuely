@@ -1,4 +1,6 @@
 import React from 'react'
+import { useRouter } from 'next/router'
+
 import useAppContext from '@/hooks/use-app-context'
 
 import { className } from '@/utils'
@@ -43,11 +45,15 @@ const navButtons: NavigationButton[] = [
 	}
 ]
 export default function Navigation() {
+	const router = useRouter()
+
 	const { navigationState } = useAppContext().Navigation
 
 	const navigationStyles = className(styles.nav, !navigationState ? 'hidden' : '')
 
 	function navigate(event: React.MouseEvent<HTMLButtonElement>) {
+		const url = event.currentTarget.dataset.path ?? '/'
+		router.replace(url)
 	}
 
 	const navigationButtons = navButtons.map((item, i) => {
