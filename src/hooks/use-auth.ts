@@ -18,12 +18,28 @@ export default function useAuth(): Auth {
 				setToken(() => data.token)
 			})
 	}
+	function register(login: string, password: string) {
+		fetch('http://localhost:3000/api/auth/register', {
+			method: 'POST',
+			body: JSON.stringify({
+				login: login,
+				password: password
+			})
+		})
+			.then((response) => {
+				return response.json()
+			})
+			.then((data) => {
+				console.log(data)
+			})
+	}
 
-	return { isLoggedIn: false, token, login }
+	return { isLoggedIn: false, token, login, register }
 }
 
 export const exampleAuthObject: Auth = {
 	isLoggedIn: false,
 	token: '',
-	login: () => {}
+	login: () => {},
+	register: () => {}
 }
