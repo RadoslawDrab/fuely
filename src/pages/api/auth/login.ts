@@ -44,7 +44,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
 			const { token, login, password } = JSON.parse(req.body)
 			// Checks if token exists or login and password exists
 			if (!token && (!login || !password)) {
-				returnStatus(res, 400, 'Bad Request')
+				returnStatus(res, 400, 'Bad Request', 'Invalid input data')
 				return
 			}
 
@@ -64,7 +64,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
 				})
 
 				if (!user) {
-					returnStatus(res, 404, 'Not Found')
+					returnStatus(res, 404, 'Not Found', 'User not found')
 					return
 				}
 
@@ -79,7 +79,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
 			const decrypted = decryptToken<UserData>(token)
 
 			if (decrypted.status.code !== 200) {
-				returnStatus(res, decrypted.status.code, decrypted.status.message)
+				returnStatus(res, decrypted.status.code, decrypted.status.info, decrypted.status.message)
 				return
 			}
 			const { data } = decrypted
@@ -93,7 +93,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
 			const hasExpired = expirationDate < new Date()
 
 			if (hasExpired) {
-				returnStatus(res, 403, 'Token Expired')
+				returnStatus(res, 401, 'Unauthorized', 'Token Expired')
 				return
 			}
 
@@ -103,7 +103,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
 			})
 
 			if (!user) {
-				returnStatus(res, 404, 'Not Found')
+				returnStatus(res, 404, 'Not Found', 'User not found')
 				return
 			}
 
