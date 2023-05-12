@@ -2,15 +2,20 @@
 .header {
 	position: sticky;
 
-	background-color: $grey-50;
+	@include theme(($grey-50, $grey-950), background-color);
 	display: flex;
 	justify-content: space-between;
 
 	padding: 1em 2em;
 
-	@include global('.logo-button') {
+	@include global('button.logo-button') {
 		background-color: transparent;
 		box-shadow: none;
+		@include theme(($grey-800, $grey-200), color);
+
+		display: flex;
+		align-items: center;
+
 		@include global('.icon') {
 			filter: none;
 		}

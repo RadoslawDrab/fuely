@@ -5,7 +5,7 @@
 	right: 0;
 
 	background-color: inherit;
-	color: $grey-950;
+	@include theme(($grey-800, $grey-200), color);
 
 	padding: 1em 2em;
 
