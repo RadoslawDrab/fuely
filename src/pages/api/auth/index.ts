@@ -21,7 +21,8 @@ export interface UserSettings {
 
 export interface Status {
 	code: number
-	message: string
+	info: string
+	message?: string
 }
 interface ReturnObject<Type> {
 	status: Status
@@ -75,12 +76,12 @@ function decrypt<T>(encryptedData: string, key: EncryptionKey): ReturnObject<T> 
 
 	// Checks if encryption was successful
 	if (!tokenDecrypted) {
-		return { status: { message: 'Bad Request', code: 400 } }
+		return { status: { info: 'Bad Request', code: 400, message: 'Invalid token' } }
 	}
 	// Returns status and data object
-	return { status: { message: 'Success', code: 200 }, data: JSON.parse(tokenDecrypted) }
+	return { status: { info: 'Success', code: 200 }, data: JSON.parse(tokenDecrypted) }
 }
 
-export function returnStatus(res: NextApiResponse, code: number, message: string) {
-	res.status(code).json({ message, code })
+export function returnStatus(res: NextApiResponse, code: number, info: string, message?: string) {
+	res.status(code).json({ code, info, message })
 }
