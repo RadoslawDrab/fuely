@@ -9,10 +9,10 @@ const users: User[] = []
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
 	switch (req.method) {
 		case 'POST': {
-			const { login, password, theme, language } = JSON.parse(req.body)
+			const { login, password } = JSON.parse(req.body)
 
 			if (!login || !password) {
-				returnStatus(res, 400, 'Bad Request', "Login or password wasn't set")
+				returnStatus(res, 400, 'Bad Request', "Login or password weren't set")
 				return
 			}
 
@@ -22,6 +22,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
 				const decryptedPassword = decryptData(user.password)
 
 				if (!decryptedLogin.data || !decryptedPassword.data) return false
+
 				return decryptedLogin.data === login && decryptedPassword.data === password
 			})
 
@@ -39,12 +40,12 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
 				settings: {
 					distanceUnit: 'kilometer',
 					fuelUnit: 'liter',
-					language: language,
-					theme: theme
+					language: 'en',
+					theme: 'light'
 				}
 			}
 			users.push(user)
-			res.status(200).json(users)
+			returnStatus(res, 200, 'OK', 'User added')
 		}
 	}
 }
