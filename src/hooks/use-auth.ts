@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 
 import { getLocalStorage, isClient, setLocalStorage } from '@/utils'
 import { Auth } from './Auth.modal'
@@ -84,6 +84,7 @@ export default function useAuth(): Auth {
 	}
 	function catchHandler(error: Error) {
 		console.error(error)
+		setLocalStorage({ token: '' })
 	}
 
 	useEffect(() => {
