@@ -7,10 +7,12 @@ const tokenKey = '#Fuely-Token#'
 const dataKey = '#Fuely-Data#'
 
 export interface User {
-	id: string
 	login: string
 	password: string
 	settings: UserSettings
+}
+export interface UserObject {
+	[id: string]: User
 }
 export interface UserSettings {
 	language: Languages
