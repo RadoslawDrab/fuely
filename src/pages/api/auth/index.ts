@@ -82,6 +82,6 @@ function decrypt<T>(encryptedData: string, key: EncryptionKey): ReturnObject<T> 
 	return { status: { info: 'Success', code: 200 }, data: JSON.parse(tokenDecrypted) }
 }
 
-export function returnStatus(res: NextApiResponse, code: number, info: string, message?: string) {
-	res.status(code).json({ code, info, message })
+export function returnError(res: NextApiResponse, code: number, info: string, message?: string) {
+	return res.status(code).send({ code, info, message })
 }
