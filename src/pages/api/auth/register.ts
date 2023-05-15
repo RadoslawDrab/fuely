@@ -1,8 +1,7 @@
 import { NextApiRequest, NextApiResponse } from 'next'
 
 import { getRandomKey } from '@/utils'
-
-import { User, decryptData, encryptData, returnStatus } from '.'
+import { User, decryptData, encryptData, returnError } from '.'
 
 const users: User[] = []
 
@@ -12,8 +11,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
 			const { login, password } = JSON.parse(req.body)
 
 			if (!login || !password) {
-				returnStatus(res, 400, 'Bad Request', "Login or password weren't set")
-				return
+				return returnError(res, 400, 'Bad Request', "Login or password weren't set")
 			}
 
 			// User with the same login and password. User already exists
@@ -27,8 +25,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
 			})
 
 			if (foundUser) {
-				returnStatus(res, 400, 'Bad Request', 'User already exists')
-				return
+				return returnError(res, 400, 'Bad Request', 'User already exists')
 			}
 
 			const allIds = users.map((user) => user.id)
@@ -45,7 +42,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
 				}
 			}
 			users.push(user)
-			returnStatus(res, 200, 'OK', 'User added')
+			res.status(200).json({ code: 200, info: 'OK', message: 'User added' })
 		}
 	}
 }
