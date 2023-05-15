@@ -1,9 +1,11 @@
+import { User } from '@/pages/api/auth'
+
 export interface Auth {
 	isLoggedIn: boolean
-	token: string
-	user: object
-	login: (login: string, password: string) => void
-	register: (login: string, password: string) => void
+	isLoading: boolean
+	user: User | null
+	login: (login: string, password: string) => Promise<any>
+	register: (login: string, password: string) => Promise<any>
 	loginUsingToken: (token: string) => void
 	logout: () => void
 }
