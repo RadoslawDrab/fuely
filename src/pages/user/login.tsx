@@ -3,7 +3,6 @@ import React, { useState } from 'react'
 import useAppContext from '@/hooks/use-app-context'
 import useUserRedirect from '@/hooks/use-user-redirect'
 
-import Layout from '@/components/Layout/Layout'
 import Button from '@/components/UI/Button'
 
 export default function Login() {
@@ -34,11 +33,11 @@ export default function Login() {
 	}
 
 	return (
-		<Layout>
+		<>
 			<Button onClick={loginUser}>Login</Button>
 			<input type="text" defaultValue={inputLogin} onChange={onLoginInputChange} />
 			<input type="text" defaultValue={inputPassword} onChange={onPasswordInputChange} />
 			{hasError && <p>Invalid login or password</p>}
-		</Layout>
+		</>
 	)
 }

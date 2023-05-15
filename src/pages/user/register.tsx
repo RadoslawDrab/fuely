@@ -4,7 +4,6 @@ import { useRouter } from 'next/router'
 import useAppContext from '@/hooks/use-app-context'
 import useUserRedirect from '@/hooks/use-user-redirect'
 
-import Layout from '@/components/Layout/Layout'
 import Button from '@/components/UI/Button'
 
 export default function Register() {
@@ -34,11 +33,11 @@ export default function Register() {
 	}
 
 	return (
-		<Layout>
+		<>
 			<Button onClick={registerUser}>Register</Button>
 			<input type="text" defaultValue={inputLogin} onChange={onLoginInputChange} />
 			<input type="text" defaultValue={inputPassword} onChange={onPasswordInputChange} />
 			{hasError && <p>User already exists</p>}
-		</Layout>
+		</>
 	)
 }
