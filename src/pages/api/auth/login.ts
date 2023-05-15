@@ -89,7 +89,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
 
 			// Returns user with the same id, login and password as user decrypted from token
 			const user = users.find((user) => {
-				return user.id === data.id && user.login === data.login && user.password === data.password
+				return user.id === data.id
 			})
 
 			if (!user) {
