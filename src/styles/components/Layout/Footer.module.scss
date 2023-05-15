@@ -1,0 +1,15 @@
+@use '@/styles/library' as *;
+.footer {
+	width: 100%;
+	background-color: inherit;
+	display: flex;
+	justify-content: space-between;
+	gap: 2em;
+	padding: 1em;
+	margin-top: 3em;
+	ul {
+		list-style: none;
+		display: flex;
+		gap: 1em;
+	}
+}
