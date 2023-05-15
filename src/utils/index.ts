@@ -46,4 +46,5 @@ export function getLocalStorage(): AppSettings | null {
 export interface AppSettings {
 	theme: 'light' | 'dark'
 	language: Languages
+	token: string
 }
