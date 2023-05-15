@@ -1,16 +1,20 @@
 import React, { useEffect } from 'react'
-import { useRouter } from 'next/router'
 
 import useAppContext from '@/hooks/use-app-context'
 
 import Layout from '@/components/Layout/Layout'
 
 export default function Dashboard() {
-	// const router = useRouter()
 	const { user, isLoading } = useAppContext().Auth
+	const { setTheme } = useAppContext().Theme
+	const { setLanguage } = useAppContext().Language
 
 	useEffect(() => {
-		// console.log(user)
+		if (user) {
+			setLanguage(user.settings.language)
+			setTheme(user.settings.theme === 'dark')
+		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [user])
 
 	if (isLoading) {
