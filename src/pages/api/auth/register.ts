@@ -1,48 +1,58 @@
 import { NextApiRequest, NextApiResponse } from 'next'
 
+import { getUsers, addUser } from './database'
 import { getRandomKey } from '@/utils'
-import { User, decryptData, encryptData, returnError } from '.'
+import { User, UserObject, decryptData, encryptData, returnError } from '.'
 
-const users: User[] = []
+export default async function handler(req: NextApiRequest, res: NextApiResponse) {
+	try {
+		const response: any = await getUsers()
+		const users: UserObject = response
 
-export default function handler(req: NextApiRequest, res: NextApiResponse) {
-	switch (req.method) {
-		case 'POST': {
-			const { login, password } = JSON.parse(req.body)
+		switch (req.method) {
+			case 'POST': {
+				const { login, password } = JSON.parse(req.body)
 
-			if (!login || !password) {
-				return returnError(res, 400, 'Bad Request', "Login or password weren't set")
-			}
-
-			// User with the same login and password. User already exists
-			const foundUser = users.find((user) => {
-				const decryptedLogin = decryptData(user.login)
-				const decryptedPassword = decryptData(user.password)
-
-				if (!decryptedLogin.data || !decryptedPassword.data) return false
-
-				return decryptedLogin.data === login && decryptedPassword.data === password
-			})
-
-			if (foundUser) {
-				return returnError(res, 400, 'Bad Request', 'User already exists')
-			}
-
-			const allIds = users.map((user) => user.id)
-
-			const user: User = {
-				id: getRandomKey(10, allIds),
-				login: encryptData(login),
-				password: encryptData(password),
-				settings: {
-					distanceUnit: 'kilometer',
-					fuelUnit: 'liter',
-					language: 'en',
-					theme: 'light'
+				if (!login || !password) {
+					return returnError(res, 400, 'Bad Request', "Login or password weren't set")
 				}
+
+				// User with the same login and password. User already exists
+				const foundUser = Object.keys(users).find((key) => {
+					const user = users[key]
+
+					const decryptedLogin = decryptData(user.login)
+					const decryptedPassword = decryptData(user.password)
+
+					if (!decryptedLogin.data || !decryptedPassword.data) return false
+
+					return decryptedLogin.data === login && decryptedPassword.data === password
+				})
+
+				if (foundUser) {
+					return returnError(res, 400, 'Bad Request', 'User already exists')
+				}
+
+				const allIds = Object.keys(users)
+
+				const user: User = {
+					login: encryptData(login),
+					password: encryptData(password),
+					settings: {
+						distanceUnit: 'kilometer',
+						fuelUnit: 'liter',
+						language: 'en',
+						theme: 'light'
+					}
+				}
+
+				const randomId = getRandomKey(10, allIds)
+				addUser(randomId, user)
+
+				res.status(200).json({ code: 200, info: 'OK', message: 'User added' })
 			}
-			users.push(user)
-			res.status(200).json({ code: 200, info: 'OK', message: 'User added' })
 		}
+	} catch (error) {
+		res.status(500).send(error)
 	}
 }
