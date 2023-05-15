@@ -11,7 +11,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
 		switch (req.method) {
 			case 'POST': {
-				const { login, password } = JSON.parse(req.body)
+				const { login, password, userName } = JSON.parse(req.body)
 
 				if (!login || !password) {
 					return returnError(res, 400, 'Bad Request', "Login or password weren't set")
@@ -42,7 +42,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 						distanceUnit: 'kilometer',
 						fuelUnit: 'liter',
 						language: 'en',
-						theme: 'light'
+						theme: 'light',
+						name: userName || 'User'
 					}
 				}
 

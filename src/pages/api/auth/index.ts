@@ -15,6 +15,7 @@ export interface UserObject {
 	[id: string]: User
 }
 export interface UserSettings {
+	name: string
 	language: Languages
 	theme: 'light' | 'dark'
 	distanceUnit: 'kilometer' | 'mile'
