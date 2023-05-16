@@ -1,9 +1,8 @@
 import React from 'react'
 import Image from 'next/image'
 
-import { className } from '@/utils'
-
 import { Props } from '@/types/UI/Icon.modal'
+import { className } from '@/utils'
 
 import styles from '@styles/UI/Icon.module.scss'
 
@@ -20,5 +19,5 @@ export default function Icon(props: Props) {
 
 	const iconSource = icon.default.src
 
-	return <Image className={iconStyles} src={iconSource} alt={props.alt} width={props.width} height={props.height} />
+	return <Image className={iconStyles} src={iconSource} alt={props.alt} width={1024} height={1024} />
 }
