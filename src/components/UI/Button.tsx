@@ -19,7 +19,13 @@ export default function Button(props: Props) {
 		: {}
 
 	return (
-		<button className={buttonClass} onClick={props.onClick} onFocus={props.onFocus} onBlur={props.onBlur} {...data}>
+		<button
+			className={buttonClass}
+			onClick={props.onClick}
+			onFocus={props.onFocus}
+			onBlur={props.onBlur}
+			{...data}
+			disabled={props.disabled}>
 			{props.children}
 		</button>
 	)

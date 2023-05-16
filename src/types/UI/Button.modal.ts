@@ -7,4 +7,5 @@ export interface Props {
 	children?: any
 	className?: string
 	data?: { [key: string]: string | number | object | boolean }
+	disabled?: boolean
 }
