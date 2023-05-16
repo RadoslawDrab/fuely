@@ -1,0 +1,7 @@
+@use 'colors' as *;
+
+$box-shadow-100: 0 0 5px 1px
+	rgba(
+		$color: $grey-950,
+		$alpha: 0.12
+	);
