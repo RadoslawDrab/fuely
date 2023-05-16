@@ -8,7 +8,7 @@
 	display: flex;
 	justify-content: space-between;
 
-	padding: 1em 2em;
+	padding: 0.75em 1.5em;
 
 	@include global(('button.nav-button', 'button.logo-button')) {
 		background-color: transparent;
