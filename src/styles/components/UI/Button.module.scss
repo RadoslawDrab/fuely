@@ -3,10 +3,10 @@
 	border: none;
 	border-radius: 5px;
 
-	@include theme(($grey-200, $grey-900), background-color);
-	@include theme(($grey-800, $grey-200), color);
-	@include global('.icon') {
-		@include theme(($grey-800__filter, $grey-200__filter), filter);
+	background-color: $grey-200;
+	color: $grey-800;
+	img {
+		filter: $grey-800__filter;
 	}
 
 	box-shadow: 0 0 0.09rem 0.1rem rgba($color: $grey-950, $alpha: 0.1);
@@ -27,22 +27,25 @@
 	&:hover {
 		cursor: pointer;
 		background-color: $grey-100;
-		@include theme(($grey-100, $grey-800), background-color);
 	}
 	&:active {
-		@include theme(($grey-300, $grey-700), background-color);
+		background-color: $grey-300;
 	}
 	&:focus-visible {
 		outline: 2px solid $accent-500;
 	}
 	&:disabled {
 		cursor: initial;
-		@include theme(($grey-400, $grey-600), background-color);
+		background-color: $grey-400;
+
+		img {
+			filter: $grey-900__filter;
+		}
 	}
-	@include global('.selected', true) {
-		@include theme(($main-500, $main-600), background-color);
-		@include theme(($grey-200, $grey-900), color);
-		@include global('.icon') {
+	@include global(('.selected'), true) {
+		background-color: $main-500;
+		color: $grey-200;
+		img {
 			filter: $grey-200__filter;
 		}
 	}
