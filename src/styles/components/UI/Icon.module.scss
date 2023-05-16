@@ -5,4 +5,7 @@
 	aspect-ratio: initial;
 
 	filter: $grey-800__filter;
+
+	// Fix for Safari
+	transform: translate3d(0, 0, 0);
 }
