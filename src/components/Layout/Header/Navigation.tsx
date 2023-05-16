@@ -74,16 +74,17 @@ export default function Navigation() {
 		if (!item.condition()) {
 			return
 		}
+		const isCurrentPath = item.path === router.pathname
 
 		// If `path` exists then navigates to that path. Otherwhise if `func` exists then executes that function
 		function onClick(event: React.MouseEvent<HTMLButtonElement>) {
 			if (item.path) {
 				navigate(event)
-			} else if (item.func) item.func(event)
+			} else if (item.func) item.func()
 		}
 		return (
 			<li key={i}>
-				<Button onClick={onClick} data={item.path ? { path: item.path } : {}}>
+				<Button onClick={onClick} className={isCurrentPath ? 'selected' : ''} data={item.path ? { path: item.path } : {}}>
 					<Icon type={item.icon} alt={`${item.name} icon`} />
 					<span>{item.name}</span>
 				</Button>
