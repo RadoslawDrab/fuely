@@ -18,7 +18,37 @@
 
 	@include global('.hidden', true) {
 		right: -100%;
+
 		opacity: 0;
 		pointer-events: none;
+	}
+
+	ul {
+		list-style: none;
+		display: flex;
+		flex-direction: column;
+		align-items: stretch;
+		gap: 1.25em;
+		li {
+			// Button
+			& > * {
+				width: 100%;
+				border-top-right-radius: 0;
+				border-bottom-right-radius: 0;
+				display: flex;
+				align-items: center;
+				gap: 2em;
+				padding: 1em 3em 1em 2em;
+				// Icon
+				img {
+					width: 2.5em;
+				}
+				// Text
+				span {
+					font-size: $size-700;
+					font-weight: 500;
+				}
+			}
+		}
 	}
 }
