@@ -83,7 +83,7 @@ export default function Navigation() {
 		return (
 			<li key={i}>
 				<Button onClick={onClick} data={item.path ? { path: item.path } : {}}>
-					<Icon type={item.icon} alt={`${item.name} icon`} width={40} height={40} />
+					<Icon type={item.icon} alt={`${item.name} icon`} />
 					<span>{item.name}</span>
 				</Button>
 			</li>
