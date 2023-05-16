@@ -1,6 +1,8 @@
 @use '@/styles/library' as *;
 .header {
 	position: sticky;
+	top: 0;
+	left: 0;
 
 	@include theme(($grey-50, $grey-950), background-color);
 	display: flex;
@@ -8,6 +10,10 @@
 
 	padding: 1em 2em;
 
+	@include global('button.nav-button') {
+		background-color: transparent;
+		box-shadow: none;
+	}
 	@include global('button.logo-button') {
 		background-color: transparent;
 		box-shadow: none;
