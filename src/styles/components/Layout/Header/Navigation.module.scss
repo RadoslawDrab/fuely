@@ -7,11 +7,17 @@
 	background-color: inherit;
 	@include theme(($grey-800, $grey-200), color);
 
-	padding: 1em 2em;
+	padding: 1.5em 2em;
+	padding-right: 0;
+
+	border-top-left-radius: 5px;
+	border-bottom-left-radius: 5px;
+	box-shadow: $box-shadow-100;
 
 	transition: all $anim-duration-500;
 
 	@include global('.hidden', true) {
+		right: -100%;
 		opacity: 0;
 		pointer-events: none;
 	}
