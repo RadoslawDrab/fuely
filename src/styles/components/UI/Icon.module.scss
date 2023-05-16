@@ -1,5 +1,8 @@
+@use '@/styles/library' as *;
 .icon {
 	width: 2em;
 	height: auto;
 	aspect-ratio: initial;
+
+	filter: $grey-800__filter;
 }
