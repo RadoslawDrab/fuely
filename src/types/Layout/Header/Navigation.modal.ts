@@ -4,6 +4,6 @@ export interface NavigationButton {
 	name: string
 	icon: Icons
 	path: string | null
-	condition?: () => boolean
+	condition: () => boolean
 	func?: (...params: any) => any
 }

@@ -22,7 +22,8 @@ export default function Navigation() {
 		{
 			name: 'Home',
 			icon: 'house',
-			path: '/'
+			path: '/',
+			condition: () => true
 		},
 		{
 			name: 'Dashboard',
@@ -70,7 +71,7 @@ export default function Navigation() {
 
 	const navigationButtons = navButtons.map((item, i) => {
 		// Checks if condition is met
-		if (item.condition && !item.condition()) {
+		if (!item.condition()) {
 			return
 		}
 
