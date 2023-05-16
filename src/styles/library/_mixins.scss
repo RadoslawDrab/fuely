@@ -51,14 +51,18 @@
 	transition: all $duration, $exceptions;
 }
 
-@mixin global($selector, $onCurrent: false) {
+@mixin global($selectors, $onCurrent: false) {
 	@if $onCurrent {
-		&:global(#{$selector}) {
-			@content;
+		@each $selector in $selectors {
+			&:global(#{$selector}) {
+				@content;
+			}
 		}
 	} @else {
-		:global(#{$selector}) {
-			@content;
+		@each $selector in $selectors {
+			:global(#{$selector}) {
+				@content;
+			}
 		}
 	}
 }

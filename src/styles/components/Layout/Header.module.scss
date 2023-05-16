@@ -10,25 +10,23 @@
 
 	padding: 1em 2em;
 
-	@include global('button.nav-button') {
+	@include global(('button.nav-button', 'button.logo-button')) {
 		background-color: transparent;
 		box-shadow: none;
 	}
-	@include global('button.logo-button') {
-		background-color: transparent;
-		box-shadow: none;
+	@include global(('button.logo-button')) {
 		@include theme(($grey-800, $grey-200), color);
 
 		display: flex;
 		align-items: center;
 
-		@include global('.icon') {
+		@include global(('.icon')) {
 			filter: none;
 		}
 	}
 
 	@media screen and (min-width: 600px) {
-		@include global('.nav-button') {
+		@include global(('.nav-button')) {
 			display: none;
 		}
 	}

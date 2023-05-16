@@ -16,7 +16,7 @@
 
 	transition: all $anim-duration-500;
 
-	@include global('.hidden', true) {
+	@include global(('.hidden'), true) {
 		right: -100%;
 
 		opacity: 0;

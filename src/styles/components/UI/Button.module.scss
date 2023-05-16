@@ -19,7 +19,7 @@
 	font-size: $size-200;
 	padding: 0.35em 0.65em;
 
-	@include global('.rect') {
+	@include global(('.rect')) {
 		padding: 0.7em;
 		aspect-ratio: 1 / 1;
 	}
