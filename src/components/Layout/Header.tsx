@@ -25,11 +25,11 @@ function Header() {
 	return (
 		<header className={styles.header}>
 			<Button className="logo-button" onClick={redirect}>
-				<Icon type="logo" alt="logo icon" width={30} height={30} />
+				<Icon type="logo" alt="logo icon" />
 				<h1>Fuely</h1>
 			</Button>
 			<Button className="nav-button" onClick={toggleNavigation}>
-				<Icon type="equal" alt="navigation icon" width={30} height={30} />
+				<Icon type="equal" alt="navigation icon" />
 			</Button>
 			<Navigation />
 		</header>
