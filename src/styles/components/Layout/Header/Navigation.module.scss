@@ -48,7 +48,12 @@
 					font-size: $size-700;
 					font-weight: 500;
 				}
+
+				@include global(('.login-button', '.logout-button'), true) {
+					margin-top: 3em;
+				}
 			}
 		}
 	}
+
 }

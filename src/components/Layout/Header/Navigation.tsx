@@ -84,7 +84,10 @@ export default function Navigation() {
 		}
 		return (
 			<li key={i}>
-				<Button onClick={onClick} className={isCurrentPath ? 'selected' : ''} data={item.path ? { path: item.path } : {}}>
+				<Button
+					onClick={onClick}
+					className={`${item.name.toLowerCase()}-button ${isCurrentPath ? 'selected' : ''}`}
+					data={item.path ? { path: item.path } : {}}>
 					<Icon type={item.icon} alt={`${item.name} icon`} />
 					<span>{item.name}</span>
 				</Button>
