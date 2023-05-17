@@ -8,7 +8,7 @@ import Button from '@/components/UI/Button'
 import styles from '@styles/Layout/Footer.module.scss'
 
 function Footer() {
-	const { setLanguage, languages, getText } = useAppContext().Language
+	const { setLanguage, languages, getText, language: currentLanguage } = useAppContext().Language
 	const { toggleTheme } = useAppContext().Theme
 
 	function onLanguageChange(e: React.MouseEvent<HTMLButtonElement>) {
@@ -20,7 +20,7 @@ function Footer() {
 		const key = `${language}-${getRandomKey()}`
 		return (
 			<li key={key}>
-				<Button onClick={onLanguageChange} data={{ language: language }}>
+				<Button onClick={onLanguageChange} selected={currentLanguage === language} data={{ language: language }}>
 					{language}
 				</Button>
 			</li>
