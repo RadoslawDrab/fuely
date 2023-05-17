@@ -34,6 +34,7 @@ export function setLocalStorage(data: Partial<AppSettings>, overwrite = false) {
 	localStorage.setItem('FUELY_APP', JSON.stringify(newData))
 }
 export function getLocalStorage(): AppSettings | null {
+	if (!isClient()) return null
 	const data = localStorage.getItem('FUELY_APP')
 
 	if (!data) {
