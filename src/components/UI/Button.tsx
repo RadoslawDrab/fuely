@@ -6,7 +6,7 @@ import { Props } from '@/types/UI/Button.modal'
 import styles from '@styles/UI/Button.module.scss'
 
 export default function Button(props: Props) {
-	const buttonClass = className(styles.button, props.className)
+	const buttonClass = className(styles.button, props.selected ? 'selected' : '', props.className)
 
 	const data = props.data
 		? Object.keys(props.data).reduce((acc, val) => {

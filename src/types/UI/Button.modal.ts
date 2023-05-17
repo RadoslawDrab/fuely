@@ -8,4 +8,5 @@ export interface Props {
 	className?: string
 	data?: { [key: string]: string | number | object | boolean }
 	disabled?: boolean
+	selected?: boolean
 }
