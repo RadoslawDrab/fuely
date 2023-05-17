@@ -1,17 +1,19 @@
 import { useEffect, useState } from 'react'
-import translations from '@data/translations.json'
 
+import translations from '@data/translations.json'
 import { LanguageObject, Languages, Texts, Translations } from '@/hooks/Language.modal'
+import { getLocalStorage, setLocalStorage } from '@/utils'
 
 const translationsObject: Translations = translations
 
 const allLanguages: any = ['en', ...Object.keys(translations.Button)]
 function useLanguage(): LanguageObject {
-	const [currentLang, setCurrentLanguage] = useState<Languages | string>('en')
+	const [currentLang, setCurrentLanguage] = useState<Languages>('en')
 
 	useEffect(() => {
 		// Changes language based on language set in browser
-		setCurrentLanguage(() => navigator.language.split('-')[0])
+		const language: any = getLocalStorage()?.language || navigator.language.split('-')[0]
+		setCurrentLanguage(() => language)
 	}, [])
 	useEffect(() => {
 		// Changes `html` element language based on current language
@@ -21,6 +23,7 @@ function useLanguage(): LanguageObject {
 
 	// Sets language
 	function setLanguage(lang: Languages) {
+		setLocalStorage({ language: lang })
 		setCurrentLanguage(() => lang)
 	}
 	function getText(text: Texts): string {
