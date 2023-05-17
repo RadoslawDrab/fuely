@@ -1,4 +1,10 @@
 {
 	"Theme": { "pl": "Motyw", "de": "Motiv" },
-	"Button": { "pl": "Przycisk", "de": "Knopf" }
+	"Button": { "pl": "Przycisk", "de": "Knopf" },
+	"Log in": { "pl": "Zaloguj się", "de": "Anmelden" },
+	"Register": { "pl": "Zarejestruj się", "de": "Registrieren" },
+	"Dashboard": { "pl": "Panel Sterowania", "de": "Bedienpult" },
+	"Home": { "pl": "Strona Główna", "de": "Startseite" },
+	"Settings": { "pl": "Ustawienia", "de": "Einstellungen" },
+	"Logout": { "pl": "Wyloguj się", "de": "Ausloggen" }
 }
