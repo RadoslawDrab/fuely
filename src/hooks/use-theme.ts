@@ -1,15 +1,17 @@
 import { useEffect, useState } from 'react'
-import { Theme } from '@/hooks/Theme.modal'
 
-import { isClient } from '../utils'
+import { getLocalStorage, setLocalStorage, isClient } from '../utils'
+import { Theme } from '@/hooks/Theme.modal'
 
 function useTheme(): Theme {
 	const [isDarkTheme, setIsDarkTheme] = useState(false)
 
 	useEffect(() => {
-		// Checks if user prefers dark theme
-		const isDark = isClient() && window.matchMedia('(prefers-color-scheme: dark)').matches
-		setIsDarkTheme(() => isDark)
+		if (isClient()) {
+			// Checks if theme is saved to localStorage and sets app theme based on that. If not checks whether user prefers dark theme
+			const isDark = getLocalStorage()?.theme === 'dark' ?? window.matchMedia('(prefers-color-scheme: dark)').matches
+			setIsDarkTheme(() => isDark)
+		}
 	}, [])
 
 	useEffect(() => {
@@ -28,9 +30,11 @@ function useTheme(): Theme {
 	}, [isDarkTheme])
 
 	function setTheme(darkTheme: boolean) {
+		setLocalStorage({ theme: darkTheme ? 'dark' : 'light' })
 		setIsDarkTheme(() => darkTheme)
 	}
 	function toggleTheme() {
+		setLocalStorage({ theme: !isDarkTheme ? 'dark' : 'light' })
 		setIsDarkTheme((theme) => !theme)
 	}
 	return { isDarkTheme, setTheme, toggleTheme }
