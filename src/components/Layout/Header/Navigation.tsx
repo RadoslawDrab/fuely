@@ -17,40 +17,47 @@ export default function Navigation() {
 
 	const { navigationState } = useAppContext().Navigation
 	const { isLoggedIn, logout } = useAppContext().Auth
+	const { getText } = useAppContext().Language
 
 	const navButtons: NavigationButton[] = [
 		{
-			name: 'Home',
+			name: 'home',
+			display: getText('Home'),
 			icon: 'house',
 			path: '/',
 			condition: () => true
 		},
 		{
-			name: 'Dashboard',
+			name: 'dashboard',
+			display: getText('Dashboard'),
 			icon: 'rectangle.3.group',
 			path: '/user/dashboard',
 			condition: () => isLoggedIn
 		},
 		{
 			name: 'Login',
+			display: getText('Log in'),
 			icon: 'person.crop.circle',
 			path: '/user/login',
 			condition: () => !isLoggedIn
 		},
 		{
-			name: 'Register',
+			name: 'register',
+			display: getText('Register'),
 			icon: 'person.crop.circle.badge.plus',
 			path: '/user/register',
 			condition: () => !isLoggedIn
 		},
 		{
-			name: 'Settings',
+			name: 'settings',
+			display: getText('Settings'),
 			icon: 'gearshape',
 			path: '/user/settings',
 			condition: () => isLoggedIn
 		},
 		{
-			name: 'Logout',
+			name: 'logout',
+			display: getText('Logout'),
 			icon: 'arrow.up.right.square',
 			path: null,
 			condition: () => isLoggedIn,
@@ -86,10 +93,11 @@ export default function Navigation() {
 			<li key={i}>
 				<Button
 					onClick={onClick}
-					className={`${item.name.toLowerCase()}-button ${isCurrentPath ? 'selected' : ''}`}
+					className={`${item.name}-button`}
+					selected={isCurrentPath}
 					data={item.path ? { path: item.path } : {}}>
 					<Icon type={item.icon} alt={`${item.name} icon`} />
-					<span>{item.name}</span>
+					<span>{item.display}</span>
 				</Button>
 			</li>
 		)
