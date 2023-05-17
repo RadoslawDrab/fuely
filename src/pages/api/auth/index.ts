@@ -1,8 +1,6 @@
 import { NextApiResponse } from 'next'
 import CryptoJS from 'crypto-js'
 
-import { Languages } from '@/hooks/Language.modal'
-
 const tokenKey = '#Fuely-Token#'
 const dataKey = '#Fuely-Data#'
 
@@ -16,8 +14,6 @@ export interface UserObject {
 }
 export interface UserSettings {
 	name: string
-	language: Languages
-	theme: 'light' | 'dark'
 	distanceUnit: 'kilometer' | 'mile'
 	fuelUnit: 'liter' | 'galon'
 }

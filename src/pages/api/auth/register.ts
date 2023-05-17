@@ -41,8 +41,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 					settings: {
 						distanceUnit: 'kilometer',
 						fuelUnit: 'liter',
-						language: 'en',
-						theme: 'light',
 						name: userName || 'User'
 					}
 				}
