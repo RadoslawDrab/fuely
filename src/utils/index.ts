@@ -27,6 +27,15 @@ export function className(...classNames: (string | undefined)[]): string {
 		.trim()
 	return style
 }
+export function createDatasetObject(data: { [key: string]: number | string | boolean | object }): object {
+	return Object.keys(data).reduce((acc, val) => {
+		if (data) {
+			const name = `data-${val}`
+			return { ...acc, [name]: `${data[val]}` }
+		}
+		return acc
+	}, {})
+}
 
 export function setLocalStorage(data: Partial<AppSettings>, overwrite = false) {
 	if (!isClient()) return
