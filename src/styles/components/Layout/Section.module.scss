@@ -1,0 +1,14 @@
+@use '@/styles/library' as *;
+.section {
+	h2 {
+		color: $grey-800;
+		text-align: center;
+		margin-bottom: 1em;
+		font-size: $size-800;
+	}
+	&-content {
+		border-radius: 4px;
+		border: 1.5px solid $grey-400;
+		padding: 1em;
+	}
+}
