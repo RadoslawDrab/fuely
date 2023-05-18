@@ -1,5 +1,5 @@
 import React from 'react'
-import { className } from '@/utils'
+import { className, createDatasetObject } from '@/utils'
 
 import { Props } from '@/types/UI/Button.modal'
 
@@ -8,15 +8,7 @@ import styles from '@styles/UI/Button.module.scss'
 export default function Button(props: Props) {
 	const buttonClass = className(styles.button, props.selected ? 'selected' : '', props.className)
 
-	const data = props.data
-		? Object.keys(props.data).reduce((acc, val) => {
-				if (props.data) {
-					const name = `data-${val}`
-					return { ...acc, [name]: `${props.data[val]}` }
-				}
-				return acc
-		  }, {})
-		: {}
+	const data = props.data ? createDatasetObject(props.data) : {}
 
 	return (
 		<button

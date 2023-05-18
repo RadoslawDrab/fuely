@@ -1,12 +1,14 @@
 import React from 'react'
 
 import { Props } from '@/types/UI/Input.modal'
-import { className } from '@/utils'
+import { className, createDatasetObject } from '@/utils'
 
 import styles from '@styles/UI/Input.module.scss'
 
 export default function Input(props: Props) {
 	const inputStyles = className(styles.input, props.className)
+
+	const data = props.data ? createDatasetObject(props.data) : {}
 	return (
 		<input
 			id={props.id}
@@ -22,6 +24,7 @@ export default function Input(props: Props) {
 			maxLength={props.max}
 			min={props.min}
 			minLength={props.min}
+			{...data}
 		/>
 	)
 }
