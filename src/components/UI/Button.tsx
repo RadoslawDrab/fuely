@@ -6,7 +6,22 @@ import { Props } from '@/types/UI/Button.modal'
 import styles from '@styles/UI/Button.module.scss'
 
 export default function Button(props: Props) {
-	const buttonClass = className(styles.button, props.selected ? 'selected' : '', props.className)
+	let variant = ''
+
+	if (props.variant) {
+		switch (typeof props.variant) {
+			case 'object': {
+				variant = props.variant.reduce((prev, cur) => (prev += `${styles[`button_${cur}`]} `), '')
+				break
+			}
+			case 'string': {
+				variant = styles[`button_${props.variant}`]
+				break
+			}
+		}
+	}
+
+	const buttonClass = className(styles.button, props.selected ? styles.selected : '', variant, props.className)
 
 	const data = props.data ? createDatasetObject(props.data) : {}
 

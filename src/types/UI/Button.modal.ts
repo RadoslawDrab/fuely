@@ -1,4 +1,4 @@
-import React from 'react'
+type Variant = 'default' | 'dark'
 
 export interface Props {
 	onClick: (event: React.MouseEvent<HTMLButtonElement>) => void
@@ -9,4 +9,5 @@ export interface Props {
 	data?: { [key: string]: string | number | object | boolean }
 	disabled?: boolean
 	selected?: boolean
+	variant?: Variant[] | Variant
 }
