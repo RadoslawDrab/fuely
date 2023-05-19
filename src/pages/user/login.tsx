@@ -6,38 +6,33 @@ import useUserRedirect from '@/hooks/use-user-redirect'
 import Button from '@/components/UI/Button'
 
 export default function Login() {
-	const { login, loginUsingToken } = useAppContext().Auth
-	const [inputLogin, setInputLogin] = useState('Radek')
-	const [inputPassword, setInputPassword] = useState('Password')
-	const [hasError, setHasError] = useState(false)
+	const { login: loginFunc, loginUsingToken, isLoggedIn } = useAppContext().Auth
+	const [error, setError] = useState('')
 
 	useUserRedirect()
 
-	function loginUser() {
-		login(inputLogin, inputPassword)
+	function loginUser(login: string, password: string) {
+		loginFunc(login, password)
 			.then((token) => {
 				loginUsingToken(token)
-				setHasError(() => false)
+				setError(() => '')
 			})
 			.catch((error) => {
-				console.error(error)
-
-				setHasError(() => true)
+				const code = +error.split(':')[0]
+				if (code === 404) {
+					setError(() => 'Incorrect login or password')
+				} else {
+					setError(() => error)
+				}
 			})
 	}
-	function onLoginInputChange(event: React.ChangeEvent<HTMLInputElement>) {
-		setInputLogin(() => event.target.value)
+	function onFormError(message: string) {
+		setError(() => message)
 	}
-	function onPasswordInputChange(event: React.ChangeEvent<HTMLInputElement>) {
-		setInputPassword(() => event.target.value)
-	}
-
 	return (
-		<>
-			<Button onClick={loginUser}>Login</Button>
-			<input type="text" defaultValue={inputLogin} onChange={onLoginInputChange} />
-			<input type="text" defaultValue={inputPassword} onChange={onPasswordInputChange} />
-			{hasError && <p>Invalid login or password</p>}
-		</>
+		<Section title="Log in">
+			<LoginForm onLogin={loginUser} onError={onFormError} onInputChange={() => setError(() => '')} />
+			<Error className={styles.error} show={error ? true : false} text={error} />
+		</Section>
 	)
 }
