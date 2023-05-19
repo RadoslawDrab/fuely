@@ -4,7 +4,12 @@ import { Props } from '@/types/Register/RegisterForm.modal'
 
 import Button from '../../UI/Button'
 import Input from '../../UI/Input'
-import styles from '@styles/Register/RegisterForm.module.scss'
+
+interface Props {
+	onRegister: (login: string, password: string) => void
+	onError: (errorMessage: string) => void
+	onInputChange: () => void
+}
 
 export default function RegisterForm(props: Props) {
 	type InputType = 'login' | 'password-1' | 'password-2'
