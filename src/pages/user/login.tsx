@@ -3,7 +3,11 @@ import React, { useState } from 'react'
 import useAppContext from '@/hooks/use-app-context'
 import useUserRedirect from '@/hooks/use-user-redirect'
 
-import Button from '@/components/UI/Button'
+import Section from '@/components/Layout/Section'
+import LoginForm from '@/components/pages/Login/LoginForm'
+import Error from '@/components/UI/Error'
+
+import styles from '@styles/styles.module.scss'
 
 export default function Login() {
 	const { login: loginFunc, loginUsingToken, isLoggedIn } = useAppContext().Auth
