@@ -42,11 +42,43 @@
 			filter: $grey-900__filter;
 		}
 	}
-	@include global(('.selected'), true) {
+	&.selected {
 		background-color: $main-500;
 		color: $grey-200;
 		img {
 			filter: $grey-200__filter;
+		}
+	}
+	&_dark {
+		background-color: $grey-600;
+		color: $grey-300;
+		img {
+			filter: $grey-300__filter;
+		}
+		&:hover {
+			background-color: $grey-500;
+		}
+		&:active {
+			background-color: $grey-800;
+		}
+		&:disabled {
+			background-color: $grey-700;
+			color: $grey-400;
+			img {
+				filter: $grey-400__filter;
+			}
+			&.selected {
+				background-color: $main-800;
+			}
+		}
+		&.selected {
+			background-color: $main-600;
+			&:hover {
+				background-color: $main-500;
+			}
+			&:active {
+				background-color: $main-700;
+			}
 		}
 	}
 }
