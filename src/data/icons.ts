@@ -9,6 +9,7 @@ const icons = [
 	'rectangle.3.group',
 	'person',
 	'person.crop.circle.badge.plus',
-	'person.crop.circle'
+	'person.crop.circle',
+	'xmark'
 ] as const
 export default icons
