@@ -1,0 +1,7 @@
+@use '@/styles/library' as *;
+.error {
+	display: block;
+	padding: 0.5em 0.75em;
+	color: $accent-600;
+	border-left: 5px solid $accent-600;
+}
