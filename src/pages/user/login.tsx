@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
+import { useRouter } from 'next/router'
 
 import useAppContext from '@/hooks/use-app-context'
-import useUserRedirect from '@/hooks/use-user-redirect'
 
 import Section from '@/components/Layout/Section'
 import LoginForm from '@/components/pages/Login/LoginForm'
@@ -10,10 +10,13 @@ import Error from '@/components/UI/Error'
 import styles from '@styles/styles.module.scss'
 
 export default function Login() {
+	const router = useRouter()
 	const { login: loginFunc, loginUsingToken, isLoggedIn } = useAppContext().Auth
 	const [error, setError] = useState('')
 
-	useUserRedirect()
+	if (isLoggedIn) {
+		router.replace('/user/dashboard')
+	}
 
 	function loginUser(login: string, password: string) {
 		loginFunc(login, password)
