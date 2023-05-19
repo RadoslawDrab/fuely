@@ -5,11 +5,12 @@ import useAppContext from './use-app-context'
 
 export default function useUserRedirect() {
 	const router = useRouter()
-	const { isLoggedIn } = useAppContext().Auth
+	const { errorMessage } = useAppContext().Auth
 
 	useEffect(() => {
-		if (isLoggedIn) {
-			router.replace('/user/dashboard')
+		if (errorMessage.includes('Unauthorized')) {
+			router.replace('/user/login')
 		}
-	}, [isLoggedIn, router])
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [errorMessage])
 }
