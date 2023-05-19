@@ -2,6 +2,7 @@ import React from 'react'
 import { useRouter } from 'next/router'
 
 import useAppContext from '@/hooks/use-app-context'
+import { className } from '@/utils'
 
 import Button from '@/components/UI/Button'
 import Icon from '@/components/UI/Icon'
@@ -12,7 +13,9 @@ import styles from '@styles/Layout/Header.module.scss'
 function Header() {
 	const router = useRouter()
 
-	const { toggleNavigation } = useAppContext().Navigation
+	const { toggleNavigation, navigationState } = useAppContext().Navigation
+
+	const navButtonStyles = className(styles['nav-button'], navigationState ? styles['active'] : '')
 
 	function redirect() {
 		const { query } = router
@@ -25,11 +28,11 @@ function Header() {
 
 	return (
 		<header className={styles.header}>
-			<Button className="logo-button" onClick={redirect}>
+			<Button className={styles['logo-button']} onClick={redirect}>
 				<Icon type="logo" alt="logo icon" />
 				<h1>Fuely</h1>
 			</Button>
-			<Button className="nav-button" onClick={toggleNavigation}>
+			<Button className={navButtonStyles} onClick={toggleNavigation}>
 				<Icon type="equal" alt="navigation icon" />
 			</Button>
 			<Navigation />
