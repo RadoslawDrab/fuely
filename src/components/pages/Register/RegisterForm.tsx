@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
 
-import { Props } from '@/types/Register/RegisterForm.modal'
-
 import Button from '../../UI/Button'
 import Input from '../../UI/Input'
+
+import styles from '@styles/styles.module.scss'
 
 interface Props {
 	onRegister: (login: string, password: string) => void
@@ -80,7 +80,7 @@ export default function RegisterForm(props: Props) {
 				data={{ type: 'password-2' }}
 			/>
 			<hr />
-			<Button className="register-button" onClick={() => {}}>
+			<Button className={styles['submit-button']} onClick={() => {}}>
 				Register
 			</Button>
 		</form>
