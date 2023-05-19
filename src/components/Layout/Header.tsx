@@ -11,6 +11,7 @@ import styles from '@styles/Layout/Header.module.scss'
 
 function Header() {
 	const router = useRouter()
+
 	const { toggleNavigation } = useAppContext().Navigation
 
 	function redirect() {

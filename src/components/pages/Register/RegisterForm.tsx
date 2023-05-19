@@ -14,9 +14,10 @@ interface Props {
 }
 
 export default function RegisterForm(props: Props) {
+	type InputType = 'login' | 'password-1' | 'password-2'
+
 	const { getText } = useAppContext().Language
 
-	type InputType = 'login' | 'password-1' | 'password-2'
 	const [login, setLogin] = useState('')
 	const [password1, setPassword1] = useState('')
 	const [password2, setPassword2] = useState('')

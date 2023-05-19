@@ -11,8 +11,10 @@ import styles from '@styles/styles.module.scss'
 
 export default function Login() {
 	const router = useRouter()
+
 	const { login: loginFunc, loginUsingToken, isLoggedIn } = useAppContext().Auth
 	const { getText } = useAppContext().Language
+
 	const [error, setError] = useState('')
 
 	if (isLoggedIn) {
