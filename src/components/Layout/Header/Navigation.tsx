@@ -95,7 +95,8 @@ export default function Navigation() {
 					onClick={onClick}
 					className={`${item.name}-button`}
 					selected={isCurrentPath}
-					data={item.path ? { path: item.path } : {}}>
+					data={item.path ? { path: item.path } : {}}
+					variant="dark">
 					<Icon type={item.icon} alt={`${item.name} icon`} />
 					<span>{item.display}</span>
 				</Button>
