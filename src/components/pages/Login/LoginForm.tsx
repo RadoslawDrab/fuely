@@ -1,5 +1,7 @@
 import React, { useState } from 'react'
 
+import useAppContext from '@/hooks/use-app-context'
+
 import Button from '@/components/UI/Button'
 import Input from '@/components/UI/Input'
 
@@ -11,6 +13,8 @@ interface Props {
 	onInputChange: () => void
 }
 export default function LoginForm(props: Props) {
+	const { getText } = useAppContext().Language
+
 	const [login, setLogin] = useState('')
 	const [password, setPassword] = useState('')
 
@@ -42,27 +46,19 @@ export default function LoginForm(props: Props) {
 	}
 	return (
 		<form onSubmit={onSubmit} className={styles.form}>
-			<label htmlFor="login-input">Login</label>
-			<Input
-				id="login-input"
-				type="text"
-				placeholder="Login"
-				onChange={onInputChange}
-				data={{ type: 'login' }}
-				defaultValue="Radek"
-			/>
-			<label htmlFor="password-input">Password</label>
+			<label htmlFor="login-input">{getText('Login')}</label>
+			<Input id="login-input" type="text" placeholder={getText('Login')} onChange={onInputChange} data={{ type: 'login' }} />
+			<label htmlFor="password-input">{getText('Password')}</label>
 			<Input
 				id="password-input"
 				type="password"
-				placeholder="Password"
+				placeholder={getText('Password')}
 				onChange={onInputChange}
 				data={{ type: 'password' }}
-				defaultValue="Password1"
 			/>
 			<hr />
 			<Button className={styles['submit-button']} onClick={() => {}}>
-				Login
+				{getText('Send')}
 			</Button>
 		</form>
 	)

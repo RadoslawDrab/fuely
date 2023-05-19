@@ -2,9 +2,13 @@
 	"Theme": { "pl": "Motyw", "de": "Motiv" },
 	"Button": { "pl": "Przycisk", "de": "Knopf" },
 	"Log in": { "pl": "Zaloguj się", "de": "Anmelden" },
+	"Login": { "pl": "Login", "de": "Login" },
 	"Register": { "pl": "Zarejestruj się", "de": "Registrieren" },
 	"Dashboard": { "pl": "Panel Sterowania", "de": "Bedienpult" },
 	"Home": { "pl": "Strona Główna", "de": "Startseite" },
 	"Settings": { "pl": "Ustawienia", "de": "Einstellungen" },
-	"Logout": { "pl": "Wyloguj się", "de": "Ausloggen" }
+	"Logout": { "pl": "Wyloguj się", "de": "Ausloggen" },
+	"Password": { "pl": "Hasło", "de": "Passwort" },
+	"Confirm Password": { "pl": "Potwierdź Hasło", "de": "Bestätige das Passwort" },
+	"Send": { "pl": "Wyślij", "de": "Send" }
 }

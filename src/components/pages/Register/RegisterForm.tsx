@@ -1,5 +1,7 @@
 import React, { useState } from 'react'
 
+import useAppContext from '@/hooks/use-app-context'
+
 import Button from '../../UI/Button'
 import Input from '../../UI/Input'
 
@@ -12,6 +14,8 @@ interface Props {
 }
 
 export default function RegisterForm(props: Props) {
+	const { getText } = useAppContext().Language
+
 	type InputType = 'login' | 'password-1' | 'password-2'
 	const [login, setLogin] = useState('')
 	const [password1, setPassword1] = useState('')
@@ -61,27 +65,27 @@ export default function RegisterForm(props: Props) {
 	}
 	return (
 		<form className={styles.form} onSubmit={onSubmit}>
-			<label htmlFor="login-input">Login</label>
-			<Input id="login-input" type="text" onChange={onInputChange} placeholder="Login" data={{ type: 'login' }} />
-			<label htmlFor="password-1-input">Password</label>
+			<label htmlFor="login-input">{getText('Login')}</label>
+			<Input id="login-input" type="text" onChange={onInputChange} placeholder={getText('Login')} data={{ type: 'login' }} />
+			<label htmlFor="password-1-input">{getText('Password')}</label>
 			<Input
 				id="password-1-input"
 				type="password"
 				onChange={onInputChange}
-				placeholder="Password"
+				placeholder={getText('Password')}
 				data={{ type: 'password-1' }}
 			/>
-			<label htmlFor="password-2-input">Confirm Password</label>
+			<label htmlFor="password-2-input">{getText('Confirm Password')}</label>
 			<Input
 				id="password-2-input"
 				type="password"
 				onChange={onInputChange}
-				placeholder="Password"
+				placeholder={getText('Password')}
 				data={{ type: 'password-2' }}
 			/>
 			<hr />
 			<Button className={styles['submit-button']} onClick={() => {}}>
-				Register
+				{getText('Send')}
 			</Button>
 		</form>
 	)

@@ -12,6 +12,7 @@ import styles from '@styles/styles.module.scss'
 export default function Register() {
 	const router = useRouter()
 	const { register, isLoggedIn } = useAppContext().Auth
+	const { getText } = useAppContext().Language
 	const [error, setError] = useState('')
 
 	if (isLoggedIn) {
@@ -33,7 +34,7 @@ export default function Register() {
 	}
 
 	return (
-		<Section title="Register">
+		<Section title={getText('Register')}>
 			<RegisterForm onRegister={registerUser} onError={onFormError} onInputChange={() => setError(() => '')} />
 			<Error show={error ? true : false} text={error} className={styles.error} />
 		</Section>

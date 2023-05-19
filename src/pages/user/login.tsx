@@ -12,6 +12,7 @@ import styles from '@styles/styles.module.scss'
 export default function Login() {
 	const router = useRouter()
 	const { login: loginFunc, loginUsingToken, isLoggedIn } = useAppContext().Auth
+	const { getText } = useAppContext().Language
 	const [error, setError] = useState('')
 
 	if (isLoggedIn) {
@@ -37,7 +38,7 @@ export default function Login() {
 		setError(() => message)
 	}
 	return (
-		<Section title="Log in">
+		<Section title={getText('Log in')}>
 			<LoginForm onLogin={loginUser} onError={onFormError} onInputChange={() => setError(() => '')} />
 			<Error className={styles.error} show={error ? true : false} text={error} />
 		</Section>
