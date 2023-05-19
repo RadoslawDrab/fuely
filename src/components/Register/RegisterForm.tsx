@@ -35,6 +35,7 @@ export default function RegisterForm(props: Props) {
 	}
 
 	function onInputChange(event: React.ChangeEvent<HTMLInputElement>) {
+		props.onInputChange()
 		const inputType: any = event.target.dataset.type
 		const value = event.target.value
 		const type: InputType = inputType
