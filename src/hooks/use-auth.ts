@@ -8,6 +8,8 @@ export default function useAuth(): Auth {
 	const [isLoading, setIsLoading] = useState<boolean>(false)
 	const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false)
 	const [user, setUser] = useState<User | null>(null)
+	const [hasError, setHasError] = useState<boolean>(false)
+	const [errorMessage, setErrorMessage] = useState<string>('')
 
 	async function login(login: string, password: string) {
 		return new Promise((resolve, reject) => {
@@ -22,10 +24,14 @@ export default function useAuth(): Auth {
 			})
 				.then(responseHandler)
 				.then((data: { token: string }) => {
+					noError()
 					setLocalStorage(data)
 					resolve(data.token)
 				})
-				.catch(reject)
+				.catch((error: Error) => {
+					setError(error)
+					reject(error.message)
+				})
 				.finally(() => {
 					setIsLoading(() => false)
 				})
@@ -34,22 +40,31 @@ export default function useAuth(): Auth {
 	const loginUsingToken = useCallback(function (token: string) {
 		setIsLoading(() => true)
 
-		fetch('/api/auth/login', {
-			method: 'POST',
-			body: JSON.stringify({
-				token: token
+		return new Promise((resolve, reject) => {
+			fetch('/api/auth/login', {
+				method: 'POST',
+				body: JSON.stringify({
+					token: token
+				})
 			})
+				.then(responseHandler)
+				.then((user: User) => {
+					noError()
+					setUser(() => user)
+					setIsLoggedIn(() => true)
+					resolve(user)
+				})
+				.catch((error: Error) => {
+					setError(error)
+
+					reject(error.message)
+				})
+				.finally(() => {
+					setIsLoading(() => false)
+				})
 		})
-			.then(responseHandler)
-			.then((user: User) => {
-				setUser(() => user)
-				setIsLoggedIn(() => true)
-			})
-			.catch(catchHandler)
-			.finally(() => {
-				setIsLoading(() => false)
-			})
 	}, [])
+
 	async function register(login: string, password: string): Promise<any> {
 		setIsLoading(() => true)
 
@@ -62,8 +77,14 @@ export default function useAuth(): Auth {
 				})
 			})
 				.then(responseHandler)
-				.then(resolve)
-				.catch(reject)
+				.then((data) => {
+					noError()
+					resolve(data)
+				})
+				.catch((error: Error) => {
+					setError(error)
+					reject(error.message)
+				})
 				.finally(() => {
 					setIsLoading(() => false)
 				})
@@ -82,9 +103,13 @@ export default function useAuth(): Auth {
 		}
 		return response.json()
 	}
-	function catchHandler(error: Error) {
-		console.error(error)
-		setLocalStorage({ token: '' })
+	function setError(error: Error) {
+		setHasError(() => true)
+		setErrorMessage(() => error.message)
+	}
+	function noError() {
+		setHasError(() => false)
+		setErrorMessage(() => '')
 	}
 
 	useEffect(() => {
@@ -97,13 +122,15 @@ export default function useAuth(): Auth {
 		}
 	}, [loginUsingToken])
 
-	return { isLoggedIn, isLoading, user, login, register, loginUsingToken, logout }
+	return { isLoggedIn, isLoading, user, errorMessage, hasError, login, register, loginUsingToken, logout }
 }
 
 export const exampleAuthObject: Auth = {
 	isLoggedIn: false,
 	isLoading: false,
 	user: null,
+	hasError: false,
+	errorMessage: '',
 	login: async () => {},
 	register: async () => {},
 	loginUsingToken: () => {},
