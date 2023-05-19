@@ -4,7 +4,7 @@ import { useRouter } from 'next/router'
 import useAppContext from '@/hooks/use-app-context'
 import useUserRedirect from '@/hooks/use-user-redirect'
 
-import RegisterForm from '@/components/Register/RegisterForm'
+import RegisterForm from '@/components/pages/Register/RegisterForm'
 import Section from '@/components/Layout/Section'
 import Error from '@/components/UI/Error'
 

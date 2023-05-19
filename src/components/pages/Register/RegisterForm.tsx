@@ -2,8 +2,8 @@ import React, { useState } from 'react'
 
 import { Props } from '@/types/Register/RegisterForm.modal'
 
-import Button from '../UI/Button'
-import Input from '../UI/Input'
+import Button from '../../UI/Button'
+import Input from '../../UI/Input'
 import styles from '@styles/Register/RegisterForm.module.scss'
 
 export default function RegisterForm(props: Props) {
