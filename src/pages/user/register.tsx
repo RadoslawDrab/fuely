@@ -4,40 +4,37 @@ import { useRouter } from 'next/router'
 import useAppContext from '@/hooks/use-app-context'
 import useUserRedirect from '@/hooks/use-user-redirect'
 
-import Button from '@/components/UI/Button'
+import RegisterForm from '@/components/Register/RegisterForm'
+import Section from '@/components/Layout/Section'
+import Error from '@/components/UI/Error'
+
+import styles from '@styles/Register/Register.module.scss'
 
 export default function Register() {
 	const router = useRouter()
 	const { register } = useAppContext().Auth
-	const [inputLogin, setInputLogin] = useState('Radek')
-	const [inputPassword, setInputPassword] = useState('Password')
-	const [hasError, setHasError] = useState(false)
+	const [error, setError] = useState('')
 
 	useUserRedirect()
 
-	function registerUser() {
-		register(inputLogin, inputPassword)
+	function registerUser(login: string, password: string) {
+		register(login, password)
 			.then(() => {
 				router.replace('/user/login')
-				setHasError(() => false)
+				setError(() => '')
 			})
 			.catch(() => {
-				setHasError(() => true)
+				setError(() => 'User already exists')
 			})
 	}
-	function onLoginInputChange(event: React.ChangeEvent<HTMLInputElement>) {
-		setInputLogin(() => event.target.value)
-	}
-	function onPasswordInputChange(event: React.ChangeEvent<HTMLInputElement>) {
-		setInputPassword(() => event.target.value)
+	function onFormError(message: string) {
+		setError(() => message)
 	}
 
 	return (
-		<>
-			<Button onClick={registerUser}>Register</Button>
-			<input type="text" defaultValue={inputLogin} onChange={onLoginInputChange} />
-			<input type="text" defaultValue={inputPassword} onChange={onPasswordInputChange} />
-			{hasError && <p>User already exists</p>}
-		</>
+		<Section title="Register">
+			<RegisterForm onRegister={registerUser} onError={onFormError} onInputChange={() => setError(() => '')} />
+			<Error show={error ? true : false} text={error} className={styles.error} />
+		</Section>
 	)
 }
