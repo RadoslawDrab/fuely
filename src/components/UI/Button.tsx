@@ -11,11 +11,11 @@ export default function Button(props: Props) {
 	if (props.variant) {
 		switch (typeof props.variant) {
 			case 'object': {
-				variant = props.variant.reduce((prev, cur) => (prev += `${styles[`button_${cur}`]} `), '')
+				variant = props.variant.reduce((prev, cur) => (cur !== 'default' ? (prev += `${styles[`button_${cur}`]} `) : prev), '')
 				break
 			}
 			case 'string': {
-				variant = styles[`button_${props.variant}`]
+				variant = props.variant !== 'default' ? styles[`button_${props.variant}`] : ''
 				break
 			}
 		}
