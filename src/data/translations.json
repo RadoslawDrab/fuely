@@ -4,11 +4,15 @@
 	"Log in": { "pl": "Zaloguj się", "de": "Anmelden" },
 	"Login": { "pl": "Login", "de": "Login" },
 	"Register": { "pl": "Zarejestruj się", "de": "Registrieren" },
-	"Dashboard": { "pl": "Panel Sterowania", "de": "Bedienpult" },
+	"Dashboard": { "pl": "Panel", "de": "Bedienpult" },
 	"Home": { "pl": "Strona Główna", "de": "Startseite" },
 	"Settings": { "pl": "Ustawienia", "de": "Einstellungen" },
 	"Logout": { "pl": "Wyloguj się", "de": "Ausloggen" },
 	"Password": { "pl": "Hasło", "de": "Passwort" },
 	"Confirm Password": { "pl": "Potwierdź Hasło", "de": "Bestätige das Passwort" },
-	"Send": { "pl": "Wyślij", "de": "Send" }
+	"Send": { "pl": "Wyślij", "de": "Send" },
+	"Pages": { "pl": "Strony", "de": "Seiten" },
+	"Contact": { "pl": "Kontakt", "de": "Kontakt" },
+	"Light": { "pl": "Jasny", "de": "Hell" },
+	"Dark": { "pl": "Ciemny", "de": "Dunkel" }
 }
