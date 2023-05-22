@@ -10,6 +10,9 @@ const icons = [
 	'person',
 	'person.crop.circle.badge.plus',
 	'person.crop.circle',
-	'xmark'
+	'xmark',
+	'sun.max',
+	'moon',
+	'globe'
 ] as const
 export default icons
