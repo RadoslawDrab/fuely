@@ -12,8 +12,7 @@ export default function Column(props: Props) {
 	const columnStyles = className(styles.column, `column ${props.name}-column`)
 	return (
 		<div className={columnStyles}>
-			<span>{props.title}</span>
-			{props.title && <hr />}
+			{props.title && <span>{props.title}</span>}
 			<ul>{props.children}</ul>
 		</div>
 	)
