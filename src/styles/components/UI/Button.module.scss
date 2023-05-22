@@ -16,8 +16,10 @@
 
 	@include transition-all(0.4s, outline);
 
+	$padding-block: 0.35rem;
+	$padding-inline: 0.65rem;
 	font-size: $size-200;
-	padding: 0.35em 0.65em;
+	padding: $padding-block $padding-inline;
 
 	@include global(('.rect')) {
 		padding: 0.7em;
@@ -82,9 +84,9 @@
 		}
 	}
 	&_link {
+		position: relative;
 		background-color: transparent;
 		color: $grey-400;
-		border-bottom: 1.5px solid transparent;
 		border-radius: 0;
 		box-shadow: none;
 		&:hover {
@@ -102,16 +104,32 @@
 			}
 		}
 		&.selected {
-			border-color: $main-500;
 			background-color: transparent;
+			&::before {
+				background-color: $main-500;
+			}
 			&:hover {
-				border-color: $main-600;
 				background-color: $grey-700;
+				&::before {
+					background-color: $main-600;
+				}
 			}
 			&:active {
-				border-color: $main-400;
 				background-color: $grey-600;
+				&::before {
+					background-color: $main-400;
+				}
 			}
+		}
+		&::before {
+			content: '';
+			position: absolute;
+			bottom: 0;
+			left: $padding-inline;
+			width: calc(100% - (2 * #{$padding-inline}));
+			height: 1.5px;
+			background-color: transparent;
+			transition: all 0.4s;
 		}
 	}
 }
