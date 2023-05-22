@@ -43,8 +43,8 @@ function Footer() {
 		const key = `${language}-${getRandomKey()}`
 		return (
 			<li key={key}>
-				<Button onClick={onLanguageChange} selected={currentLanguage === language} data={{ language: language }}>
-					{language}
+				<Button onClick={onLanguageChange} selected={currentLanguage === language} data={{ language: language }} variant="dark">
+					{language.toUpperCase()}
 				</Button>
 			</li>
 		)
