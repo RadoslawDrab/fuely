@@ -1,0 +1,36 @@
+@use '@/styles/library' as *;
+
+.options {
+	grid-column: 1 / -1;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 1.5em 0;
+	border-bottom: 1.5px solid $grey-400;
+	gap: 1em;
+	.theme-button {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		font-size: $size-400;
+		img {
+			width: 1.3em;
+		}
+	}
+	ul {
+		width: 100%;
+		display: flex;
+		align-items: center;
+		list-style: none;
+		gap: 0.5em;
+		.globe-item {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+
+			margin-right: 0.5em;
+			width: 1.25em;
+			filter: $grey-200__filter;
+		}
+	}
+}

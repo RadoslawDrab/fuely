@@ -1,0 +1,25 @@
+@use '@/styles/library' as *;
+
+.copywrite {
+	grid-column: 1 / -1;
+	width: 100%;
+	border-top: 1.5px solid $grey-400;
+	padding: 2em 0;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+
+	font-size: $size-400;
+	color: $grey-400;
+	.logo {
+		display: flex;
+		align-items: center;
+		gap: 1em;
+		span {
+			font-size: $size-500;
+		}
+		img {
+			filter: none;
+		}
+	}
+}

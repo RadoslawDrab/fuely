@@ -2,50 +2,16 @@
 .footer {
 	position: relative;
 	width: 100%;
-	max-width: 35rem;
+	max-width: $size-phone-l;
 	margin: 0 auto;
 
 	background-color: $grey-800;
 	display: grid;
-	grid-template-columns: repeat(3, 1fr);
-	justify-items: start;
-	gap: 2em;
-	padding: 3em 2em;
+	grid-template-columns: repeat(2, 1fr);
+	gap: 1.5em;
+	padding: 3em 1.5em;
 	padding-bottom: 0;
 
-	&-copywrite {
-		grid-column: 1 / -1;
-		width: 100%;
-		border-top: 1.5px solid $grey-400;
-		padding: 2em 0;
-		display: flex;
-		justify-content: space-between;
-
-		font-size: $size-400;
-		color: $grey-400;
-
-		.footer-logo {
-			display: flex;
-			align-items: center;
-			gap: 1em;
-			span {
-				font-size: $size-500;
-			}
-			img {
-				filter: none;
-			}
-		}
-	}
-	@include global(('.pages-column', '.contact-column')) {
-		ul {
-			li {
-				& > * {
-					padding-left: 0;
-					padding-right: 0;
-				}
-			}
-		}
-	}
 	@include global(('.pages-column')) {
 		ul {
 			li button img {
@@ -53,6 +19,7 @@
 			}
 		}
 	}
+
 	&::before {
 		content: '';
 		z-index: -1;
