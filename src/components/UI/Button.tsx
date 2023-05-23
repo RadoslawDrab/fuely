@@ -33,7 +33,7 @@ export default function Button(props: Props) {
 			onBlur={props.onBlur}
 			{...data}
 			disabled={props.disabled}>
-			{props.children}
+			{props.children || 'Button'}
 		</button>
 	)
 }
