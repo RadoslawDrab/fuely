@@ -1,0 +1,72 @@
+@use '@/styles/library' as *;
+.section {
+	display: flex;
+	flex-direction: column;
+	gap: 1em;
+	header {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		h3 {
+			font-size: $size-700;
+			font-weight: 600;
+		}
+		time {
+			font-size: $size-500;
+			letter-spacing: 0.15px;
+		}
+	}
+	.main {
+		display: grid;
+		grid-template-columns: auto 1fr auto;
+		align-items: center;
+		gap: 1em;
+		@media screen and (min-width: 23rem) {
+			gap: 1.5em;
+		}
+
+		.label {
+			width: fit-content;
+			color: $grey-800;
+			font-size: $size-500;
+			letter-spacing: 0.5px;
+			@media screen and (min-width: 23rem) {
+				font-size: $size-600;
+			}
+		}
+		.graph {
+			width: auto;
+		}
+		data {
+			width: fit-content;
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			.data {
+				color: $grey-800;
+				font-size: $size-500;
+				letter-spacing: 0.5px;
+				span {
+					margin-left: 0.3em;
+					font-size: $size-300;
+				}
+				@media screen and (min-width: 23rem) {
+					font-size: $size-600;
+					span {
+						font-size: $size-400;
+					}
+				}
+			}
+			.percent {
+				color: $grey-600;
+				font-size: $size-400;
+				font-weight: 300;
+				&::after {
+					margin-left: 0.15em;
+					font-size: $size-200;
+					content: '%';
+				}
+			}
+		}
+	}
+}
