@@ -40,7 +40,7 @@ export default function Login() {
 		setError(() => message)
 	}
 	return (
-		<Section title={getText('Log in')}>
+		<Section title={getText('Log in')} className={styles.section}>
 			<LoginForm onLogin={loginUser} onError={onFormError} onInputChange={() => setError(() => '')} />
 			<Error className={styles.error} show={error ? true : false} text={error} />
 		</Section>

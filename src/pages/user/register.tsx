@@ -36,7 +36,7 @@ export default function Register() {
 	}
 
 	return (
-		<Section title={getText('Register')}>
+		<Section title={getText('Register')} className={styles.section}>
 			<RegisterForm onRegister={registerUser} onError={onFormError} onInputChange={() => setError(() => '')} />
 			<Error show={error ? true : false} text={error} className={styles.error} />
 		</Section>
