@@ -9,6 +9,7 @@ import styles from '@styles/pages/Dashboard/Overview.module.scss'
 import defaultStyles from '@styles/styles.module.scss'
 
 interface Props {
+	date: string
 	items: {
 		label: string
 		currentValue: number
@@ -17,7 +18,6 @@ interface Props {
 		digits?: number
 	}[]
 }
-const date = '23 May 2023'
 export default function Overview(props: Props) {
 	const itemElements = props.items.map((item, i) => {
 		const key = `${i}-${getRandomKey()}`
@@ -54,7 +54,7 @@ export default function Overview(props: Props) {
 		<Section title="Overview" className={defaultStyles.section} contentClassName={styles.section}>
 			<header>
 				<h3>Last refuel</h3>
-				<time dateTime={date}>{date}</time>
+				<time dateTime={props.date}>{props.date}</time>
 			</header>
 			<hr />
 			<div className={styles.main}>{itemElements}</div>
