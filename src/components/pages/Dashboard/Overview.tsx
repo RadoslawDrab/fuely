@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { getRandomKey } from '@/utils'
+import { className, getRandomKey } from '@/utils'
 
 import Section from '@/components/Layout/Section'
 import Graph from '@/components/UI/Graph'
@@ -9,6 +9,7 @@ import styles from '@styles/pages/Dashboard/Overview.module.scss'
 import defaultStyles from '@styles/styles.module.scss'
 
 interface Props {
+	className?: string
 	date: string
 	items: {
 		label: string
@@ -19,6 +20,8 @@ interface Props {
 	}[]
 }
 export default function Overview(props: Props) {
+	const sectionStyles = className(defaultStyles.section, props.className)
+
 	const itemElements = props.items.map((item, i) => {
 		const key = `${i}-${getRandomKey()}`
 
@@ -51,7 +54,7 @@ export default function Overview(props: Props) {
 		)
 	})
 	return (
-		<Section title="Overview" className={defaultStyles.section} contentClassName={styles.section}>
+		<Section title="Overview" className={sectionStyles} contentClassName={styles.section}>
 			<header>
 				<h3>Last refuel</h3>
 				<time dateTime={props.date}>{props.date}</time>
