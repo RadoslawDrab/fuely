@@ -1,0 +1,60 @@
+@use '@/styles/library' as *;
+
+.section {
+	display: flex;
+	flex-direction: column;
+	ul {
+		list-style: none;
+		display: flex;
+		flex-direction: column;
+		margin-bottom: 1em;
+		li {
+			display: grid;
+			grid-template-columns: 1fr auto auto auto;
+			justify-content: space-between;
+			align-items: center;
+			gap: 0.75em;
+			padding: 0.75em 0;
+			border-bottom: 1.5px solid $grey-400;
+			.date {
+				font-size: $size-500;
+				letter-spacing: 0.5px;
+				color: $grey-800;
+			}
+			.cost,
+			.fuel {
+				font-size: $size-400;
+				color: $grey-600;
+				span {
+					margin-left: 0.3em;
+				}
+			}
+			.button {
+				aspect-ratio: 1/1;
+				padding: 0.75em;
+				margin-left: 0.5em;
+
+				img {
+					width: 1.5em;
+				}
+			}
+			@media screen and (pointer: fine) {
+				.button {
+					opacity: 0;
+					pointer-events: none;
+				}
+				&:hover {
+					.button {
+						opacity: 1;
+						pointer-events: auto;
+					}
+				}
+			}
+		}
+	}
+	.load-button {
+		font-size: $size-500;
+		padding: 0.5em 1em;
+		align-self: center;
+	}
+}
