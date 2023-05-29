@@ -16,7 +16,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
 }
 
 export function getUsers() {
-	return new Promise(async (resolve, reject) => {
+	return new Promise((resolve, reject) => {
 		get(child(databaseRef, 'users/')).then((snapshot) => {
 			if (snapshot.exists()) {
 				resolve(snapshot.val())
@@ -30,5 +30,19 @@ export function getUsers() {
 export function addUser(id: string, user: User) {
 	set(child(databaseRef, `users/${id}`), {
 		...user
+	})
+}
+
+export function getEvents(id: string) {
+	return new Promise((resolve: (value: object) => void, reject) => {
+		get(child(databaseRef, `events/${id}`))
+			.then((snapshot) => {
+				if (snapshot.exists()) {
+					resolve(snapshot.val())
+				} else {
+					reject()
+				}
+			})
+			.catch((error) => reject(error))
 	})
 }
