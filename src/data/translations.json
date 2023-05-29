@@ -14,5 +14,6 @@
 	"Pages": { "pl": "Strony", "de": "Seiten" },
 	"Contact": { "pl": "Kontakt", "de": "Kontakt" },
 	"Light": { "pl": "Jasny", "de": "Hell" },
-	"Dark": { "pl": "Ciemny", "de": "Dunkel" }
+	"Dark": { "pl": "Ciemny", "de": "Dunkel" },
+	"Name": { "pl": "Nazwa", "de": "Name" }
 }
