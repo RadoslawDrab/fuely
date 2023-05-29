@@ -11,6 +11,9 @@
 	input {
 		width: 9rem;
 	}
+	.form-error {
+		grid-column: 1 / -1;
+	}
 	hr {
 		grid-column: 1 / -1;
 	}
