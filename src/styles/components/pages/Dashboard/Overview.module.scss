@@ -18,7 +18,7 @@
 	}
 	.main {
 		display: grid;
-		grid-template-columns: repeat(3, 1fr);
+		grid-template-columns: 35fr 30fr 35fr;
 		align-items: center;
 		gap: 1em;
 		@media screen and (min-width: 23rem) {
