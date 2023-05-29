@@ -4,6 +4,7 @@ export interface Auth {
 	isLoggedIn: boolean
 	isLoading: boolean
 	user: User | null
+	userId: string
 	hasError: boolean
 	errorMessage: string
 	login: (login: string, password: string) => Promise<any>

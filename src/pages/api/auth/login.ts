@@ -74,7 +74,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 				if (!userId) {
 					return returnError(res, 404, 'Not Found', 'User not found')
 				}
-				const user = users[userId]
+				const user = { userId, user: users[userId].settings }
 
 				res.status(200).json(user)
 			}

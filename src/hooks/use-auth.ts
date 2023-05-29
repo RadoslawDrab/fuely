@@ -10,6 +10,7 @@ export default function useAuth(): Auth {
 	const [user, setUser] = useState<User | null>(null)
 	const [hasError, setHasError] = useState<boolean>(false)
 	const [errorMessage, setErrorMessage] = useState<string>('')
+	const [userId, setUserId] = useState<string>('')
 
 	async function login(login: string, password: string) {
 		return new Promise((resolve, reject) => {
@@ -48,11 +49,12 @@ export default function useAuth(): Auth {
 				})
 			})
 				.then(responseHandler)
-				.then((user: User) => {
+				.then((data) => {
 					noError()
-					setUser(() => user)
+					setUser(() => data.user)
+					setUserId(() => data.userId)
 					setIsLoggedIn(() => true)
-					resolve(user)
+					resolve(data.user)
 				})
 				.catch((error: Error) => {
 					setError(error)
@@ -122,13 +124,14 @@ export default function useAuth(): Auth {
 		}
 	}, [loginUsingToken])
 
-	return { isLoggedIn, isLoading, user, errorMessage, hasError, login, register, loginUsingToken, logout }
+	return { isLoggedIn, isLoading, user, errorMessage, hasError, userId, login, register, loginUsingToken, logout }
 }
 
 export const exampleAuthObject: Auth = {
 	isLoggedIn: false,
 	isLoading: false,
 	user: null,
+	userId: '',
 	hasError: false,
 	errorMessage: '',
 	login: async () => {},
