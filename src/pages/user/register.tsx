@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { useRouter } from 'next/router'
 
 import useAppContext from '@/hooks/use-app-context'
+import { className } from '@/utils'
 
 import RegisterForm from '@/components/pages/Register/RegisterForm'
 import Section from '@/components/Layout/Section'
@@ -16,6 +17,8 @@ export default function Register() {
 	const { getText } = useAppContext().Language
 
 	const [error, setError] = useState('')
+
+	const sectionStyles = className(styles.section, styles.center)
 
 	if (isLoggedIn) {
 		router.replace('/user/dashboard')
@@ -36,7 +39,7 @@ export default function Register() {
 	}
 
 	return (
-		<Section title={getText('Register')} className={styles.section}>
+		<Section title={getText('Register')} className={sectionStyles}>
 			<RegisterForm onRegister={registerUser} onError={onFormError} onInputChange={() => setError(() => '')} />
 			<Error show={error ? true : false} text={error} className={styles.error} />
 		</Section>

@@ -49,4 +49,7 @@
 .section {
 	max-width: 27rem;
 	margin: 0 auto;
+	&.center {
+		grid-column: 1 / -1;
+	}
 }

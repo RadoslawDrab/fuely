@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { useRouter } from 'next/router'
 
 import useAppContext from '@/hooks/use-app-context'
+import { className } from '@/utils'
 
 import Section from '@/components/Layout/Section'
 import LoginForm from '@/components/pages/Login/LoginForm'
@@ -16,6 +17,8 @@ export default function Login() {
 	const { getText } = useAppContext().Language
 
 	const [error, setError] = useState('')
+
+	const sectionStyles = className(styles.section, styles.center)
 
 	if (isLoggedIn) {
 		router.replace('/user/dashboard')
@@ -40,7 +43,7 @@ export default function Login() {
 		setError(() => message)
 	}
 	return (
-		<Section title={getText('Log in')} className={styles.section}>
+		<Section title={getText('Log in')} className={sectionStyles}>
 			<LoginForm onLogin={loginUser} onError={onFormError} onInputChange={() => setError(() => '')} />
 			<Error className={styles.error} show={error ? true : false} text={error} />
 		</Section>
