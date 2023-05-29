@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 import useAppContext from '@/hooks/use-app-context'
 
 import Button from '@/components/UI/Button'
-import Input from '@/components/UI/Input'
+import FormInput from '@/components/UI/FormInput'
 
 import styles from '@styles/styles.module.scss'
 
@@ -28,34 +28,10 @@ export default function LoginForm(props: Props) {
 
 		props.onLogin(login, password)
 	}
-
-	function onInputChange(event: React.ChangeEvent<HTMLInputElement>) {
-		props.onInputChange()
-		const value = event.target.value
-
-		switch (event.target.dataset.type) {
-			case 'login': {
-				setLogin(() => value)
-				break
-			}
-			case 'password': {
-				setPassword(() => value)
-				break
-			}
-		}
-	}
 	return (
 		<form onSubmit={onSubmit} className={styles.form}>
-			<label htmlFor="login-input">{getText('Login')}</label>
-			<Input id="login-input" type="text" placeholder={getText('Login')} onChange={onInputChange} data={{ type: 'login' }} />
-			<label htmlFor="password-input">{getText('Password')}</label>
-			<Input
-				id="password-input"
-				type="password"
-				placeholder={getText('Password')}
-				onChange={onInputChange}
-				data={{ type: 'password' }}
-			/>
+			<FormInput name="login" type="text" text={getText('Login')} getValue={(value) => setLogin(() => value)} />
+			<FormInput name="password" type="password" text={getText('Password')} getValue={(value) => setPassword(() => value)} />
 			<hr />
 			<Button className={styles['submit-button']} onClick={() => {}}>
 				{getText('Send')}
