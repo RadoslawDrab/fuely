@@ -1,4 +1,5 @@
 import { Languages } from '@/hooks/Language.modal'
+import units from '@data/units.json'
 
 export function isClient() {
 	return typeof window !== 'undefined'
@@ -35,6 +36,10 @@ export function createDatasetObject(data: { [key: string]: number | string | boo
 		}
 		return acc
 	}, {})
+}
+type Unit = keyof typeof units
+export function getUnit(name: Unit) {
+	return units[name]
 }
 
 export function setLocalStorage(data: Partial<AppSettings>, overwrite = false) {
