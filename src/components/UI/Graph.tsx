@@ -5,7 +5,6 @@ import { className, getRandomKey } from '@/utils'
 import styles from '@styles/UI/Graph.module.scss'
 
 interface Props {
-	min: number
 	items: { name?: string; value: number }[]
 	max?: number
 	meter?: boolean
