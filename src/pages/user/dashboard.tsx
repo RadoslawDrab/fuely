@@ -2,6 +2,8 @@ import React from 'react'
 
 import useAppContext from '@/hooks/use-app-context'
 import useUserRedirect from '@/hooks/use-user-redirect'
+import { getUnit } from '@/utils'
+import useEvents from '@/hooks/use-events'
 
 import Overview from '@/components/pages/Dashboard/Overview'
 import DashboardComponent from '@/components/pages/Dashboard/Dashboard'
@@ -12,12 +14,25 @@ import styles from '@styles/pages/Dashboard/index.module.scss'
 
 export default function Dashboard() {
 	const { user, isLoading } = useAppContext().Auth
+	const { events, sortedDates, formatDate } = useEvents()
 
 	useUserRedirect()
 
-	if (isLoading) {
+	if (isLoading || !events || !user) {
 		return <>Loading...</>
 	}
+
+	const dashboardItems = sortedDates.map((date) => {
+		const event = events[date]
+		return {
+			id: date,
+			cost: event.cost,
+			costUnit: user.currency,
+			fuel: event.fuel,
+			fuelUnit: getUnit(user.fuelUnit),
+			date: formatDate(date)
+		}
+	})
 
 	return (
 		<>
@@ -46,13 +61,7 @@ export default function Dashboard() {
 				<span>New Refuel</span>
 			</Button>
 			<hr className={styles.line} />
-			<DashboardComponent
-				className={styles.dashboard}
-				items={[
-					{ id: '123456', cost: 250, costUnit: 'zł', fuel: 35, fuelUnit: 'L', date: '23 May 2023' },
-					{ id: '123456', cost: 250, costUnit: 'zł', fuel: 35, fuelUnit: 'L', date: '23 May 2023' }
-				]}
-			/>
+			<DashboardComponent className={styles.dashboard} items={dashboardItems} />
 		</>
 	)
 }
