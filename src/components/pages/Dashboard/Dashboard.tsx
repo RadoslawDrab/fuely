@@ -29,7 +29,7 @@ export default function Dashboard(props: Props) {
 	function navigate(event: React.MouseEvent<HTMLButtonElement>) {
 		const path = `/user/${event.currentTarget.dataset.id}` || '/user/dashboard'
 
-		router.replace(path)
+		router.push(path)
 	}
 	const rows = props.items.map((item, i) => {
 		const date = item.date
