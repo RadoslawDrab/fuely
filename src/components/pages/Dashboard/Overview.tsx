@@ -30,12 +30,12 @@ export default function Overview(props: Props) {
 
 		const value = item.currentValue.toFixed(item.digits ?? 1)
 		const prevValue = item.previousValue.toFixed(item.digits ?? 1)
+
 		return (
 			<React.Fragment key={key}>
 				<label className={styles.label}>{item.label}</label>
 				<Graph
 					className={styles.graph}
-					min={0}
 					max={Math.max(item.currentValue, item.previousValue)}
 					items={[
 						{ name: value, value: item.currentValue },
