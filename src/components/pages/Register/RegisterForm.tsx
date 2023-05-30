@@ -8,7 +8,7 @@ import FormInput from '@/components/UI/FormInput'
 import styles from '@styles/styles.module.scss'
 
 interface Props {
-	onRegister: (login: string, password: string) => void
+	onRegister: (login: string, password: string, name: string) => void
 	onError: (errorMessage: string) => void
 	onInputChange: () => void
 }
@@ -44,7 +44,7 @@ export default function RegisterForm(props: Props) {
 			return
 		}
 
-		props.onRegister(login, password1)
+		props.onRegister(login, password1, name)
 	}
 
 	return (
