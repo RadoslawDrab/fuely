@@ -2,15 +2,17 @@ import { useCallback, useEffect, useState } from 'react'
 
 import { getLocalStorage, isClient, setLocalStorage } from '@/utils'
 import { Auth } from './Auth.modal'
-import { User } from '@/pages/api/auth'
+import { Events } from './Events.modal'
+import { UserSettings } from '@/pages/api/auth'
 
 export default function useAuth(): Auth {
 	const [isLoading, setIsLoading] = useState<boolean>(false)
 	const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false)
-	const [user, setUser] = useState<User | null>(null)
+	const [user, setUser] = useState<UserSettings | null>(null)
 	const [hasError, setHasError] = useState<boolean>(false)
 	const [errorMessage, setErrorMessage] = useState<string>('')
 	const [userId, setUserId] = useState<string>('')
+	const [events, setEvents] = useState<Events>({})
 
 	async function login(login: string, password: string) {
 		return new Promise((resolve, reject) => {
@@ -67,7 +69,7 @@ export default function useAuth(): Auth {
 		})
 	}, [])
 
-	async function register(login: string, password: string): Promise<any> {
+	async function register(login: string, password: string, name: string): Promise<any> {
 		setIsLoading(() => true)
 
 		return new Promise((resolve, reject) => {
@@ -75,7 +77,8 @@ export default function useAuth(): Auth {
 				method: 'POST',
 				body: JSON.stringify({
 					login: login,
-					password: password
+					password: password,
+					userName: name
 				})
 			})
 				.then(responseHandler)
@@ -124,7 +127,19 @@ export default function useAuth(): Auth {
 		}
 	}, [loginUsingToken])
 
-	return { isLoggedIn, isLoading, user, errorMessage, hasError, userId, login, register, loginUsingToken, logout }
+	useEffect(() => {
+		if (!userId) {
+			return
+		}
+		fetch('/api/user/events', { method: 'POST', body: JSON.stringify({ id: userId }) })
+			.then(responseHandler)
+			.then((data: Events) => {
+				setEvents(() => data)
+			})
+			.catch((error: Error) => {})
+	}, [userId])
+
+	return { isLoggedIn, isLoading, user, errorMessage, hasError, userId, events, login, register, loginUsingToken, logout }
 }
 
 export const exampleAuthObject: Auth = {
@@ -134,6 +149,7 @@ export const exampleAuthObject: Auth = {
 	userId: '',
 	hasError: false,
 	errorMessage: '',
+	events: {},
 	login: async () => {},
 	register: async () => {},
 	loginUsingToken: () => {},
