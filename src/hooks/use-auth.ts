@@ -27,7 +27,7 @@ export default function useAuth(): Auth {
 			})
 				.then(responseHandler)
 				.then((data: { token: string }) => {
-					noError()
+					setError()
 					setLocalStorage(data)
 					resolve(data.token)
 				})
@@ -52,7 +52,7 @@ export default function useAuth(): Auth {
 			})
 				.then(responseHandler)
 				.then((data) => {
-					noError()
+					setError()
 					setUser(() => data.user)
 					setUserId(() => data.userId)
 					setIsLoggedIn(() => true)
@@ -60,7 +60,6 @@ export default function useAuth(): Auth {
 				})
 				.catch((error: Error) => {
 					setError(error)
-
 					reject(error.message)
 				})
 				.finally(() => {
@@ -83,7 +82,7 @@ export default function useAuth(): Auth {
 			})
 				.then(responseHandler)
 				.then((data) => {
-					noError()
+					setError()
 					resolve(data)
 				})
 				.catch((error: Error) => {
@@ -99,6 +98,7 @@ export default function useAuth(): Auth {
 		// Remove token from localStorage
 		setLocalStorage({ token: undefined })
 		setUser(() => null)
+		setUserId(() => '')
 		setIsLoggedIn(() => false)
 	}
 
@@ -108,13 +108,14 @@ export default function useAuth(): Auth {
 		}
 		return response.json()
 	}
-	function setError(error: Error) {
-		setHasError(() => true)
-		setErrorMessage(() => error.message)
-	}
-	function noError() {
-		setHasError(() => false)
-		setErrorMessage(() => '')
+	function setError(error?: Error) {
+		if (error) {
+			setHasError(() => true)
+			setErrorMessage(() => error.message)
+		} else {
+			setHasError(() => false)
+			setErrorMessage(() => '')
+		}
 	}
 
 	useEffect(() => {
@@ -136,7 +137,9 @@ export default function useAuth(): Auth {
 			.then((data: Events) => {
 				setEvents(() => data)
 			})
-			.catch((error: Error) => {})
+			.catch((error: Error) => {
+				setError(error)
+			})
 	}, [userId])
 
 	return { isLoggedIn, isLoading, user, errorMessage, hasError, userId, events, login, register, loginUsingToken, logout }
