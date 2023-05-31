@@ -19,8 +19,8 @@ export default function useUnit() {
 		const system = user.settings?.units
 		switch (system) {
 			case 'imperial': {
-				units.distance = 'm'
-				units.fuel = 'G'
+				units.distance = 'mi'
+				units.fuel = 'gal'
 			}
 		}
 	}
