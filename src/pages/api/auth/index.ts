@@ -14,8 +14,7 @@ export interface UserObject {
 }
 export interface UserSettings {
 	name: string
-	distanceUnit: 'kilometer' | 'mile'
-	fuelUnit: 'liter' | 'galon'
+	units: 'metric' | 'imperial'
 	currency: string
 }
 

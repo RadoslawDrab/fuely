@@ -39,10 +39,9 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 					login: encryptData(login),
 					password: encryptData(password),
 					settings: {
-						distanceUnit: 'kilometer',
-						fuelUnit: 'liter',
 						name: userName || 'User',
-						currency: 'USD'
+						currency: 'USD',
+						units: 'metric'
 					}
 				}
 
