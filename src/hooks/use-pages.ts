@@ -6,7 +6,9 @@ import useAppContext from './use-app-context'
 export default function usePages(): Pages {
 	const router = useRouter()
 
-	const { isLoggedIn } = useAppContext().Auth
+	const {
+		state: { isLoggedIn }
+	} = useAppContext().Auth
 
 	const allPages: Page[] = [
 		{

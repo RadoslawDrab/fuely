@@ -13,7 +13,10 @@ import styles from '@styles/styles.module.scss'
 export default function Register() {
 	const router = useRouter()
 
-	const { register, isLoggedIn } = useAppContext().Auth
+	const {
+		register,
+		state: { isLoggedIn }
+	} = useAppContext().Auth
 	const { getText } = useAppContext().Language
 
 	const [error, setError] = useState('')

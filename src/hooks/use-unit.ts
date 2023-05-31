@@ -6,20 +6,19 @@ export default function useUnit() {
 	const units = {
 		distance: 'km',
 		fuel: 'L',
-		currency: user?.currency ?? 'USD'
+		currency: user.settings?.currency ?? 'USD'
 	}
 	if (user) {
-		const system = user.units
+		const system = user.settings?.units
 		switch (system) {
 			case 'imperial': {
 				units.distance = 'm'
-				units.fuel = 'g'
+				units.fuel = 'G'
 			}
 		}
 	}
 	return {
-		system: user?.units ?? 'metric',
-		isMetric: (user?.units ?? 'metric') === 'metric',
-		units
+		system: user.settings?.units ?? 'metric',
+		isMetric: (user.settings?.units ?? 'metric') === 'metric',
 	}
 }

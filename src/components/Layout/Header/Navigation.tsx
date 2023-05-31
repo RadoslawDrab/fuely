@@ -14,7 +14,10 @@ export default function Navigation() {
 	const router = useRouter()
 
 	const { navigationState } = useAppContext().Navigation
-	const { isLoggedIn, logout } = useAppContext().Auth
+	const {
+		state: { isLoggedIn },
+		logout
+	} = useAppContext().Auth
 	const { getText } = useAppContext().Language
 
 	const navigationStyles = className(styles.nav, !navigationState ? 'hidden' : '')

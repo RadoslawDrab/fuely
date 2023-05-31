@@ -13,8 +13,10 @@ import Icon from '@/components/UI/Icon'
 import styles from '@styles/pages/Dashboard/index.module.scss'
 
 export default function Dashboard() {
-	const { user, isLoading } = useAppContext().Auth
-	const { events, sortedDates, formatDate } = useEvents()
+	const {
+		user,
+		state: { isLoading }
+	} = useAppContext().Auth
 	const { units } = useUnit()
 
 	useUserRedirect()

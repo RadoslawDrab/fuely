@@ -11,7 +11,9 @@ const emptyEvent: FullEvent = {
 	odometer: 0
 }
 export default function useEvents(): EventObject {
-	const { events } = useAppContext().Auth
+	const {
+		user: { events }
+	} = useAppContext().Auth
 
 	const [isLoading, setIsLoading] = useState(false)
 

@@ -6,7 +6,9 @@ import useAppContext from './use-app-context'
 export default function useUserRedirect() {
 	const router = useRouter()
 
-	const { errorMessage } = useAppContext().Auth
+	const {
+		state: { errorMessage }
+	} = useAppContext().Auth
 
 	useEffect(() => {
 		if (errorMessage.includes('Unauthorized')) {

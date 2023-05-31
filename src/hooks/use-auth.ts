@@ -1,22 +1,16 @@
-import { useCallback, useEffect, useState } from 'react'
+import { useCallback, useEffect, useReducer } from 'react'
 
-import { getLocalStorage, isClient, setLocalStorage } from '@/utils'
+import { getLocalStorage, isClient } from '@/utils'
 import { Auth } from './Auth.modal'
 import { Events } from './Events.modal'
-import { UserSettings } from '@/pages/api/auth'
+import authReducer from './Auth/authReducer'
 
 export default function useAuth(): Auth {
-	const [isLoading, setIsLoading] = useState<boolean>(false)
-	const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false)
-	const [user, setUser] = useState<UserSettings | null>(null)
-	const [hasError, setHasError] = useState<boolean>(false)
-	const [errorMessage, setErrorMessage] = useState<string>('')
-	const [userId, setUserId] = useState<string>('')
-	const [events, setEvents] = useState<Events>({})
+	const [authState, dispatch] = useReducer(authReducer.reducer, authReducer.initialState)
 
-	async function login(login: string, password: string) {
+	function login(login: string, password: string) {
 		return new Promise((resolve, reject) => {
-			setIsLoading(() => true)
+			setLoading(true)
 
 			fetch('/api/auth/login', {
 				method: 'POST',
@@ -28,7 +22,7 @@ export default function useAuth(): Auth {
 				.then(responseHandler)
 				.then((data: { token: string }) => {
 					setError()
-					setLocalStorage(data)
+					dispatch({ type: 'SET_TOKEN', token: data.token })
 					resolve(data.token)
 				})
 				.catch((error: Error) => {
@@ -36,12 +30,12 @@ export default function useAuth(): Auth {
 					reject(error.message)
 				})
 				.finally(() => {
-					setIsLoading(() => false)
+					setLoading(false)
 				})
 		})
 	}
 	const loginUsingToken = useCallback(function (token: string) {
-		setIsLoading(() => true)
+		setLoading(true)
 
 		return new Promise((resolve, reject) => {
 			fetch('/api/auth/login', {
@@ -53,9 +47,7 @@ export default function useAuth(): Auth {
 				.then(responseHandler)
 				.then((data) => {
 					setError()
-					setUser(() => data.user)
-					setUserId(() => data.userId)
-					setIsLoggedIn(() => true)
+					dispatch({ type: 'SET_USER', user: data.user, id: data.userId })
 					resolve(data.user)
 				})
 				.catch((error: Error) => {
@@ -63,13 +55,13 @@ export default function useAuth(): Auth {
 					reject(error.message)
 				})
 				.finally(() => {
-					setIsLoading(() => false)
+					setLoading(false)
 				})
 		})
 	}, [])
 
-	async function register(login: string, password: string, name: string): Promise<any> {
-		setIsLoading(() => true)
+	function register(login: string, password: string, name: string): Promise<any> {
+		setLoading(true)
 
 		return new Promise((resolve, reject) => {
 			fetch('/api/auth/register', {
@@ -90,16 +82,13 @@ export default function useAuth(): Auth {
 					reject(error.message)
 				})
 				.finally(() => {
-					setIsLoading(() => false)
+					setLoading(false)
 				})
 		})
 	}
+
 	function logout() {
-		// Remove token from localStorage
-		setLocalStorage({ token: undefined })
-		setUser(() => null)
-		setUserId(() => '')
-		setIsLoggedIn(() => false)
+		dispatch({ type: 'LOG_OUT' })
 	}
 
 	function responseHandler(response: Response) {
@@ -109,13 +98,10 @@ export default function useAuth(): Auth {
 		return response.json()
 	}
 	function setError(error?: Error) {
-		if (error) {
-			setHasError(() => true)
-			setErrorMessage(() => error.message)
-		} else {
-			setHasError(() => false)
-			setErrorMessage(() => '')
-		}
+		dispatch({ type: 'SET_ERROR', errorMessage: error?.message })
+	}
+	function setLoading(state: boolean) {
+		dispatch({ type: 'SET_LOADING', state })
 	}
 
 	useEffect(() => {
@@ -129,30 +115,29 @@ export default function useAuth(): Auth {
 	}, [loginUsingToken])
 
 	useEffect(() => {
-		if (!userId) {
-			return
+		if (authState.user.id) {
+			fetch('/api/user/events', { method: 'POST', body: JSON.stringify({ id: authState.user.id }) })
+				.then(responseHandler)
+				.then((data: Events) => {
+					dispatch({ type: 'SET_EVENTS', events: data })
+				})
+				.catch((error: Error) => {
+					setError(error)
+				})
 		}
-		fetch('/api/user/events', { method: 'POST', body: JSON.stringify({ id: userId }) })
-			.then(responseHandler)
-			.then((data: Events) => {
-				setEvents(() => data)
-			})
-			.catch((error: Error) => {
-				setError(error)
-			})
-	}, [userId])
+	}, [authState.user.id])
 
-	return { isLoggedIn, isLoading, user, errorMessage, hasError, userId, events, login, register, loginUsingToken, logout }
+	return {
+		...authState,
+		login,
+		register,
+		loginUsingToken,
+		logout
+	}
 }
 
 export const exampleAuthObject: Auth = {
-	isLoggedIn: false,
-	isLoading: false,
-	user: null,
-	userId: '',
-	hasError: false,
-	errorMessage: '',
-	events: {},
+	...authReducer.initialState,
 	login: async () => {},
 	register: async () => {},
 	loginUsingToken: () => {},
