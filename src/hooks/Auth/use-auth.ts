@@ -2,8 +2,8 @@ import { useCallback, useEffect, useReducer } from 'react'
 
 import { getLocalStorage, isClient } from '@/utils'
 import { Auth } from './Auth.modal'
-import { Events } from './Events.modal'
-import authReducer from './Auth/authReducer'
+import { Events } from '../Events.modal'
+import authReducer from './authReducer'
 
 export default function useAuth(): Auth {
 	const [authState, dispatch] = useReducer(authReducer.reducer, authReducer.initialState)

@@ -1,4 +1,4 @@
-import { AuthState, UserState } from './Auth/AuthReducer.modal'
+import { AuthState, UserState } from './AuthReducer.modal'
 
 export interface Auth {
 	state: AuthState
