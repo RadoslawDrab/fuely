@@ -1,3 +1,5 @@
+import { UnitType } from './use-unit'
+
 export interface Event {
 	cost: number
 	fuel: number
@@ -14,7 +16,8 @@ export interface EventObject {
 	events: Events
 	sortedDates: string[]
 	isLoading: boolean
+	emptyEvent: FullEvent
 	getEvent: (index: number) => FullEvent | null
 	formatDate: (date: string) => string
-	emptyEvent: FullEvent
+	convert: (value: number, type: UnitType) => number
 }

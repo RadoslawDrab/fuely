@@ -38,9 +38,9 @@ export default function Overview(props: Props) {
 	const sectionStyles = className(defaultStyles.section, props.className)
 
 	// Last consumption
-	const currentConsumption = isMetric ? (event0.fuel / event0.distance) * 100 : event0.distance / event0.fuel
+	const currentConsumption = (isMetric ? (event0.fuel / event0.distance) * 100 : event0.distance / event0.fuel) ?? 0
 	// Second to last consumption
-	const previousConsumption = isMetric ? (event1.fuel / event1.distance) * 100 : event1.distance / event1.fuel
+	const previousConsumption = (isMetric ? (event1.fuel / event1.distance) * 100 : event1.distance / event1.fuel) ?? 0
 
 	const items: Item[] = [
 		{ label: 'Prize', currentValue: event0.cost, previousValue: event1.cost, unit: units.currency },
@@ -71,24 +71,25 @@ export default function Overview(props: Props) {
 	const itemElements = items.map((item, i) => {
 		const key = `${i}-${getRandomKey()}`
 
-		const percent = item.currentValue / item.previousValue - 1
-		// Adds + or - based on percent
-		const percentString = `${percent > 0 ? '+' : '-'}${Math.abs(percent * 100).toFixed(1)}`
+		const graphItems = []
 
 		const value = item.currentValue.toFixed(item.digits ?? 1)
 		const prevValue = item.previousValue.toFixed(item.digits ?? 1)
 
+		if (item.currentValue) graphItems.push({ name: value, value: item.currentValue })
+		if (item.previousValue) graphItems.push({ name: prevValue, value: item.previousValue })
+
+		const { currentValue, previousValue } = item
+
+		const percent = currentValue / previousValue - 1
+
+		// Adds + or - based on percent
+		const percentString = isFinite(percent) ? `${percent > 0 ? '+' : '-'}${Math.abs(percent * 100).toFixed(1)}` : '0'
+
 		return (
 			<React.Fragment key={key}>
 				<label className={styles.label}>{item.label}</label>
-				<Graph
-					className={styles.graph}
-					max={Math.max(item.currentValue, item.previousValue)}
-					items={[
-						{ name: value, value: item.currentValue },
-						{ name: prevValue, value: item.previousValue }
-					]}
-				/>
+				<Graph className={styles.graph} max={Math.max(currentValue, previousValue)} items={graphItems} />
 
 				<data value={value}>
 					<span className={styles.data}>

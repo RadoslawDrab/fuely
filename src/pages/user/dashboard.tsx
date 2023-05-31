@@ -17,6 +17,7 @@ export default function Dashboard() {
 		user,
 		state: { isLoading }
 	} = useAppContext().Auth
+	const { events, sortedDates, formatDate, convert } = useEvents()
 	const { units } = useUnit()
 
 	useUserRedirect()
@@ -31,7 +32,7 @@ export default function Dashboard() {
 			id: date,
 			cost: event.cost,
 			costUnit: units.currency,
-			fuel: event.fuel,
+			fuel: convert(event.fuel, 'fuel'),
 			fuelUnit: units.fuel,
 			date: formatDate(date)
 		}

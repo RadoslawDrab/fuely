@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 
 import useAppContext from './use-app-context'
+import useUnit, { UnitType } from './use-unit'
 import { EventObject, FullEvent } from './Events.modal'
 
 const emptyEvent: FullEvent = {
@@ -14,6 +15,7 @@ export default function useEvents(): EventObject {
 	const {
 		user: { events }
 	} = useAppContext().Auth
+	const { conversion, isMetric } = useUnit()
 
 	const [isLoading, setIsLoading] = useState(false)
 
@@ -37,8 +39,17 @@ export default function useEvents(): EventObject {
 		if (!date) {
 			return null
 		}
+
+		const event = events[date]
+		const converted = {
+			...event,
+			distance: convert(event.distance, 'distance'),
+			fuel: convert(event.fuel, 'fuel'),
+			odometer: convert(event.odometer, 'distance')
+		}
+		const convertedEvent = isMetric ? event : converted
 		// Returns object with date and event data
-		return { date: formattedDate, ...events[date] }
+		return { date: formattedDate, ...convertedEvent }
 	}
 
 	function formatDate(date: string) {
@@ -49,6 +60,9 @@ export default function useEvents(): EventObject {
 
 		return formattedDate
 	}
+	function convert(value: number, type: UnitType) {
+		return value * conversion[type]
+	}
 
 	return {
 		events,
@@ -56,6 +70,7 @@ export default function useEvents(): EventObject {
 		isLoading,
 		emptyEvent,
 		getEvent,
-		formatDate
+		formatDate,
+		convert
 	}
 }
