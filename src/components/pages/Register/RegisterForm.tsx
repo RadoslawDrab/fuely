@@ -49,9 +49,30 @@ export default function RegisterForm(props: Props) {
 
 	return (
 		<form className={styles.form} onSubmit={onSubmit}>
-			<FormInput name="login" type="text" getValue={(value) => setLogin(() => value)} text={getText('Login')} />
-			<FormInput name="password-1" type="password" getValue={(value) => setPassword1(() => value)} text={getText('Password')} />
-			<FormInput name="password-2" type="password" getValue={(value) => setPassword2(() => value)} text={getText('Password')} />
+			<FormInput
+				name="login"
+				type="text"
+				getValue={(value) => setLogin(() => value)}
+				text={getText('Login')}
+				check={(value) => value.length > 4}
+				errorText="Login must be longer than 4 characters"
+			/>
+			<FormInput
+				name="password-1"
+				type="password"
+				getValue={(value) => setPassword1(() => value)}
+				text={getText('Password')}
+				check={(value) => value.length > 5}
+				errorText="Password must be longer than 5 characters"
+			/>
+			<FormInput
+				name="password-2"
+				type="password"
+				getValue={(value) => setPassword2(() => value)}
+				text={getText('Password')}
+				check={(value) => value.length > 5}
+				errorText="Password must be longer than 5 characters"
+			/>
 			<hr />
 			<FormInput
 				name="name"
