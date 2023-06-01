@@ -1,15 +1,16 @@
 import useAppContext from './use-app-context'
 
 export type UnitType = 'distance' | 'fuel'
+
+const conversion = {
+	// kilometers > miles
+	distance: 0.621371192,
+	// liters > galons
+	fuel: 0.264172052
+}
 export default function useUnit() {
 	const { user } = useAppContext().Auth
 
-	const conversion = {
-		// kilometers > miles
-		distance: 0.621371192,
-		// liters > galons
-		fuel: 0.264172052
-	}
 	const units = {
 		distance: 'km',
 		fuel: 'L',
