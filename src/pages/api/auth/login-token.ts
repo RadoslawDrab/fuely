@@ -2,11 +2,7 @@ import { NextApiRequest, NextApiResponse } from 'next'
 
 import { UserObject, decryptToken, returnError } from '.'
 import { getUsers } from './database'
-
-interface UserData {
-	id: string
-	expires: string
-}
+import { UserData } from './login'
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
 	try {

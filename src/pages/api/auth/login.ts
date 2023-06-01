@@ -1,9 +1,9 @@
 import { NextApiRequest, NextApiResponse } from 'next'
 
-import { UserObject, createToken, decryptData, decryptToken, returnError } from '../auth'
+import { UserObject, createToken, decryptData, returnError } from '../auth'
 import { getUsers } from './database'
 
-interface UserData {
+export interface UserData {
 	id: string
 	expires: string
 }
