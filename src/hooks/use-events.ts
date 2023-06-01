@@ -63,6 +63,9 @@ export default function useEvents(): EventObject {
 	function convert(value: number, type: UnitType) {
 		return value * conversion[type]
 	}
+	function convertIfImperial(value: number, type: UnitType) {
+		return isMetric ? value : value * conversion[type]
+	}
 
 	return {
 		events,
@@ -71,6 +74,7 @@ export default function useEvents(): EventObject {
 		emptyEvent,
 		getEvent,
 		formatDate,
-		convert
+		convert,
+		convertIfImperial
 	}
 }

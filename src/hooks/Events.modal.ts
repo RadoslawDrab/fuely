@@ -20,4 +20,5 @@ export interface EventObject {
 	getEvent: (index: number) => FullEvent | null
 	formatDate: (date: string) => string
 	convert: (value: number, type: UnitType) => number
+	convertIfImperial: (value: number, type: UnitType) => number
 }
