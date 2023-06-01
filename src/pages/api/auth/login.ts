@@ -30,10 +30,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 					const decryptedLogin = decryptData<string>(user.login)
 					const decryptedPassword = decryptData<string>(user.password)
 
-					if (
-						(decryptedLogin.status.code !== 200 || decryptedPassword.status.code !== 200) &&
-						(!decryptedLogin.data || !decryptedPassword.data)
-					) {
+					if ((!decryptedLogin.status.ok || !decryptedPassword.status.ok) && (!decryptedLogin.data || !decryptedPassword.data)) {
 						return false
 					}
 
