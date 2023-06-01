@@ -12,11 +12,14 @@ interface Props {
 	type: React.HTMLInputTypeAttribute
 	getValue: (value: string) => void
 	notRequired?: boolean
+	errorText?: string
+	check?: (value: string) => boolean
 }
 
 export default function FormInput(props: Props) {
-	const [value, setValue] = useState('')
+	const defaultErrorMessage = `Fill out ${props.text} field`
 	const [hasError, setHasError] = useState(false)
+	const [errorMessage, setErrorMessage] = useState(defaultErrorMessage)
 	const [isTouched, setIsTouched] = useState(false)
 
 	const inputId = `input-${props.name}`
@@ -25,19 +28,22 @@ export default function FormInput(props: Props) {
 		const value = event.currentTarget.value
 
 		if (value) {
-			setValue(() => value)
 			props.getValue(value)
 			setHasError(() => false)
-		} else {
-			setHasError(() => true)
 		}
 	}
 	function onFocus() {
 		setIsTouched(() => true)
 	}
-	function onBlur() {
+	function onBlur(event: React.FocusEvent<HTMLInputElement>) {
+		const value = event.currentTarget.value
+
 		if (isTouched && !value) {
 			setHasError(() => true)
+			setErrorMessage(() => defaultErrorMessage)
+		} else if (isTouched && value && props.check && !props.check(value)) {
+			setHasError(() => true)
+			setErrorMessage(() => props.errorText || defaultErrorMessage)
 		}
 	}
 	return (
@@ -51,7 +57,7 @@ export default function FormInput(props: Props) {
 				onBlur={onBlur}
 				placeholder={props.placeholder ?? props.text}
 			/>
-			<Error className={styles['form-error']} show={hasError && !props.notRequired} text={`Fill out ${props.text} field`} />
+			<Error className={styles['form-error']} show={hasError && !props.notRequired} text={errorMessage} />
 		</>
 	)
 }
