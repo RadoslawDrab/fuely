@@ -43,6 +43,10 @@ export default function RegisterForm(props: Props) {
 			props.onError('Name must have more than 3 characters')
 			return
 		}
+		if (name === login) {
+			props.onError('Name must be different than login')
+			return
+		}
 
 		props.onRegister(login, password1, name)
 	}
