@@ -3,12 +3,13 @@ import { useCallback, useEffect, useReducer } from 'react'
 import { getLocalStorage, isClient } from '@/utils'
 import { Auth } from './Auth.modal'
 import { Events } from '../Events.modal'
+import { Status } from '@/pages/api/auth'
 import authReducer from './authReducer'
 
 export default function useAuth(): Auth {
 	const [authState, dispatch] = useReducer(authReducer.reducer, authReducer.initialState)
 
-	function login(login: string, password: string) {
+	function login(login: string, password: string): Promise<string> {
 		return new Promise((resolve, reject) => {
 			setLoading(true)
 
@@ -60,7 +61,7 @@ export default function useAuth(): Auth {
 		})
 	}, [])
 
-	function register(login: string, password: string, name: string): Promise<any> {
+	function register(login: string, password: string, name: string): Promise<Status> {
 		setLoading(true)
 
 		return new Promise((resolve, reject) => {
@@ -73,7 +74,7 @@ export default function useAuth(): Auth {
 				})
 			})
 				.then(responseHandler)
-				.then((data) => {
+				.then((data: Status) => {
 					setError()
 					resolve(data)
 				})
@@ -138,8 +139,8 @@ export default function useAuth(): Auth {
 
 export const exampleAuthObject: Auth = {
 	...authReducer.initialState,
-	login: async () => {},
-	register: async () => {},
+	login: () => new Promise(() => ''),
+	register: () => new Promise(() => {}),
 	loginUsingToken: () => {},
 	logout: () => {}
 }
