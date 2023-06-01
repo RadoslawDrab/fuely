@@ -38,7 +38,7 @@ export default function useAuth(): Auth {
 		setLoading(true)
 
 		return new Promise((resolve, reject) => {
-			fetch('/api/auth/login', {
+			fetch('/api/auth/login-token', {
 				method: 'POST',
 				body: JSON.stringify({
 					token: token
