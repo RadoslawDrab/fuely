@@ -22,17 +22,15 @@ interface Item {
 }
 
 export default function Overview(props: Props) {
-	const { getEvent, isLoading } = useEvents()
+	const { getEvent, isLoading, emptyEvent } = useEvents()
 	const { isMetric, units } = useUnit()
 
 	if (isLoading) return <></>
 
 	// Last event
-	const event0 = getEvent(0)
+	const event0 = getEvent(0) ?? emptyEvent
 	// Second to last event
-	const event1 = getEvent(1)
-
-	if (!event0 || !event1) return <></>
+	const event1 = getEvent(1) ?? emptyEvent
 
 	// Styling
 	const sectionStyles = className(defaultStyles.section, props.className)
@@ -54,8 +52,8 @@ export default function Overview(props: Props) {
 		},
 		{
 			label: 'Consumption',
-			currentValue: currentConsumption,
-			previousValue: previousConsumption,
+			currentValue: isFinite(currentConsumption) ? currentConsumption : 0,
+			previousValue: isFinite(previousConsumption) ? previousConsumption : 0,
 			unit: isMetric ? (
 				<>
 					<sup>{units.fuel}</sup>/<sub>100{units.distance}</sub>
@@ -64,32 +62,36 @@ export default function Overview(props: Props) {
 				<>
 					<sup>{units.distance}</sup>/<sub>{units.fuel}</sub>
 				</>
-			),
-			digits: 2
+			)
 		}
 	]
 	const itemElements = items.map((item, i) => {
 		const key = `${i}-${getRandomKey()}`
 
-		const graphItems = []
+		const currentValue = item.currentValue > 0 ? item.currentValue : 0
+		const previousValue = item.previousValue > 0 ? item.previousValue : 0
 
-		const value = item.currentValue.toFixed(item.digits ?? 1)
-		const prevValue = item.previousValue.toFixed(item.digits ?? 1)
+		const value = currentValue.toFixed(item.digits ?? 2)
+		const prevValue = previousValue.toFixed(item.digits ?? 2)
 
-		if (item.currentValue) graphItems.push({ name: value, value: item.currentValue })
-		if (item.previousValue) graphItems.push({ name: prevValue, value: item.previousValue })
-
-		const { currentValue, previousValue } = item
+		const max = Math.max(currentValue, previousValue, 1)
 
 		const percent = currentValue / previousValue - 1
 
 		// Adds + or - based on percent
-		const percentString = isFinite(percent) ? `${percent > 0 ? '+' : '-'}${Math.abs(percent * 100).toFixed(1)}` : '0'
+		const percentString = isFinite(percent) ? `${percent >= 0 ? '+' : '-'}${Math.abs(percent * 100).toFixed(1)}` : '0'
 
 		return (
 			<React.Fragment key={key}>
 				<label className={styles.label}>{item.label}</label>
-				<Graph className={styles.graph} max={Math.max(currentValue, previousValue)} items={graphItems} />
+				<Graph
+					className={styles.graph}
+					max={max}
+					items={[
+						{ name: value, value: currentValue || max },
+						{ name: prevValue, value: previousValue || max }
+					]}
+				/>
 
 				<data value={value}>
 					<span className={styles.data}>

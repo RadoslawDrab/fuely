@@ -6,10 +6,10 @@ import { EventObject, FullEvent } from './Events.modal'
 
 const emptyEvent: FullEvent = {
 	date: '',
-	cost: 0,
-	distance: 0,
-	fuel: 0,
-	odometer: 0
+	cost: -1,
+	distance: -1,
+	fuel: -1,
+	odometer: -1
 }
 export default function useEvents(): EventObject {
 	const {
