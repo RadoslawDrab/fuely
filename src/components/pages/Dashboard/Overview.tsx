@@ -1,8 +1,9 @@
-import React from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 
-import { className, getRandomKey } from '@/utils'
+import { FullEvent } from '@/hooks/Events.modal'
 import useEvents from '@/hooks/use-events'
 import useUnit from '@/hooks/use-unit'
+import { className, getRandomKey } from '@/utils'
 
 import Section from '@/components/Layout/Section'
 import Graph from '@/components/UI/Graph'
@@ -22,49 +23,72 @@ interface Item {
 }
 
 export default function Overview(props: Props) {
-	const { getEvent, isLoading, emptyEvent } = useEvents()
+	const { events, getEvent, isLoading, emptyEvent } = useEvents()
 	const { isMetric, units } = useUnit()
 
-	if (isLoading) return <></>
-
-	// Last event
-	const event0 = getEvent(0) ?? emptyEvent
-	// Second to last event
-	const event1 = getEvent(1) ?? emptyEvent
+	const [event0, setEvent0] = useState<FullEvent>(emptyEvent)
+	const [event1, setEvent1] = useState<FullEvent>(emptyEvent)
 
 	// Styling
 	const sectionStyles = className(defaultStyles.section, props.className)
 
-	// Last consumption
-	const currentConsumption = (isMetric ? (event0.fuel / event0.distance) * 100 : event0.distance / event0.fuel) ?? 0
-	// Second to last consumption
-	const previousConsumption = (isMetric ? (event1.fuel / event1.distance) * 100 : event1.distance / event1.fuel) ?? 0
+	useEffect(() => {
+		getEvent(0)
+			.then((event) => {
+				setEvent0(() => event)
+			})
+			.catch(() => {})
+		getEvent(1)
+			.then((event) => {
+				setEvent1(() => event)
+			})
+			.catch(() => {})
+	}, [isLoading, events, getEvent])
 
-	const items: Item[] = [
-		{ label: 'Prize', currentValue: event0.cost, previousValue: event1.cost, unit: units.currency },
-		{ label: 'Fuel', currentValue: event0.fuel, previousValue: event1.fuel, unit: units.fuel },
-		{
-			label: 'Distance',
-			currentValue: event0.distance,
-			previousValue: event1.distance,
-			unit: units.distance,
-			digits: 0
-		},
-		{
-			label: 'Consumption',
-			currentValue: isFinite(currentConsumption) ? currentConsumption : 0,
-			previousValue: isFinite(previousConsumption) ? previousConsumption : 0,
-			unit: isMetric ? (
-				<>
-					<sup>{units.fuel}</sup>/<sub>100{units.distance}</sub>
-				</>
-			) : (
-				<>
-					<sup>{units.distance}</sup>/<sub>{units.fuel}</sub>
-				</>
-			)
-		}
-	]
+	const items: Item[] = useMemo(() => {
+		// Last consumption
+		const currentConsumption = (isMetric ? (event0.fuel / event0.distance) * 100 : event0.distance / event0.fuel) ?? 0
+		// Second to last consumption
+		const previousConsumption = (isMetric ? (event1.fuel / event1.distance) * 100 : event1.distance / event1.fuel) ?? 0
+
+		return [
+			{ label: 'Prize', currentValue: event0.cost, previousValue: event1.cost, unit: event0.currency.toUpperCase() },
+			{ label: 'Fuel', currentValue: event0.fuel, previousValue: event1.fuel, unit: units.fuel },
+			{
+				label: 'Distance',
+				currentValue: event0.distance,
+				previousValue: event1.distance,
+				unit: units.distance,
+				digits: 0
+			},
+			{
+				label: 'Consumption',
+				currentValue: isFinite(currentConsumption) ? currentConsumption : 0,
+				previousValue: isFinite(previousConsumption) ? previousConsumption : 0,
+				unit: isMetric ? (
+					<>
+						<sup>{units.fuel}</sup>/<sub>100{units.distance}</sub>
+					</>
+				) : (
+					<>
+						<sup>{units.distance}</sup>/<sub>{units.fuel}</sub>
+					</>
+				)
+			}
+		]
+	}, [
+		event0.cost,
+		event0.currency,
+		event0.distance,
+		event0.fuel,
+		event1.cost,
+		event1.distance,
+		event1.fuel,
+		isMetric,
+		units.distance,
+		units.fuel
+	])
+
 	const itemElements = items.map((item, i) => {
 		const key = `${i}-${getRandomKey()}`
 
@@ -107,7 +131,7 @@ export default function Overview(props: Props) {
 		<Section title="Overview" className={sectionStyles} contentClassName={styles.section}>
 			<header>
 				<h3>Last refuel</h3>
-				<time dateTime={event0.date}>{event0.date}</time>
+				<time dateTime={event0?.date}>{event0?.date}</time>
 			</header>
 			<hr />
 			<div className={styles.main}>{itemElements}</div>
