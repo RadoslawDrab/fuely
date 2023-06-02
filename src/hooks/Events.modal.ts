@@ -5,6 +5,7 @@ export interface Event {
 	fuel: number
 	distance: number
 	odometer: number
+	currency: string
 }
 export interface FullEvent extends Event {
 	date: string
@@ -17,7 +18,7 @@ export interface EventObject {
 	sortedDates: string[]
 	isLoading: boolean
 	emptyEvent: FullEvent
-	getEvent: (index: number) => FullEvent | null
+	getEvent: (index: number) => Promise<FullEvent>
 	formatDate: (date: string) => string
 	convert: (value: number, type: UnitType) => number
 	convertIfImperial: (value: number, type: UnitType) => number

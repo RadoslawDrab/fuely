@@ -1,56 +1,88 @@
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useMemo, useState } from 'react'
 
+import { currencyConvert } from '@/utils'
+import { EventObject, FullEvent } from './Events.modal'
 import useAppContext from './use-app-context'
 import useUnit, { UnitType } from './use-unit'
-import { EventObject, FullEvent } from './Events.modal'
 
 const emptyEvent: FullEvent = {
 	date: '',
 	cost: -1,
 	distance: -1,
 	fuel: -1,
-	odometer: -1
+	odometer: -1,
+	currency: 'usd'
 }
+
 export default function useEvents(): EventObject {
 	const {
-		user: { events }
+		user: { events, settings }
 	} = useAppContext().Auth
 	const { conversion, isMetric } = useUnit()
 
 	const [isLoading, setIsLoading] = useState(false)
 
 	// Dates sorted descending
-	const sortedDates = Object.keys(events).sort((a: string, b: string) => {
-		return new Date(a) > new Date(b) ? -1 : 1
-	})
+	const sortedDates = useMemo(
+		() =>
+			Object.keys(events).sort((a: string, b: string) => {
+				return new Date(a) > new Date(b) ? -1 : 1
+			}),
+		[events]
+	)
 
 	// Sets loading based on events state
 	useEffect(() => {
 		setIsLoading(() => events === undefined)
 	}, [events])
 
-	function getEvent(index: number) {
-		if (sortedDates.length <= 0) return null
+	const convert = useCallback(
+		function (value: number, type: UnitType): number {
+			return value * conversion[type]
+		},
+		[conversion]
+	)
 
-		// Gets date based on index
-		const date = sortedDates[Math.max(Math.min(index, sortedDates.length - 1), 0)]
-		const formattedDate = formatDate(date)
+	const convertIfImperial = useCallback(
+		function (value: number, type: UnitType): number {
+			return isMetric ? value : convert(value, type)
+		},
+		[isMetric, convert]
+	)
+	const getEvent = useCallback(
+		function (index: number): Promise<FullEvent> {
+			return new Promise(async (resolve: (event: FullEvent) => void, reject: (errorMessage: string) => void) => {
+				if (sortedDates.length <= 0) return reject('No events')
 
-		if (!date) {
-			return null
-		}
+				// Gets date based on index
+				const date = sortedDates[Math.max(Math.min(index, sortedDates.length - 1), 0)]
+				const formattedDate = formatDate(date)
 
-		const event = events[date]
-		const converted = {
-			...event,
-			distance: convert(event.distance, 'distance'),
-			fuel: convert(event.fuel, 'fuel'),
-			odometer: convert(event.odometer, 'distance')
-		}
-		const convertedEvent = isMetric ? event : converted
-		// Returns object with date and event data
-		return { date: formattedDate, ...convertedEvent }
-	}
+				if (!date) {
+					reject('No date for this index')
+				}
+
+				const e = events[date]
+
+				// Converts units based on user preference
+				const convertedEvent = {
+					...e,
+					distance: convertIfImperial(e.distance, 'distance'),
+					fuel: convertIfImperial(e.fuel, 'fuel'),
+					odometer: convertIfImperial(e.odometer, 'distance')
+				}
+
+				// Updates cost of an event based on user's currency preference
+				const newCurrency = settings?.currency || 'usd'
+				const newCost = await currencyConvert(convertedEvent.cost, convertedEvent.currency, newCurrency)
+				const event = { ...convertedEvent, cost: newCost, currency: newCurrency }
+
+				// Returns object with date and event data
+				resolve({ date: formattedDate, ...event })
+			})
+		},
+		[convertIfImperial, events, settings?.currency, sortedDates]
+	)
 
 	function formatDate(date: string) {
 		const d = new Date(date)
@@ -59,12 +91,6 @@ export default function useEvents(): EventObject {
 			.padStart(2, '0')}.${d.getFullYear()}`
 
 		return formattedDate
-	}
-	function convert(value: number, type: UnitType) {
-		return value * conversion[type]
-	}
-	function convertIfImperial(value: number, type: UnitType) {
-		return isMetric ? value : value * conversion[type]
 	}
 
 	return {
