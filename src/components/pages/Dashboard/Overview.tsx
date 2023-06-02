@@ -52,7 +52,7 @@ export default function Overview(props: Props) {
 		const previousConsumption = (isMetric ? (event1.fuel / event1.distance) * 100 : event1.distance / event1.fuel) ?? 0
 
 		return [
-			{ label: 'Prize', currentValue: event0.cost, previousValue: event1.cost, unit: event0.currency.toUpperCase() },
+			{ label: 'Price', currentValue: event0.cost, previousValue: event1.cost, unit: event0.currency.toUpperCase() },
 			{ label: 'Fuel', currentValue: event0.fuel, previousValue: event1.fuel, unit: units.fuel },
 			{
 				label: 'Distance',
