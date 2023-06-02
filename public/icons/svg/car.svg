@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- Created with Vectornator (http://vectornator.io/) -->
+<svg height="100%" stroke-miterlimit="10" style="fill-rule:nonzero;clip-rule:evenodd;stroke-linecap:round;stroke-linejoin:round;" version="1.1" viewBox="0 0 30 13.18" width="100%" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<defs>
+<path d="M3.75502 10.503C3.75502 9.02336 4.95454 7.82384 6.43422 7.82384C7.91391 7.82384 9.11343 9.02336 9.11343 10.503C9.11343 11.9827 7.91391 13.1822 6.43422 13.1822C4.95454 13.1822 3.75502 11.9827 3.75502 10.503Z" id="Fill"/>
+<path d="M20.6763 10.503C20.6763 9.02336 21.8758 7.82384 23.3555 7.82384C24.8352 7.82384 26.0347 9.02336 26.0347 10.503C26.0347 11.9827 24.8352 13.1822 23.3555 13.1822C21.8758 13.1822 20.6763 11.9827 20.6763 10.503Z" id="Fill_2"/>
+<path d="M11.4219-0.00224442C10.8492-0.00224478 10.0569 0.361261 9.65922 0.773314L6.73325 3.80504C6.62344 3.91882 6.43204 3.99828 6.27497 4.01656L1.30435 4.61585C0.583186 4.69978 5.55112e-16 5.33518 5.55112e-16 6.06121L5.55112e-16 9.1987C-3.58608e-07 10.1715 0.789829 10.9656 1.76263 10.9656L3.38425 10.9613C3.38425 10.9613 3.35041 10.6815 3.35041 10.503C3.35041 8.78973 4.73792 7.40081 6.45123 7.40081C8.16455 7.40081 9.55488 8.78973 9.55488 10.503C9.55488 10.6804 9.52103 10.9613 9.52103 10.9613L20.3055 10.9613C20.3055 10.9613 20.2717 10.6815 20.2717 10.503C20.2717 8.78973 21.6592 7.40081 23.3725 7.40081C25.0858 7.40081 26.4762 8.78973 26.4761 10.503C26.4761 10.6804 26.4423 10.9613 26.4423 10.9613L28.2374 10.9613C29.2183 10.9613 30 10.1444 30 9.16344L30 5.42666C30 5.11397 29.7417 4.82262 29.436 4.75686L26.0165 4.01656C25.8619 3.9833 25.6366 3.87967 25.5229 3.76979L22.4207 0.738061C22.0089 0.340115 21.1955-0.00224442 20.6228-0.00224442L11.4219-0.00224442Z" id="Fill_3"/>
+</defs>
+<clipPath id="ArtboardFrame">
+<rect height="13.18" width="30" x="0" y="0"/>
+</clipPath>
+<g clip-path="url(#ArtboardFrame)" id="Layer-1">
+<g opacity="1">
+<g opacity="1">
+<mask height="5.3584" id="StrokeMask" maskUnits="userSpaceOnUse" width="5.3584" x="3.75502" y="7.82384">
+<rect fill="#000000" height="5.3584" stroke="none" width="5.3584" x="3.75502" y="7.82384"/>
+<use fill="#ffffff" fill-rule="evenodd" stroke="none" xlink:href="#Fill"/>
+</mask>
+<use fill="none" mask="url(#StrokeMask)" stroke="#000000" stroke-linecap="butt" stroke-linejoin="miter" stroke-width="2.5" xlink:href="#Fill"/>
+</g>
+<g opacity="1">
+<mask height="5.3584" id="StrokeMask_2" maskUnits="userSpaceOnUse" width="5.3584" x="20.6763" y="7.82384">
+<rect fill="#000000" height="5.3584" stroke="none" width="5.3584" x="20.6763" y="7.82384"/>
+<use fill="#ffffff" fill-rule="evenodd" stroke="none" xlink:href="#Fill_2"/>
+</mask>
+<use fill="none" mask="url(#StrokeMask_2)" stroke="#000000" stroke-linecap="butt" stroke-linejoin="miter" stroke-width="2.5" xlink:href="#Fill_2"/>
+</g>
+<g opacity="1">
+<mask height="10.9678" id="StrokeMask_3" maskUnits="userSpaceOnUse" width="30" x="5.55112e-16" y="-0.00224442">
+<rect fill="#000000" height="10.9678" stroke="none" width="30" x="5.55112e-16" y="-0.00224442"/>
+<use fill="#ffffff" fill-rule="evenodd" stroke="none" xlink:href="#Fill_3"/>
+</mask>
+<use fill="none" mask="url(#StrokeMask_3)" stroke="#000000" stroke-linecap="butt" stroke-linejoin="miter" stroke-width="2.3" xlink:href="#Fill_3"/>
+</g>
+</g>
+</g>
+</svg>

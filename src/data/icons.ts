@@ -13,6 +13,7 @@ const icons = [
 	'xmark',
 	'sun.max',
 	'moon',
-	'globe'
+	'globe',
+	'car'
 ] as const
 export default icons
