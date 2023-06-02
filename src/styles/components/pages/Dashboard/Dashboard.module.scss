@@ -38,6 +38,13 @@
 					width: 1.5em;
 				}
 			}
+			&:first-child {
+				padding-top: 0;
+			}
+			&:last-child {
+				border: none;
+				padding-bottom: 0;
+			}
 			@media screen and (pointer: fine) {
 				.button {
 					opacity: 0;
