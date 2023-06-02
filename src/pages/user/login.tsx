@@ -1,5 +1,5 @@
-import React, { useState } from 'react'
 import { useRouter } from 'next/router'
+import { useState } from 'react'
 
 import useAppContext from '@/hooks/use-app-context'
 import { className } from '@/utils'
@@ -7,6 +7,7 @@ import { className } from '@/utils'
 import Section from '@/components/Layout/Section'
 import LoginForm from '@/components/pages/Login/LoginForm'
 import Error from '@/components/UI/Error'
+import LoadingIcon from '@/components/UI/LoadingIcon'
 
 import styles from '@styles/styles.module.scss'
 
@@ -16,7 +17,7 @@ export default function Login() {
 	const {
 		login: loginFunc,
 		loginUsingToken,
-		state: { isLoggedIn }
+		state: { isLoggedIn, isLoading }
 	} = useAppContext().Auth
 	const { getText } = useAppContext().Language
 
@@ -45,6 +46,10 @@ export default function Login() {
 	}
 	function onFormError(message: string) {
 		setError(() => message)
+	}
+
+	if (isLoading) {
+		return <LoadingIcon />
 	}
 	return (
 		<Section title={getText('Log in')} className={sectionStyles}>

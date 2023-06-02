@@ -1,9 +1,18 @@
-import React from 'react'
-
-import styles from './Settings.module.scss'
+import useAppContext from '@/hooks/use-app-context'
 import useUserRedirect from '@/hooks/use-user-redirect'
 
+import LoadingIcon from '@/components/UI/LoadingIcon'
+
 export default function Settings(props: any) {
+	const {
+		state: { isLoading }
+	} = useAppContext().Auth
+
 	useUserRedirect()
-	return <></>
+
+	if (isLoading) {
+		return <LoadingIcon />
+	}
+
+	return <>Settings</>
 }
