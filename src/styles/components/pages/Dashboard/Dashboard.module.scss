@@ -52,4 +52,7 @@
 			}
 		}
 	}
+	@media screen and (min-width: $size-tablet-xs) {
+		height: 100%;
+	}
 }
