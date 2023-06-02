@@ -85,14 +85,7 @@ export default function Dashboard(props: Props) {
 	})
 	return (
 		<Section title="Dashboard" className={props.className} contentClassName={sectionStyles}>
-			{rows.length > 0 && (
-				<>
-					<ul>{rows}</ul>
-					<Button className={styles['load-button']} onClick={() => {}}>
-						Load more
-					</Button>
-				</>
-			)}
+			{rows.length > 0 && <ul>{rows}</ul>}
 			{rows.length <= 0 && <span>No events</span>}
 		</Section>
 	)
