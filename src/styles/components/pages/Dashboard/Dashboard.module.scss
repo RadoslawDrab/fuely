@@ -3,11 +3,12 @@
 .section {
 	display: flex;
 	flex-direction: column;
+	overflow-y: auto;
+	max-height: 22.25rem;
 	ul {
 		list-style: none;
 		display: flex;
 		flex-direction: column;
-		margin-bottom: 1em;
 		li {
 			display: grid;
 			grid-template-columns: 1fr auto auto auto;
