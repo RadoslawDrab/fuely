@@ -1,1 +1,70 @@
 @use '@/styles/library' as *;
+
+.loading {
+	position: relative;
+	grid-column: 1 / -1;
+	justify-self: center;
+	align-self: center;
+	min-width: 10rem;
+	max-width: 14rem;
+	width: 60%;
+
+	.car {
+		margin: 0 auto;
+		width: 50%;
+		display: flex;
+
+		animation: carMovement 3s infinite ease-in-out;
+
+		$car-movement: 5%;
+		@keyframes carMovement {
+			0% {
+				transform: translateX(-#{$car-movement});
+			}
+			50% {
+				transform: translateX($car-movement);
+			}
+			100% {
+				transform: translateX(-#{$car-movement});
+			}
+		}
+		img {
+			width: 100%;
+			filter: $grey-800__filter;
+		}
+	}
+	&::before {
+		$road-size: 7.5%;
+		$road-length: 10%;
+		$road-color-1: $grey-800;
+		$road-color-2: transparent;
+
+		content: '';
+		position: absolute;
+		left: 50%;
+		bottom: calc(-#{$road-size} + 1px);
+		width: 100%;
+		height: $road-size;
+		transform: translateX(-50%);
+
+		background: linear-gradient(
+			90deg,
+			$road-color-1 calc(50% + #{$road-length}),
+			$road-color-2 calc(50% + #{$road-length}),
+			$road-color-2 100%
+		);
+		background-repeat: repeat-x;
+		background-size: 25% 100%;
+
+		animation: roadMovement 2s infinite linear;
+
+		@keyframes roadMovement {
+			0% {
+				background-position-x: 0%;
+			}
+			100% {
+				background-position-x: calc(100%);
+			}
+		}
+	}
+}
