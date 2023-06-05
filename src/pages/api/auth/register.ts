@@ -1,9 +1,8 @@
 import { NextApiRequest, NextApiResponse } from 'next'
 import { createUserWithEmailAndPassword, getAuth, updateProfile } from 'firebase/auth'
 
-import { Status, returnError } from '.'
-
-import databaseRef from '../_firebase'
+import { Status, returnError, defaultUserSettings } from '.'
+import { setValue } from '../database'
 
 const auth = getAuth()
 
@@ -18,6 +17,9 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 				await updateProfile(credential.user, {
 					displayName: name || 'User'
 				})
+
+				setValue(defaultUserSettings, 'users')
+				setValue('', 'events')
 
 				const status: Status = {
 					ok: true,
