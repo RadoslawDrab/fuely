@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 
 import useAppContext from '@/hooks/use-app-context'
+import { checkEmailAndPassword, emailRegEx, passwordInfo, passwordRegEx } from '@/utils'
 
 import Button from '@/components/UI/Button'
 import FormInput from '@/components/UI/FormInput'
@@ -21,8 +22,9 @@ export default function LoginForm(props: Props) {
 	function onSubmit(event: React.FormEvent<HTMLFormElement>) {
 		event.preventDefault()
 
-		if (!email || !password) {
-			props.onError('Some inputs are empty')
+		const check = checkEmailAndPassword(email, password)
+		if (!check.ok) {
+			props.onError(check.message)
 			return
 		}
 
@@ -30,8 +32,22 @@ export default function LoginForm(props: Props) {
 	}
 	return (
 		<form onSubmit={onSubmit} className={styles.form}>
-			<FormInput name="email" type="text" text={'Email'} getValue={(value) => setEmail(() => value)} />
-			<FormInput name="password" type="password" text={getText('Password')} getValue={(value) => setPassword(() => value)} />
+			<FormInput
+				name="email"
+				type="text"
+				text={'Email'}
+				getValue={(value) => setEmail(() => value)}
+				check={(value) => !!value.match(emailRegEx)}
+				errorText="Enter valid email"
+			/>
+			<FormInput
+				name="password"
+				type="password"
+				text={getText('Password')}
+				getValue={(value) => setPassword(() => value)}
+				check={(value) => !!value.match(passwordRegEx)}
+				errorText={passwordInfo}
+			/>
 			<hr />
 			<Button className={styles['submit-button']} onClick={() => {}}>
 				{getText('Send')}

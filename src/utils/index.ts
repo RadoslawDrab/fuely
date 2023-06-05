@@ -81,3 +81,30 @@ export interface AppSettings {
 	theme: 'light' | 'dark'
 	language: Languages
 }
+
+export const emailRegEx = /[^\.@]*@[^\.@]*\.[^\.@]{2,3}/
+export const passwordRegEx = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/
+export const passwordInfo =
+	'Password must contain: minimum 8 characters, uppercase letter, lowercase letter, number and special character'
+
+export function checkEmailAndPassword(email: string, password: string): { ok: boolean; message: string } {
+	const status = {
+		ok: true,
+		message: ''
+	}
+	if (!email || !password) {
+		status.ok = false
+		status.message = 'Some inputs are empty'
+	}
+	if (!email.match(emailRegEx)) {
+		status.ok = false
+		status.message = 'Email is not valid'
+	}
+	if (!password.match(passwordRegEx)) {
+		status.ok = false
+		status.message = passwordInfo
+	}
+	console.log(status)
+
+	return status
+}

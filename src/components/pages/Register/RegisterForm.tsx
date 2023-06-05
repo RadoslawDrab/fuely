@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 
 import useAppContext from '@/hooks/use-app-context'
+import { emailRegEx, passwordRegEx, passwordInfo, checkEmailAndPassword } from '@/utils'
 
 import Button from '@/components/UI/Button'
 import FormInput from '@/components/UI/FormInput'
@@ -22,20 +23,17 @@ export default function RegisterForm(props: Props) {
 
 	function onSubmit(event: React.FormEvent<HTMLFormElement>) {
 		event.preventDefault()
-		if (!email || !password || !name) {
+		const check = checkEmailAndPassword(email, password)
+		if (!check.ok) {
+			props.onError(check.message)
+			return
+		}
+		if (!name) {
 			props.onError('Some inputs are empty')
 			return
 		}
-		if (email.length <= 3) {
-			props.onError('Email must have more than 3 characters ')
-			return
-		}
-		if (password.length <= 6) {
-			props.onError('Password must have more than 6 characters ')
-			return
-		}
-		if (name.length <= 3) {
-			props.onError('Name must have more than 3 characters')
+		if (name.length < 3) {
+			props.onError('Name must contain at least 3 characters')
 			return
 		}
 
@@ -49,7 +47,7 @@ export default function RegisterForm(props: Props) {
 				type="text"
 				getValue={(value) => setEmail(() => value)}
 				text={'Email'}
-				check={(value) => value.length > 4}
+				check={(value) => !!value.match(emailRegEx)}
 				errorText="Enter valid email"
 			/>
 			<FormInput
@@ -57,8 +55,8 @@ export default function RegisterForm(props: Props) {
 				type="password"
 				getValue={(value) => setPassword(() => value)}
 				text={getText('Password')}
-				check={(value) => value.length > 5}
-				errorText="Password must be longer than 5 characters"
+				check={(value) => !!value.match(passwordRegEx)}
+				errorText={passwordInfo}
 			/>
 			<hr />
 			<FormInput
@@ -67,6 +65,8 @@ export default function RegisterForm(props: Props) {
 				getValue={(value) => setName(() => value)}
 				text={getText('Name')}
 				placeholder="e.g. John"
+				check={(value) => value.length >= 3}
+				errorText="Name must contain at least 3 characters"
 			/>
 			<hr />
 			<Button className={styles['submit-button']} onClick={() => {}}>
