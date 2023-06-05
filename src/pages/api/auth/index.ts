@@ -32,6 +32,10 @@ interface ReturnObject<Type> {
 
 type EncryptionKey = 'token' | 'data'
 
+export const defaultUserSettings: UserSettings = {
+	units: 'metric',
+	currency: 'usd'
+}
 export function encryptData<T>(data: T) {
 	return encrypt<T>(data, 'data')
 }
