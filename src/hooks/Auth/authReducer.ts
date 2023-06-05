@@ -1,4 +1,3 @@
-import { setLocalStorage } from '@/utils'
 import { Actions, State } from './AuthReducer.modal'
 
 const initialState: State = {
@@ -9,8 +8,12 @@ const initialState: State = {
 		errorMessage: ''
 	},
 	user: {
-		id: '',
-		settings: null,
+		displayName: 'User',
+		email: '',
+		settings: {
+			currency: 'usd',
+			units: 'metric'
+		},
 		events: {}
 	}
 }
@@ -20,11 +23,10 @@ function reducer(state: State, action: Actions): State {
 			return {
 				...state,
 				state: { ...state.state, isLoggedIn: true },
-				user: { ...state.user, id: action.id, settings: action.user }
+				user: { ...state.user, ...action.user }
 			}
 		}
 		case 'LOG_OUT': {
-			setLocalStorage({ token: undefined })
 			return {
 				...state,
 				state: {
@@ -32,15 +34,15 @@ function reducer(state: State, action: Actions): State {
 					isLoggedIn: false
 				},
 				user: {
-					id: '',
-					settings: null,
+					displayName: 'User',
+					email: '',
+					settings: {
+						currency: 'usd',
+						units: 'metric'
+					},
 					events: {}
 				}
 			}
-		}
-		case 'SET_TOKEN': {
-			setLocalStorage({ token: action.token })
-			return state
 		}
 		case 'SET_EVENTS': {
 			return { ...state, user: { ...state.user, events: action.events } }
