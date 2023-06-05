@@ -1,7 +1,7 @@
 import { NextApiResponse } from 'next'
 import CryptoJS from 'crypto-js'
 import { child, get } from 'firebase/database'
-import databaseRef from './_firebase'
+import databaseRef from '../_firebase'
 import { User } from 'firebase/auth'
 
 const tokenKey = '#Fuely-Token#'

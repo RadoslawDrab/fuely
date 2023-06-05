@@ -3,6 +3,8 @@ import { createUserWithEmailAndPassword, getAuth, updateProfile } from 'firebase
 
 import { Status, returnError } from '.'
 
+import databaseRef from '../_firebase'
+
 const auth = getAuth()
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {

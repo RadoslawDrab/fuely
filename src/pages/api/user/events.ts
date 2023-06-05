@@ -1,7 +1,7 @@
 import { NextApiRequest, NextApiResponse } from 'next'
 import { getAuth } from 'firebase/auth'
 
-import databaseRef from '../auth/_firebase'
+import databaseRef from '../_firebase'
 import { returnError } from '../auth/'
 import { child, get } from 'firebase/database'
 
