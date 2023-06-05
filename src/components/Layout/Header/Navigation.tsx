@@ -23,8 +23,9 @@ export default function Navigation() {
 	const navigationStyles = className(styles.nav, !navigationState ? 'hidden' : '')
 
 	function logoutUser() {
-		router.replace('/user/login')
-		logout()
+		logout().then(() => {
+			router.replace('/user/login')
+		})
 	}
 
 	return (
