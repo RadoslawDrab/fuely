@@ -9,9 +9,9 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 	try {
 		switch (req.method) {
 			case 'POST': {
-				const { login, password, name } = JSON.parse(req.body)
+				const { email, password, name } = JSON.parse(req.body)
 
-				const credential = await createUserWithEmailAndPassword(auth, login, password)
+				const credential = await createUserWithEmailAndPassword(auth, email, password)
 
 				await updateProfile(credential.user, {
 					displayName: name || 'User'

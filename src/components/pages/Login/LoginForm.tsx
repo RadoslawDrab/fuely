@@ -8,29 +8,29 @@ import FormInput from '@/components/UI/FormInput'
 import styles from '@styles/styles.module.scss'
 
 interface Props {
-	onLogin: (login: string, password: string) => void
+	onLogin: (email: string, password: string) => void
 	onError: (message: string) => void
 	onInputChange: () => void
 }
 export default function LoginForm(props: Props) {
 	const { getText } = useAppContext().Language
 
-	const [login, setLogin] = useState('')
+	const [email, setEmail] = useState('')
 	const [password, setPassword] = useState('')
 
 	function onSubmit(event: React.FormEvent<HTMLFormElement>) {
 		event.preventDefault()
 
-		if (!login || !password) {
+		if (!email || !password) {
 			props.onError('Some inputs are empty')
 			return
 		}
 
-		props.onLogin(login, password)
+		props.onLogin(email, password)
 	}
 	return (
 		<form onSubmit={onSubmit} className={styles.form}>
-			<FormInput name="login" type="text" text={getText('Login')} getValue={(value) => setLogin(() => value)} />
+			<FormInput name="email" type="text" text={'Email'} getValue={(value) => setEmail(() => value)} />
 			<FormInput name="password" type="password" text={getText('Password')} getValue={(value) => setPassword(() => value)} />
 			<hr />
 			<Button className={styles['submit-button']} onClick={() => {}}>

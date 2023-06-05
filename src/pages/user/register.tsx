@@ -29,8 +29,8 @@ export default function Register() {
 		router.replace('/user/dashboard')
 	}
 
-	function registerUser(login: string, password: string, name: string) {
-		register(login, password, name)
+	function registerUser(email: string, password: string, name: string) {
+		register(email, password, name)
 			.then(() => {
 				router.replace('/user/login')
 				setFormError('')

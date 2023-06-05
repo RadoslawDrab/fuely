@@ -16,7 +16,7 @@ export default function Login() {
 	const router = useRouter()
 
 	const {
-		login: loginFunc,
+		login,
 		state: { isLoggedIn, isLoading }
 	} = useAppContext().Auth
 	const { getText } = useAppContext().Language
@@ -29,8 +29,8 @@ export default function Login() {
 		router.replace('/user/dashboard')
 	}
 
-	function loginUser(login: string, password: string) {
-		loginFunc(login, password)
+	function loginUser(email: string, password: string) {
+		login(email, password)
 			.then(() => {
 				setError(() => '')
 				router.replace('/user/dashboard')

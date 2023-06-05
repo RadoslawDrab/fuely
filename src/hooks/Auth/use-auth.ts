@@ -9,14 +9,14 @@ import authReducer from './authReducer'
 export default function useAuth(): Auth {
 	const [authState, dispatch] = useReducer(authReducer.reducer, authReducer.initialState)
 
-	function login(login: string, password: string): Promise<any> {
+	function login(email: string, password: string): Promise<any> {
 		return new Promise(async (resolve, reject: (error: Status) => void) => {
 			setLoading(true)
 
 			const response = await fetch('/api/auth/login', {
 				method: 'POST',
 				body: JSON.stringify({
-					login: login,
+					email: email,
 					password: password
 				})
 			})
@@ -67,14 +67,14 @@ export default function useAuth(): Auth {
 		[setUserData]
 	)
 
-	function register(login: string, password: string, name: string): Promise<Status> {
+	function register(email: string, password: string, name: string): Promise<Status> {
 		return new Promise(async (resolve, reject) => {
 			setLoading(true)
 
 			const response = await fetch('/api/auth/register', {
 				method: 'POST',
 				body: JSON.stringify({
-					login: login,
+					email: email,
 					password: password,
 					name: name
 				})
