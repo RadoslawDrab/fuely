@@ -11,7 +11,7 @@ export default function useUserRedirect() {
 	} = useAppContext().Auth
 
 	useEffect(() => {
-		if (errorMessage.includes('Unauthorized')) {
+		if (errorMessage.includes('no-data')) {
 			router.replace('/user/login')
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
