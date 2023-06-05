@@ -1,5 +1,4 @@
 import { Languages } from '@/hooks/Language.modal'
-import units from '@data/units.json'
 
 export function isClient() {
 	return typeof window !== 'undefined'
@@ -36,10 +35,6 @@ export function createDatasetObject(data: { [key: string]: number | string | boo
 		}
 		return acc
 	}, {})
-}
-type Unit = keyof typeof units
-export function getUnit(name: Unit) {
-	return units[name]
 }
 
 export function getCurrencies(): Promise<{ [key: string]: string }> {
@@ -85,5 +80,4 @@ export function getLocalStorage(): AppSettings | null {
 export interface AppSettings {
 	theme: 'light' | 'dark'
 	language: Languages
-	token: string
 }
