@@ -41,9 +41,15 @@ export default function Login() {
 				switch (status) {
 					case 'user-not-found': {
 						setError(() => 'Incorrect login or password')
+						break
 					}
 					case 'wrong-password': {
 						setError(() => 'Incorrect login or password')
+						break
+					}
+					default: {
+						setError(() => error.code)
+						break
 					}
 				}
 			})
