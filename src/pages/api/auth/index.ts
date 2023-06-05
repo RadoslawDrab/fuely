@@ -1,27 +1,28 @@
 import { NextApiResponse } from 'next'
 import CryptoJS from 'crypto-js'
+import { child, get } from 'firebase/database'
+import databaseRef from './_firebase'
+import { User } from 'firebase/auth'
 
 const tokenKey = '#Fuely-Token#'
 const dataKey = '#Fuely-Data#'
 
-export interface User {
-	login: string
-	password: string
+export interface UserData {
+	displayName: string
+	email: string | null
+}
+export interface UserObject extends UserData {
 	settings: UserSettings
 }
-export interface UserObject {
-	[id: string]: User
-}
+
 export interface UserSettings {
-	name: string
 	units: 'metric' | 'imperial'
 	currency: string
 }
 
 export interface Status {
 	ok: boolean
-	code: number
-	info: string
+	code: string
 	message?: string
 }
 interface ReturnObject<Type> {
@@ -30,24 +31,6 @@ interface ReturnObject<Type> {
 }
 
 type EncryptionKey = 'token' | 'data'
-
-export function createToken<T>(data: T, expirationTime: number): string {
-	// Create expiration date based on `expirationTime`
-	const expirationDate = new Date().setMinutes(new Date().getMinutes() + expirationTime)
-
-	// Creates data object
-	const newData = {
-		...data,
-		expires: new Date(expirationDate).toISOString()
-	}
-
-	const encrypted = encrypt(newData, 'token')
-	return encrypted
-}
-export function decryptToken<T>(token: string): ReturnObject<T> {
-	const decrypted = decrypt<T>(token, 'token')
-	return decrypted
-}
 
 export function encryptData<T>(data: T) {
 	return encrypt<T>(data, 'data')
@@ -76,12 +59,33 @@ function decrypt<T>(encryptedData: string, key: EncryptionKey): ReturnObject<T> 
 
 	// Checks if encryption was successful
 	if (!tokenDecrypted) {
-		return { status: { ok: false, info: 'Bad Request', code: 400, message: 'Invalid token' } }
+		return { status: { ok: false, code: 'Bad Request', message: 'Invalid token' } }
 	}
 	// Returns status and data object
-	return { status: { ok: true, info: 'Success', code: 200 }, data: JSON.parse(tokenDecrypted) }
+	return { status: { ok: true, code: 'Success' }, data: JSON.parse(tokenDecrypted) }
 }
 
-export function returnError(res: NextApiResponse, code: number, info: string, message?: string) {
-	return res.status(code).send({ code, info, message })
+export function returnError(res: NextApiResponse, code: string, message?: string) {
+	return res.status(400).json({ ok: false, code, message })
+}
+
+export function getUserData(user: User): Promise<UserObject> {
+	return new Promise(async (resolve) => {
+		const userData: UserObject = {
+			displayName: user.displayName || 'User',
+			email: user.email,
+			settings: {
+				units: 'metric',
+				currency: 'usd'
+			}
+		}
+		const snapshot = await get(child(databaseRef, `users/${user.uid}`))
+
+		if (snapshot.exists()) {
+			const value = snapshot.val()
+
+			userData.settings = value
+		}
+		resolve(userData)
+	})
 }

@@ -1,57 +1,32 @@
 import { NextApiRequest, NextApiResponse } from 'next'
+import { createUserWithEmailAndPassword, getAuth, updateProfile } from 'firebase/auth'
 
-import { getUsers, addUser } from './database'
-import { getRandomKey } from '@/utils'
-import { User, UserObject, decryptData, encryptData, returnError } from '.'
+import { Status, returnError } from '.'
+
+const auth = getAuth()
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
 	try {
-		const response: any = await getUsers()
-		const users: UserObject = response
-
 		switch (req.method) {
 			case 'POST': {
-				const { login, password, userName } = JSON.parse(req.body)
+				const { login, password, name } = JSON.parse(req.body)
 
-				if (!login || !password) {
-					return returnError(res, 400, 'Bad Request', "Login or password weren't set")
-				}
+				const credential = await createUserWithEmailAndPassword(auth, login, password)
 
-				// User with the same login and password. User already exists
-				const foundUser = Object.keys(users).find((key) => {
-					const user = users[key]
-
-					const decryptedLogin = decryptData(user.login)
-					const decryptedPassword = decryptData(user.password)
-
-					if (!decryptedLogin.data || !decryptedPassword.data) return false
-
-					return decryptedLogin.data === login && decryptedPassword.data === password
+				await updateProfile(credential.user, {
+					displayName: name || 'User'
 				})
 
-				if (foundUser) {
-					return returnError(res, 400, 'Bad Request', 'User already exists')
+				const status: Status = {
+					ok: true,
+					code: 'auth/created'
 				}
-
-				const allIds = Object.keys(users)
-
-				const user: User = {
-					login: encryptData(login),
-					password: encryptData(password),
-					settings: {
-						name: userName || 'User',
-						currency: 'USD',
-						units: 'metric'
-					}
-				}
-
-				const randomId = getRandomKey(10, allIds)
-				addUser(randomId, user)
-
-				res.status(200).json({ code: 200, info: 'OK', message: 'User added' })
+				res.status(200).json(status)
 			}
 		}
-	} catch (error) {
-		res.status(500).send(error)
+	} catch (error: any) {
+		returnError(res, error.code, error.message)
 	}
+
+	return
 }

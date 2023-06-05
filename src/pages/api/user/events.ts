@@ -1,23 +1,28 @@
-import { NextApiResponse, NextApiRequest } from 'next'
+import { NextApiRequest, NextApiResponse } from 'next'
+import { getAuth } from 'firebase/auth'
 
-import { getEvents } from '../auth/database'
-import { returnError } from '../auth'
+import databaseRef from '../auth/_firebase'
+import { returnError } from '../auth/'
+import { child, get } from 'firebase/database'
 
-export default function handler(req: NextApiRequest, res: NextApiResponse) {
-	switch (req.method) {
-		case 'POST': {
-			const { id } = JSON.parse(req.body)
+const auth = getAuth()
 
-			if (!id) {
-				return
+export default async function handler(req: NextApiRequest, res: NextApiResponse) {
+	try {
+		const { currentUser } = auth
+
+		if (currentUser) {
+			const snapshot = await get(child(databaseRef, `events/${currentUser.uid}`))
+
+			if (snapshot.exists()) {
+				res.status(200).json(snapshot.val())
+			} else {
+				returnError(res, 'user/no-events')
 			}
-			getEvents(id)
-				.then((events) => {
-					res.status(200).json(events)
-				})
-				.catch((error) => {
-					returnError(res, 404, 'Not Found', error)
-				})
+		} else {
+			returnError(res, 'auth/no-user')
 		}
+	} catch (error: any) {
+		returnError(res, error.code, error.message)
 	}
 }
