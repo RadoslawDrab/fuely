@@ -8,7 +8,7 @@ import FormInput from '@/components/UI/FormInput'
 import styles from '@styles/styles.module.scss'
 
 interface Props {
-	onRegister: (login: string, password: string, name: string) => void
+	onRegister: (email: string, password: string, name: string) => void
 	onError: (errorMessage: string) => void
 	onInputChange: () => void
 }
@@ -16,26 +16,21 @@ interface Props {
 export default function RegisterForm(props: Props) {
 	const { getText } = useAppContext().Language
 
-	const [login, setLogin] = useState('')
-	const [password1, setPassword1] = useState('')
-	const [password2, setPassword2] = useState('')
+	const [email, setEmail] = useState('')
+	const [password, setPassword] = useState('')
 	const [name, setName] = useState('')
 
 	function onSubmit(event: React.FormEvent<HTMLFormElement>) {
 		event.preventDefault()
-		if (!login || !password1 || !password2 || !name) {
+		if (!email || !password || !name) {
 			props.onError('Some inputs are empty')
 			return
 		}
-		if (login.length <= 3) {
-			props.onError('Login must have more than 3 characters ')
+		if (email.length <= 3) {
+			props.onError('Email must have more than 3 characters ')
 			return
 		}
-		if (password1 !== password2) {
-			props.onError('Passwords are not the same')
-			return
-		}
-		if (password1.length <= 6) {
+		if (password.length <= 6) {
 			props.onError('Password must have more than 6 characters ')
 			return
 		}
@@ -43,36 +38,24 @@ export default function RegisterForm(props: Props) {
 			props.onError('Name must have more than 3 characters')
 			return
 		}
-		if (name === login) {
-			props.onError('Name must be different than login')
-			return
-		}
 
-		props.onRegister(login, password1, name)
+		props.onRegister(email, password, name)
 	}
 
 	return (
 		<form className={styles.form} onSubmit={onSubmit}>
 			<FormInput
-				name="login"
+				name="email"
 				type="text"
-				getValue={(value) => setLogin(() => value)}
-				text={getText('Login')}
+				getValue={(value) => setEmail(() => value)}
+				text={'Email'}
 				check={(value) => value.length > 4}
-				errorText="Login must be longer than 4 characters"
+				errorText="Enter valid email"
 			/>
 			<FormInput
-				name="password-1"
+				name="password"
 				type="password"
-				getValue={(value) => setPassword1(() => value)}
-				text={getText('Password')}
-				check={(value) => value.length > 5}
-				errorText="Password must be longer than 5 characters"
-			/>
-			<FormInput
-				name="password-2"
-				type="password"
-				getValue={(value) => setPassword2(() => value)}
+				getValue={(value) => setPassword(() => value)}
 				text={getText('Password')}
 				check={(value) => value.length > 5}
 				errorText="Password must be longer than 5 characters"
