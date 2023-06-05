@@ -72,24 +72,3 @@ function decrypt<T>(encryptedData: string, key: EncryptionKey): ReturnObject<T> 
 export function returnError(res: NextApiResponse, code: string, message?: string) {
 	return res.status(400).json({ ok: false, code, message })
 }
-
-export function getUserData(user: User): Promise<UserObject> {
-	return new Promise(async (resolve) => {
-		const userData: UserObject = {
-			displayName: user.displayName || 'User',
-			email: user.email,
-			settings: {
-				units: 'metric',
-				currency: 'usd'
-			}
-		}
-		const snapshot = await get(child(databaseRef, `users/${user.uid}`))
-
-		if (snapshot.exists()) {
-			const value = snapshot.val()
-
-			userData.settings = value
-		}
-		resolve(userData)
-	})
-}

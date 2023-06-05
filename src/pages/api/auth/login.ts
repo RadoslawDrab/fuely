@@ -1,7 +1,8 @@
 import { NextApiRequest, NextApiResponse } from 'next'
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth'
 
-import { getUserData, returnError } from '../auth'
+import { returnError } from '../auth'
+import { getUserData } from '../database'
 
 const auth = getAuth()
 

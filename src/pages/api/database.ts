@@ -1,6 +1,7 @@
 import { child, get, set } from 'firebase/database'
 import databaseRef from './_firebase.ts'
-import { getAuth } from 'firebase/auth'
+import { User, getAuth } from 'firebase/auth'
+import { UserObject } from './auth/index.ts'
 
 const auth = getAuth()
 
@@ -26,5 +27,25 @@ export function setValue(value: any, path: 'events' | 'users'): Promise<void> {
 		}
 		set(child(databaseRef, `${path}/${currentUser.uid}`), value)
 		resolve()
+	})
+}
+export function getUserData(user: User): Promise<UserObject> {
+	return new Promise(async (resolve) => {
+		const userData: UserObject = {
+			displayName: user.displayName || 'User',
+			email: user.email,
+			settings: {
+				units: 'metric',
+				currency: 'usd'
+			}
+		}
+		const snapshot = await get(child(databaseRef, `users/${user.uid}`))
+
+		if (snapshot.exists()) {
+			const value = snapshot.val()
+
+			userData.settings = value
+		}
+		resolve(userData)
 	})
 }
