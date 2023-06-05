@@ -5,8 +5,8 @@ export interface Auth {
 	state: AuthState
 	user: UserState
 
-	login: (login: string, password: string) => Promise<string>
+	login: (login: string, password: string) => Promise<Status>
 	register: (login: string, password: string, name: string) => Promise<Status>
-	loginUsingToken: (token: string) => void
-	logout: () => void
+	loginUsingToken: () => void
+	logout: () => Promise<Status>
 }

@@ -1,105 +1,138 @@
 import { useCallback, useEffect, useReducer } from 'react'
 
-import { getLocalStorage, isClient } from '@/utils'
+import { isClient } from '@/utils'
 import { Auth } from './Auth.modal'
 import { Events } from '../Events.modal'
-import { Status } from '@/pages/api/auth'
+import { Status, UserObject } from '@/pages/api/auth'
 import authReducer from './authReducer'
 
 export default function useAuth(): Auth {
 	const [authState, dispatch] = useReducer(authReducer.reducer, authReducer.initialState)
 
-	function login(login: string, password: string): Promise<string> {
-		return new Promise((resolve, reject) => {
+	function login(login: string, password: string): Promise<any> {
+		return new Promise(async (resolve, reject: (error: Status) => void) => {
 			setLoading(true)
 
-			fetch('/api/auth/login', {
+			const response = await fetch('/api/auth/login', {
 				method: 'POST',
 				body: JSON.stringify({
 					login: login,
 					password: password
 				})
 			})
-				.then(responseHandler)
-				.then((data: { token: string }) => {
-					setError()
-					dispatch({ type: 'SET_TOKEN', token: data.token })
-					resolve(data.token)
-				})
-				.catch((error: Error) => {
-					setError(error)
-					reject(error.message)
-				})
-				.finally(() => {
-					setLoading(false)
-				})
+			if (!response.ok) {
+				const error: Status = await response.json()
+
+				setError(error)
+				setLoading(false)
+				reject(error)
+				return
+			}
+
+			resolve(await setUserData(response))
 		})
 	}
-	const loginUsingToken = useCallback(function (token: string) {
-		setLoading(true)
+	const setUserData = useCallback(async function (response: Response) {
+		const data: UserObject = await response.json()
 
-		return new Promise((resolve, reject) => {
-			fetch('/api/auth/login-token', {
-				method: 'POST',
-				body: JSON.stringify({
-					token: token
-				})
-			})
-				.then(responseHandler)
-				.then((data) => {
-					setError()
-					dispatch({ type: 'SET_USER', user: data.user, id: data.userId })
-					resolve(data.user)
-				})
-				.catch((error: Error) => {
-					setError(error)
-					reject(error.message)
-				})
-				.finally(() => {
-					setLoading(false)
-				})
-		})
+		dispatch({ type: 'SET_USER', user: data })
+
+		getEvents().catch(() => {})
+
+		setLoading(false)
+		setError()
+		return data
 	}, [])
+	const loginUsingToken = useCallback(
+		function () {
+			return new Promise(async (resolve, reject) => {
+				setLoading(true)
+
+				const response = await fetch('/api/auth/login-token', {
+					method: 'POST'
+				})
+
+				if (!response.ok) {
+					const error = await response.json()
+
+					setError(error)
+					setLoading(false)
+					reject(error)
+					return
+				}
+
+				resolve(await setUserData(response))
+			})
+		},
+		[setUserData]
+	)
 
 	function register(login: string, password: string, name: string): Promise<Status> {
-		setLoading(true)
+		return new Promise(async (resolve, reject) => {
+			setLoading(true)
 
-		return new Promise((resolve, reject) => {
-			fetch('/api/auth/register', {
+			const response = await fetch('/api/auth/register', {
 				method: 'POST',
 				body: JSON.stringify({
 					login: login,
 					password: password,
-					userName: name
+					name: name
 				})
 			})
-				.then(responseHandler)
-				.then((data: Status) => {
-					setError()
-					resolve(data)
-				})
-				.catch((error: Error) => {
-					setError(error)
-					reject(error.message)
-				})
-				.finally(() => {
-					setLoading(false)
-				})
+
+			if (!response.ok) {
+				const error = await response.json()
+
+				setError(error)
+				setLoading(false)
+				reject(error)
+				return
+			}
+
+			const status: Status = await response.json()
+
+			let result = resolve
+			if (!status.ok) {
+				result = reject
+			}
+			setLoading(false)
+
+			result(status)
 		})
 	}
 
-	function logout() {
-		dispatch({ type: 'LOG_OUT' })
+	function logout(): Promise<Status> {
+		return new Promise(async (resolve, reject) => {
+			dispatch({ type: 'LOG_OUT' })
+			const response = await fetch('/api/auth/logout')
+
+			let result = resolve
+
+			if (!response.ok) {
+				result = reject
+			}
+			const status: Status = await response.json()
+			result(status)
+		})
 	}
 
-	function responseHandler(response: Response) {
-		if (!response.ok) {
-			throw new Error(`${response.status}: ${response.statusText}`)
-		}
-		return response.json()
+	function getEvents(): Promise<void> {
+		return new Promise(async (resolve, reject) => {
+			const response = await fetch('/api/user/events')
+
+			if (!response.ok) {
+				const error = await response.json()
+				reject(error)
+				return
+			}
+			const data: Events = await response.json()
+
+			dispatch({ type: 'SET_EVENTS', events: data })
+			resolve()
+		})
 	}
-	function setError(error?: Error) {
-		dispatch({ type: 'SET_ERROR', errorMessage: error?.message })
+	function setError(error?: Status) {
+		dispatch({ type: 'SET_ERROR', errorMessage: error?.code })
 	}
 	function setLoading(state: boolean) {
 		dispatch({ type: 'SET_LOADING', state })
@@ -107,26 +140,9 @@ export default function useAuth(): Auth {
 
 	useEffect(() => {
 		if (isClient()) {
-			const appData = getLocalStorage()
-
-			if (appData?.token) {
-				loginUsingToken(appData.token)
-			}
+			loginUsingToken().catch((error) => {})
 		}
 	}, [loginUsingToken])
-
-	useEffect(() => {
-		if (authState.user.id) {
-			fetch('/api/user/events', { method: 'POST', body: JSON.stringify({ id: authState.user.id }) })
-				.then(responseHandler)
-				.then((data: Events) => {
-					dispatch({ type: 'SET_EVENTS', events: data })
-				})
-				.catch((error: Error) => {
-					setError(error)
-				})
-		}
-	}, [authState.user.id])
 
 	return {
 		...authState,
@@ -142,5 +158,5 @@ export const exampleAuthObject: Auth = {
 	login: () => new Promise(() => ''),
 	register: () => new Promise(() => {}),
 	loginUsingToken: () => {},
-	logout: () => {}
+	logout: () => new Promise(() => {})
 }
