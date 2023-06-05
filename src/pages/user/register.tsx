@@ -3,6 +3,7 @@ import { useState } from 'react'
 
 import useAppContext from '@/hooks/use-app-context'
 import { className } from '@/utils'
+import { Status } from '../api/auth'
 
 import Section from '@/components/Layout/Section'
 import Error from '@/components/UI/Error'
@@ -32,13 +33,23 @@ export default function Register() {
 		register(login, password, name)
 			.then(() => {
 				router.replace('/user/login')
-				setError(() => '')
+				setFormError('')
 			})
-			.catch(() => {
-				setError(() => 'User already exists')
+			.catch((error: Status) => {
+				const status = error.code.replace('auth/', '')
+				switch (status) {
+					case 'email-already-in-use': {
+						setFormError('Email is already in use')
+						break
+					}
+					default: {
+						setFormError(status)
+						break
+					}
+				}
 			})
 	}
-	function onFormError(message: string) {
+	function setFormError(message: string) {
 		setError(() => message)
 	}
 
@@ -48,7 +59,7 @@ export default function Register() {
 
 	return (
 		<Section title={getText('Register')} className={sectionStyles}>
-			<RegisterForm onRegister={registerUser} onError={onFormError} onInputChange={() => setError(() => '')} />
+			<RegisterForm onRegister={registerUser} onError={setFormError} onInputChange={() => setError(() => '')} />
 			<Error show={error ? true : false} text={error} className={styles.error} />
 		</Section>
 	)

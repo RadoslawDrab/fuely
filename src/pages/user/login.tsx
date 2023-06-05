@@ -3,6 +3,7 @@ import { useState } from 'react'
 
 import useAppContext from '@/hooks/use-app-context'
 import { className } from '@/utils'
+import { Status } from '../api/auth'
 
 import Section from '@/components/Layout/Section'
 import LoginForm from '@/components/pages/Login/LoginForm'
@@ -16,7 +17,6 @@ export default function Login() {
 
 	const {
 		login: loginFunc,
-		loginUsingToken,
 		state: { isLoggedIn, isLoading }
 	} = useAppContext().Auth
 	const { getText } = useAppContext().Language
@@ -31,16 +31,20 @@ export default function Login() {
 
 	function loginUser(login: string, password: string) {
 		loginFunc(login, password)
-			.then((token) => {
-				loginUsingToken(token)
+			.then(() => {
 				setError(() => '')
+				router.replace('/user/dashboard')
 			})
-			.catch((error) => {
-				const code = +error.split(':')[0]
-				if (code === 404) {
-					setError(() => 'Incorrect login or password')
-				} else {
-					setError(() => error)
+			.catch((error: Status) => {
+				const status = error.code.replace('auth/', '')
+
+				switch (status) {
+					case 'user-not-found': {
+						setError(() => 'Incorrect login or password')
+					}
+					case 'wrong-password': {
+						setError(() => 'Incorrect login or password')
+					}
 				}
 			})
 	}
