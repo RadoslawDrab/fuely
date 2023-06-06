@@ -40,6 +40,13 @@ export default function usePages(): Pages {
 			condition: () => !isLoggedIn
 		},
 		{
+			name: 'refuel',
+			display: 'Refuel',
+			icon: 'fuelpump',
+			path: '/user/refuel',
+			condition: () => isLoggedIn
+		},
+		{
 			name: 'settings',
 			display: 'Settings',
 			icon: 'gearshape',
