@@ -104,7 +104,6 @@ export function checkEmailAndPassword(email: string, password: string): { ok: bo
 		status.ok = false
 		status.message = passwordInfo
 	}
-	console.log(status)
 
 	return status
 }
