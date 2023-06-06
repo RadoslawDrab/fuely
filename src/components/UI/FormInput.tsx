@@ -23,7 +23,7 @@ export default function FormInput(props: Props) {
 	const defaultErrorMessage = `Fill out ${props.text} field`
 	const [hasError, setHasError] = useState(false)
 	const [errorMessage, setErrorMessage] = useState(defaultErrorMessage)
-	const [isTouched, setIsTouched] = useState(false)
+	const [isTouched, setIsTouched] = useState(props.defaultValue ? true : false)
 
 	const inputId = `input-${props.name}`
 
