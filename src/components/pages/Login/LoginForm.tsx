@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 
 import useAppContext from '@/hooks/use-app-context'
-import { checkEmailAndPassword, emailRegEx, passwordInfo, passwordRegEx } from '@/utils'
+import { checkEmailAndPassword, emailRegEx, getLocalStorage, passwordInfo, passwordRegEx } from '@/utils'
 
 import Button from '@/components/UI/Button'
 import FormInput from '@/components/UI/FormInput'
@@ -14,9 +14,11 @@ interface Props {
 	onInputChange: () => void
 }
 export default function LoginForm(props: Props) {
+	const emailFromLS: string | null = getLocalStorage()?.formData
+
 	const { getText } = useAppContext().Language
 
-	const [email, setEmail] = useState('')
+	const [email, setEmail] = useState(emailFromLS ?? '')
 	const [password, setPassword] = useState('')
 
 	function onSubmit(event: React.FormEvent<HTMLFormElement>) {
@@ -39,6 +41,7 @@ export default function LoginForm(props: Props) {
 				getValue={(value) => setEmail(() => value)}
 				check={(value) => !!value.match(emailRegEx)}
 				errorText="Enter valid email"
+				defaultValue={email}
 			/>
 			<FormInput
 				name="password"
