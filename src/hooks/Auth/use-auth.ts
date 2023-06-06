@@ -149,7 +149,8 @@ export default function useAuth(): Auth {
 		login,
 		register,
 		loginUsingToken,
-		logout
+		logout,
+		getEvents
 	}
 }
 
@@ -158,5 +159,6 @@ export const exampleAuthObject: Auth = {
 	login: () => new Promise(() => ''),
 	register: () => new Promise(() => {}),
 	loginUsingToken: () => {},
-	logout: () => new Promise(() => {})
+	logout: () => new Promise(() => {}),
+	getEvents: () => new Promise(() => {})
 }

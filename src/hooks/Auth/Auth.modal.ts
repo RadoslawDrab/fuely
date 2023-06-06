@@ -9,4 +9,5 @@ export interface Auth {
 	register: (email: string, password: string, name: string) => Promise<Status>
 	loginUsingToken: () => void
 	logout: () => Promise<Status>
+	getEvents: () => Promise<void>
 }
