@@ -10,9 +10,12 @@ interface Props {
 	text: string
 	placeholder?: string
 	type: React.HTMLInputTypeAttribute
-	getValue: (value: string) => void
 	notRequired?: boolean
 	errorText?: string
+	min?: number
+	max?: number
+	defaultValue?: any
+	getValue: (value: string) => void
 	check?: (value: string) => boolean
 }
 
@@ -56,6 +59,9 @@ export default function FormInput(props: Props) {
 				onFocus={onFocus}
 				onBlur={onBlur}
 				placeholder={props.placeholder ?? props.text}
+				min={props.min}
+				max={props.max}
+				defaultValue={props.defaultValue}
 			/>
 			<Error className={styles['form-error']} show={hasError && !props.notRequired} text={errorMessage} />
 		</>
