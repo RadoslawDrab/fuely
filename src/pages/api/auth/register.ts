@@ -22,7 +22,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 				setValue('', 'events')
 
 				const status: Status = {
-					ok: true,
 					code: 'auth/created'
 				}
 				res.status(200).json(status)

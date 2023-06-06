@@ -21,7 +21,6 @@ export interface UserSettings {
 }
 
 export interface Status {
-	ok: boolean
 	code: string
 	message?: string
 }
@@ -63,12 +62,12 @@ function decrypt<T>(encryptedData: string, key: EncryptionKey): ReturnObject<T> 
 
 	// Checks if encryption was successful
 	if (!tokenDecrypted) {
-		return { status: { ok: false, code: 'Bad Request', message: 'Invalid token' } }
+		return { status: { code: 'Bad Request', message: 'Invalid token' } }
 	}
 	// Returns status and data object
-	return { status: { ok: true, code: 'Success' }, data: JSON.parse(tokenDecrypted) }
+	return { status: { code: 'Success' }, data: JSON.parse(tokenDecrypted) }
 }
 
 export function returnError(res: NextApiResponse, code: string, message?: string) {
-	return res.status(400).json({ ok: false, code, message })
+	return res.status(400).json({ code, message })
 }

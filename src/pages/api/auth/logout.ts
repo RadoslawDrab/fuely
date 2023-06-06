@@ -13,7 +13,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 			await signOut(auth)
 
 			const status: Status = {
-				ok: true,
 				code: 'auth/logout'
 			}
 			res.status(200).json(status)
