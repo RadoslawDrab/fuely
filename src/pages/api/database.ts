@@ -18,14 +18,14 @@ export function getEvents(id: string) {
 			.catch((error) => reject(error))
 	})
 }
-export function setValue(value: any, path: 'events' | 'users'): Promise<void> {
+export function setValue(value: any, base: 'events' | 'users', path: string = ''): Promise<void> {
 	return new Promise((resolve, reject) => {
 		const { currentUser } = auth
 		if (!currentUser) {
 			reject()
 			return
 		}
-		set(child(databaseRef, `${path}/${currentUser.uid}`), value)
+		set(child(databaseRef, `${base}/${currentUser.uid}${path ? '/' + path : ''}`), value)
 		resolve()
 	})
 }
