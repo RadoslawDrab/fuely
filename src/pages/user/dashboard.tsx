@@ -1,4 +1,5 @@
 import React from 'react'
+import { useRouter } from 'next/router'
 
 import useAppContext from '@/hooks/use-app-context'
 import useEvents from '@/hooks/use-events'
@@ -13,9 +14,12 @@ import Overview from '@/components/pages/Dashboard/Overview'
 import styles from '@styles/pages/Dashboard/index.module.scss'
 
 export default function Dashboard() {
+	const router = useRouter()
+
 	const {
 		state: { isLoading: userIsLoading, isLoggedIn }
 	} = useAppContext().Auth
+	const { getText } = useAppContext().Language
 	const { isLoading: eventsAreLoading } = useEvents()
 
 	useUserRedirect()
@@ -24,12 +28,16 @@ export default function Dashboard() {
 		return <LoadingIcon />
 	}
 
+	function refuelButtonClick() {
+		router.push('/user/refuel')
+	}
+
 	return (
 		<>
 			<Overview className={styles.overview} />
-			<Button className={styles['new-refuel-button']} onClick={() => {}}>
+			<Button className={styles['new-refuel-button']} onClick={refuelButtonClick}>
 				<Icon type="fuelpump" alt="fuelpump icon" />
-				<span>New Refuel</span>
+				<span>{getText('Refuel')}</span>
 			</Button>
 			<hr className={styles.line} />
 			<DashboardComponent className={styles.dashboard} />
