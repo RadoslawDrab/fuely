@@ -14,15 +14,17 @@ function Header() {
 	const router = useRouter()
 
 	const { toggleNavigation, navigationState } = useAppContext().Navigation
+	const {
+		state: { isLoggedIn }
+	} = useAppContext().Auth
 
 	const navButtonStyles = className(styles['nav-button'], navigationState ? styles['active'] : '')
 
 	function redirect() {
-		const { query } = router
-		if (query.userId) {
-			router.replace(`/user/${router.query.userId}/`)
+		if (isLoggedIn) {
+			router.push(`/user/dashboard`)
 		} else {
-			router.replace('/')
+			router.push('/')
 		}
 	}
 
