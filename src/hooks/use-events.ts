@@ -26,7 +26,9 @@ export default function useEvents(): EventObject {
 	const sortedDates = useMemo(
 		() =>
 			Object.keys(events).sort((a: string, b: string) => {
-				return new Date(a) > new Date(b) ? -1 : 1
+				const dateA = a.split(':')[0]
+				const dateB = b.split(':')[0]
+				return new Date(dateA) > new Date(dateB) ? -1 : 1
 			}),
 		[events]
 	)
@@ -56,7 +58,7 @@ export default function useEvents(): EventObject {
 
 				// Gets date based on index
 				const date = sortedDates[Math.max(Math.min(index, sortedDates.length - 1), 0)]
-				const formattedDate = formatDate(date)
+				const formattedDate = formatDate(date.split(':')[0])
 
 				if (!date) {
 					reject('No date for this index')
