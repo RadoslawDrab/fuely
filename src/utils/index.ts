@@ -80,6 +80,7 @@ export function getLocalStorage(): AppSettings | null {
 export interface AppSettings {
 	theme: 'light' | 'dark'
 	language: Languages
+	formData: any
 }
 
 export const emailRegEx = /[^\.@]*@[^\.@]*\.[^\.@]{2,3}/
