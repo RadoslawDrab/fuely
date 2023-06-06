@@ -20,7 +20,7 @@ export default function NavigationButtons(props: Props) {
 	// Changes url based on path
 	function navigate(event: React.MouseEvent<HTMLButtonElement>) {
 		const url = event.currentTarget.dataset.path ?? '/'
-		router.replace(url)
+		router.push(url)
 	}
 
 	const navigationButtons = availablePages.map((item, i) => {
