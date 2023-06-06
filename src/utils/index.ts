@@ -107,3 +107,15 @@ export function checkEmailAndPassword(email: string, password: string): { ok: bo
 
 	return status
 }
+
+export function checkIfStringIsNumber(value: string): boolean {
+	return !!value.match(/(?<!.)[\d\.]*(?!.)/)
+}
+export function formatDate(date: string) {
+	const d = new Date(date)
+	const formattedDate = `${d.getDate().toString().padStart(2, '0')}.${(d.getMonth() + 1)
+		.toString()
+		.padStart(2, '0')}.${d.getFullYear()}`
+
+	return formattedDate
+}
