@@ -1,21 +1,21 @@
 import { child, get, set } from 'firebase/database'
-import databaseRef from './_firebase.ts'
 import { User, getAuth } from 'firebase/auth'
+
+import databaseRef from './_firebase.ts'
 import { UserObject } from './auth/index.ts'
+import { Events } from '@/hooks/Events.modal.ts'
 
 const auth = getAuth()
 
-export function getEvents(id: string) {
-	return new Promise((resolve: (value: object) => void, reject) => {
-		get(child(databaseRef, `events/${id}`))
-			.then((snapshot) => {
-				if (snapshot.exists()) {
-					resolve(snapshot.val())
-				} else {
-					reject('Data not found')
-				}
-			})
-			.catch((error) => reject(error))
+export function getEvents(user: User): Promise<Events> {
+	return new Promise(async (resolve) => {
+		let data = {}
+		const snapshot = await get(child(databaseRef, `events/${user.uid}`))
+
+		if (snapshot.exists()) {
+			data = snapshot.val()
+		}
+		resolve(data)
 	})
 }
 export function setValue(value: any, base: 'events' | 'users', path: string = ''): Promise<void> {
