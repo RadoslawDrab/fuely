@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useMemo, useState } from 'react'
 
-import { currencyConvert } from '@/utils'
+import { currencyConvert, formatDate } from '@/utils'
 import { EventObject, FullEvent } from './Events.modal'
 import useAppContext from './use-app-context'
 import useUnit, { UnitType } from './use-unit'
@@ -83,15 +83,6 @@ export default function useEvents(): EventObject {
 		},
 		[convertIfImperial, events, settings?.currency, sortedDates]
 	)
-
-	function formatDate(date: string) {
-		const d = new Date(date)
-		const formattedDate = `${d.getDate().toString().padStart(2, '0')}.${(d.getMonth() + 1)
-			.toString()
-			.padStart(2, '0')}.${d.getFullYear()}`
-
-		return formattedDate
-	}
 
 	return {
 		events,
