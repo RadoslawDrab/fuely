@@ -32,8 +32,8 @@ export default function Login() {
 	function loginUser(email: string, password: string) {
 		login(email, password)
 			.then(() => {
-				setError(() => '')
 				router.replace('/user/dashboard')
+				setError(() => '')
 			})
 			.catch((error: Status) => {
 				const status = error.code.replace('auth/', '')
