@@ -1,9 +1,9 @@
-import Head from 'next/head'
 import { useRouter } from 'next/router'
 
 import useAppContext from '@/hooks/use-app-context'
 import useUserRedirect from '@/hooks/use-user-redirect'
 
+import Head from '@/components/Head'
 import LoadingIcon from '@/components/UI/LoadingIcon'
 
 export default function Item() {
@@ -22,10 +22,7 @@ export default function Item() {
 	}
 	return (
 		<>
-			<Head>
-				<title>Fuely | {itemId}</title>
-				<meta name="description" content={`Fuely ${itemId} page`} />
-			</Head>
+			<Head title={`Fuely | ${itemId}`} description={`Fuely ${itemId} page`} />
 			Item - {itemId}
 		</>
 	)

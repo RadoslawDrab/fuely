@@ -1,14 +1,9 @@
-import Head from 'next/head'
+import Head from '@/components/Head'
 
 export default function Home() {
 	return (
 		<>
-			<Head>
-				<title>Fuely | Home</title>
-				<meta name="description" content="Fuely home page" />
-				<meta name="viewport" content="width=device-width, initial-scale=1" />
-				<link rel="icon" href="/favicon.ico" />
-			</Head>
+			<Head title="Fuely | Home" description="Fuely home page" />
 			<></>
 		</>
 	)

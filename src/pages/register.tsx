@@ -1,4 +1,3 @@
-import Head from 'next/head'
 import { useRouter } from 'next/router'
 import { useState } from 'react'
 
@@ -6,6 +5,7 @@ import useAppContext from '@/hooks/use-app-context'
 import { className } from '@/utils'
 import { Status } from './api/auth'
 
+import Head from '@/components/Head'
 import Section from '@/components/Layout/Section'
 import Error from '@/components/UI/Error'
 import LoadingIcon from '@/components/UI/LoadingIcon'
@@ -60,10 +60,7 @@ export default function Register() {
 
 	return (
 		<>
-			<Head>
-				<title>Fuely | Register</title>
-				<meta name="description" content="Fuely register page" />
-			</Head>
+			<Head title="Fuely | Register" description="Fuely register page" />
 			<Section title={getText('Register')} className={sectionStyles}>
 				<RegisterForm onRegister={registerUser} onError={setFormError} onInputChange={() => setError(() => '')} />
 				<Error show={error ? true : false} text={error} className={styles.error} />

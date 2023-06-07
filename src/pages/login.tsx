@@ -1,4 +1,3 @@
-import Head from 'next/head'
 import { useRouter } from 'next/router'
 import { useState } from 'react'
 
@@ -6,10 +5,11 @@ import useAppContext from '@/hooks/use-app-context'
 import { className } from '@/utils'
 import { Status } from './api/auth'
 
+import Head from '@/components/Head'
 import Section from '@/components/Layout/Section'
-import LoginForm from '@/components/pages/Login/LoginForm'
 import Error from '@/components/UI/Error'
 import LoadingIcon from '@/components/UI/LoadingIcon'
+import LoginForm from '@/components/pages/Login/LoginForm'
 
 import styles from '@styles/styles.module.scss'
 
@@ -64,10 +64,7 @@ export default function Login() {
 	}
 	return (
 		<>
-			<Head>
-				<title>Fuely | Login</title>
-				<meta name="description" content="Fuely login page" />
-			</Head>
+			<Head title="Fuely | Login" description="Fuely login page" />
 			<Section title={getText('Log in')} className={sectionStyles}>
 				<LoginForm onLogin={loginUser} onError={onFormError} onInputChange={() => setError(() => '')} />
 				<Error className={styles.error} show={error ? true : false} text={error} />

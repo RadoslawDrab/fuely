@@ -1,4 +1,3 @@
-import Head from 'next/head'
 import { useRouter } from 'next/router'
 import React, { useState } from 'react'
 
@@ -7,10 +6,11 @@ import useAppContext from '@/hooks/use-app-context'
 import { className, setLocalStorage } from '@/utils'
 import { Status } from './api/auth'
 
+import Head from '@/components/Head'
 import Section from '@/components/Layout/Section'
-import RefuelForm from '@/components/pages/Refuel/RefuelForm'
 import Error from '@/components/UI/Error'
 import LoadingIcon from '@/components/UI/LoadingIcon'
+import RefuelForm from '@/components/pages/Refuel/RefuelForm'
 
 import styles from '@styles/styles.module.scss'
 
@@ -71,10 +71,7 @@ export default function NewEvent() {
 
 	return (
 		<>
-			<Head>
-				<title>Fuely | Refuel</title>
-				<meta name="description" content="Fuely refuel form page" />
-			</Head>
+			<Head title="Fuely | Refuel" description="Fuely refuel form page" />
 			<Section title="Refuel" className={sectionStyles}>
 				<RefuelForm onSubmit={onSubmit} />
 				<Error show={error !== ''} text={errorTypes[error]} />
