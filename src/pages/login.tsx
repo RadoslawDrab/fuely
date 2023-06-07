@@ -1,3 +1,4 @@
+import Head from 'next/head'
 import { useRouter } from 'next/router'
 import { useState } from 'react'
 
@@ -62,9 +63,15 @@ export default function Login() {
 		return <LoadingIcon />
 	}
 	return (
-		<Section title={getText('Log in')} className={sectionStyles}>
-			<LoginForm onLogin={loginUser} onError={onFormError} onInputChange={() => setError(() => '')} />
-			<Error className={styles.error} show={error ? true : false} text={error} />
-		</Section>
+		<>
+			<Head>
+				<title>Fuely | Login</title>
+				<meta name="description" content="Fuely login page" />
+			</Head>
+			<Section title={getText('Log in')} className={sectionStyles}>
+				<LoginForm onLogin={loginUser} onError={onFormError} onInputChange={() => setError(() => '')} />
+				<Error className={styles.error} show={error ? true : false} text={error} />
+			</Section>
+		</>
 	)
 }

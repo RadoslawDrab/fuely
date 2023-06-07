@@ -1,5 +1,6 @@
-import React from 'react'
+import Head from 'next/head'
 import { useRouter } from 'next/router'
+import React from 'react'
 
 import useAppContext from '@/hooks/use-app-context'
 import useEvents from '@/hooks/use-events'
@@ -17,6 +18,7 @@ export default function Dashboard() {
 	const router = useRouter()
 
 	const {
+		user,
 		state: { isLoading: userIsLoading, isLoggedIn }
 	} = useAppContext().Auth
 	const { getText } = useAppContext().Language
@@ -34,6 +36,10 @@ export default function Dashboard() {
 
 	return (
 		<>
+			<Head>
+				<title>Fuely | Dashboard - {user.displayName}</title>
+				<meta name="description" content={`Dashboard of ${user.displayName} user`} />
+			</Head>
 			<Overview className={styles.overview} />
 			<Button className={styles['refuel-button']} onClick={refuelButtonClick}>
 				<Icon type="fuelpump" alt="fuelpump icon" />

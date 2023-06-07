@@ -1,3 +1,4 @@
+import Head from 'next/head'
 import { useRouter } from 'next/router'
 import React, { useState } from 'react'
 
@@ -69,9 +70,15 @@ export default function NewEvent() {
 	}
 
 	return (
-		<Section title="Refuel" className={sectionStyles}>
-			<RefuelForm onSubmit={onSubmit} />
-			<Error show={error !== ''} text={errorTypes[error]} />
-		</Section>
+		<>
+			<Head>
+				<title>Fuely | Refuel</title>
+				<meta name="description" content="Fuely refuel form page" />
+			</Head>
+			<Section title="Refuel" className={sectionStyles}>
+				<RefuelForm onSubmit={onSubmit} />
+				<Error show={error !== ''} text={errorTypes[error]} />
+			</Section>
+		</>
 	)
 }

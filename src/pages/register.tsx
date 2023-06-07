@@ -1,3 +1,4 @@
+import Head from 'next/head'
 import { useRouter } from 'next/router'
 import { useState } from 'react'
 
@@ -58,9 +59,15 @@ export default function Register() {
 	}
 
 	return (
-		<Section title={getText('Register')} className={sectionStyles}>
-			<RegisterForm onRegister={registerUser} onError={setFormError} onInputChange={() => setError(() => '')} />
-			<Error show={error ? true : false} text={error} className={styles.error} />
-		</Section>
+		<>
+			<Head>
+				<title>Fuely | Register</title>
+				<meta name="description" content="Fuely register page" />
+			</Head>
+			<Section title={getText('Register')} className={sectionStyles}>
+				<RegisterForm onRegister={registerUser} onError={setFormError} onInputChange={() => setError(() => '')} />
+				<Error show={error ? true : false} text={error} className={styles.error} />
+			</Section>
+		</>
 	)
 }
