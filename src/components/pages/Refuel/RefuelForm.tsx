@@ -1,6 +1,8 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
-import { checkIfStringIsNumber, formatDate, getLocalStorage } from '@/utils'
+import { checkIfStringIsNumber, getLocalStorage } from '@/utils'
+import useAppContext from '@/hooks/use-app-context'
+import useEvents from '@/hooks/use-events'
 
 import Button from '@/components/UI/Button'
 import { FullEvent } from '@/hooks/Events.modal'
@@ -15,11 +17,25 @@ interface Props {
 export default function RefuelForm(props: Props) {
 	const formData: FullEvent | null = getLocalStorage()?.formData
 
+	const { user } = useAppContext().Auth
+	const { getEvent } = useEvents()
+
 	const [cost, setCost] = useState(formData?.cost ?? 0)
-	const [currency, setCurrency] = useState(formData?.currency ?? 'usd')
+	const [currency, setCurrency] = useState(formData?.currency || user.settings.currency || 'usd')
 	const [fuel, setFuel] = useState(formData?.fuel ?? 0)
 	const [odometer, setOdometer] = useState(formData?.odometer ?? 0)
 	const [date, setDate] = useState(formData?.date ?? new Date().toLocaleDateString('en-CA'))
+
+	useEffect(() => {
+		getEvent(0)
+			.then((event) => {
+				setOdometer(() => event.odometer)
+			})
+			.catch((error) => {})
+	}, [getEvent])
+	useEffect(() => {
+		setCurrency(() => user.settings.currency)
+	}, [user.settings.currency])
 
 	function onFormSubmit(event: React.FormEvent<HTMLFormElement>) {
 		event.preventDefault()
