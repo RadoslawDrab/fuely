@@ -19,10 +19,24 @@ export default function usePages(): Pages {
 			condition: () => true
 		},
 		{
+			name: 'about',
+			display: 'About',
+			icon: 'gearshape',
+			path: '/about',
+			condition: () => true
+		},
+		{
 			name: 'dashboard',
 			display: 'Dashboard',
 			icon: 'rectangle.3.group',
 			path: '/user/dashboard',
+			condition: () => isLoggedIn
+		},
+		{
+			name: 'refuel',
+			display: 'Refuel',
+			icon: 'fuelpump',
+			path: '/user/refuel',
 			condition: () => isLoggedIn
 		},
 		{
@@ -38,13 +52,6 @@ export default function usePages(): Pages {
 			icon: 'person.crop.circle.badge.plus',
 			path: '/user/register',
 			condition: () => !isLoggedIn
-		},
-		{
-			name: 'refuel',
-			display: 'Refuel',
-			icon: 'fuelpump',
-			path: '/user/refuel',
-			condition: () => isLoggedIn
 		},
 		{
 			name: 'settings',
