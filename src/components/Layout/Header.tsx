@@ -22,7 +22,7 @@ function Header() {
 
 	function redirect() {
 		if (isLoggedIn) {
-			router.push(`/user/dashboard`)
+			router.push(`/dashboard`)
 		} else {
 			router.push('/')
 		}

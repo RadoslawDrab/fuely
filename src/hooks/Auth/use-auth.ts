@@ -92,7 +92,7 @@ export default function useAuth(): Auth {
 			const status: Status = await response.json()
 
 			let result = resolve
-			if (!status.ok) {
+			if (!status.code.includes('created')) {
 				result = reject
 			}
 			setLoading(false)

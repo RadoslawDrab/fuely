@@ -54,7 +54,7 @@ export default function Dashboard(props: Props) {
 	const sectionStyles = className(defaultStyles.section, styles.section)
 
 	function navigate(event: React.MouseEvent<HTMLButtonElement>) {
-		const path = `/user/${event.currentTarget.dataset.id}` || '/user/dashboard'
+		const path = `/${event.currentTarget.dataset.id}` || '/dashboard'
 
 		router.push(path)
 	}

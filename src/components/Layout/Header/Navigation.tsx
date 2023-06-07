@@ -24,7 +24,7 @@ export default function Navigation() {
 
 	function logoutUser() {
 		logout().then(() => {
-			router.replace('/user/login')
+			router.replace('/login')
 		})
 	}
 

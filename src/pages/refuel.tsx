@@ -4,7 +4,7 @@ import React, { useState } from 'react'
 import { FullEvent } from '@/hooks/Events.modal'
 import useAppContext from '@/hooks/use-app-context'
 import { className, setLocalStorage } from '@/utils'
-import { Status } from '../api/auth'
+import { Status } from './api/auth'
 
 import Section from '@/components/Layout/Section'
 import RefuelForm from '@/components/pages/Refuel/RefuelForm'
@@ -54,7 +54,7 @@ export default function NewEvent() {
 		getEvents()
 			.then(() => {
 				setLocalStorage({ formData: undefined })
-				router.replace('/user/dashboard')
+				router.replace('/dashboard')
 			})
 			.catch((error) => {
 				setError(() => error)

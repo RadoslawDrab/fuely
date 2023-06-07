@@ -12,7 +12,7 @@ export default function useUserRedirect() {
 
 	useEffect(() => {
 		if (errorMessage.includes('no-data')) {
-			router.replace('/user/login')
+			router.replace('/login')
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [errorMessage])

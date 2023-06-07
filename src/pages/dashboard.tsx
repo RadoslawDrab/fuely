@@ -29,7 +29,7 @@ export default function Dashboard() {
 	}
 
 	function refuelButtonClick() {
-		router.push('/user/refuel')
+		router.push('/refuel')
 	}
 
 	return (

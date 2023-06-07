@@ -29,35 +29,35 @@ export default function usePages(): Pages {
 			name: 'dashboard',
 			display: 'Dashboard',
 			icon: 'rectangle.3.group',
-			path: '/user/dashboard',
+			path: '/dashboard',
 			condition: () => isLoggedIn
 		},
 		{
 			name: 'refuel',
 			display: 'Refuel',
 			icon: 'fuelpump',
-			path: '/user/refuel',
+			path: '/refuel',
 			condition: () => isLoggedIn
 		},
 		{
 			name: 'login',
 			display: 'Log in',
 			icon: 'person.crop.circle',
-			path: '/user/login',
+			path: '/login',
 			condition: () => !isLoggedIn
 		},
 		{
 			name: 'register',
 			display: 'Register',
 			icon: 'person.crop.circle.badge.plus',
-			path: '/user/register',
+			path: '/register',
 			condition: () => !isLoggedIn
 		},
 		{
 			name: 'settings',
 			display: 'Settings',
 			icon: 'gearshape',
-			path: '/user/settings',
+			path: '/settings',
 			condition: () => isLoggedIn
 		}
 	]

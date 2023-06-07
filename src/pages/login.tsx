@@ -3,20 +3,20 @@ import { useState } from 'react'
 
 import useAppContext from '@/hooks/use-app-context'
 import { className } from '@/utils'
-import { Status } from '../api/auth'
+import { Status } from './api/auth'
 
 import Section from '@/components/Layout/Section'
+import LoginForm from '@/components/pages/Login/LoginForm'
 import Error from '@/components/UI/Error'
 import LoadingIcon from '@/components/UI/LoadingIcon'
-import RegisterForm from '@/components/pages/Register/RegisterForm'
 
 import styles from '@styles/styles.module.scss'
 
-export default function Register() {
+export default function Login() {
 	const router = useRouter()
 
 	const {
-		register,
+		login,
 		state: { isLoggedIn, isLoading }
 	} = useAppContext().Auth
 	const { getText } = useAppContext().Language
@@ -26,41 +26,45 @@ export default function Register() {
 	const sectionStyles = className(styles.section, styles.center)
 
 	if (isLoggedIn) {
-		router.replace('/user/dashboard')
+		router.replace('/dashboard')
 	}
 
-	function registerUser(email: string, password: string, name: string) {
-		register(email, password, name)
+	function loginUser(email: string, password: string) {
+		login(email, password)
 			.then(() => {
-				router.replace('/user/login')
-				setFormError('')
+				router.replace('/dashboard')
+				setError(() => '')
 			})
 			.catch((error: Status) => {
 				const status = error.code.replace('auth/', '')
+
 				switch (status) {
-					case 'email-already-in-use': {
-						setFormError('Email is already in use')
+					case 'user-not-found': {
+						setError(() => 'Incorrect login or password')
+						break
+					}
+					case 'wrong-password': {
+						setError(() => 'Incorrect login or password')
 						break
 					}
 					default: {
-						setFormError(status)
+						setError(() => error.code)
 						break
 					}
 				}
 			})
 	}
-	function setFormError(message: string) {
+	function onFormError(message: string) {
 		setError(() => message)
 	}
 
 	if (isLoading) {
 		return <LoadingIcon />
 	}
-
 	return (
-		<Section title={getText('Register')} className={sectionStyles}>
-			<RegisterForm onRegister={registerUser} onError={setFormError} onInputChange={() => setError(() => '')} />
-			<Error show={error ? true : false} text={error} className={styles.error} />
+		<Section title={getText('Log in')} className={sectionStyles}>
+			<LoginForm onLogin={loginUser} onError={onFormError} onInputChange={() => setError(() => '')} />
+			<Error className={styles.error} show={error ? true : false} text={error} />
 		</Section>
 	)
 }
