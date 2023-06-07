@@ -4,6 +4,7 @@
 	top: 100%;
 	right: 0;
 	height: calc(100vh - 100%);
+	overflow-y: auto;
 
 	background-color: inherit;
 	@include theme(($grey-800, $grey-200), color);
@@ -39,49 +40,61 @@
 				padding: 1em 3em 1em 2em;
 				// Icon
 				img {
-					width: 2.5em;
+					width: 2.1em;
 				}
 				// Text
 				span {
-					font-size: $size-700;
+					font-size: $size-600;
 					font-weight: 500;
 				}
 
-				@include global(('.login-button', '.logout-button'), true) {
+				@include global(('.login-button', '.settings-button'), true) {
 					margin-top: 3em;
 				}
 			}
 		}
 	}
-	// 848 px
-	@media screen and (min-width: 53rem) {
-		position: relative;
-		box-shadow: none;
-		padding: 0.5em 0;
-		background-color: transparent;
-		@include global('.hidden', true) {
+	@media screen and (min-width: $size-tablet-l) {
+		padding: 1.5em 2em;
+		height: auto;
+		clip-path: polygon(0 0, 0 100%, 100% 100%, 100% 0);
+		border-bottom-left-radius: 5px;
+		border-bottom-right-radius: 5px;
+
+		@include global(('.hidden'), true) {
 			right: 0;
-			pointer-events: auto;
+			clip-path: polygon(0 0, 0 0%, 100% 0%, 100% 0);
+
+			pointer-events: none;
 		}
 		ul {
-			flex-direction: row;
+			display: grid;
+			grid-template-columns: repeat(2, 1fr);
+			column-gap: 2em;
 			li {
+				grid-column: 1 / 2;
 				& > button {
 					border-radius: 5px;
 					padding: 0.75em 1.6em;
-					gap: 1.25em;
+					gap: 1.4em;
 					img {
 						width: 1.75em;
 					}
 					span {
 						font-size: $size-500;
-						text-align: center;
 					}
-					@include global(('.login-button', '.logout-button'), true) {
+					@include global(('.login-button', '.settings-button'), true) {
 						margin-top: 0;
-						margin-left: 1.5em;
-						width: auto;
 					}
+				}
+				@include global(('.logout-item', '.settings-item', '.login-item', '.register-item'), true) {
+					grid-column: 2 / 3;
+				}
+				@include global(('.settings-item', '.login-item'), true) {
+					grid-row: 1 / 2;
+				}
+				@include global(('.logout-item', '.register-item'), true) {
+					grid-row: 2 / 3;
 				}
 			}
 		}
