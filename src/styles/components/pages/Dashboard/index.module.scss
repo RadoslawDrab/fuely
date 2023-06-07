@@ -1,9 +1,10 @@
 @use '@/styles/library' as *;
 
-.new-refuel-button {
+.refuel-button {
 	align-self: center;
 	display: flex;
 	align-items: center;
+	justify-self: center;
 	padding: 1em 2em;
 	span {
 		font-size: $size-500;
@@ -12,10 +13,9 @@
 	}
 }
 @media screen and (min-width: $size-tablet-xs) {
-	.new-refuel-button {
+	.refuel-button {
 		grid-column: 1 / -1;
 		padding: 1.5em 3em;
-		justify-self: center;
 		span {
 			font-size: $size-600;
 		}

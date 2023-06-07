@@ -35,7 +35,7 @@ export default function Dashboard() {
 	return (
 		<>
 			<Overview className={styles.overview} />
-			<Button className={styles['new-refuel-button']} onClick={refuelButtonClick}>
+			<Button className={styles['refuel-button']} onClick={refuelButtonClick}>
 				<Icon type="fuelpump" alt="fuelpump icon" />
 				<span>{getText('Refuel')}</span>
 			</Button>
