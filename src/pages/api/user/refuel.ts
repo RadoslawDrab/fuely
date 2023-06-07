@@ -28,7 +28,15 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 				const eventDatesSorted = Object.keys(events).sort((a: string, b: string) => {
 					const dateA = a.split(':')[0]
 					const dateB = b.split(':')[0]
-					return new Date(dateA) > new Date(dateB) ? -1 : 1
+					const dateIndexA = a.split(':')[1]
+					const dateIndexB = b.split(':')[1]
+					return dateIndexA < dateIndexB
+						? new Date(dateA) < new Date(dateB)
+							? -1
+							: 1
+						: new Date(dateA) < new Date(dateB)
+						? 1
+						: -1
 				})
 				const lastEvent = events[eventDatesSorted[0] || ''] || {}
 
