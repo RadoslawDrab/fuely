@@ -120,3 +120,11 @@ export function formatDate(date: string) {
 
 	return formattedDate
 }
+
+export function sortDate(a: string, b: string) {
+	const dateA = a.split(':')[0]
+	const dateB = b.split(':')[0]
+	const dateIndexA = a.split(':')[1]
+	const dateIndexB = b.split(':')[1]
+	return dateIndexA < dateIndexB ? (new Date(dateA) < new Date(dateB) ? -1 : 1) : new Date(dateA) < new Date(dateB) ? 1 : -1
+}

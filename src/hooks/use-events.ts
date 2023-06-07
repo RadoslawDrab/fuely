@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useMemo, useState } from 'react'
 
-import { currencyConvert, formatDate } from '@/utils'
+import { currencyConvert, formatDate, sortDate } from '@/utils'
 import { EventObject, FullEvent } from './Events.modal'
 import useAppContext from './use-app-context'
 import useUnit, { UnitType } from './use-unit'
@@ -23,17 +23,7 @@ export default function useEvents(): EventObject {
 	const [isLoading, setIsLoading] = useState(false)
 
 	// Dates sorted descending
-	const sortedDates = useMemo(
-		() =>
-			Object.keys(events).sort((a: string, b: string) => {
-				const dateA = a.split(':')[0]
-				const dateB = b.split(':')[0]
-				const dateIndexA = a.split(':')[1]
-				const dateIndexB = b.split(':')[1]
-				return dateIndexA < dateIndexB ? (new Date(dateA) < new Date(dateB) ? -1 : 1) : new Date(dateA) < new Date(dateB) ? 1 : -1
-			}),
-		[events]
-	)
+	const sortedDates = useMemo(() => Object.keys(events).sort(sortDate), [events])
 
 	// Sets loading based on events state
 	useEffect(() => {

@@ -4,6 +4,7 @@ import { getAuth } from 'firebase/auth'
 import { Status, returnError } from '../auth'
 import { Event } from '@/hooks/Events.modal'
 import { getEvents, getUserData, setValue } from '../database'
+import { sortDate } from '@/utils'
 
 const auth = getAuth()
 
@@ -25,19 +26,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 				const userObject = await getUserData(currentUser)
 				const events = await getEvents(currentUser)
 
-				const eventDatesSorted = Object.keys(events).sort((a: string, b: string) => {
-					const dateA = a.split(':')[0]
-					const dateB = b.split(':')[0]
-					const dateIndexA = a.split(':')[1]
-					const dateIndexB = b.split(':')[1]
-					return dateIndexA < dateIndexB
-						? new Date(dateA) < new Date(dateB)
-							? -1
-							: 1
-						: new Date(dateA) < new Date(dateB)
-						? 1
-						: -1
-				})
+				const eventDatesSorted = Object.keys(events).sort(sortDate)
 				const lastEvent = events[eventDatesSorted[0] || ''] || {}
 
 				const distance = Math.max(odometer - (lastEvent.odometer || odometer), 0)
