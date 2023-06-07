@@ -26,7 +26,7 @@ export default function NavigationButtons(props: Props) {
 	const navigationButtons = availablePages.map((item, i) => {
 		const isCurrentPath = item.path === router.pathname
 		return (
-			<li key={i}>
+			<li key={i} className={`${item.name}-item`}>
 				<Button
 					onClick={navigate}
 					className={`${item.name}-button`}
