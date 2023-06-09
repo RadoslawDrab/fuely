@@ -61,12 +61,12 @@ export function currencyConvert(value: number, valueCurrency: string, endpointCu
 	})
 }
 
-export function setLocalStorage(data: Partial<AppSettings>, overwrite = false) {
+export function setLocalStorage(data: Partial<LocalAppSettings>, overwrite = false) {
 	if (!isClient()) return
 	const newData = overwrite ? data : { ...getLocalStorage(), ...data }
 	localStorage.setItem('FUELY_APP', JSON.stringify(newData))
 }
-export function getLocalStorage(): AppSettings | null {
+export function getLocalStorage(): LocalAppSettings | null {
 	if (!isClient()) return null
 	const data = localStorage.getItem('FUELY_APP')
 
@@ -76,10 +76,27 @@ export function getLocalStorage(): AppSettings | null {
 
 	return JSON.parse(data)
 }
+export function setSessionStorage(data: Partial<SessionAppSettings>, overwrite = false) {
+	if (!isClient()) return
+	const newData = overwrite ? data : { ...getSessionStorage(), ...data }
+	sessionStorage.setItem('FUELY_APP', JSON.stringify(newData))
+}
+export function getSessionStorage(): SessionAppSettings | null {
+	if (!isClient()) return null
+	const data = sessionStorage.getItem('FUELY_APP')
 
-export interface AppSettings {
+	if (!data) {
+		return null
+	}
+
+	return JSON.parse(data)
+}
+
+export interface LocalAppSettings {
 	theme: 'light' | 'dark'
 	language: Languages
+}
+export interface SessionAppSettings {
 	formData: any
 }
 
