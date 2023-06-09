@@ -33,7 +33,6 @@ export default function Login() {
 	function loginUser(email: string, password: string) {
 		login(email, password)
 			.then(() => {
-				router.replace('/dashboard')
 				setError(() => '')
 			})
 			.catch((error: Status) => {
