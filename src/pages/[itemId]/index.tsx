@@ -7,6 +7,8 @@ import Head from '@/components/Head'
 import LoadingIcon from '@/components/UI/LoadingIcon'
 
 export default function Item() {
+	useUserRedirect()
+
 	const router = useRouter()
 
 	const { itemId } = router.query
@@ -14,8 +16,6 @@ export default function Item() {
 	const {
 		state: { isLoading }
 	} = useAppContext().Auth
-
-	useUserRedirect()
 
 	if (isLoading) {
 		return <LoadingIcon />

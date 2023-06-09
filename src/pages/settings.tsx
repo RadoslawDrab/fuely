@@ -5,12 +5,12 @@ import Head from '@/components/Head'
 import LoadingIcon from '@/components/UI/LoadingIcon'
 
 export default function Settings(props: any) {
+	useUserRedirect()
+
 	const {
 		user,
 		state: { isLoading }
 	} = useAppContext().Auth
-
-	useUserRedirect()
 
 	if (isLoading) {
 		return <LoadingIcon />

@@ -3,6 +3,7 @@ import React, { useState } from 'react'
 
 import { FullEvent } from '@/hooks/Events.modal'
 import useAppContext from '@/hooks/use-app-context'
+import useUserRedirect from '@/hooks/use-user-redirect'
 import { className, setSessionStorage } from '@/utils'
 import { Status } from './api/auth'
 
@@ -18,7 +19,8 @@ const errorTypes: any = {
 	'event/not-enough-data': 'Not enough data provided',
 	'auth/no-user': 'User not logged in'
 }
-export default function NewEvent() {
+export default function Refuel() {
+	useUserRedirect()
 	const router = useRouter()
 
 	const { getEvents } = useAppContext().Auth

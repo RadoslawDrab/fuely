@@ -15,6 +15,8 @@ import Overview from '@/components/pages/Dashboard/Overview'
 import styles from '@styles/pages/Dashboard/index.module.scss'
 
 export default function Dashboard() {
+	useUserRedirect()
+
 	const router = useRouter()
 
 	const {
@@ -23,8 +25,6 @@ export default function Dashboard() {
 	} = useAppContext().Auth
 	const { getText } = useAppContext().Language
 	const { isLoading: eventsAreLoading } = useEvents()
-
-	useUserRedirect()
 
 	if (userIsLoading || eventsAreLoading || !isLoggedIn) {
 		return <LoadingIcon />
