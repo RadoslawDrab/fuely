@@ -1,15 +1,16 @@
 import React from 'react'
 
+import { setSessionStorage } from '@/utils'
+
 import Header from './Header'
 import Footer from './Footer'
 
 import styles from '@styles/Layout/Layout.module.scss'
-import { setLocalStorage } from '@/utils'
 
 interface Props {
 	children?: any
 }
-setLocalStorage({ formData: undefined })
+setSessionStorage({ formData: undefined })
 function Layout(props: Props) {
 	return (
 		<div className={styles.layout}>

@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 
 import { FullEvent } from '@/hooks/Events.modal'
 import useAppContext from '@/hooks/use-app-context'
-import { className, setLocalStorage } from '@/utils'
+import { className, setSessionStorage } from '@/utils'
 import { Status } from './api/auth'
 
 import Head from '@/components/Head'
@@ -31,8 +31,8 @@ export default function NewEvent() {
 	async function onSubmit(event: FullEvent) {
 		setError(() => '')
 		setIsLoading(() => true)
-		// Saves form data to localStorage to restore them after submiting failure
-		setLocalStorage({ formData: event })
+		// Saves form data to sessionStorage to restore them after submiting failure
+		setSessionStorage({ formData: event })
 		const response = await fetch('/api/user/refuel', {
 			method: 'POST',
 			body: JSON.stringify({
@@ -54,7 +54,7 @@ export default function NewEvent() {
 
 		getEvents()
 			.then(() => {
-				setLocalStorage({ formData: undefined })
+				setSessionStorage({ formData: undefined })
 				router.replace('/dashboard')
 			})
 			.catch((error) => {

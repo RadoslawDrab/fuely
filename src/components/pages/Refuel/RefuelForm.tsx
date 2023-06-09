@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react'
 
-import { checkIfStringIsNumber, getLocalStorage } from '@/utils'
+import { checkIfStringIsNumber, getSessionStorage } from '@/utils'
 import useAppContext from '@/hooks/use-app-context'
 import useEvents from '@/hooks/use-events'
+import { FullEvent } from '@/hooks/Events.modal'
 
 import Button from '@/components/UI/Button'
-import { FullEvent } from '@/hooks/Events.modal'
 import FormInput from '@/components/UI/FormInput'
 
 // import styles from './RefuelForm.module.scss';
@@ -15,7 +15,7 @@ interface Props {
 	onSubmit: (event: FullEvent) => void
 }
 export default function RefuelForm(props: Props) {
-	const formData: FullEvent | null = getLocalStorage()?.formData
+	const formData: FullEvent | null = getSessionStorage()?.formData
 
 	const { user } = useAppContext().Auth
 	const { getEvent } = useEvents()
