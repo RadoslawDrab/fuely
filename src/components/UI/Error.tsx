@@ -11,5 +11,13 @@ interface Props {
 }
 export default function Error(props: Props) {
 	const errorStyles = className(styles.error, props.className)
-	return <>{props.show && <span className={errorStyles}>{props.text}</span>}</>
+	return (
+		<>
+			{props.show && (
+				<span className={errorStyles} role="status">
+					{props.text}
+				</span>
+			)}
+		</>
+	)
 }
