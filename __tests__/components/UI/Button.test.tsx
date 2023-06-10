@@ -4,7 +4,7 @@ import { render, fireEvent } from '@testing-library/react'
 import Button from '../../../src/components/UI/Button'
 
 describe('Button', () => {
-	test('is rendering', () => {
+	test('renders', () => {
 		const component = render(<Button onClick={() => {}} />)
 		const button = component.getByRole('button')
 
