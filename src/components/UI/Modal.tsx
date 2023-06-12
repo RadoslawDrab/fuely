@@ -1,8 +1,11 @@
 import React from 'react'
-import Button from './Button'
-import styles from '@styles/UI/Modal.module.scss'
+
 import { className } from '@/utils'
+
+import Button from './Button'
 import Icon from './Icon'
+
+import styles from '@styles/UI/Modal.module.scss'
 
 interface Props {
 	children?: any
