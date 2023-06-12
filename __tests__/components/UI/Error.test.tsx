@@ -15,6 +15,6 @@ describe('Error', () => {
 		const component = render(<Error show text="Test" />)
 		const span = component.getByRole('status')
 
-		expect(span.classList).toContain('error')
+		expect(span.className).toContain('error')
 	})
 })

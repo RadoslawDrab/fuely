@@ -26,7 +26,7 @@ describe('Button', () => {
 		const button = component.getByRole('button')
 
 		expect(button.hasAttribute('disabled')).toBeTruthy()
-		expect(button.classList).toContain('selected')
+		expect(button.className).toContain('selected')
 	})
 	test('renders proper dataset data', () => {
 		const component = render(<Button onClick={() => {}} data={{ test: 'value' }} />)
