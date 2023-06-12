@@ -10,7 +10,7 @@ export default function LoadingIcon() {
 			<Head>
 				<title>Fuely | Loading</title>
 			</Head>
-			<div className={styles.loading}>
+			<div className={styles.loading} role="status">
 				<div className={styles.car}>
 					<Icon type="car" alt="car icon" />
 				</div>
