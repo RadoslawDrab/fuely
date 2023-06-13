@@ -18,13 +18,13 @@ export default function Graph(props: Props) {
 		const labelId = `progress-bar-${i}`
 
 		return (
-			<div key={key} className={styles.bar}>
+			<li key={key} className={styles.bar}>
 				<progress id={labelId} max={props.max} value={item.value}>
 					at {item.value}/{props.max}
 				</progress>
 				{item.name && <label htmlFor={labelId}>{item.name}</label>}
-			</div>
+			</li>
 		)
 	})
-	return <div className={graphStyles}>{progressElements}</div>
+	return <ul className={graphStyles}>{progressElements}</ul>
 }
