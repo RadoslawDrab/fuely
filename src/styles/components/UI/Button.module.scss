@@ -132,4 +132,32 @@
 			transition: all 0.4s;
 		}
 	}
+	&_redirect {
+		background-color: transparent;
+		color: $grey-400;
+		box-shadow: none;
+		&:hover {
+			color: $grey-500;
+			background-color: $grey-200;
+		}
+		&:active {
+			background-color: $grey-300;
+		}
+		&:disabled {
+			background-color: $grey-500;
+			color: $grey-200;
+			&.selected {
+				background-color: $main-600;
+			}
+		}
+		&.selected {
+			background-color: $main-400;
+			&:hover {
+				background-color: $main-500;
+			}
+			&:active {
+				background-color: $main-600;
+			}
+		}
+	}
 }

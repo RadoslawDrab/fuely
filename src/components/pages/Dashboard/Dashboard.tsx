@@ -77,7 +77,7 @@ export default function Dashboard(props: Props) {
 					{fuelAmount.toFixed(1)}
 					<span>{item.fuelUnit}</span>
 				</data>
-				<Button className={styles.button} onClick={navigate} data={{ id: item.id }}>
+				<Button className={styles.button} onClick={navigate} data={{ id: item.id }} variant={'redirect'}>
 					<Icon type="arrow.right" alt="right arrow icon" />
 				</Button>
 			</li>
