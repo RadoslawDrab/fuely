@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { checkIfStringIsNumber, getSessionStorage } from '@/utils'
 import useAppContext from '@/hooks/use-app-context'
 import useEvents from '@/hooks/use-events'
-import { FullEvent } from '@/hooks/Events.modal'
+import { Event, FullEvent } from '@/hooks/Events.modal'
 
 import Button from '@/components/UI/Button'
 import FormInput from '@/components/UI/FormInput'
@@ -12,7 +12,7 @@ import FormInput from '@/components/UI/FormInput'
 import styles from '@styles/styles.module.scss'
 
 interface Props {
-	onSubmit: (event: FullEvent) => void
+	onSubmit: (event: Event, date: string) => void
 }
 export default function RefuelForm(props: Props) {
 	const formData: FullEvent | null = getSessionStorage()?.formData
@@ -40,14 +40,16 @@ export default function RefuelForm(props: Props) {
 	function onFormSubmit(event: React.FormEvent<HTMLFormElement>) {
 		event.preventDefault()
 
-		props.onSubmit({
-			distance: 0,
-			cost,
-			currency: currency.toLowerCase(),
-			fuel,
-			odometer,
+		props.onSubmit(
+			{
+				distance: 0,
+				cost,
+				currency: currency.toLowerCase(),
+				fuel,
+				odometer
+			},
 			date
-		})
+		)
 	}
 	// Checks if value is proper number and is greather than 0
 	function textInputsCheck(value: string) {

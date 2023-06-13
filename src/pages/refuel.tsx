@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router'
 import React, { useState } from 'react'
 
-import { FullEvent } from '@/hooks/Events.modal'
+import { Event } from '@/hooks/Events.modal'
 import useAppContext from '@/hooks/use-app-context'
 import useUserRedirect from '@/hooks/use-user-redirect'
 import { className, setSessionStorage } from '@/utils'
@@ -30,7 +30,7 @@ export default function Refuel() {
 
 	const sectionStyles = className(styles.section, styles.center)
 
-	async function onSubmit(event: FullEvent) {
+	async function onSubmit(event: Event, date: string) {
 		setError(() => '')
 		setIsLoading(() => true)
 		// Saves form data to sessionStorage to restore them after submiting failure
@@ -42,7 +42,7 @@ export default function Refuel() {
 				fuel: event.fuel,
 				currency: event.currency,
 				odometer: event.odometer,
-				date: event.date
+				date
 			})
 		})
 

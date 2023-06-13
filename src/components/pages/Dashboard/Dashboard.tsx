@@ -41,7 +41,7 @@ export default function Dashboard(props: Props) {
 	const dashboardItems: Item[] = useMemo(() => {
 		return dashboardEvents.map((event) => {
 			return {
-				id: event.date,
+				id: event.fullId,
 				cost: event.cost,
 				costUnit: units.currency.toUpperCase(),
 				fuel: convertIfImperial(event.fuel, 'fuel'),
