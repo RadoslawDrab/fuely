@@ -9,6 +9,7 @@ import useUserRedirect from '@/hooks/use-user-redirect'
 import Head from '@/components/Head'
 import LoadingIcon from '@/components/UI/LoadingIcon'
 
+export type EventSiblings = [FullEvent | null, FullEvent | null, FullEvent, FullEvent | null, FullEvent | null]
 export default function Item() {
 	const router = useRouter()
 
@@ -16,26 +17,39 @@ export default function Item() {
 	const {
 		state: { isLoading }
 	} = useAppContext().Auth
-	const { getEventById } = useEvents()
+	const { getEventById, sortedDates, emptyEvent } = useEvents()
 
-	const [event, setEvent] = useState<FullEvent | null>(null)
+	const [events, setEvents] = useState<EventSiblings>([null, null, emptyEvent, null, null])
 
 	const eventId: any = router.query.eventId
 
 	useEffect(() => {
 		if (eventId) {
-			getEventById(eventId)
-				.then((event) => setEvent(() => event))
-				.catch(() => setEvent(() => null))
-		}
-	}, [eventId, getEventById])
+			// Current event index
+			const eventIndex = sortedDates.findIndex((date) => date == eventId)
 
-	if (isLoading || !event) {
+			if (eventIndex >= 0 && eventIndex < sortedDates.length) {
+				const eventsPromises = []
+				// Adds event promises to `eventsPromises` array with 2 previous events and 2 next events
+				for (let i = -2; i <= 2; i++) {
+					const date = sortedDates[eventIndex + i]
+					eventsPromises.push(date ? getEventById(date) : null)
+				}
+				// Resolves all event promises and sets events object
+				Promise.all(eventsPromises).then((events) => {
+					const e: any = events
+					setEvents(e)
+				})
+			}
+		}
+	}, [eventId, getEventById, sortedDates])
+
+	if (isLoading || events.length !== 5 || !events[2]) {
 		return <LoadingIcon />
 	}
 	return (
 		<>
-			<Head title={`Fuely | ${event.date}`} description={`Fuely ${event.date} event page`} />
+			<Head title={`Fuely | ${events[2].date}`} description={`Fuely ${events[2].date} event page`} />
 			Item - {event.date}
 		</>
 	)
