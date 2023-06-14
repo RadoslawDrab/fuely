@@ -143,5 +143,13 @@ export function sortDate(a: string, b: string) {
 	const dateB = b.split(':')[0]
 	const dateIndexA = a.split(':')[1]
 	const dateIndexB = b.split(':')[1]
-	return dateIndexA < dateIndexB ? (new Date(dateA) < new Date(dateB) ? -1 : 1) : new Date(dateA) < new Date(dateB) ? 1 : -1
+
+	return new Date(dateA) > new Date(dateB) ? (dateIndexA > dateIndexB ? 1 : -1) : dateIndexA > dateIndexB ? -1 : 1
+}
+
+interface ObjectData {
+	[key: string]: any
+}
+export function getProp<Key extends keyof ObjectData>(obj: ObjectData, key: Key): ObjectData[Key] {
+	return obj[key]
 }
