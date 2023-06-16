@@ -1,0 +1,28 @@
+@use '@/styles/library' as *;
+
+.item {
+	list-style: none;
+	font-size: $size-400;
+	display: grid;
+	grid-template-columns: repeat(3, auto);
+	justify-items: space-between;
+	gap: 1em 1.25em;
+	.date {
+		font-size: $size-400;
+	}
+	.value {
+		span {
+			font-size: $size-400;
+		}
+	}
+	.percent {
+		font-size: $size-400;
+	}
+	.current {
+		color: $main-600;
+		font-weight: 600;
+		&.percent {
+			opacity: 0;
+		}
+	}
+}
