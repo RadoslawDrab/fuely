@@ -8,6 +8,7 @@ import useUserRedirect from '@/hooks/use-user-redirect'
 
 import Head from '@/components/Head'
 import LoadingIcon from '@/components/UI/LoadingIcon'
+import Info from '@/components/pages/Item/Info'
 
 export type EventSiblings = [FullEvent | null, FullEvent | null, FullEvent, FullEvent | null, FullEvent | null]
 export default function Item() {
@@ -50,7 +51,7 @@ export default function Item() {
 	return (
 		<>
 			<Head title={`Fuely | ${events[2].date}`} description={`Fuely ${events[2].date} event page`} />
-			Item - {event.date}
+			<Info events={events} />
 		</>
 	)
 }
