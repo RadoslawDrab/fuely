@@ -26,7 +26,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 				const userObject = await getUserData(currentUser)
 				const events = await getEvents(currentUser)
 
-				const eventDatesSorted = Object.keys(events).sort(sortDate)
+				const eventDatesSorted = Object.keys(events).reverse()
 				const lastEvent = events[eventDatesSorted[0] || ''] || {}
 
 				const distance = Math.max(odometer - (lastEvent.odometer || odometer), 0)

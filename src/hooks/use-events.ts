@@ -25,7 +25,7 @@ export default function useEvents(): EventObject {
 	const [isLoading, setIsLoading] = useState(false)
 
 	// Dates sorted descending
-	const sortedDates = useMemo(() => Object.keys(events).sort(sortDate), [events])
+	const sortedDates = useMemo(() => Object.keys(events).reverse(), [events])
 
 	// Sets loading based on events state
 	useEffect(() => {
