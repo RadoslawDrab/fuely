@@ -38,10 +38,7 @@ export default function Refuel() {
 		const response = await fetch('/api/user/refuel', {
 			method: 'POST',
 			body: JSON.stringify({
-				cost: event.cost,
-				fuel: event.fuel,
-				currency: event.currency,
-				odometer: event.odometer,
+				...event,
 				date
 			})
 		})
