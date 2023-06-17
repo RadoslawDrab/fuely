@@ -1,3 +1,5 @@
+import { useCallback } from 'react'
+
 import useAppContext from './use-app-context'
 
 export type UnitType = 'distance' | 'fuel'
@@ -25,10 +27,26 @@ export default function useUnit() {
 			}
 		}
 	}
+
+	const isMetric = (user.settings?.units ?? 'metric') === 'metric'
+
+	const convert = useCallback(function (value: number, type: UnitType, reverse: boolean = false): number {
+		return value * (reverse ? 1 / conversion[type] : conversion[type])
+	}, [])
+
+	const convertIfImperial = useCallback(
+		function (value: number, type: UnitType, reverse: boolean = false): number {
+			return isMetric ? value : convert(value, type, reverse)
+		},
+		[isMetric, convert]
+	)
+
 	return {
 		system: user.settings?.units ?? 'metric',
-		isMetric: (user.settings?.units ?? 'metric') === 'metric',
+		isMetric,
 		units,
-		conversion
+		conversion,
+		convert,
+		convertIfImperial
 	}
 }
