@@ -12,7 +12,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 	try {
 		switch (req.method) {
 			case 'POST': {
-				const { date, cost, currency, odometer, fuel } = JSON.parse(req.body)
+				const { date, cost, currency, odometer, fuel, fuelPercent } = JSON.parse(req.body)
 
 				if (!cost || !odometer || !fuel) {
 					return returnError(res, 'event/not-enough-data')
@@ -34,9 +34,11 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 					cost,
 					odometer,
 					fuel,
+					fuelPercent: fuelPercent || 100,
 					currency: currency || userObject.settings.currency,
 					distance
 				}
+
 				const curDate = date && new Date(date) ? new Date(date) : new Date()
 				const dateString = `${curDate.getFullYear()}-${(curDate.getMonth() + 1).toString().padStart(2, '0')}-${curDate
 					.getDate()
