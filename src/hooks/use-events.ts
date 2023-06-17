@@ -1,9 +1,9 @@
 import { useCallback, useEffect, useMemo, useState } from 'react'
 
-import { currencyConvert, formatDate, sortDate } from '@/utils'
+import { currencyConvert, formatDate } from '@/utils'
 import { EventObject, FullEvent } from './Events.modal'
 import useAppContext from './use-app-context'
-import useUnit, { UnitType } from './use-unit'
+import useUnit from './use-unit'
 
 const emptyEvent: FullEvent = {
 	id: -1,
@@ -21,7 +21,7 @@ export default function useEvents(): EventObject {
 	const {
 		user: { events, settings }
 	} = useAppContext().Auth
-	const { conversion, isMetric } = useUnit()
+	const { convertIfImperial } = useUnit()
 
 	const [isLoading, setIsLoading] = useState(false)
 
@@ -33,19 +33,6 @@ export default function useEvents(): EventObject {
 		setIsLoading(() => events === undefined)
 	}, [events])
 
-	const convert = useCallback(
-		function (value: number, type: UnitType): number {
-			return value * conversion[type]
-		},
-		[conversion]
-	)
-
-	const convertIfImperial = useCallback(
-		function (value: number, type: UnitType): number {
-			return isMetric ? value : convert(value, type)
-		},
-		[isMetric, convert]
-	)
 	const getEvent = useCallback(
 		function (index: number): Promise<FullEvent> {
 			return new Promise(async (resolve: (event: FullEvent) => void, reject: (errorMessage: string) => void) => {
@@ -127,8 +114,6 @@ export default function useEvents(): EventObject {
 		emptyEvent,
 		getEvent,
 		getEventById,
-		formatDate,
-		convert,
-		convertIfImperial
+		formatDate
 	}
 }

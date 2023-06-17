@@ -27,7 +27,8 @@ interface Item {
 export default function Dashboard(props: Props) {
 	const router = useRouter()
 
-	const { getEvent, sortedDates, convertIfImperial } = useEvents()
+	const { getEvent, sortedDates } = useEvents()
+	const { convertIfImperial } = useUnit()
 	const { units } = useUnit()
 
 	const [dashboardEvents, setDashboardEvents] = useState<FullEvent[]>([])

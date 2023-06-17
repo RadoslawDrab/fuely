@@ -1,5 +1,3 @@
-import { UnitType } from './use-unit'
-
 export interface Event {
 	cost: number
 	fuel: number
@@ -24,6 +22,4 @@ export interface EventObject {
 	getEvent: (index: number) => Promise<FullEvent>
 	getEventById: (eventId: string) => Promise<FullEvent>
 	formatDate: (date: string) => string
-	convert: (value: number, type: UnitType) => number
-	convertIfImperial: (value: number, type: UnitType) => number
 }
