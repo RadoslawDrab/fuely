@@ -51,10 +51,15 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
 				const eventDate = `${dateString}:${id}`
 
-				setValue(event, 'events', eventDate).then(() => {
-					const status: Status = { code: 'event/event-added' }
-					res.status(200).json(status)
-				})
+				setValue(event, 'events', eventDate)
+					.then(() => {
+						const status: Status = { code: 'event/event-added' }
+						res.status(200).json(status)
+					})
+					.catch((error) => {
+						const status: Status = { code: error }
+						res.status(401).json(status)
+					})
 
 				break
 			}

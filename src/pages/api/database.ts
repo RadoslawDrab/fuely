@@ -26,7 +26,12 @@ export function setValue(value: any, base: 'events' | 'users', path: string = ''
 			return
 		}
 		set(child(databaseRef, `${base}/${currentUser.uid}${path ? '/' + path : ''}`), value)
-		resolve()
+			.then(() => {
+				resolve()
+			})
+			.catch((error) => {
+				reject(error.code)
+			})
 	})
 }
 export function getUserData(user: User): Promise<UserObject> {
