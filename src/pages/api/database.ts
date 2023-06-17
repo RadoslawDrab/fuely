@@ -41,7 +41,8 @@ export function getUserData(user: User): Promise<UserObject> {
 			email: user.email,
 			settings: {
 				units: 'metric',
-				currency: 'usd'
+				currency: 'usd',
+				maxTankCapacity: 0
 			}
 		}
 		const snapshot = await get(child(databaseRef, `users/${user.uid}`))

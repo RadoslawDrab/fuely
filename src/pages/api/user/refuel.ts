@@ -51,6 +51,9 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
 				const eventDate = `${dateString}:${id}`
 
+				if (event.fuel > userObject.settings.maxTankCapacity) {
+					setValue(event.fuel, 'users', 'maxTankCapacity')
+				}
 				setValue(event, 'events', eventDate)
 					.then(() => {
 						const status: Status = { code: 'event/event-added' }
