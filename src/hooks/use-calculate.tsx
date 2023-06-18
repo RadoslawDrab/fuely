@@ -42,8 +42,7 @@ export default function useCalculate(event: FullEvent) {
 		const distancePerFuel: Data = {
 			name: 'Distance per Fuel',
 			unitType: `${units.distance}/${units.fuel}`,
-			value: checkDistance(1 / fuelPerDistance.value),
-			decimals: 3
+			value: checkDistance(event.distance / event.fuel)
 		}
 		const costPerDistance: Data = {
 			name: 'Cost per Distance',
