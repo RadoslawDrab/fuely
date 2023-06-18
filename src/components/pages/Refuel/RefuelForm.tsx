@@ -23,7 +23,6 @@ export default function RefuelForm(props: Props) {
 	const [cost, setCost] = useState(formData?.cost ?? 0)
 	const [currency, setCurrency] = useState(formData?.currency || user.settings.currency || 'usd')
 	const [fuel, setFuel] = useState(formData?.fuel ?? 0)
-	const [fuelPercent, setFuelPercent] = useState(formData?.fuelPercent ?? 100)
 	const [odometer, setOdometer] = useState(formData?.odometer ?? 0)
 	const [date, setDate] = useState(formData?.date ?? new Date().toLocaleDateString('en-CA'))
 
@@ -48,7 +47,6 @@ export default function RefuelForm(props: Props) {
 				cost,
 				currency: currency.toLowerCase(),
 				fuel,
-				fuelPercent,
 				odometer
 			},
 			date
@@ -92,17 +90,6 @@ export default function RefuelForm(props: Props) {
 				errorText="Invalid amount"
 			/>
 			<FormInput name="date" type="date" text="Date" getValue={(value) => setDate(value)} defaultValue={date} />
-			<FormInput
-				name="fuel-percent"
-				type="number"
-				text="Fuel Percent"
-				min={0}
-				max={100}
-				getValue={(value) => setFuelPercent(+value)}
-				defaultValue={fuelPercent}
-				check={textInputsCheck}
-				errorText="Invalid amount"
-			/>
 			<FormInput name="currency" type="text" text="Currency" getValue={(value) => setCurrency(value)} defaultValue={currency} />
 			<Button onClick={() => {}}>Send</Button>
 		</form>

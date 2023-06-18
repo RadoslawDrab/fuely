@@ -1,7 +1,6 @@
 export interface Event {
 	cost: number
 	fuel: number
-	fuelPercent: number
 	distance: number
 	odometer: number
 	currency: string

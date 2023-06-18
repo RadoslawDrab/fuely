@@ -12,7 +12,6 @@ const emptyEvent: FullEvent = {
 	cost: -1,
 	distance: -1,
 	fuel: -1,
-	fuelPercent: 0,
 	odometer: -1,
 	currency: 'usd'
 }

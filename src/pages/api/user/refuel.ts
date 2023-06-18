@@ -12,7 +12,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 	try {
 		switch (req.method) {
 			case 'POST': {
-				const { date, cost, currency, odometer, fuel, fuelPercent } = JSON.parse(req.body)
+				const { date, cost, currency, odometer, fuel } = JSON.parse(req.body)
 
 				if (!cost || !odometer || !fuel) {
 					return returnError(res, 'event/not-enough-data')
@@ -34,7 +34,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 					cost,
 					odometer,
 					fuel,
-					fuelPercent: fuelPercent || 100,
 					currency: currency || userObject.settings.currency,
 					distance
 				}
@@ -53,9 +52,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
 				const eventDate = `${dateString}:${id}`
 
-				if (event.fuel > userObject.settings.maxTankCapacity) {
-					setValue(event.fuel, 'users', 'maxTankCapacity')
-				}
 				setValue(event, 'events', eventDate)
 					.then(() => {
 						const status: Status = { code: 'event/event-added' }

@@ -12,8 +12,7 @@ const initialState: State = {
 		email: '',
 		settings: {
 			currency: 'usd',
-			units: 'metric',
-			maxTankCapacity: 0
+			units: 'metric'
 		},
 		events: {}
 	}
@@ -39,8 +38,7 @@ function reducer(state: State, action: Actions): State {
 					email: '',
 					settings: {
 						currency: 'usd',
-						units: 'metric',
-						maxTankCapacity: 0
+						units: 'metric'
 					},
 					events: {}
 				}

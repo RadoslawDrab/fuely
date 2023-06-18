@@ -18,7 +18,6 @@ export interface UserObject extends UserData {
 export interface UserSettings {
 	units: 'metric' | 'imperial'
 	currency: string
-	maxTankCapacity: number
 }
 
 export interface Status {
@@ -34,8 +33,7 @@ type EncryptionKey = 'token' | 'data'
 
 export const defaultUserSettings: UserSettings = {
 	units: 'metric',
-	currency: 'usd',
-	maxTankCapacity: 0
+	currency: 'usd'
 }
 export function encryptData<T>(data: T) {
 	return encrypt<T>(data, 'data')
