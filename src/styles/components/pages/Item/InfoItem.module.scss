@@ -7,22 +7,14 @@
 	grid-template-columns: repeat(3, auto);
 	justify-items: space-between;
 	gap: 1em 1.25em;
-	.date {
-		font-size: $size-400;
-	}
-	.value {
-		span {
-			font-size: $size-400;
-		}
-	}
-	.percent {
-		font-size: $size-400;
-	}
 	.current {
 		color: $main-600;
 		font-weight: 600;
 		&.percent {
 			opacity: 0;
 		}
+	}
+	@media screen and (min-width: $size-phone-m) {
+		font-size: $size-500;
 	}
 }
