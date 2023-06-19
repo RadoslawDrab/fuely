@@ -106,6 +106,25 @@ export default function useEvents(): EventObject {
 		[convertIfImperial, events, settings?.currency, sortedDates]
 	)
 
+	const removeEvent = useCallback(function (eventId: string) {
+		return new Promise(async (resolve, reject) => {
+			try {
+				const response = await fetch('/api/user/events', {
+					method: 'PATCH',
+					body: eventId
+				})
+
+				let func = resolve
+				if (!response.ok) {
+					func = reject
+				}
+				const value = await response.json()
+				func(value)
+			} catch (error) {
+				console.log(error)
+			}
+		})
+	}, [])
 	return {
 		events,
 		sortedDates,
@@ -113,6 +132,7 @@ export default function useEvents(): EventObject {
 		emptyEvent,
 		getEvent,
 		getEventById,
-		formatDate
+		formatDate,
+		removeEvent
 	}
 }
