@@ -33,5 +33,5 @@ export default function InfoItem(props: Props) {
 			</React.Fragment>
 		)
 	})
-	return <ul className={styles.item}>{dateItems}</ul>
+	return <div className={styles.item}>{dateItems}</div>
 }
