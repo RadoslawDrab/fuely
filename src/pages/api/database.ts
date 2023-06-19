@@ -1,4 +1,4 @@
-import { child, get, set } from 'firebase/database'
+import { child, get, remove, set } from 'firebase/database'
 import { User, getAuth } from 'firebase/auth'
 
 import databaseRef from './_firebase.ts'
@@ -6,6 +6,8 @@ import { UserObject } from './auth/index.ts'
 import { Events } from '@/hooks/Events.modal.ts'
 
 const auth = getAuth()
+
+type Base = 'events' | 'users'
 
 export function getEvents(user: User): Promise<Events> {
 	return new Promise(async (resolve) => {
@@ -18,7 +20,7 @@ export function getEvents(user: User): Promise<Events> {
 		resolve(data)
 	})
 }
-export function setValue(value: any, base: 'events' | 'users', path: string = ''): Promise<void> {
+export function setValue(value: any, base: Base, path: string = ''): Promise<void> {
 	return new Promise((resolve, reject) => {
 		const { currentUser } = auth
 		if (!currentUser) {
@@ -26,6 +28,22 @@ export function setValue(value: any, base: 'events' | 'users', path: string = ''
 			return
 		}
 		set(child(databaseRef, `${base}/${currentUser.uid}${path ? '/' + path : ''}`), value)
+			.then(() => {
+				resolve()
+			})
+			.catch((error) => {
+				reject(error.code)
+			})
+	})
+}
+export function removeValue(base: Base, path: string): Promise<void> {
+	return new Promise((resolve, reject) => {
+		const { currentUser } = auth
+		if (!currentUser) {
+			reject()
+			return
+		}
+		remove(child(databaseRef, `${base}/${currentUser.uid}${path ? '/' + path : ''}`))
 			.then(() => {
 				resolve()
 			})
