@@ -4,7 +4,6 @@ import { getAuth } from 'firebase/auth'
 import { Status, returnError } from '../auth'
 import { Event } from '@/hooks/Events.modal'
 import { getEvents, getUserData, setValue } from '../database'
-import { sortDate } from '@/utils'
 
 const auth = getAuth()
 
@@ -58,8 +57,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 						res.status(200).json(status)
 					})
 					.catch((error) => {
-						const status: Status = { code: error }
-						res.status(401).json(status)
+						returnError(res, error)
 					})
 
 				break
