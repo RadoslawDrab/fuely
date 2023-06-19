@@ -37,7 +37,7 @@ export default function Info(props: Props) {
 			})
 
 		return (
-			<div key={itemKey} className={styles.section}>
+			<div key={itemKey} className={styles['data-section']}>
 				<header>
 					<span className={styles.name}>{data.name}</span>
 					<span className={styles.value}>
@@ -51,5 +51,9 @@ export default function Info(props: Props) {
 		)
 	})
 
-	return <Section title={currentEvent.date}>{sections}</Section>
+	return (
+		<Section title={currentEvent.date} className={styles.section} contentClassName={styles['section-content']}>
+			{sections}
+		</Section>
+	)
 }
