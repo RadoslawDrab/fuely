@@ -1,0 +1,31 @@
+@use '@/styles/library' as *;
+
+.button {
+	justify-self: center;
+	display: flex;
+	align-items: center;
+	gap: 1em;
+	img {
+		height: 1.4em;
+	}
+	span {
+		font-size: $size-500;
+	}
+}
+.modal {
+	p {
+		letter-spacing: 0.3px;
+		span {
+			font-weight: 600;
+			color: $main-500;
+		}
+	}
+	form {
+		width: max-content;
+		margin: 0 auto;
+		button {
+			display: inline;
+			margin: 1em;
+		}
+	}
+}
