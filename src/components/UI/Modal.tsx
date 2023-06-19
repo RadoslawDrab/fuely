@@ -23,18 +23,21 @@ export default function Modal(props: Props) {
 	if (!props.show) return <></>
 
 	return (
-		<dialog open={props.show} className={modalStyles}>
-			<div className={styles['modal-bar']}>
-				<span>{props.title}</span>
-				{props.allowClosing && (
-					<form method="dialog">
-						<Button className="close-button" onClick={() => {}}>
-							<Icon type="xmark" alt="close icon" />
-						</Button>
-					</form>
-				)}
-			</div>
-			<div className={styles['modal-content']}>{props.children}</div>
-		</dialog>
+		<>
+			<dialog open={props.show} className={modalStyles}>
+				<div className={styles['modal-bar']}>
+					<span>{props.title}</span>
+					{props.allowClosing && (
+						<form method="dialog">
+							<Button className="close-button" onClick={() => {}}>
+								<Icon type="xmark" alt="close icon" />
+							</Button>
+						</form>
+					)}
+				</div>
+				<div className={styles['modal-content']}>{props.children}</div>
+			</dialog>
+			{props.show && modalType === 'center' && <div className={styles['modal-background']}></div>}
+		</>
 	)
 }
