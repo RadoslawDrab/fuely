@@ -9,6 +9,7 @@ import useUserRedirect from '@/hooks/use-user-redirect'
 import Head from '@/components/Head'
 import LoadingIcon from '@/components/UI/LoadingIcon'
 import Info from '@/components/pages/Item/Info'
+import RemoveButton from '@/components/pages/Item/RemoveButton'
 
 export type EventSiblings = [FullEvent | null, FullEvent | null, FullEvent, FullEvent | null, FullEvent | null]
 export default function Item() {
@@ -16,11 +17,13 @@ export default function Item() {
 
 	useUserRedirect()
 	const {
-		state: { isLoading }
+		state: { isLoading: userIsLoading },
+		getEvents
 	} = useAppContext().Auth
-	const { getEventById, sortedDates, emptyEvent } = useEvents()
+	const { getEventById, sortedDates, emptyEvent, removeEvent } = useEvents()
 
 	const [events, setEvents] = useState<EventSiblings>([null, null, emptyEvent, null, null])
+	const [isLoading, setIsLoading] = useState(false)
 
 	const eventId: any = router.query.eventId
 
@@ -45,13 +48,26 @@ export default function Item() {
 		}
 	}, [eventId, getEventById, sortedDates])
 
-	if (isLoading || events.length !== 5 || !events[2]) {
+	function onEventRemove() {
+		setIsLoading(true)
+		removeEvent(eventId)
+			.then(async () => {
+				await getEvents()
+				router.replace('/dashboard')
+			})
+			.catch(() => {})
+			.finally(() => {
+				setIsLoading(false)
+			})
+	}
+	if (userIsLoading || isLoading || events.length !== 5 || !events[2]) {
 		return <LoadingIcon />
 	}
 	return (
 		<>
 			<Head title={`Fuely | ${events[2].date}`} description={`Fuely ${events[2].date} event page`} />
 			<Info events={events} />
+			<RemoveButton onClick={onEventRemove} event={events[2].date} />
 		</>
 	)
 }
