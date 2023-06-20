@@ -1,5 +1,7 @@
 import React, { useState } from 'react'
 
+import useAppContext from '@/hooks/use-app-context'
+
 import Button from '@/components/UI/Button'
 import Icon from '@/components/UI/Icon'
 import Modal from '@/components/UI/Modal'
@@ -11,22 +13,23 @@ interface Props {
 	event: string
 }
 export default function RemoveButton(props: Props) {
+	const { getText } = useAppContext().Language
 	const [confirmationIsOpen, setConfirmationIsOpen] = useState(false)
 	return (
 		<>
 			<Button onClick={() => setConfirmationIsOpen(true)} className={styles.button} variant="error">
 				<Icon type="xmark" alt="remove icon" />
-				<span>Remove</span>
+				<span>{getText('Remove')}</span>
 			</Button>
 			<Modal title="Confirmation" show={confirmationIsOpen} type="center" className={styles.modal}>
 				<p>
-					Remove <span>{props.event}</span> event
+					{getText('Remove')} <span>{props.event}</span>
 				</p>
 				<form onSubmit={(event) => event.preventDefault()}>
 					<Button onClick={props.onClick} variant="error">
-						Yes
+						{getText('Yes')}
 					</Button>
-					<Button onClick={() => setConfirmationIsOpen(false)}>No</Button>
+					<Button onClick={() => setConfirmationIsOpen(false)}>{getText('No')}</Button>
 				</form>
 			</Modal>
 		</>

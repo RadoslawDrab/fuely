@@ -4,6 +4,7 @@ import { FullEvent } from '@/hooks/Events.modal'
 import { EventSiblings } from '@/pages/[eventId]'
 import useCalculate, { Data } from '@/hooks/use-calculate'
 import { getProp } from '@/utils'
+import useAppContext from '@/hooks/use-app-context'
 
 import Section from '@/components/Layout/Section'
 import InfoItem from './InfoItem'
@@ -14,6 +15,8 @@ interface Props {
 	events: EventSiblings
 }
 export default function Info(props: Props) {
+	const { getText } = useAppContext().Language
+
 	const currentEvent = props.events[2]
 	const { getData, compare, keys } = useCalculate(currentEvent)
 
@@ -52,7 +55,7 @@ export default function Info(props: Props) {
 	})
 
 	return (
-		<Section title={currentEvent.date} className={styles.section} contentClassName={styles['section-content']}>
+		<Section title={getText('Event')} className={styles.section} contentClassName={styles['section-content']}>
 			{sections}
 		</Section>
 	)
