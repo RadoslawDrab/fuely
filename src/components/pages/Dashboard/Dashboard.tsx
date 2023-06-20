@@ -5,6 +5,7 @@ import { FullEvent } from '@/hooks/Events.modal'
 import useEvents from '@/hooks/use-events'
 import useUnit from '@/hooks/use-unit'
 import { className, getRandomKey } from '@/utils'
+import useAppContext from '@/hooks/use-app-context'
 
 import Section from '@/components/Layout/Section'
 import Button from '@/components/UI/Button'
@@ -27,6 +28,7 @@ interface Item {
 export default function Dashboard(props: Props) {
 	const router = useRouter()
 
+	const { getText } = useAppContext().Language
 	const { getEvent, sortedDates } = useEvents()
 	const { convertIfImperial } = useUnit()
 	const { units } = useUnit()
@@ -85,7 +87,7 @@ export default function Dashboard(props: Props) {
 		)
 	})
 	return (
-		<Section title="Dashboard" className={props.className} contentClassName={sectionStyles}>
+		<Section title={getText('Dashboard')} className={props.className} contentClassName={sectionStyles}>
 			{rows.length > 0 && <ul>{rows}</ul>}
 			{rows.length <= 0 && <span>No events</span>}
 		</Section>

@@ -23,7 +23,7 @@ export default function useCalculate(event: FullEvent) {
 		const eventCurrencyUnit = event.currency.toUpperCase()
 
 		const cost: Data = { name: getText('Cost'), unitType: eventCurrencyUnit, value: event.cost }
-		const fuelAmount: Data = { name: getText('Fuel Amount'), unitType: units.fuel, value: event.fuel }
+		const fuelAmount: Data = { name: getText('Fuel'), unitType: units.fuel, value: event.fuel }
 		const distance: Data = {
 			name: getText('Distance'),
 			unitType: units.distance,

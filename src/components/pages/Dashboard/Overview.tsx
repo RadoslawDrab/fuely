@@ -4,6 +4,7 @@ import { FullEvent } from '@/hooks/Events.modal'
 import useEvents from '@/hooks/use-events'
 import useUnit from '@/hooks/use-unit'
 import { className, getRandomKey } from '@/utils'
+import useAppContext from '@/hooks/use-app-context'
 
 import Section from '@/components/Layout/Section'
 import Graph from '@/components/UI/Graph'
@@ -23,6 +24,7 @@ interface Item {
 }
 
 export default function Overview(props: Props) {
+	const { getText } = useAppContext().Language
 	const { events, getEvent, isLoading, emptyEvent } = useEvents()
 	const { isMetric, units } = useUnit()
 
@@ -52,17 +54,17 @@ export default function Overview(props: Props) {
 		const previousConsumption = (isMetric ? (event1.fuel / event1.distance) * 100 : event1.distance / event1.fuel) ?? 0
 
 		return [
-			{ label: 'Price', currentValue: event0.cost, previousValue: event1.cost, unit: event0.currency.toUpperCase() },
-			{ label: 'Fuel', currentValue: event0.fuel, previousValue: event1.fuel, unit: units.fuel },
+			{ label: getText('Cost'), currentValue: event0.cost, previousValue: event1.cost, unit: event0.currency.toUpperCase() },
+			{ label: getText('Fuel'), currentValue: event0.fuel, previousValue: event1.fuel, unit: units.fuel },
 			{
-				label: 'Distance',
+				label: getText('Distance'),
 				currentValue: event0.distance,
 				previousValue: event1.distance,
 				unit: units.distance,
 				digits: 0
 			},
 			{
-				label: 'Consumption',
+				label: getText('Fuel/Distance'),
 				currentValue: isFinite(currentConsumption) ? currentConsumption : 0,
 				previousValue: isFinite(previousConsumption) ? previousConsumption : 0,
 				unit: isMetric ? (
@@ -84,6 +86,7 @@ export default function Overview(props: Props) {
 		event1.cost,
 		event1.distance,
 		event1.fuel,
+		getText,
 		isMetric,
 		units.distance,
 		units.fuel
@@ -128,9 +131,9 @@ export default function Overview(props: Props) {
 		)
 	})
 	return (
-		<Section title="Overview" className={sectionStyles} contentClassName={styles.section}>
+		<Section title={getText('Overview')} className={sectionStyles} contentClassName={styles.section}>
 			<header>
-				<h3>Last refuel</h3>
+				<h3>{getText('Last refuel')}</h3>
 				<time dateTime={event0?.date}>{event0?.date}</time>
 			</header>
 			<hr />

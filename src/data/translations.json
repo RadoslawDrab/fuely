@@ -8,6 +8,7 @@
 	"Home": { "pl": "Strona Główna", "de": "Startseite" },
 	"Settings": { "pl": "Ustawienia", "de": "Einstellungen" },
 	"Logout": { "pl": "Wyloguj się", "de": "Ausloggen" },
+	"Overview": { "pl": "Przegląd", "de": "Überblick" },
 	"Password": { "pl": "Hasło", "de": "Passwort" },
 	"Confirm Password": { "pl": "Potwierdź Hasło", "de": "Bestätige das Passwort" },
 	"Send": { "pl": "Wyślij", "de": "Send" },
@@ -22,7 +23,7 @@
 	"Refuel": { "pl": "Tankowanie", "de": "Tanken" },
 	"About": { "pl": "O aplikacji", "de": "Über App" },
 	"Cost": { "pl": "Koszt", "de": "Kosten" },
-	"Fuel Amount": { "pl": "Ilość paliwa", "de": "Kraftstoffmenge" },
+	"Fuel": { "pl": "Paliwo", "de": "Kraftstoff" },
 	"Distance": { "pl": "Dystans", "de": "Distanz" },
 	"Fuel/Cost": { "pl": "Paliwo/Koszt", "de": "Treibstoff/Kosten" },
 	"Cost/Fuel": { "pl": "Koszt/Paliwo", "de": "Kosten/Treibstoff" },
@@ -30,5 +31,6 @@
 	"Distance/Fuel": { "pl": "Dystans/Paliwo", "de": "Distanz/Treibstoff" },
 	"Cost/Distance": { "pl": "Koszt/Dystans", "de": "Kosten/Distanz" },
 	"Distance/Cost": { "pl": "Dystans/Koszt", "de": "Distanz/Kosten" },
-	"Event": { "pl": "Wydarzenie", "de": "Fall" }
+	"Event": { "pl": "Wydarzenie", "de": "Fall" },
+	"Last refuel": { "pl": "Ostatnie tankowanie", "de": "Letztes Auftanken" }
 }
