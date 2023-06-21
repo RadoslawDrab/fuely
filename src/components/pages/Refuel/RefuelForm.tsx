@@ -60,7 +60,7 @@ export default function RefuelForm(props: Props) {
 	return (
 		<form onSubmit={onFormSubmit} className={styles.form}>
 			<FormInput
-				name="cost"
+				id="cost"
 				type="text"
 				text="Cost"
 				min={0}
@@ -70,7 +70,7 @@ export default function RefuelForm(props: Props) {
 				errorText="Invalid amount"
 			/>
 			<FormInput
-				name="fuel"
+				id="fuel"
 				type="text"
 				text="Fuel Amount"
 				min={0}
@@ -80,7 +80,7 @@ export default function RefuelForm(props: Props) {
 				errorText="Invalid amount"
 			/>
 			<FormInput
-				name="odometer"
+				id="odometer"
 				type="number"
 				text="Odometer"
 				min={0}
@@ -89,9 +89,11 @@ export default function RefuelForm(props: Props) {
 				check={textInputsCheck}
 				errorText="Invalid amount"
 			/>
-			<FormInput name="date" type="date" text="Date" getValue={(value) => setDate(value)} defaultValue={date} />
-			<FormInput name="currency" type="text" text="Currency" getValue={(value) => setCurrency(value)} defaultValue={currency} />
-			<Button onClick={() => {}}>Send</Button>
+			<FormInput id="date" type="date" text="Date" getValue={(value) => setDate(value)} defaultValue={date} />
+			<FormInput id="currency" type="text" text="Currency" getValue={(value) => setCurrency(value)} defaultValue={currency} />
+			<Button onClick={() => {}} className={styles['submit-button']}>
+				Send
+			</Button>
 		</form>
 	)
 }

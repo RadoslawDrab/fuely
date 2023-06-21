@@ -13,9 +13,12 @@ export default function Input(props: Props) {
 		<input
 			id={props.id}
 			className={inputStyles}
+			name={props.name}
 			type={props.type}
 			placeholder={props.placeholder}
 			defaultValue={props.defaultValue}
+			checked={props.checked}
+			defaultChecked={props.defaultChecked}
 			onChange={props.onChange}
 			onFocus={props.onFocus}
 			onBlur={props.onBlur}

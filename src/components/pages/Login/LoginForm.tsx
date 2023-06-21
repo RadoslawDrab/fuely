@@ -35,7 +35,7 @@ export default function LoginForm(props: Props) {
 	return (
 		<form onSubmit={onSubmit} className={styles.form}>
 			<FormInput
-				name="email"
+				id="email"
 				type="text"
 				text={'Email'}
 				getValue={(value) => setEmail(() => value)}
@@ -44,7 +44,7 @@ export default function LoginForm(props: Props) {
 				defaultValue={email}
 			/>
 			<FormInput
-				name="password"
+				id="password"
 				type="password"
 				text={getText('Password')}
 				getValue={(value) => setPassword(() => value)}

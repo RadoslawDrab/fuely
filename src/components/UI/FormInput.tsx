@@ -6,7 +6,8 @@ import Error from './Error'
 import styles from '@styles/styles.module.scss'
 
 interface Props {
-	name: string
+	name?: string
+	id: string
 	text: string
 	placeholder?: string
 	type: React.HTMLInputTypeAttribute
@@ -15,6 +16,7 @@ interface Props {
 	min?: number
 	max?: number
 	defaultValue?: any
+	defaultChecked?: boolean
 	getValue: (value: string) => void
 	check?: (value: string) => boolean
 }
@@ -25,7 +27,7 @@ export default function FormInput(props: Props) {
 	const [errorMessage, setErrorMessage] = useState(defaultErrorMessage)
 	const [isTouched, setIsTouched] = useState(props.defaultValue ? true : false)
 
-	const inputId = `input-${props.name}`
+	const inputId = `input-${props.id}`
 
 	function onChange(event: React.ChangeEvent<HTMLInputElement>) {
 		const value = event.currentTarget.value
@@ -41,12 +43,15 @@ export default function FormInput(props: Props) {
 	function onBlur(event: React.FocusEvent<HTMLInputElement>) {
 		const value = event.currentTarget.value
 
-		if (isTouched && !value) {
-			setHasError(() => true)
-			setErrorMessage(() => defaultErrorMessage)
-		} else if (isTouched && value && props.check && !props.check(value)) {
-			setHasError(() => true)
-			setErrorMessage(() => props.errorText || defaultErrorMessage)
+		if (isTouched && !value && !props.notRequired) {
+			setHasError(true)
+			setErrorMessage(defaultErrorMessage)
+		} else if (isTouched && value && props.check && !props.check(value) && !props.notRequired) {
+			setHasError(true)
+			setErrorMessage(props.errorText || defaultErrorMessage)
+		} else if (isTouched && value && props.check && !props.check(value) && props.notRequired) {
+			setHasError(true)
+			setErrorMessage(props.errorText || defaultErrorMessage)
 		}
 	}
 	return (
@@ -55,6 +60,7 @@ export default function FormInput(props: Props) {
 			<Input
 				id={inputId}
 				type={props.type}
+				name={props.name}
 				onChange={onChange}
 				onFocus={onFocus}
 				onBlur={onBlur}
@@ -62,8 +68,9 @@ export default function FormInput(props: Props) {
 				min={props.min}
 				max={props.max}
 				defaultValue={props.defaultValue}
+				defaultChecked={props.defaultChecked}
 			/>
-			<Error className={styles['form-error']} show={hasError && !props.notRequired} text={errorMessage} />
+			<Error className={styles['form-error']} show={hasError} text={errorMessage} />
 		</>
 	)
 }

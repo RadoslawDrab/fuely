@@ -43,7 +43,7 @@ export default function RegisterForm(props: Props) {
 	return (
 		<form className={styles.form} onSubmit={onSubmit}>
 			<FormInput
-				name="email"
+				id="email"
 				type="text"
 				getValue={(value) => setEmail(() => value)}
 				text={'Email'}
@@ -51,7 +51,7 @@ export default function RegisterForm(props: Props) {
 				errorText="Enter valid email"
 			/>
 			<FormInput
-				name="password"
+				id="password"
 				type="password"
 				getValue={(value) => setPassword(() => value)}
 				text={getText('Password')}
@@ -60,7 +60,7 @@ export default function RegisterForm(props: Props) {
 			/>
 			<hr />
 			<FormInput
-				name="name"
+				id="name"
 				type="text"
 				getValue={(value) => setName(() => value)}
 				text={getText('Name')}
