@@ -37,6 +37,38 @@ export function createDatasetObject(data: { [key: string]: number | string | boo
 	}, {})
 }
 
+export const currencies = [
+	'pln',
+	'usd',
+	'aud',
+	'bgn',
+	'byn',
+	'byr',
+	'cad',
+	'chf',
+	'cop',
+	'cny',
+	'cuc',
+	'czk',
+	'dkk',
+	'egp',
+	'eur',
+	'gbp',
+	'hrk',
+	'inr',
+	'jpy',
+	'ltl',
+	'lvl',
+	'mkd',
+	'mxn',
+	'nok',
+	'nzd',
+	'ron',
+	'rub',
+	'syp',
+	'uah',
+	'uyu'
+]
 export function getCurrencies(): Promise<{ [key: string]: string }> {
 	return new Promise(async (resolve) => {
 		const response = await fetch(`https://cdn.jsdelivr.net/gh/fawazahmed0/currency-api@1/latest/currencies.json`)
