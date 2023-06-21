@@ -15,7 +15,7 @@ export default function Section(props: Props) {
 	const sectionContentStyles = className(styles.content, props.contentClassName)
 	return (
 		<section className={sectionStyles}>
-			<h2>{props.title}</h2>
+			{props.title && <h2>{props.title}</h2>}
 			<div className={sectionContentStyles}>{props.children}</div>
 		</section>
 	)
