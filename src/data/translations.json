@@ -7,6 +7,7 @@
 	"Dashboard": { "pl": "Panel", "de": "Bedienpult" },
 	"Home": { "pl": "Strona Główna", "de": "Startseite" },
 	"Settings": { "pl": "Ustawienia", "de": "Einstellungen" },
+	"Account": { "pl": "Konto", "de": "Konto" },
 	"Logout": { "pl": "Wyloguj się", "de": "Ausloggen" },
 	"Overview": { "pl": "Przegląd", "de": "Überblick" },
 	"Password": { "pl": "Hasło", "de": "Passwort" },
