@@ -19,7 +19,7 @@ export default function SettingsForm(props: Props) {
 
 	const [currencies, setCurrencies] = useState<string[]>([])
 	const [selectedCurrency, setSelectedCurrency] = useState<string>(user.settings.currency)
-	const [userName, setUserName] = useState<string>(user.displayName)
+	const [displayName, setDisplayName] = useState<string>(user.displayName)
 	const [unitSystem, setUnitSystem] = useState<string>(user.settings.units)
 
 	useEffect(() => {
@@ -34,19 +34,28 @@ export default function SettingsForm(props: Props) {
 	function currencyValueHandler(value: string) {
 		setSelectedCurrency(value)
 	}
-	function userNameValueHandler(value: string) {
-		setUserName(value)
+	function displayNameValueHandler(value: string) {
+		setDisplayName(value)
 	}
 	function unitSystemChangeHandler(e: React.ChangeEvent<HTMLInputElement>) {
 		setUnitSystem(e.target.id.replace('units-input_', ''))
 	}
 	function onSubmit(e: React.MouseEvent<HTMLFormElement>) {
 		e.preventDefault()
-		props.onSubmit(userName, unitSystem, selectedCurrency)
+		if (displayName.length >= 3) props.onSubmit(displayName, unitSystem, selectedCurrency)
 	}
 	return (
 		<form className={defaultStyles.form} onSubmit={onSubmit}>
-			<FormInput id="name" text="Name" type="text" getValue={userNameValueHandler} defaultValue={user.displayName} notRequired />
+			<FormInput
+				id="name"
+				text="Name"
+				type="text"
+				getValue={displayNameValueHandler}
+				defaultValue={user.displayName}
+				notRequired
+				check={(value) => value.length >= 3}
+				errorText="Name must contain at least 3 characters"
+			/>
 			<div className={styles['units-box']}>
 				<span>System</span>
 				<div>
