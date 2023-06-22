@@ -13,6 +13,7 @@ import defaultStyles from '@styles/styles.module.scss'
 
 interface Props {
 	onSubmit: (displayName: string, unit: string, currency: string) => void
+	onError: (error: string | null) => void
 }
 export default function SettingsForm(props: Props) {
 	const { user } = useAppContext().Auth
