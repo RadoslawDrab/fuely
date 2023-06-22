@@ -17,7 +17,8 @@ interface Props {
 	max?: number
 	defaultValue?: any
 	defaultChecked?: boolean
-	getValue: (value: string) => void
+	getValue?: (value: string) => void
+	getValueOnBlur?: (value: string) => void
 	check?: (value: string) => boolean
 }
 
@@ -33,7 +34,7 @@ export default function FormInput(props: Props) {
 		const value = event.currentTarget.value
 
 		if (value) {
-			props.getValue(value)
+			props.getValue && props.getValue(value)
 			setHasError(() => false)
 		}
 	}
@@ -52,6 +53,10 @@ export default function FormInput(props: Props) {
 		} else if (isTouched && value && props.check && !props.check(value) && props.notRequired) {
 			setHasError(true)
 			setErrorMessage(props.errorText || defaultErrorMessage)
+		} else {
+			if (props.getValueOnBlur) {
+				props.getValueOnBlur(value)
+			}
 		}
 	}
 	return (
