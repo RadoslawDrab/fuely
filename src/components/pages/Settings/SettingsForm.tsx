@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 
 import useAppContext from '@/hooks/use-app-context'
-import { getCurrencies, currencies as availableCurrencies } from '@/utils'
+import { currencies } from '@/utils'
 
 import FormInput from '@/components/UI/FormInput'
 import Button from '@/components/UI/Button'
@@ -12,38 +12,53 @@ import styles from '@styles/pages/Settings/SettingsForm.module.scss'
 import defaultStyles from '@styles/styles.module.scss'
 
 interface Props {
-	onSubmit: (displayName: string, unit: string, currency: string) => void
+	onDisplayNameChange: (newDisplayName: string) => void
+	onUnitChange: (newUnit: string) => void
+	onCurrencyChange: (newCurrency: string) => void
 	onError: (error: string | null) => void
+}
+interface Settings {
+	displayName: string | null
+	units: string | null
+	currency: string | null
 }
 export default function SettingsForm(props: Props) {
 	const { user } = useAppContext().Auth
 
-	const [currencies, setCurrencies] = useState<string[]>([])
-	const [selectedCurrency, setSelectedCurrency] = useState<string>(user.settings.currency)
-	const [displayName, setDisplayName] = useState<string>(user.displayName)
-	const [unitSystem, setUnitSystem] = useState<string>(user.settings.units)
+	const [settings, setSettings] = useState<Settings>({ displayName: null, units: null, currency: null })
 
-	useEffect(() => {
-		getCurrencies().then((currencies) => {
-			const c = Object.keys(currencies).filter((currency) => availableCurrencies.find((c) => c === currency))
-			setCurrencies(c)
-		})
-	}, [])
+	const currencyOptions = currencies.map((c) => ({
+		name: c.toUpperCase(),
+		value: c,
+		selected: c === user.settings.currency
+	}))
 
-	const currencyOptions = currencies.map((c) => ({ name: c.toUpperCase(), value: c, selected: c === selectedCurrency }))
-
-	function currencyValueHandler(value: string) {
-		setSelectedCurrency(value)
-	}
 	function displayNameValueHandler(value: string) {
-		setDisplayName(value)
+		setSettings((prevSettings) => ({ ...prevSettings, displayName: value }))
 	}
 	function unitSystemChangeHandler(e: React.ChangeEvent<HTMLInputElement>) {
-		setUnitSystem(e.target.id.replace('units-input_', ''))
+		const unit = e.target.id.replace('units-input_', '')
+		setSettings((prevSettings) => ({ ...prevSettings, units: unit }))
+	}
+	function currencyValueHandler(value: string) {
+		setSettings((prevSettings) => ({ ...prevSettings, currency: value }))
 	}
 	function onSubmit(e: React.MouseEvent<HTMLFormElement>) {
 		e.preventDefault()
-		if (displayName.length >= 3) props.onSubmit(displayName, unitSystem, selectedCurrency)
+		const { displayName, units, currency } = settings
+
+		// Sends data to parent
+		if (displayName) {
+			props.onDisplayNameChange(displayName)
+		}
+		if (units) {
+			props.onUnitChange(units)
+		}
+		if (currency) {
+			props.onCurrencyChange(currency)
+		}
+		// Resets component's settings state
+		setSettings({ displayName: null, units: null, currency: null })
 	}
 	return (
 		<form className={defaultStyles.form} onSubmit={onSubmit}>
@@ -51,9 +66,8 @@ export default function SettingsForm(props: Props) {
 				id="name"
 				text="Name"
 				type="text"
-				getValue={displayNameValueHandler}
+				getValueOnBlur={displayNameValueHandler}
 				defaultValue={user.displayName}
-				notRequired
 				check={(value) => value.length >= 3}
 				errorText="Name must contain at least 3 characters"
 			/>
