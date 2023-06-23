@@ -7,57 +7,69 @@ import { className } from '@/utils'
 import Head from '@/components/Head'
 import LoadingIcon from '@/components/UI/LoadingIcon'
 import Section from '@/components/Layout/Section'
-import SettingsForm from '@/components/pages/Settings/SettingsForm'
-import AccountForm from '@/components/pages/Settings/AccountForm'
 import Error from '@/components/UI/Error'
+import SettingsForm from '@/components/pages/Settings/SettingsForm'
+import EmailChangeForm from '@/components/pages/Settings/EmailChangeForm'
+import PasswordChangeForm from '@/components/pages/Settings/PasswordChangeForm'
 
 import defaultStyles from '@styles/styles.module.scss'
 import styles from '@styles/pages/Settings/index.module.scss'
 
+interface Error {
+	email: string | null
+	password: string | null
+	settings: string | null
+}
 export default function Settings() {
 	useUserRedirect()
 
 	const { getText } = useAppContext().Language
-
-	const [accountError, setAccountError] = useState<string | null>(null)
-	const [settingsError, setSettingsError] = useState<string | null>(null)
-
-	const accountSectionStyles = className(defaultStyles.section, styles.section)
-	const settingsSectionStyles = className(defaultStyles.section, styles.section)
-
 	const {
 		user,
 		state: { isLoading }
 	} = useAppContext().Auth
 
+	const [errorWith, setErrorWith] = useState<Error>({
+		email: null,
+		password: null,
+		settings: null
+	})
+
+	const accountSectionStyles = className(defaultStyles.section, styles.section, 'not-grow')
+	const settingsSectionStyles = className(defaultStyles.section, styles.section, 'not-grow')
+
 	if (isLoading) {
 		return <LoadingIcon />
 	}
 
-	function onEmailChange(newEmail: string) {
-		console.log(newEmail)
-	}
+	function onEmailChange(newEmail: string) {}
 	function onPasswordChange(newPassword: string) {}
 
 	function onDisplayNameChange(newDisplayName: string) {}
 	function onUnitChange(newUnit: string) {}
 	function onCurrencyChange(newCurrency: string) {}
 
+	function onError(type: keyof typeof errorWith, err: string | null) {
+		setErrorWith((prevError) => ({ ...prevError, [type]: err }))
+	}
 	return (
 		<>
 			<Head title={`Fuely | Settings - ${user.displayName}`} description={`${user.displayName} settings page`} />
 			<Section title={getText('Account')} contentClassName={accountSectionStyles}>
-				<AccountForm onEmailChange={onEmailChange} onPasswordChange={onPasswordChange} onError={(err) => setAccountError(err)} />
-				<Error show={accountError !== null} text={accountError ? accountError : ''} />
+				<EmailChangeForm onEmailChange={onEmailChange} onError={(error) => onError('email', error)} />
+				<Error show={errorWith.email !== null} text={errorWith.email ? errorWith.email : ''} />
+				<hr />
+				<PasswordChangeForm onPasswordChange={onPasswordChange} onError={(error) => onError('password', error)} />
+				<Error show={errorWith.password !== null} text={errorWith.password ? errorWith.password : ''} />
 			</Section>
 			<Section title={getText('Settings')} contentClassName={settingsSectionStyles}>
 				<SettingsForm
-					onSubmit={(user, unit, currency) => {
-						console.log(user, unit, currency)
-					}}
-					onError={() => {}}
+					onDisplayNameChange={onDisplayNameChange}
+					onUnitChange={onUnitChange}
+					onCurrencyChange={onCurrencyChange}
+					onError={(error) => onError('settings', error)}
 				/>
-				<Error show={settingsError !== null} text={settingsError ? settingsError : ''} />
+				<Error show={errorWith.settings !== null} text={errorWith.settings ? errorWith.settings : ''} />
 			</Section>
 		</>
 	)
