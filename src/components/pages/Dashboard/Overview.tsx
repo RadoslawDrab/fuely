@@ -32,7 +32,7 @@ export default function Overview(props: Props) {
 	const [event1, setEvent1] = useState<FullEvent>(emptyEvent)
 
 	// Styling
-	const sectionStyles = className(defaultStyles.section, props.className)
+	const sectionStyles = className(defaultStyles.section, styles.section)
 
 	useEffect(() => {
 		getEvent(0)
@@ -131,7 +131,7 @@ export default function Overview(props: Props) {
 		)
 	})
 	return (
-		<Section title={getText('Overview')} className={sectionStyles} contentClassName={styles.section}>
+		<Section title={getText('Overview')} className={props.className} contentClassName={sectionStyles}>
 			<header>
 				<h3>{getText('Last refuel')}</h3>
 				<time dateTime={event0?.date}>{event0?.date}</time>
