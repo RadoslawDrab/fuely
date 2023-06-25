@@ -45,9 +45,7 @@ export default function Settings() {
 	function onEmailChange(newEmail: string) {}
 	function onPasswordChange(newPassword: string) {}
 
-	function onDisplayNameChange(newDisplayName: string) {}
-	function onUnitChange(newUnit: string) {}
-	function onCurrencyChange(newCurrency: string) {}
+	function onSettingsFormSubmit(newDisplayName: string | null, newUnit: string | null, newCurrency: string | null) {}
 
 	function onError(type: keyof typeof errorWith, err: string | null) {
 		setErrorWith((prevError) => ({ ...prevError, [type]: err }))
@@ -63,12 +61,7 @@ export default function Settings() {
 				<Error show={errorWith.password !== null} text={errorWith.password ? errorWith.password : ''} />
 			</Section>
 			<Section title={getText('Settings')} contentClassName={settingsSectionStyles}>
-				<SettingsForm
-					onDisplayNameChange={onDisplayNameChange}
-					onUnitChange={onUnitChange}
-					onCurrencyChange={onCurrencyChange}
-					onError={(error) => onError('settings', error)}
-				/>
+				<SettingsForm onSubmit={onSettingsFormSubmit} onError={(error) => onError('settings', error)} />
 				<Error show={errorWith.settings !== null} text={errorWith.settings ? errorWith.settings : ''} />
 			</Section>
 		</>

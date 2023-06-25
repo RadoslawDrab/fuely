@@ -12,9 +12,7 @@ import styles from '@styles/pages/Settings/SettingsForm.module.scss'
 import defaultStyles from '@styles/styles.module.scss'
 
 interface Props {
-	onDisplayNameChange: (newDisplayName: string) => void
-	onUnitChange: (newUnit: string) => void
-	onCurrencyChange: (newCurrency: string) => void
+	onSubmit: (newDisplayName: string | null, newUnit: string | null, newCurrency: string | null) => void
 	onError: (error: string | null) => void
 }
 interface Settings {
@@ -48,15 +46,8 @@ export default function SettingsForm(props: Props) {
 		const { displayName, units, currency } = settings
 
 		// Sends data to parent
-		if (displayName) {
-			props.onDisplayNameChange(displayName)
-		}
-		if (units) {
-			props.onUnitChange(units)
-		}
-		if (currency) {
-			props.onCurrencyChange(currency)
-		}
+		props.onSubmit(displayName, units, currency)
+
 		// Resets component's settings state
 		setSettings({ displayName: null, units: null, currency: null })
 	}
