@@ -8,7 +8,7 @@ import FormInput from '@/components/UI/FormInput'
 import Input from '@/components/UI/Input'
 import Select from '@/components/UI/Select'
 
-import styles from '@styles/pages/Settings/SettingsForm.module.scss'
+import styles from '@styles/pages/Settings/UserSettingsForm.module.scss'
 import defaultStyles from '@styles/styles.module.scss'
 
 interface Props {
@@ -20,7 +20,7 @@ interface Settings {
 	units: string | null
 	currency: string | null
 }
-export default function SettingsForm(props: Props) {
+export default function UserSettingsForm(props: Props) {
 	const { user } = useAppContext().Auth
 
 	const [settings, setSettings] = useState<Settings>({ displayName: null, units: null, currency: null })

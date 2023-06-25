@@ -6,7 +6,7 @@ import useUserRedirect from '@/hooks/use-user-redirect'
 import Head from '@/components/Head'
 import LoadingIcon from '@/components/UI/LoadingIcon'
 import AccountSection from '@/components/pages/Settings/AccountSection'
-import SettingsSection from '@/components/pages/Settings/SettingsSection'
+import UserSettingsSection from '@/components/pages/Settings/UserSettingsSection'
 
 export interface SettingsFormsError {
 	email: string | null
@@ -43,7 +43,7 @@ export default function Settings() {
 		<>
 			<Head title={`Fuely | Settings - ${user.displayName}`} description={`${user.displayName} settings page`} />
 			<AccountSection onEmailChange={onEmailChange} onPasswordChange={onPasswordChange} onError={onError} errorWith={errorWith} />
-			<SettingsSection onSettingsFormSubmit={onSettingsFormSubmit} onError={onError} errorWith={errorWith} />
+			<UserSettingsSection onSettingsFormSubmit={onSettingsFormSubmit} onError={onError} errorWith={errorWith} />
 		</>
 	)
 }
