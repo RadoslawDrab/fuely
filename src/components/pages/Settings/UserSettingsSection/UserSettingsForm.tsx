@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 
 import useAppContext from '@/hooks/use-app-context'
-import { currencies } from '@/utils'
+import { currencies } from '@/utils/currency'
 
 import Button from '@/components/UI/Button'
 import FormInput from '@/components/UI/FormInput'

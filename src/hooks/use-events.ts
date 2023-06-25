@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useMemo, useState } from 'react'
 
-import { currencyConvert, formatDate } from '@/utils'
+import { currencyConvert } from '@/utils/currency'
+import { formatDate } from '@/utils'
 import { EventObject, FullEvent } from './Events.modal'
 import useAppContext from './use-app-context'
 import useUnit from './use-unit'
