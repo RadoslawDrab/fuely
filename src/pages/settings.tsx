@@ -8,17 +8,12 @@ import LoadingIcon from '@/components/UI/LoadingIcon'
 import AccountSection from '@/components/pages/Settings/AccountSection'
 import UserSettingsSection from '@/components/pages/Settings/UserSettingsSection'
 
-export interface SettingsFormsError {
-	email: string | null
-	password: string | null
-	settings: string | null
-}
 export default function Settings() {
 	useUserRedirect()
 
 	const {
 		user,
-		state: { isLoading }
+		state: { isLoading: userIsLoading }
 	} = useAppContext().Auth
 
 	const [errorWith, setErrorWith] = useState<SettingsFormsError>({
@@ -26,8 +21,13 @@ export default function Settings() {
 		password: null,
 		settings: null
 	})
+	const [isLoading, setIsLoading] = useState<SettingsFormsLoading>({
+		email: false,
+		password: false,
+		settings: false
+	})
 
-	if (isLoading) {
+	if (userIsLoading) {
 		return <LoadingIcon />
 	}
 
@@ -39,11 +39,35 @@ export default function Settings() {
 	function onError(type: keyof typeof errorWith, err: string | null) {
 		setErrorWith((prevError) => ({ ...prevError, [type]: err }))
 	}
+	function setLoading(type: keyof typeof isLoading, value: boolean) {
+		setIsLoading((prevState) => ({ ...prevState, [type]: value }))
+	}
 	return (
 		<>
 			<Head title={`Fuely | Settings - ${user.displayName}`} description={`${user.displayName} settings page`} />
-			<AccountSection onEmailChange={onEmailChange} onPasswordChange={onPasswordChange} onError={onError} errorWith={errorWith} />
-			<UserSettingsSection onSettingsFormSubmit={onSettingsFormSubmit} onError={onError} errorWith={errorWith} />
+			<AccountSection
+				onEmailChange={onEmailChange}
+				onPasswordChange={onPasswordChange}
+				onError={onError}
+				errorWith={errorWith}
+				isLoading={isLoading}
+			/>
+			<UserSettingsSection
+				onSettingsFormSubmit={onSettingsFormSubmit}
+				onError={onError}
+				errorWith={errorWith}
+				isLoading={isLoading}
+			/>
 		</>
 	)
+}
+export interface SettingsFormsError {
+	email: string | null
+	password: string | null
+	settings: string | null
+}
+export interface SettingsFormsLoading {
+	email: boolean
+	password: boolean
+	settings: boolean
 }
