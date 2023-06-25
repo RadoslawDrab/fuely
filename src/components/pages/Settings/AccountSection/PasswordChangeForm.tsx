@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 
-import { passwordRegEx, passwordInfo } from '@/utils'
+import { passwordInfo, passwordRegEx } from '@/utils'
 
 import Button from '@/components/UI/Button'
 import FormInput from '@/components/UI/FormInput'

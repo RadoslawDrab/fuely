@@ -3,10 +3,10 @@ import React, { useState } from 'react'
 import useAppContext from '@/hooks/use-app-context'
 import { currencies } from '@/utils'
 
-import FormInput from '@/components/UI/FormInput'
 import Button from '@/components/UI/Button'
-import Select from '@/components/UI/Select'
+import FormInput from '@/components/UI/FormInput'
 import Input from '@/components/UI/Input'
+import Select from '@/components/UI/Select'
 
 import styles from '@styles/pages/Settings/SettingsForm.module.scss'
 import defaultStyles from '@styles/styles.module.scss'
