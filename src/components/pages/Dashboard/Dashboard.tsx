@@ -1,11 +1,11 @@
 import { useRouter } from 'next/router'
 import React, { useEffect, useMemo, useState } from 'react'
 
-import { FullEvent } from '@/hooks/Events.modal'
-import useEvents from '@/hooks/use-events'
-import useUnit from '@/hooks/use-unit'
+import { FullEvent } from '@/hooks/Events/Events.modal'
+import useEvents from '@/hooks/Events/use-events'
+import useUnit from '@/hooks/Other/use-unit'
 import { className, getRandomKey } from '@/utils'
-import useAppContext from '@/hooks/use-app-context'
+import useAppContext from '@/hooks/Other/use-app-context'
 
 import Section from '@/components/Layout/Section'
 import Button from '@/components/UI/Button'

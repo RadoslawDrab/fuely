@@ -1,7 +1,7 @@
 import { useState } from 'react'
 
-import useAppContext from '@/hooks/use-app-context'
-import useUserRedirect from '@/hooks/use-user-redirect'
+import useAppContext from '@/hooks/Other/use-app-context'
+import useUserRedirect from '@/hooks/Other/use-user-redirect'
 
 import Head from '@/components/Head'
 import LoadingIcon from '@/components/UI/LoadingIcon'

@@ -1,9 +1,9 @@
 import React from 'react'
 import { AppContext } from '@/context/appContext'
 
-import useLanguage from '@/hooks/use-language'
-import useNavigation from '@/hooks/use-navigation'
-import useTheme from '@/hooks/use-theme'
+import useLanguage from '@/hooks/Language/use-language'
+import useNavigation from '@/hooks/Navigation/use-navigation'
+import useTheme from '@/hooks/Theme/use-theme'
 import useAuth from '@/hooks/Auth/use-auth'
 
 interface Props {

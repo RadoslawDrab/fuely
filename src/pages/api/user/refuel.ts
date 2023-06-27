@@ -2,7 +2,7 @@ import { NextApiRequest, NextApiResponse } from 'next'
 import { getAuth } from 'firebase/auth'
 
 import { Status, returnError } from '../auth'
-import { Event } from '@/hooks/Events.modal'
+import { Event } from '@/hooks/Events/Events.modal'
 import { getEvents, getUserData, setValue } from '../database'
 
 const auth = getAuth()

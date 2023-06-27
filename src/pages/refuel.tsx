@@ -1,9 +1,9 @@
 import { useRouter } from 'next/router'
 import React, { useState } from 'react'
 
-import { Event } from '@/hooks/Events.modal'
-import useAppContext from '@/hooks/use-app-context'
-import useUserRedirect from '@/hooks/use-user-redirect'
+import { Event } from '@/hooks/Events/Events.modal'
+import useAppContext from '@/hooks/Other/use-app-context'
+import useUserRedirect from '@/hooks/Other/use-user-redirect'
 import { className, setSessionStorage } from '@/utils'
 import { Status } from './api/auth'
 

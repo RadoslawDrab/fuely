@@ -3,8 +3,8 @@ import { useCallback, useEffect, useMemo, useState } from 'react'
 import { currencyConvert } from '@/utils/currency'
 import { formatDate } from '@/utils'
 import { EventObject, FullEvent } from './Events.modal'
-import useAppContext from './use-app-context'
-import useUnit from './use-unit'
+import useAppContext from '../Other/use-app-context'
+import useUnit from '../Other/use-unit'
 
 const emptyEvent: FullEvent = {
 	id: -1,

@@ -1,9 +1,9 @@
 import { useRouter } from 'next/router'
 import React from 'react'
 
-import useAppContext from '@/hooks/use-app-context'
-import useEvents from '@/hooks/use-events'
-import useUserRedirect from '@/hooks/use-user-redirect'
+import useAppContext from '@/hooks/Other/use-app-context'
+import useEvents from '@/hooks/Events/use-events'
+import useUserRedirect from '@/hooks/Other/use-user-redirect'
 
 import Head from '@/components/Head'
 import Button from '@/components/UI/Button'

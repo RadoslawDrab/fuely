@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 
-import useAppContext from '@/hooks/use-app-context'
+import useAppContext from '@/hooks/Other/use-app-context'
 import { emailRegEx, passwordRegEx, passwordInfo, checkEmailAndPassword } from '@/utils'
 
 import Button from '@/components/UI/Button'

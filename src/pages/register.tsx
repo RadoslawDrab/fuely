@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router'
 import { useState } from 'react'
 
-import useAppContext from '@/hooks/use-app-context'
+import useAppContext from '@/hooks/Other/use-app-context'
 import { className } from '@/utils'
 import { Status } from './api/auth'
 

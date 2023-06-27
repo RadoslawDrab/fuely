@@ -1,8 +1,8 @@
 import { getProp } from '@/utils'
 import { FullEvent } from './Events.modal'
 import useEvents from './use-events'
-import useUnit from './use-unit'
-import useAppContext from './use-app-context'
+import useUnit from '../Other/use-unit'
+import useAppContext from '../Other/use-app-context'
 
 export interface Data {
 	name: string

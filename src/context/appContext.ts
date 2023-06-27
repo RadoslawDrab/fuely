@@ -1,13 +1,13 @@
 import React from 'react'
 
-import { exampleLanguageObject } from '@/hooks/use-language'
-import { LanguageObject } from '@/hooks/Language.modal'
+import { exampleLanguageObject } from '@/hooks/Language/use-language'
+import { LanguageObject } from '@/hooks/Language/Language.modal'
 
-import { exampleThemeObject } from '@/hooks/use-theme'
-import { Theme } from '@/hooks/Theme.modal'
+import { exampleThemeObject } from '@/hooks/Theme/use-theme'
+import { Theme } from '@/hooks/Theme/Theme.modal'
 
-import { exampleNavigationObject } from '@/hooks/use-navigation'
-import { Navigation } from '@/hooks/Navigation.modal'
+import { exampleNavigationObject } from '@/hooks/Navigation/use-navigation'
+import { Navigation } from '@/hooks/Navigation/Navigation.modal'
 
 import { exampleAuthObject } from '@/hooks/Auth/use-auth'
 import { Auth } from '@/hooks/Auth/Auth.modal'

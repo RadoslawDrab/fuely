@@ -1,8 +1,8 @@
 import React from 'react'
 import { useRouter } from 'next/router'
 
-import usePages from '@/hooks/use-pages'
-import useAppContext from '@/hooks/use-app-context'
+import usePages from '@/hooks/Pages/use-pages'
+import useAppContext from '@/hooks/Other/use-app-context'
 import { Variant } from '@type/UI/Button.modal.ts'
 
 import Button from '../UI/Button'

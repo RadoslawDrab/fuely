@@ -1,6 +1,6 @@
 import React from 'react'
 
-import useAppContext from '@/hooks/use-app-context'
+import useAppContext from '@/hooks/Other/use-app-context'
 import { SettingsFormsError, SettingsFormsLoading } from '@/pages/settings'
 import { className } from '@/utils'
 

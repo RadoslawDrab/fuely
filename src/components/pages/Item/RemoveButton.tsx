@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 
-import useAppContext from '@/hooks/use-app-context'
+import useAppContext from '@/hooks/Other/use-app-context'
 
 import Button from '@/components/UI/Button'
 import Icon from '@/components/UI/Icon'

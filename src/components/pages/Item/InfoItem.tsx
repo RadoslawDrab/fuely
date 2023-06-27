@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { Data } from '@/hooks/use-calculate'
+import { Data } from '@/hooks/Events/use-calculate'
 import { className } from '@/utils'
 
 import styles from '@styles/pages/Item/InfoItem.module.scss'

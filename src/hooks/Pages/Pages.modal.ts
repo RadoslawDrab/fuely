@@ -1,5 +1,5 @@
 import { Icons } from '@/types/UI/Icon.modal'
-import { Texts } from './Language.modal'
+import { Texts } from '../Language/Language.modal'
 
 export interface Page {
 	name: string

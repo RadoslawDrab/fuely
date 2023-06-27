@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router'
 
 import { Page, Pages } from './Pages.modal'
-import useAppContext from './use-app-context'
+import useAppContext from '../Other/use-app-context'
 
 export default function usePages(): Pages {
 	const router = useRouter()

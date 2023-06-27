@@ -1,7 +1,7 @@
 import React from 'react'
 import Link from 'next/link'
 
-import useAppContext from '@/hooks/use-app-context'
+import useAppContext from '@/hooks/Other/use-app-context'
 import { className, getRandomKey } from '@/utils'
 
 import Column from './Footer/Column'

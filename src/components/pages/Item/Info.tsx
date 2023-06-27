@@ -1,10 +1,10 @@
 import React from 'react'
 
-import { FullEvent } from '@/hooks/Events.modal'
+import { FullEvent } from '@/hooks/Events/Events.modal'
 import { EventSiblings } from '@/pages/[eventId]'
-import useCalculate, { Data } from '@/hooks/use-calculate'
+import useCalculate, { Data } from '@/hooks/Events/use-calculate'
 import { getProp } from '@/utils'
-import useAppContext from '@/hooks/use-app-context'
+import useAppContext from '@/hooks/Other/use-app-context'
 
 import Section from '@/components/Layout/Section'
 import InfoItem from './InfoItem'
