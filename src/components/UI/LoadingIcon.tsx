@@ -3,13 +3,12 @@ import React from 'react'
 
 import { className } from '@/utils'
 
+import { LoadingIconProps as Props } from './types/LoadingIcon.modal'
+
 import Icon from './Icon'
 
 import styles from '@styles/UI/LoadingIcon.module.scss'
 
-interface Props {
-	center?: boolean
-}
 export default function LoadingIcon(props: Props) {
 	const loadingIconStyles = className(styles.loading, 'loading-icon', props.center ? styles.center : '')
 	return (

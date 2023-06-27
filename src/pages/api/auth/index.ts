@@ -1,35 +1,10 @@
 import { NextApiResponse } from 'next'
 import CryptoJS from 'crypto-js'
-import { child, get } from 'firebase/database'
-import databaseRef from '../_firebase'
-import { User } from 'firebase/auth'
+
+import { EncryptionKey, ReturnObject, UserSettings } from './index.modal'
 
 const tokenKey = '#Fuely-Token#'
 const dataKey = '#Fuely-Data#'
-
-export interface UserData {
-	displayName: string
-	email: string | null
-}
-export interface UserObject extends UserData {
-	settings: UserSettings
-}
-
-export interface UserSettings {
-	units: 'metric' | 'imperial'
-	currency: string
-}
-
-export interface Status {
-	code: string
-	message?: string
-}
-interface ReturnObject<Type> {
-	status: Status
-	data?: Type
-}
-
-type EncryptionKey = 'token' | 'data'
 
 export const defaultUserSettings: UserSettings = {
 	units: 'metric',

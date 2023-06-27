@@ -1,7 +1,8 @@
 import React from 'react'
+
 import { className, createDatasetObject } from '@/utils'
 
-import { Props } from '@/types/UI/Button.modal'
+import { ButtonProps as Props } from '@/components/UI/types/Button.modal'
 
 import styles from '@styles/UI/Button.module.scss'
 

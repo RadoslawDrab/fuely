@@ -1,5 +1,5 @@
-import { UserObject } from '@/pages/api/auth'
-import { Events } from '../Events/Events.modal'
+import { UserObject } from '@/pages/api/auth/index.modal'
+import { Events } from '../../Events/types/Events.modal'
 
 export type Actions = SetUser | LogOut | SetError | SetLoading | SetEvents
 

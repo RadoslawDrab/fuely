@@ -3,6 +3,8 @@ import React, { useState } from 'react'
 import useAppContext from '@/hooks/Other/use-app-context'
 import { currencies } from '@/utils/currency'
 
+import { UserSettingsFormProps as Props, UserSettingsFormSettings as Settings } from '../types/UserSettingsSection.modal'
+
 import Button from '@/components/UI/Button'
 import FormInput from '@/components/UI/FormInput'
 import Input from '@/components/UI/Input'
@@ -11,15 +13,6 @@ import Select from '@/components/UI/Select'
 import styles from '@styles/pages/Settings/UserSettingsForm.module.scss'
 import defaultStyles from '@styles/styles.module.scss'
 
-interface Props {
-	onSubmit: (newDisplayName: string | null, newUnit: string | null, newCurrency: string | null) => void
-	onError: (error: string | null) => void
-}
-interface Settings {
-	displayName: string | null
-	units: string | null
-	currency: string | null
-}
 export default function UserSettingsForm(props: Props) {
 	const { user } = useAppContext().Auth
 

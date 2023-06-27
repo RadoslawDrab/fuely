@@ -2,20 +2,13 @@ import React from 'react'
 
 import { className } from '@/utils'
 
+import { ModalProps as Props } from './types/Modal.modal'
+
 import Button from './Button'
 import Icon from './Icon'
 
 import styles from '@styles/UI/Modal.module.scss'
 
-interface Props {
-	children?: any
-	show: boolean
-	allowClosing?: boolean
-	className?: string
-	type?: 'center' | 'flow'
-	title: string
-	state?: (isOpen: boolean) => void
-}
 export default function Modal(props: Props) {
 	const modalType = props.type ?? 'flow'
 	const modalStyles = className(styles.modal, styles[`modal__${modalType}`], props.className)

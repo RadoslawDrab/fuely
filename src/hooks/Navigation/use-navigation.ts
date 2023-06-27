@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-import { Navigation } from '@/hooks/Navigation/Navigation.modal'
+import { Navigation } from './types/Navigation.modal'
 
 export default function useNavigation(): Navigation {
 	const [navigationState, setNavigationState] = useState(false)

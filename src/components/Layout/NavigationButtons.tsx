@@ -1,16 +1,14 @@
-import React from 'react'
 import { useRouter } from 'next/router'
+import React from 'react'
 
-import usePages from '@/hooks/Pages/use-pages'
 import useAppContext from '@/hooks/Other/use-app-context'
-import { Variant } from '@type/UI/Button.modal.ts'
+import usePages from '@/hooks/Pages/use-pages'
+
+import { NavigationButtonsProps as Props } from './types/NavigationButtons.modal'
 
 import Button from '../UI/Button'
 import Icon from '../UI/Icon'
 
-interface Props {
-	buttonsVariant: Variant
-}
 export default function NavigationButtons(props: Props) {
 	const router = useRouter()
 

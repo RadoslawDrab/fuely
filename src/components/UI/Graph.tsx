@@ -2,14 +2,10 @@ import React from 'react'
 
 import { className, getRandomKey } from '@/utils'
 
+import { GraphProps as Props } from './types/Graph.modal'
+
 import styles from '@styles/UI/Graph.module.scss'
 
-interface Props {
-	items: { name?: string; value: number }[]
-	max?: number
-	meter?: boolean
-	className?: string
-}
 export default function Graph(props: Props) {
 	const graphStyles = className(styles.graph, props.meter ? styles.meter : '', props.className)
 

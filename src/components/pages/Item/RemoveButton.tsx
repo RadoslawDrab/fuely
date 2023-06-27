@@ -2,16 +2,14 @@ import React, { useState } from 'react'
 
 import useAppContext from '@/hooks/Other/use-app-context'
 
+import { RemoveButtonProps as Props } from './types/RemoveButton.modal'
+
 import Button from '@/components/UI/Button'
 import Icon from '@/components/UI/Icon'
 import Modal from '@/components/UI/Modal'
 
 import styles from '@styles/pages/Item/RemoveButton.module.scss'
 
-interface Props {
-	onClick: () => void
-	event: string
-}
 export default function RemoveButton(props: Props) {
 	const { getText } = useAppContext().Language
 	const [confirmationIsOpen, setConfirmationIsOpen] = useState(false)

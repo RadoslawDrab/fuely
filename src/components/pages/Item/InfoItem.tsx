@@ -1,14 +1,11 @@
 import React from 'react'
 
-import { Data } from '@/hooks/Events/use-calculate'
 import { className } from '@/utils'
+
+import { InfoItemProps as Props } from './types/Info.modal'
 
 import styles from '@styles/pages/Item/InfoItem.module.scss'
 
-interface Props {
-	item: Data
-	items: { unit: string; value: string; date: string; isCurrent: boolean; percent: number }[]
-}
 export default function InfoItem(props: Props) {
 	const dateItems = props.items.map((item, index) => {
 		const key = `${item.date + '-' + index}`

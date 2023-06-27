@@ -3,16 +3,12 @@ import React, { useState } from 'react'
 import useAppContext from '@/hooks/Other/use-app-context'
 import { emailRegEx, passwordRegEx, passwordInfo, checkEmailAndPassword } from '@/utils'
 
+import { RegisterFormProps as Props } from './types/RegisterForm.modal'
+
 import Button from '@/components/UI/Button'
 import FormInput from '@/components/UI/FormInput'
 
 import styles from '@styles/styles.module.scss'
-
-interface Props {
-	onRegister: (email: string, password: string, name: string) => void
-	onError: (errorMessage: string) => void
-	onInputChange: () => void
-}
 
 export default function RegisterForm(props: Props) {
 	const { getText } = useAppContext().Language

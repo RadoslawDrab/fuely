@@ -2,12 +2,12 @@ import { child, get, remove, set, update } from 'firebase/database'
 import { User, getAuth } from 'firebase/auth'
 
 import databaseRef from './_firebase.ts'
-import { UserObject } from './auth/index.ts'
-import { Events } from '@/hooks/Events/Events.modal.ts'
+
+import { Events } from '@/hooks/Events/types/Events.modal.ts'
+import { UserObject } from './auth/index.modal'
+import { Base } from './Database.modal.ts'
 
 const auth = getAuth()
-
-type Base = 'events' | 'users'
 
 export function getEvents(user: User): Promise<Events> {
 	return new Promise(async (resolve) => {

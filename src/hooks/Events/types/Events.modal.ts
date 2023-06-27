@@ -23,3 +23,9 @@ export interface EventObject {
 	formatDate: (date: string) => string
 	removeEvent: (eventId: string) => Promise<any>
 }
+export interface CalculateData {
+	name: string
+	unitType: string
+	value: number
+	decimals?: number
+}

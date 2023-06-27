@@ -1,10 +1,11 @@
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
 
-import { FullEvent } from '@/hooks/Events/Events.modal'
 import useAppContext from '@/hooks/Other/use-app-context'
 import useEvents from '@/hooks/Events/use-events'
 import useUserRedirect from '@/hooks/Other/use-user-redirect'
+
+import { FullEvent } from '@/hooks/Events/types/Events.modal'
 
 import Head from '@/components/Head'
 import LoadingIcon from '@/components/UI/LoadingIcon'

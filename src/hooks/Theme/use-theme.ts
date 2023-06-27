@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react'
 
 import { getLocalStorage, setLocalStorage, isClient } from '../../utils'
-import { Theme } from '@/hooks/Theme/Theme.modal'
+
+import { Theme } from './types/Theme.modal'
 
 function useTheme(): Theme {
 	const [isDarkTheme, setIsDarkTheme] = useState(false)

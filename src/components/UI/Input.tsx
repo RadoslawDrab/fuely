@@ -1,7 +1,8 @@
 import React from 'react'
 
-import { Props } from '@/types/UI/Input.modal'
 import { className, createDatasetObject } from '@/utils'
+
+import { InputProps as Props } from '@/components/UI/types/Input.modal'
 
 import styles from '@styles/UI/Input.module.scss'
 

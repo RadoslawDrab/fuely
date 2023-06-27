@@ -1,6 +1,6 @@
 import { ChangeEvent, FocusEvent, HTMLInputTypeAttribute } from 'react'
 
-export interface Props {
+export interface InputProps {
 	type: HTMLInputTypeAttribute
 	className?: string
 	name?: string

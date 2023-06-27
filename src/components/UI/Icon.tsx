@@ -1,8 +1,9 @@
 import React from 'react'
 import Image from 'next/image'
 
-import { Props } from '@/types/UI/Icon.modal'
 import { className } from '@/utils'
+
+import { IconProps as Props } from '@/components/UI/types/Icon.modal'
 
 import styles from '@styles/UI/Icon.module.scss'
 

@@ -2,15 +2,12 @@ import React, { useState } from 'react'
 
 import { emailRegEx } from '@/utils'
 
+import { EmailChangeFormProps as Props } from '../types/AccountSection.modal'
+
 import Button from '@/components/UI/Button'
 import FormInput from '@/components/UI/FormInput'
 
 import defaultStyles from '@styles/styles.module.scss'
-
-interface Props {
-	onEmailChange: (newEmail: string) => void
-	onError: (error: string | null) => void
-}
 
 export default function EmailChangeForm(props: Props) {
 	const [email, setEmail] = useState<string | null>(null)

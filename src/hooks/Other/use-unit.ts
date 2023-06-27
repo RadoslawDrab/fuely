@@ -2,7 +2,7 @@ import { useCallback } from 'react'
 
 import useAppContext from './use-app-context'
 
-export type UnitType = 'distance' | 'fuel'
+import { UnitType } from './types/Unit.modal'
 
 const conversion = {
 	// kilometers > miles

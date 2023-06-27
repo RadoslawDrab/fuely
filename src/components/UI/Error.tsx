@@ -2,13 +2,10 @@ import React from 'react'
 
 import { className } from '@/utils'
 
+import { ErrorProps as Props } from './types/Error.modal'
+
 import styles from '@styles/UI/Error.module.scss'
 
-interface Props {
-	show: boolean
-	text: string
-	className?: string
-}
 export default function Error(props: Props) {
 	const errorStyles = className(styles.error, props.className)
 	return (

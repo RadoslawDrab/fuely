@@ -1,26 +1,11 @@
 import React, { useState } from 'react'
 
+import { FormInputProps as Props } from './types/FormInput.modal'
+
 import Input from './Input'
 import Error from './Error'
 
 import styles from '@styles/styles.module.scss'
-
-interface Props {
-	name?: string
-	id: string
-	text: string
-	placeholder?: string
-	type: React.HTMLInputTypeAttribute
-	notRequired?: boolean
-	errorText?: string
-	min?: number
-	max?: number
-	defaultValue?: any
-	defaultChecked?: boolean
-	getValue?: (value: string) => void
-	getValueOnBlur?: (value: string) => void
-	check?: (value: string) => boolean
-}
 
 export default function FormInput(props: Props) {
 	const defaultErrorMessage = `Fill out ${props.text} field`

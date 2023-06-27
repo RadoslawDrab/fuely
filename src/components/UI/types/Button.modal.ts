@@ -1,6 +1,6 @@
-export type Variant = 'default' | 'dark' | 'link' | 'redirect' | 'error'
+export type ButtonVariant = 'default' | 'dark' | 'link' | 'redirect' | 'error'
 
-export interface Props {
+export interface ButtonProps {
 	onClick: (event: React.MouseEvent<HTMLButtonElement>) => void
 	onFocus?: (event: React.FocusEvent<HTMLButtonElement>) => void
 	onBlur?: (event: React.FocusEvent<HTMLButtonElement>) => void
@@ -9,5 +9,5 @@ export interface Props {
 	data?: { [key: string]: string | number | object | boolean }
 	disabled?: boolean
 	selected?: boolean
-	variant?: Variant[] | Variant
+	variant?: ButtonVariant[] | ButtonVariant
 }

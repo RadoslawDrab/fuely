@@ -1,8 +1,9 @@
 import React from 'react'
 
 import useAppContext from '@/hooks/Other/use-app-context'
-import { SettingsFormsError, SettingsFormsLoading } from '@/pages/settings'
 import { className } from '@/utils'
+
+import { AccountSectionProps as Props } from './types/AccountSection.modal'
 
 import Section from '@/components/Layout/Section'
 import Error from '@/components/UI/Error'
@@ -13,13 +14,6 @@ import LoadingIcon from '@/components/UI/LoadingIcon'
 import styles from '@styles/pages/Settings/index.module.scss'
 import defaultStyles from '@styles/styles.module.scss'
 
-interface Props {
-	onError: (type: keyof SettingsFormsError, error: string | null) => void
-	onEmailChange: (newEmail: string) => void
-	onPasswordChange: (newPassword: string) => void
-	errorWith: SettingsFormsError
-	isLoading: SettingsFormsLoading
-}
 export default function AccountSection(props: Props) {
 	const { getText } = useAppContext().Language
 

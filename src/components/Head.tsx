@@ -1,11 +1,8 @@
 import React from 'react'
 import HeadHTML from 'next/head'
 
-interface Props {
-	title: string
-	description: string
-	children?: any
-}
+import { HeadProps as Props } from './Head.modal'
+
 export default function Head(props: Props) {
 	return (
 		<HeadHTML>

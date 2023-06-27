@@ -1,15 +1,11 @@
 import { getProp } from '@/utils'
-import { FullEvent } from './Events.modal'
 import useEvents from './use-events'
 import useUnit from '../Other/use-unit'
 import useAppContext from '../Other/use-app-context'
 
-export interface Data {
-	name: string
-	unitType: string
-	value: number
-	decimals?: number
-}
+import { FullEvent } from './types/Events.modal'
+import { CalculateData as Data } from './types/Events.modal'
+
 export default function useCalculate(event: FullEvent) {
 	const { emptyEvent } = useEvents()
 	const { units, isMetric } = useUnit()

@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react'
 
 import translations from '@data/translations.json'
-import { LanguageObject, Languages, Texts, Translations } from '@/hooks/Language/Language.modal'
 import { getLocalStorage, setLocalStorage } from '@/utils'
+
+import { LanguageObject, Languages, Texts, Translations } from './types/Language.modal'
 
 const translationsObject: Translations = translations
 

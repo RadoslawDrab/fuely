@@ -2,15 +2,13 @@ import React, { useState } from 'react'
 
 import { passwordInfo, passwordRegEx } from '@/utils'
 
+import { PasswordChangeFormProps as Props } from '../types/AccountSection.modal'
+
 import Button from '@/components/UI/Button'
 import FormInput from '@/components/UI/FormInput'
 
 import defaultStyles from '@styles/styles.module.scss'
 
-interface Props {
-	onPasswordChange: (newPassword: string) => void
-	onError: (error: string | null) => void
-}
 export default function PasswordChangeForm(props: Props) {
 	const [oldPassword, setOldPassword] = useState<string | null>(null)
 	const [newPassword, setNewPassword] = useState<string | null>(null)

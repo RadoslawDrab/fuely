@@ -2,14 +2,13 @@ import React from 'react'
 
 import { setSessionStorage } from '@/utils'
 
-import Header from './Header'
+import { LayoutProps as Props } from './types/Layout.modal'
+
 import Footer from './Footer'
+import Header from './Header'
 
 import styles from '@styles/Layout/Layout.module.scss'
 
-interface Props {
-	children?: any
-}
 setSessionStorage({ formData: undefined })
 function Layout(props: Props) {
 	return (

@@ -1,4 +1,4 @@
-import { Actions, State } from './AuthReducer.modal'
+import { Actions, State } from './types/authReducer.modal'
 
 const initialState: State = {
 	state: {

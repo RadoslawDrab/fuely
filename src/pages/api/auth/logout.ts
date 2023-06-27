@@ -1,7 +1,9 @@
 import { NextApiRequest, NextApiResponse } from 'next'
 import { getAuth, signOut } from 'firebase/auth'
 
-import { Status, returnError } from '.'
+import { returnError } from '.'
+
+import { Status } from './index.modal'
 
 const auth = getAuth()
 

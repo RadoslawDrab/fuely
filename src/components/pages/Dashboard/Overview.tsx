@@ -1,27 +1,18 @@
 import React, { useEffect, useMemo, useState } from 'react'
 
-import { FullEvent } from '@/hooks/Events/Events.modal'
 import useEvents from '@/hooks/Events/use-events'
 import useUnit from '@/hooks/Other/use-unit'
 import { className, getRandomKey } from '@/utils'
 import useAppContext from '@/hooks/Other/use-app-context'
+
+import { FullEvent } from '@/hooks/Events/types/Events.modal'
+import { OverviewItem, OverviewProps as Props } from './types/Overview.modal'
 
 import Section from '@/components/Layout/Section'
 import Graph from '@/components/UI/Graph'
 
 import styles from '@styles/pages/Dashboard/Overview.module.scss'
 import defaultStyles from '@styles/styles.module.scss'
-
-interface Props {
-	className?: string
-}
-interface Item {
-	label: string
-	currentValue: number
-	previousValue: number
-	unit: string | JSX.Element
-	digits?: number
-}
 
 export default function Overview(props: Props) {
 	const { getText } = useAppContext().Language
@@ -47,7 +38,7 @@ export default function Overview(props: Props) {
 			.catch(() => {})
 	}, [isLoading, events, getEvent])
 
-	const items: Item[] = useMemo(() => {
+	const items: OverviewItem[] = useMemo(() => {
 		// Last consumption
 		const currentConsumption = (isMetric ? (event0.fuel / event0.distance) * 100 : event0.distance / event0.fuel) ?? 0
 		// Second to last consumption

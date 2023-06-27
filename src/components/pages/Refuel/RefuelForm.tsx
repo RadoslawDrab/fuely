@@ -3,17 +3,15 @@ import React, { useEffect, useState } from 'react'
 import { checkIfStringIsNumber, getSessionStorage } from '@/utils'
 import useAppContext from '@/hooks/Other/use-app-context'
 import useEvents from '@/hooks/Events/use-events'
-import { Event, FullEvent } from '@/hooks/Events/Events.modal'
+
+import { FullEvent } from '@/hooks/Events/types/Events.modal'
+import { RefuelFormProps as Props } from './types/RefuelForm.modal'
 
 import Button from '@/components/UI/Button'
 import FormInput from '@/components/UI/FormInput'
 
-// import styles from './RefuelForm.module.scss';
 import styles from '@styles/styles.module.scss'
 
-interface Props {
-	onSubmit: (event: Event, date: string) => void
-}
 export default function RefuelForm(props: Props) {
 	const formData: FullEvent | null = getSessionStorage()?.formData
 

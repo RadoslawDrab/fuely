@@ -1,19 +1,18 @@
 import React from 'react'
 
-import { FullEvent } from '@/hooks/Events/Events.modal'
-import { EventSiblings } from '@/pages/[eventId]'
-import useCalculate, { Data } from '@/hooks/Events/use-calculate'
+import useCalculate from '@/hooks/Events/use-calculate'
 import { getProp } from '@/utils'
 import useAppContext from '@/hooks/Other/use-app-context'
+
+import { InfoProps as Props } from './types/Info.modal'
+import { FullEvent } from '@/hooks/Events/types/Events.modal'
+import { CalculateData } from '@/hooks/Events/types/Events.modal'
 
 import Section from '@/components/Layout/Section'
 import InfoItem from './InfoItem'
 
 import styles from '@styles/pages/Item/Info.module.scss'
 
-interface Props {
-	events: EventSiblings
-}
 export default function Info(props: Props) {
 	const { getText } = useAppContext().Language
 
@@ -21,13 +20,13 @@ export default function Info(props: Props) {
 	const { getData, compare, keys } = useCalculate(currentEvent)
 
 	const sections = keys.map((key, index) => {
-		const data: Data = getProp(getData(currentEvent), key)
+		const data: CalculateData = getProp(getData(currentEvent), key)
 		const itemKey = `${key}-${index}`
 
 		const infoItems = props.events
 			.filter((event): event is FullEvent => event !== null)
 			.map((event) => {
-				const data: Data = getProp(getData(event), key)
+				const data: CalculateData = getProp(getData(event), key)
 				const isCurrent = currentEvent.fullId === event.fullId
 				const percent = getProp(compare(event), key)
 				return {

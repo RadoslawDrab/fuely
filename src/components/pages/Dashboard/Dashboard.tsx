@@ -1,11 +1,13 @@
 import { useRouter } from 'next/router'
 import React, { useEffect, useMemo, useState } from 'react'
 
-import { FullEvent } from '@/hooks/Events/Events.modal'
 import useEvents from '@/hooks/Events/use-events'
 import useUnit from '@/hooks/Other/use-unit'
 import { className, getRandomKey } from '@/utils'
 import useAppContext from '@/hooks/Other/use-app-context'
+
+import { FullEvent } from '@/hooks/Events/types/Events.modal'
+import { DashboardItem, DashboardProps as Props } from './types/Dashboard.modal'
 
 import Section from '@/components/Layout/Section'
 import Button from '@/components/UI/Button'
@@ -14,17 +16,6 @@ import Icon from '@/components/UI/Icon'
 import styles from '@styles/pages/Dashboard/Dashboard.module.scss'
 import defaultStyles from '@styles/styles.module.scss'
 
-interface Props {
-	className?: string
-}
-interface Item {
-	id: string
-	date: string
-	cost: number
-	costUnit: string
-	fuel: number
-	fuelUnit: string
-}
 export default function Dashboard(props: Props) {
 	const router = useRouter()
 
@@ -41,7 +32,7 @@ export default function Dashboard(props: Props) {
 		})
 	}, [getEvent, sortedDates])
 
-	const dashboardItems: Item[] = useMemo(() => {
+	const dashboardItems: DashboardItem[] = useMemo(() => {
 		return dashboardEvents.map((event) => {
 			return {
 				id: event.fullId,

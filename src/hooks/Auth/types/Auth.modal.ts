@@ -1,5 +1,5 @@
-import { Status } from '@/pages/api/auth'
-import { AuthState, UserState } from './AuthReducer.modal'
+import { Status } from '@/pages/api/auth/index.modal'
+import { AuthState, UserState } from './authReducer.modal'
 
 export interface Auth {
 	state: AuthState

@@ -3,16 +3,13 @@ import React, { useState } from 'react'
 import useAppContext from '@/hooks/Other/use-app-context'
 import { checkEmailAndPassword, emailRegEx, getSessionStorage, passwordInfo, passwordRegEx } from '@/utils'
 
+import { LoginFormProps as Props } from './types/LoginForm.modal'
+
 import Button from '@/components/UI/Button'
 import FormInput from '@/components/UI/FormInput'
 
 import styles from '@styles/styles.module.scss'
 
-interface Props {
-	onLogin: (email: string, password: string) => void
-	onError: (message: string) => void
-	onInputChange: () => void
-}
 export default function LoginForm(props: Props) {
 	const emailFromLS: string | null = getSessionStorage()?.formData
 
