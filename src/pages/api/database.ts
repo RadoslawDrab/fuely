@@ -1,4 +1,4 @@
-import { child, get, remove, set } from 'firebase/database'
+import { child, get, remove, set, update } from 'firebase/database'
 import { User, getAuth } from 'firebase/auth'
 
 import databaseRef from './_firebase.ts'
@@ -28,6 +28,22 @@ export function setValue(value: any, base: Base, path: string = ''): Promise<voi
 			return
 		}
 		set(child(databaseRef, `${base}/${currentUser.uid}${path ? '/' + path : ''}`), value)
+			.then(() => {
+				resolve()
+			})
+			.catch((error) => {
+				reject(error.code)
+			})
+	})
+}
+export function updateValue(value: any, base: Base, path: string = ''): Promise<void> {
+	return new Promise((resolve, reject) => {
+		const { currentUser } = auth
+		if (!currentUser) {
+			reject()
+			return
+		}
+		update(child(databaseRef, `${base}/${currentUser.uid}${path ? '/' + path : ''}`), value)
 			.then(() => {
 				resolve()
 			})
