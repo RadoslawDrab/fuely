@@ -19,6 +19,7 @@ const initialState: State = {
 }
 function reducer(state: State, action: Actions): State {
 	switch (action.type) {
+		// Updates user's state and data
 		case 'SET_USER': {
 			return {
 				...state,
@@ -26,6 +27,7 @@ function reducer(state: State, action: Actions): State {
 				user: { ...state.user, ...action.user }
 			}
 		}
+		// Logs user out while return default data
 		case 'LOG_OUT': {
 			return {
 				...state,
@@ -44,15 +46,18 @@ function reducer(state: State, action: Actions): State {
 				}
 			}
 		}
+		// Updates user's events object
 		case 'SET_EVENTS': {
 			return { ...state, user: { ...state.user, events: action.events } }
 		}
+		// Updates error status
 		case 'SET_ERROR': {
 			return {
 				...state,
 				state: { ...state.state, hasError: action.errorMessage ? true : false, errorMessage: action.errorMessage || '' }
 			}
 		}
+		// Set's loading state
 		case 'SET_LOADING': {
 			return { ...state, state: { ...state.state, isLoading: action.state } }
 		}
