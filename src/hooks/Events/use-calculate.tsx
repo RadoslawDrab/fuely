@@ -12,10 +12,14 @@ export default function useCalculate(event: FullEvent) {
 	const { getText } = useAppContext().Language
 
 	const keys = Object.keys(getData(emptyEvent))
+	const eventData = getData(event)
 
 	function getData(event: FullEvent) {
+		// Event's distance based on unit system
 		const eventDistance = isMetric ? event.distance / 100 : event.distance
+		// Event's distance unit
 		const eventDistanceUnit = isMetric ? '100' + units.distance : units.distance
+		// Event's currency unit
 		const eventCurrencyUnit = event.currency.toUpperCase()
 
 		const cost: Data = { name: getText('Cost'), unitType: eventCurrencyUnit, value: event.cost }
@@ -58,6 +62,7 @@ export default function useCalculate(event: FullEvent) {
 			unitType: `${units.distance}/${eventCurrencyUnit}`,
 			value: checkDistance(1 / costPerDistance.value)
 		}
+		// Checks event's distance
 		function checkDistance(value: number) {
 			return event.distance > 0 ? value : 0
 		}
@@ -74,17 +79,19 @@ export default function useCalculate(event: FullEvent) {
 			distancePerCost
 		}
 	}
-	function compare(compareEvent: FullEvent): { [key: string]: number } {
-		const eventData = getData(event)
+
+	function compare(compareEvent: FullEvent): { [Property in keyof typeof eventData]: number } {
 		const compareEventData = getData(compareEvent)
 
-		return Object.keys(eventData).reduce((obj, type) => {
+		const percents: any = Object.keys(eventData).reduce((obj, type) => {
 			const data = getProp(eventData, type).value
 			const compareData = getProp(compareEventData, type).value
 
+			// Percent which indicates how much `compareEvent` is different from `event`
 			const percent = (compareData / data) * 100 - 100
 			return { ...obj, [type]: isNaN(percent) ? 0 : percent }
 		}, {})
+		return percents
 	}
 	return {
 		keys,
