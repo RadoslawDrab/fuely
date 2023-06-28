@@ -20,11 +20,11 @@ export default function FormInput(props: Props) {
 
 		if (value) {
 			props.getValue && props.getValue(value)
-			setHasError(() => false)
+			setHasError(false)
 		}
 	}
 	function onFocus() {
-		setIsTouched(() => true)
+		setIsTouched(true)
 	}
 	function onBlur(event: React.FocusEvent<HTMLInputElement>) {
 		const value = event.currentTarget.value
@@ -32,10 +32,7 @@ export default function FormInput(props: Props) {
 		if (isTouched && !value && !props.notRequired) {
 			setHasError(true)
 			setErrorMessage(defaultErrorMessage)
-		} else if (isTouched && value && props.check && !props.check(value) && !props.notRequired) {
-			setHasError(true)
-			setErrorMessage(props.errorText || defaultErrorMessage)
-		} else if (isTouched && value && props.check && !props.check(value) && props.notRequired) {
+		} else if (isTouched && value && props.check && !props.check(value)) {
 			setHasError(true)
 			setErrorMessage(props.errorText || defaultErrorMessage)
 		} else {
