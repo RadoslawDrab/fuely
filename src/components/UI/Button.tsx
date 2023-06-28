@@ -7,20 +7,18 @@ import { ButtonProps as Props } from '@/components/UI/types/Button.modal'
 import styles from '@styles/UI/Button.module.scss'
 
 export default function Button(props: Props) {
-	let variant = ''
-
-	if (props.variant) {
-		switch (typeof props.variant) {
-			case 'object': {
-				variant = props.variant.reduce((prev, cur) => (cur !== 'default' ? (prev += `${styles[`button_${cur}`]} `) : prev), '')
-				break
+	const variant = (() => {
+		if (props.variant) {
+			switch (typeof props.variant) {
+				case 'object': {
+					return props.variant.reduce((prev, cur) => (cur !== 'default' ? (prev += `${styles[`button_${cur}`]} `) : prev), '')
+				}
+				case 'string': {
+					return props.variant !== 'default' ? styles[`button_${props.variant}`] : ''
+				}
 			}
-			case 'string': {
-				variant = props.variant !== 'default' ? styles[`button_${props.variant}`] : ''
-				break
-			}
-		}
-	}
+		} else return ''
+	})()
 
 	const buttonClass = className(styles.button, props.selected ? styles.selected : '', variant, props.className)
 
