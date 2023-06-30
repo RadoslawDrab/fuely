@@ -1,7 +1,7 @@
 import { NextApiRequest, NextApiResponse } from 'next'
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth'
 
-import { returnError } from '../auth'
+import { parseBody, returnError } from '.'
 import { getUserData } from '../database'
 
 const auth = getAuth()
@@ -10,7 +10,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 	try {
 		switch (req.method) {
 			case 'POST': {
-				const { email, password } = JSON.parse(req.body)
+				const { email, password } = parseBody(req)
 
 				const credential = await signInWithEmailAndPassword(auth, email, password)
 				const user = credential.user

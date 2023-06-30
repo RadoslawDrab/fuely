@@ -2,6 +2,7 @@ import { useCallback, useEffect, useReducer } from 'react'
 
 import { isClient } from '@/utils'
 import authReducer from './authReducer'
+import { encrypt } from '@/pages/api/_local'
 
 import { Status, UserObject } from '@/pages/api/auth/index.modal'
 import { Auth } from './types/Auth.modal'
@@ -48,7 +49,7 @@ export default function useAuth(): Auth {
 
 			const response = await fetch('/api/auth/login', {
 				method: 'POST',
-				body: JSON.stringify({
+				body: encrypt({
 					email: email,
 					password: password
 				})
@@ -82,7 +83,7 @@ export default function useAuth(): Auth {
 
 			const response = await fetch('/api/auth/register', {
 				method: 'POST',
-				body: JSON.stringify({
+				body: encrypt({
 					email: email,
 					password: password,
 					name: name

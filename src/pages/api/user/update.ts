@@ -1,7 +1,7 @@
 import { getAuth, updateProfile } from 'firebase/auth'
 import { NextApiRequest, NextApiResponse } from 'next'
 
-import { returnError } from '../auth'
+import { parseBody, returnError } from '../auth'
 import { updateValue } from '../database'
 
 const auth = getAuth()
@@ -15,7 +15,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 				if (!currentUser) {
 					return returnError(res, 'auth/no-user')
 				}
-				const { displayName, units, currency } = JSON.parse(req.body)
+				const { displayName, units, currency } = parseBody(req)
 
 				// Updates profile's display name
 				if (displayName) {

@@ -1,7 +1,7 @@
 import { NextApiRequest, NextApiResponse } from 'next'
 import { getAuth } from 'firebase/auth'
 
-import { returnError } from '../auth'
+import { parseBody, returnError } from '../auth'
 import { getEvents, getUserData, setValue } from '../database'
 
 import { Status } from '../auth/index.modal'
@@ -13,7 +13,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 	try {
 		switch (req.method) {
 			case 'POST': {
-				const { date, cost, currency, odometer, fuel } = JSON.parse(req.body)
+				const { date, cost, currency, odometer, fuel } = parseBody(req)
 
 				if (!cost || !odometer || !fuel) {
 					return returnError(res, 'event/not-enough-data')

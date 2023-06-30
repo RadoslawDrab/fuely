@@ -4,6 +4,7 @@ import { currencyConvert } from '@/utils/currency'
 import { formatDate } from '@/utils'
 import useAppContext from '../Other/use-app-context'
 import useUnit from '../Other/use-unit'
+import { encrypt } from '@/pages/api/_local'
 
 import { EventObject, FullEvent } from './types/Events.modal'
 
@@ -113,7 +114,7 @@ export default function useEvents(): EventObject {
 			try {
 				const response = await fetch('/api/user/events', {
 					method: 'PATCH',
-					body: eventId
+					body: encrypt(eventId)
 				})
 
 				let func = resolve

@@ -1,7 +1,7 @@
 import { NextApiRequest, NextApiResponse } from 'next'
 import { getAuth } from 'firebase/auth'
 
-import { returnError } from '../auth/'
+import { parseBody, returnError } from '../auth/'
 import { getEvents, removeValue } from '../database'
 
 const auth = getAuth()
@@ -19,7 +19,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 				break
 			}
 			case 'PATCH': {
-				const eventId = req.body
+				const eventId = parseBody(req)
 				await removeValue('events', eventId)
 				res.status(200).json({
 					code: 'events/removed'
