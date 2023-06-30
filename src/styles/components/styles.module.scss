@@ -5,17 +5,19 @@
 }
 .form {
 	display: grid;
-	grid-template-columns: 1fr auto;
+	grid-template-columns: 1fr;
 	align-items: center;
 	gap: 1em 2em;
 	label {
 		position: relative;
-		font-size: $size-500;
+		font-size: $size-600;
+		letter-spacing: 0.5px;
 		color: $grey-800;
 	}
 	input {
-		width: 9rem;
+		width: 100%;
 		font-size: $size-400;
+		letter-spacing: 0.5px;
 	}
 	.form-error {
 		grid-column: 1 / -1;
@@ -39,17 +41,12 @@
 			font-size: $size-500;
 		}
 	}
-	@media screen and (min-width: 31rem) {
-		column-gap: 4em;
-		input {
-			width: 11rem;
-		}
-	}
 }
 .section {
 	max-width: 27rem;
-	margin: 0 auto;
+	width: 100%;
 	&.center {
 		grid-column: 1 / -1;
+		justify-self: center;
 	}
 }
