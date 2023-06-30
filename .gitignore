@@ -36,3 +36,4 @@ next-env.d.ts
 
 
 _firebase.ts
+_local.ts
