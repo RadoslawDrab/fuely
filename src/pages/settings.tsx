@@ -2,6 +2,7 @@ import { useState } from 'react'
 
 import useAppContext from '@/hooks/Other/use-app-context'
 import useUserRedirect from '@/hooks/Other/use-user-redirect'
+import { encrypt } from './api/data/_local'
 
 import Head from '@/components/Head'
 import LoadingIcon from '@/components/UI/LoadingIcon'
@@ -13,7 +14,8 @@ export default function Settings() {
 
 	const {
 		user,
-		state: { isLoading: userIsLoading }
+		state: { isLoading: userIsLoading },
+		loginUsingToken
 	} = useAppContext().Auth
 
 	const [errorWith, setErrorWith] = useState<SettingsFormsError>({
@@ -31,10 +33,32 @@ export default function Settings() {
 		return <LoadingIcon />
 	}
 
-	function onEmailChange(newEmail: string) {}
-	function onPasswordChange(newPassword: string) {}
+	async function onEmailChange(newEmail: string) {
+		setLoading('settings', true)
+		await fetch('/api/user/update', {
+			method: 'PATCH',
+			body: encrypt({ email: newEmail })
+		})
+	}
+	async function onPasswordChange(newPassword: string) {}
 
-	function onSettingsFormSubmit(newDisplayName: string | null, newUnit: string | null, newCurrency: string | null) {}
+	async function onSettingsFormSubmit(newDisplayName: string | null, newUnit: string | null, newCurrency: string | null) {
+		if (!(newDisplayName || newUnit || newCurrency)) return
+		setLoading('settings', true)
+		const response = await fetch('/api/user/update', {
+			method: 'PATCH',
+			body: encrypt({ displayName: newDisplayName, units: newUnit, currency: newCurrency })
+		})
+		if (!response.ok) {
+			const error = await response.json()
+			onError('settings', error.code)
+			return
+		}
+		await response.json()
+		loginUsingToken()
+
+		setLoading('settings', false)
+	}
 
 	function onError(type: keyof typeof errorWith, err: string | null) {
 		setErrorWith((prevError) => ({ ...prevError, [type]: err }))
