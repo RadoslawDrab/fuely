@@ -1,17 +1,49 @@
 import { useCallback, useEffect, useReducer } from 'react'
 
 import { isClient } from '@/utils'
-import { Status, UserObject } from '@/pages/api/auth/index.modal'
 import authReducer from './authReducer'
 
+import { Status, UserObject } from '@/pages/api/auth/index.modal'
 import { Auth } from './types/Auth.modal'
 import { Events } from '../Events/types/Events.modal'
 
 export default function useAuth(): Auth {
 	const [authState, dispatch] = useReducer(authReducer.reducer, authReducer.initialState)
 
-	function login(email: string, password: string): Promise<any> {
+	const setUserData = useCallback(function (data: UserObject): Status {
+		// Updates auth state user data
+		dispatch({ type: 'SET_USER', user: data })
+
+		// Updates user's events
+		getEvents().catch(() => {})
+
+		// Disables loading and removes any errors
+		setLoading(false)
+		setError()
+		return { code: 'auth/logged-in' }
+	}, [])
+	const errorHandler = useCallback(
+		async <ResponseData>(response: Response, errorFunction?: (data: ResponseData) => boolean): Promise<ResponseData> => {
+			const data: ResponseData = await response.json()
+			return new Promise((resolve, reject) => {
+				// Returns error if response failed or `errorFunction` returns true
+				if (!response.ok || (errorFunction && errorFunction(data))) {
+					const error: any = data
+					// Sets and returns error and disables loading state
+					setError(error)
+					setLoading(false)
+					reject(error)
+				} else {
+					resolve(data)
+				}
+			})
+		},
+		[]
+	)
+	function login(email: string, password: string): Promise<Status> {
 		return new Promise(async (resolve, reject: (error: Status) => void) => {
+			// Checks if user is logged in. If yes then resolves
+			if (authState.state.isLoggedIn) return resolve({ code: 'auth/already-logged-in' })
 			setLoading(true)
 
 			const response = await fetch('/api/auth/login', {
@@ -21,51 +53,27 @@ export default function useAuth(): Auth {
 					password: password
 				})
 			})
-			if (!response.ok) {
-				const error: Status = await response.json()
 
-				setError(error)
-				setLoading(false)
-				reject(error)
-				return
-			}
-
-			resolve(await setUserData(response))
+			errorHandler<UserObject>(response)
+				.then((data) => resolve(setUserData(data)))
+				.catch((error) => reject(error))
 		})
 	}
-	const setUserData = useCallback(async function (response: Response) {
-		const data: UserObject = await response.json()
-
-		dispatch({ type: 'SET_USER', user: data })
-
-		getEvents().catch(() => {})
-
-		setLoading(false)
-		setError()
-		return data
-	}, [])
 	const loginUsingToken = useCallback(
-		function () {
+		function (): Promise<Status> {
 			return new Promise(async (resolve, reject) => {
+				// Checks if user is logged in. If yes then resolves
+				if (authState.state.isLoggedIn) return resolve({ code: 'auth/already-logged-in' })
 				setLoading(true)
 
-				const response = await fetch('/api/auth/login-token', {
-					method: 'POST'
-				})
+				const response = await fetch('/api/auth/login-token')
 
-				if (!response.ok) {
-					const error = await response.json()
-
-					setError(error)
-					setLoading(false)
-					reject(error)
-					return
-				}
-
-				resolve(await setUserData(response))
+				errorHandler<UserObject>(response)
+					.then((data: any) => resolve(setUserData(data)))
+					.catch((error) => reject(error))
 			})
 		},
-		[setUserData]
+		[authState.state.isLoggedIn, errorHandler, setUserData]
 	)
 
 	function register(email: string, password: string, name: string): Promise<Status> {
@@ -81,39 +89,25 @@ export default function useAuth(): Auth {
 				})
 			})
 
-			if (!response.ok) {
-				const error = await response.json()
-
-				setError(error)
-				setLoading(false)
-				reject(error)
-				return
-			}
-
-			const status: Status = await response.json()
-
-			let result = resolve
-			if (!status.code.includes('created')) {
-				result = reject
-			}
-			setLoading(false)
-
-			result(status)
+			errorHandler<Status>(response, (status) => !status.code.includes('created'))
+				.then((status) => {
+					setLoading(false)
+					resolve(status)
+				})
+				.catch((error) => reject(error))
 		})
 	}
 
 	function logout(): Promise<Status> {
 		return new Promise(async (resolve, reject) => {
+			// Checks if user is logged in. If no then resolves
+			if (!authState.state.isLoggedIn) resolve({ code: 'auth/not-logged-in' })
 			dispatch({ type: 'LOG_OUT' })
 			const response = await fetch('/api/auth/logout')
 
-			let result = resolve
-
-			if (!response.ok) {
-				result = reject
-			}
-			const status: Status = await response.json()
-			result(status)
+			errorHandler(response)
+				.then((data: any) => resolve(data))
+				.catch((error) => reject(error))
 		})
 	}
 
