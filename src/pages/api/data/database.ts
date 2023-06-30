@@ -4,8 +4,8 @@ import { User, getAuth } from 'firebase/auth'
 import databaseRef from './_firebase.ts'
 
 import { Events } from '@/hooks/Events/types/Events.modal.ts'
-import { UserObject } from './auth/index.modal'
-import { Base } from './database.modal.ts'
+import { UserObject } from './types/index.modal.ts'
+import { Base } from './types/database.modal.ts'
 
 const auth = getAuth()
 

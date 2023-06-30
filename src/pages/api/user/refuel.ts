@@ -1,10 +1,10 @@
 import { NextApiRequest, NextApiResponse } from 'next'
 import { getAuth } from 'firebase/auth'
 
-import { parseBody, returnError } from '../auth'
-import { getEvents, getUserData, setValue } from '../database'
+import { parseBody, returnError } from '../data'
+import { getEvents, getUserData, setValue } from '../data/database'
 
-import { Status } from '../auth/index.modal'
+import { Status } from '../data/types/index.modal'
 import { Event } from '@/hooks/Events/types/Events.modal'
 
 const auth = getAuth()

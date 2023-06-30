@@ -2,9 +2,9 @@ import { useCallback, useEffect, useReducer } from 'react'
 
 import { isClient } from '@/utils'
 import authReducer from './authReducer'
-import { encrypt } from '@/pages/api/_local'
+import { encrypt } from '@/pages/api/data/_local'
 
-import { Status, UserObject } from '@/pages/api/auth/index.modal'
+import { Status, UserObject } from '@/pages/api/data/types/index.modal'
 import { Auth } from './types/Auth.modal'
 import { Events } from '../Events/types/Events.modal'
 

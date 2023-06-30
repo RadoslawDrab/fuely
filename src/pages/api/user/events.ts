@@ -1,8 +1,8 @@
 import { NextApiRequest, NextApiResponse } from 'next'
 import { getAuth } from 'firebase/auth'
 
-import { parseBody, returnError } from '../auth/'
-import { getEvents, removeValue } from '../database'
+import { parseBody, returnError } from '../data'
+import { getEvents, removeValue } from '../data/database'
 
 const auth = getAuth()
 

@@ -4,7 +4,7 @@ import { useState } from 'react'
 import useAppContext from '@/hooks/Other/use-app-context'
 import { className } from '@/utils'
 
-import { Status } from './api/auth/index.modal'
+import { Status } from './api/data/types/index.modal'
 
 import Head from '@/components/Head'
 import Section from '@/components/Layout/Section'

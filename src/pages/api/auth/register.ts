@@ -1,10 +1,10 @@
 import { NextApiRequest, NextApiResponse } from 'next'
 import { createUserWithEmailAndPassword, getAuth, updateProfile } from 'firebase/auth'
 
-import { returnError, defaultUserSettings, parseBody } from '.'
-import { setValue } from '../database'
+import { returnError, defaultUserSettings, parseBody } from '../data'
+import { setValue } from '../data/database'
 
-import { Status } from './index.modal'
+import { Status } from '../data/types/index.modal'
 
 const auth = getAuth()
 

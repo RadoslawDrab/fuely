@@ -1,8 +1,8 @@
 import { getAuth, updateProfile } from 'firebase/auth'
 import { NextApiRequest, NextApiResponse } from 'next'
 
-import { parseBody, returnError } from '../auth'
-import { updateValue } from '../database'
+import { parseBody, returnError } from '../data'
+import { updateValue } from '../data/database'
 
 const auth = getAuth()
 

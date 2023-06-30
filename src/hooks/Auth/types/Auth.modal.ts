@@ -1,4 +1,4 @@
-import { Status } from '@/pages/api/auth/index.modal'
+import { Status } from '@/pages/api/data/types/index.modal'
 import { AuthState, UserState } from './authReducer.modal'
 
 export interface Auth {

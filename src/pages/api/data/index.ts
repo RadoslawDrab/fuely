@@ -1,8 +1,8 @@
 import { NextApiRequest, NextApiResponse } from 'next'
 
-import { decrypt } from '../_local'
+import { decrypt } from './_local'
 
-import { UserSettings } from './index.modal'
+import { UserSettings } from './types/index.modal'
 
 export const defaultUserSettings: UserSettings = {
 	units: 'metric',
