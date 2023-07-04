@@ -17,6 +17,7 @@
 		"allowImportingTsExtensions": true,
 		"paths": {
 			"@/*": ["./src/*"],
+			"@main/*": ["./*"],
 			"@styles/*": ["./src/styles/components/*"],
 			"@type/*": ["./src/types/*"],
 			"@comp/*": ["./src/components/*"],
