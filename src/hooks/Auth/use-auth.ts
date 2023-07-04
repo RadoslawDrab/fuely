@@ -2,7 +2,7 @@ import { useCallback, useEffect, useReducer } from 'react'
 
 import { isClient } from '@/utils'
 import authReducer from './authReducer'
-import { encrypt } from '@main/_local'
+import { encrypt } from '@/utils/encryption'
 
 import { Status, UserObject } from '@/pages/api/data/types/index.modal'
 import { Auth } from './types/Auth.modal'

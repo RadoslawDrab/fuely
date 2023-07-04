@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from 'next'
 
-import { decrypt } from '@main/_local'
+import { decrypt } from '@/utils/encryption'
 
 import { UserSettings } from './types/index.modal'
 

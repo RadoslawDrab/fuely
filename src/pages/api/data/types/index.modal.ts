@@ -14,7 +14,3 @@ export interface Status {
 	code: string
 	message?: string
 }
-export interface ReturnObject<Type> {
-	status: Status
-	data?: Type
-}

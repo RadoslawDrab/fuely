@@ -37,7 +37,7 @@ export default function Login() {
 				setError(() => '')
 			})
 			.catch((error: Status) => {
-				const status = error.code.replace('auth/', '')
+				const status = error.code?.replace('auth/', '') || ''
 
 				switch (status) {
 					case 'user-not-found': {
