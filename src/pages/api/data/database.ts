@@ -1,7 +1,7 @@
 import { child, get, remove, set, update } from 'firebase/database'
 import { User, getAuth } from 'firebase/auth'
 
-import databaseRef from '@main/_firebase.ts'
+import databaseRef from './firebase.ts'
 
 import { Events } from '@/hooks/Events/types/Events.modal.ts'
 import { UserObject } from './types/index.modal.ts'
