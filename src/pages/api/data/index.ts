@@ -1,7 +1,5 @@
 import { NextApiRequest, NextApiResponse } from 'next'
 
-import { decrypt } from '@/utils/encryption'
-
 import { UserSettings } from './types/index.modal'
 
 export const defaultUserSettings: UserSettings = {
@@ -14,5 +12,5 @@ export function returnError(res: NextApiResponse, code: string, message?: string
 }
 
 export function parseBody(request: NextApiRequest): any {
-	return decrypt<string>(request.body).data || {}
+	return JSON.parse(request.body) || {}
 }
