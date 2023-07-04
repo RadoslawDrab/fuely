@@ -4,7 +4,7 @@ import { currencyConvert } from '@/utils/currency'
 import { formatDate } from '@/utils'
 import useAppContext from '../Other/use-app-context'
 import useUnit from '../Other/use-unit'
-import { encrypt } from '@/pages/api/data/_local'
+import { encrypt } from '@main/_local'
 
 import { EventObject, FullEvent } from './types/Events.modal'
 

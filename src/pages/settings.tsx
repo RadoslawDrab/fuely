@@ -2,7 +2,7 @@ import { useState } from 'react'
 
 import useAppContext from '@/hooks/Other/use-app-context'
 import useUserRedirect from '@/hooks/Other/use-user-redirect'
-import { encrypt } from './api/data/_local'
+import { encrypt } from '@main/_local'
 
 import Head from '@/components/Head'
 import LoadingIcon from '@/components/UI/LoadingIcon'

@@ -5,7 +5,7 @@ import useAppContext from '@/hooks/Other/use-app-context'
 import useUserRedirect from '@/hooks/Other/use-user-redirect'
 import { className, setSessionStorage } from '@/utils'
 import { Status } from './api/data/types/index.modal'
-import { encrypt } from './api/data/_local'
+import { encrypt } from '@main/_local'
 
 import { Event } from '@/hooks/Events/types/Events.modal'
 
