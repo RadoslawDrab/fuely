@@ -41,11 +41,15 @@ export default function Login() {
 
 				switch (status) {
 					case 'user-not-found': {
-						setError(() => 'Incorrect login or password')
+						setError('Incorrect login or password')
 						break
 					}
 					case 'wrong-password': {
-						setError(() => 'Incorrect login or password')
+						setError('Incorrect login or password')
+						break
+					}
+					case 'email-not-verified': {
+						setError('Email is not verified')
 						break
 					}
 					default: {

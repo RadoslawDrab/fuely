@@ -1,5 +1,5 @@
 import { NextApiRequest, NextApiResponse } from 'next'
-import { createUserWithEmailAndPassword, getAuth, updateProfile } from 'firebase/auth'
+import { createUserWithEmailAndPassword, getAuth, sendEmailVerification, updateProfile } from 'firebase/auth'
 
 import { returnError, defaultUserSettings, parseBody } from '../data'
 import { setValue } from '../data/database'
@@ -19,6 +19,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 				await updateProfile(credential.user, {
 					displayName: name || 'User'
 				})
+				await sendEmailVerification(credential.user)
 
 				setValue(defaultUserSettings, 'users')
 				setValue('', 'events')
