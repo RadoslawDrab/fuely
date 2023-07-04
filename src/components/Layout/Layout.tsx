@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { setSessionStorage } from '@/utils'
+import { className, setSessionStorage } from '@/utils'
 
 import { LayoutProps as Props } from './types/Layout.modal'
 
@@ -11,8 +11,9 @@ import styles from '@styles/Layout/Layout.module.scss'
 
 setSessionStorage({ formData: undefined })
 function Layout(props: Props) {
+	const layoutStyles = className(styles.layout, 'layout')
 	return (
-		<div className={styles.layout}>
+		<div className={layoutStyles}>
 			<Header />
 			<main>{props.children}</main>
 			<Footer />
