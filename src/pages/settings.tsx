@@ -2,7 +2,6 @@ import { useState } from 'react'
 
 import useAppContext from '@/hooks/Other/use-app-context'
 import useUserRedirect from '@/hooks/Other/use-user-redirect'
-import { encrypt } from '@/utils/encryption'
 
 import Head from '@/components/Head'
 import LoadingIcon from '@/components/UI/LoadingIcon'
@@ -37,7 +36,7 @@ export default function Settings() {
 		setLoading('settings', true)
 		await fetch('/api/user/update', {
 			method: 'PATCH',
-			body: encrypt({ email: newEmail })
+			body: JSON.stringify({ email: newEmail })
 		})
 	}
 	async function onPasswordChange(newPassword: string) {}
@@ -47,7 +46,7 @@ export default function Settings() {
 		setLoading('settings', true)
 		const response = await fetch('/api/user/update', {
 			method: 'PATCH',
-			body: encrypt({ displayName: newDisplayName, units: newUnit, currency: newCurrency })
+			body: JSON.stringify({ displayName: newDisplayName, units: newUnit, currency: newCurrency })
 		})
 		if (!response.ok) {
 			const error = await response.json()

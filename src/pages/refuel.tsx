@@ -5,7 +5,6 @@ import useAppContext from '@/hooks/Other/use-app-context'
 import useUserRedirect from '@/hooks/Other/use-user-redirect'
 import { className, setSessionStorage } from '@/utils'
 import { Status } from './api/data/types/index.modal'
-import { encrypt } from '@/utils/encryption'
 
 import { Event } from '@/hooks/Events/types/Events.modal'
 
@@ -39,7 +38,7 @@ export default function Refuel() {
 		setSessionStorage({ formData: event })
 		const response = await fetch('/api/user/refuel', {
 			method: 'POST',
-			body: encrypt({
+			body: JSON.stringify({
 				...event,
 				date
 			})
