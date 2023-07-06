@@ -13,12 +13,12 @@ import styles from '@styles/Layout/Layout.module.scss'
 setSessionStorage({ formData: undefined })
 function Layout(props: Props) {
 	const mainContainerRef = useRef<HTMLElement>(null)
-
+	const headerRef = useRef<HTMLElement>(null)
 	const layoutStyles = className(styles.layout, 'layout')
 	return (
-		<LayoutContextWrapper value={{ mainContainerRef: mainContainerRef }}>
+		<LayoutContextWrapper value={{ mainContainerRef, headerRef }}>
 			<div className={layoutStyles}>
-				<Header />
+				<Header ref={headerRef} />
 				<main ref={mainContainerRef}>{props.children}</main>
 				<Footer />
 			</div>

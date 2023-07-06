@@ -10,7 +10,7 @@ import Navigation from './Header/Navigation'
 
 import styles from '@styles/Layout/Header.module.scss'
 
-function Header() {
+export default React.forwardRef(function Header(_, ref: React.ForwardedRef<HTMLElement>) {
 	const router = useRouter()
 
 	const { toggleNavigation, navigationState } = useAppContext().Navigation
@@ -29,7 +29,7 @@ function Header() {
 	}
 
 	return (
-		<header className={styles.header}>
+		<header ref={ref} className={styles.header}>
 			<Button className={styles['logo-button']} onClick={redirect} variant="dark">
 				<Icon type="logo" alt="logo icon" />
 				<h1>Fuely</h1>
@@ -40,6 +40,4 @@ function Header() {
 			<Navigation />
 		</header>
 	)
-}
-
-export default Header
+})
