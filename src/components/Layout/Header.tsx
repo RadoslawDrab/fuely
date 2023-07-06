@@ -38,6 +38,7 @@ export default React.forwardRef(function Header(_, ref: React.ForwardedRef<HTMLE
 				<Icon type="equal" alt="navigation icon" />
 			</Button>
 			<Navigation />
+			<ul className="notifications"></ul>
 		</header>
 	)
 })
