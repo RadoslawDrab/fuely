@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- Created with Vectornator (http://vectornator.io/) -->
+<svg height="100%" stroke-miterlimit="10" style="fill-rule:nonzero;clip-rule:evenodd;stroke-linecap:round;stroke-linejoin:round;" version="1.1" viewBox="-3.55271e-15 0 30 30" width="100%" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<defs>
+<path d="M15 30C23.2644 30 30 23.2644 30 15C30 6.73558 23.2644 0 15 0C6.73558 0-3.55271e-15 6.73558-3.55271e-15 15C-3.55271e-15 23.2644 6.73558 30 15 30ZM15 27.5584C8.06178 27.5584 2.44164 21.9382 2.44164 15C2.44164 8.06178 8.06178 2.44164 15 2.44164C21.9382 2.44164 27.5584 8.06178 27.5584 15C27.5584 21.9382 21.9382 27.5584 15 27.5584ZM13.1638 23.5924C14.0867 23.5924 14.9135 23.0925 15.4519 22.3426L23.1814 11.0175C23.5659 10.4792 23.7005 9.94078 23.7005 9.47932C23.7005 8.11416 22.5084 7.11432 21.1625 7.11432C20.2588 7.11432 19.5858 7.57578 18.9705 8.51794L13.1638 17.6126L10.7795 14.94C10.2796 14.4208 9.72203 14.094 8.97215 14.094C7.62621 14.094 6.47255 15.1707 6.47255 16.5166C6.47255 17.1512 6.66483 17.6126 7.2032 18.2471L10.8372 22.4003C11.4717 23.1309 12.2216 23.5924 13.1638 23.5924Z" id="Fill"/>
+</defs>
+<g id="checkmark.circle">
+<g opacity="1">
+<use fill="#000000" fill-rule="nonzero" stroke="none" xlink:href="#Fill"/>
+<mask height="30" id="StrokeMask" maskUnits="userSpaceOnUse" width="30" x="-3.55271e-15" y="0">
+<rect fill="#000000" height="30" stroke="none" width="30" x="-3.55271e-15" y="0"/>
+<use fill="#ffffff" fill-rule="evenodd" stroke="none" xlink:href="#Fill"/>
+</mask>
+<use fill="none" mask="url(#StrokeMask)" stroke="#000000" stroke-linecap="butt" stroke-linejoin="miter" stroke-width="2.2" xlink:href="#Fill"/>
+</g>
+</g>
+</svg>

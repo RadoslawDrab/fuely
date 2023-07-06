@@ -14,6 +14,8 @@ const icons = [
 	'sun.max',
 	'moon',
 	'globe',
-	'car'
+	'car',
+	'info.circle',
+	'checkmark.circle'
 ] as const
 export default icons
