@@ -1,0 +1,117 @@
+@use '@/styles/library' as *;
+
+.notification {
+	background-color: $grey-200;
+	z-index: 4;
+	position: relative;
+	opacity: 0;
+	padding: 0.75em 1em;
+	min-width: 20rem;
+	max-width: min(30rem, 100vw - 4em);
+	border: 2px solid $grey-300;
+	border-radius: 4px;
+	box-shadow: 0 0 0.25rem 0.5rem rgba($color: $grey-200, $alpha: 0.1);
+
+	display: grid;
+	grid-template-columns: auto 1fr auto;
+	gap: 0.25em 1.2em;
+	.close-button {
+		aspect-ratio: 1 / 1;
+		width: 2rem;
+		img {
+			width: 100%;
+		}
+		&:hover {
+			background-color: $grey-300;
+		}
+	}
+	.notification-icon {
+		width: 2.4rem;
+		grid-row: 1 / -1;
+		align-self: center;
+	}
+	.notification-icon,
+	.close-button {
+		padding: 0.5rem;
+	}
+	.content {
+		grid-column: 2 / 3;
+		color: $grey-700;
+		font-size: $size-500;
+		letter-spacing: 0.5px;
+		.title {
+			color: $grey-800;
+			font-size: $size-600;
+			font-weight: 500;
+			letter-spacing: 0.25px;
+			display: block;
+			margin-bottom: 0.25em;
+		}
+	}
+	&.show {
+		animation: crossIn 500ms forwards;
+		@keyframes crossIn {
+			0% {
+				transform: translateY(-100%);
+				opacity: 0;
+				pointer-events: none;
+			}
+			50% {
+				opacity: 0;
+			}
+			100% {
+				transform: translateY(0%);
+				opacity: 1;
+				pointer-events: auto;
+			}
+		}
+	}
+	&.hide {
+		animation: crossOut 750ms forwards;
+		@keyframes crossOut {
+			0% {
+				transform: translateY(0%);
+				opacity: 1;
+				pointer-events: auto;
+			}
+			25% {
+				opacity: 0;
+			}
+			100% {
+				transform: translateY(-100%);
+				opacity: 0;
+				pointer-events: none;
+			}
+		}
+	}
+
+	&.notification {
+		&-info {
+			background-color: $main-200;
+			border-color: $main-300;
+			.close-button {
+				&:hover {
+					background-color: $main-300;
+				}
+			}
+		}
+		&-error {
+			background-color: $error-200;
+			border-color: $error-300;
+			.close-button {
+				&:hover {
+					background-color: $error-300;
+				}
+			}
+		}
+		&-success {
+			background-color: $success-200;
+			border-color: $success-300;
+			.close-button {
+				&:hover {
+					background-color: $success-300;
+				}
+			}
+		}
+	}
+}
