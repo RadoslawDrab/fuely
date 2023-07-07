@@ -5,6 +5,7 @@ import { useLayoutContext } from '@/context/layoutContext'
 import { className, getProp } from '@/utils'
 
 import { NotificationProps } from './types/Notification.modal'
+import { Icons } from './types/Icon.modal'
 
 import Button from './Button'
 import Icon from './Icon'
@@ -17,16 +18,28 @@ export default function Notification(props: NotificationProps) {
 
 	const { headerRef } = useLayoutContext()
 
+	const parentContainer = props.parentNode || headerRef?.current?.querySelector('ul.notifications')
+	if (!parentContainer) {
+		return
+	}
+
 	const notificationStyles = className(
 		styles.notification,
 		show ? styles.show : styles.hide,
 		getProp(styles, 'notification-' + props.type ?? 'default')
 	)
-
-	const parentContainer = props.parentNode || headerRef?.current?.querySelector('ul.notifications')
-	if (!parentContainer) {
-		return
-	}
+	const notificationIconType: Icons = (() => {
+		switch (props.type) {
+			case 'success':
+				return 'check'
+			case 'error':
+				return 'x'
+			case 'info':
+				return 'info'
+			default:
+				return 'bell'
+		}
+	})()
 
 	function onClose() {
 		setShow(false)
@@ -46,7 +59,7 @@ export default function Notification(props: NotificationProps) {
 	}
 	return createPortal(
 		<li ref={notificationRef} className={notificationStyles}>
-			<Icon className={styles['notification-icon']} type="info.circle" alt="info icon" />
+			<Icon className={styles['notification-icon']} type={notificationIconType} alt="info icon" />
 			<div className={styles.content}>
 				<span className={styles.title}>{props.title ?? 'Notification'}</span>
 				{props.children}
