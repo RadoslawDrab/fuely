@@ -3,6 +3,7 @@ const icons = [
 	'car',
 	'bell',
 	'caret-right',
+	'caret-left',
 	'chart-line',
 	'check',
 	'equals',
