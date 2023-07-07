@@ -16,7 +16,7 @@ export default function RemoveButton(props: Props) {
 	return (
 		<>
 			<Button onClick={() => setConfirmationIsOpen(true)} className={styles.button} variant="error">
-				<Icon type="xmark" alt="remove icon" />
+				<Icon type="x" alt="remove icon" />
 				<span>{getText('Remove')}</span>
 			</Button>
 			<Modal title="Confirmation" show={confirmationIsOpen} type="center" className={styles.modal}>

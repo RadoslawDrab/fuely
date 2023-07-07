@@ -22,42 +22,42 @@ export default function usePages(): Pages {
 		{
 			name: 'about',
 			display: 'About',
-			icon: 'gearshape',
+			icon: 'info',
 			path: '/about',
 			condition: () => true
 		},
 		{
 			name: 'dashboard',
 			display: 'Dashboard',
-			icon: 'rectangle.3.group',
+			icon: 'chart-line',
 			path: '/dashboard',
 			condition: () => isLoggedIn
 		},
 		{
 			name: 'refuel',
 			display: 'Refuel',
-			icon: 'fuelpump',
+			icon: 'gas-pump',
 			path: '/refuel',
 			condition: () => isLoggedIn
 		},
 		{
 			name: 'login',
 			display: 'Log in',
-			icon: 'person.crop.circle',
+			icon: 'user',
 			path: '/login',
 			condition: () => !isLoggedIn
 		},
 		{
 			name: 'register',
 			display: 'Register',
-			icon: 'person.crop.circle.badge.plus',
+			icon: 'user-plus',
 			path: '/register',
 			condition: () => !isLoggedIn
 		},
 		{
 			name: 'settings',
 			display: 'Settings',
-			icon: 'gearshape',
+			icon: 'gear',
 			path: '/settings',
 			condition: () => isLoggedIn
 		}

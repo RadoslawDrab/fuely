@@ -72,7 +72,7 @@ export default function Dashboard(props: Props) {
 					<span>{item.fuelUnit}</span>
 				</data>
 				<Button className={styles.button} onClick={navigate} data={{ id: item.id }} variant={'redirect'}>
-					<Icon type="arrow.right" alt="right arrow icon" />
+					<Icon type="caret-right" alt="right arrow icon" />
 				</Button>
 			</li>
 		)

@@ -32,14 +32,14 @@ export default function Options() {
 		<div className={styles.options}>
 			<ul>
 				<li>
-					<Icon className={styles['globe-item']} type="globe" alt="globe icon" />
+					<Icon className={styles['globe-item']} type="translate" alt="globe icon" />
 				</li>
 				{languageButtons}
 			</ul>
 			<Button className={styles['theme-button']} onClick={toggleTheme} variant="dark">
 				{!isDarkTheme && (
 					<>
-						<Icon type="sun.max" alt="sun icon" />
+						<Icon type="sun" alt="sun icon" />
 						<span>{getText('Light')}</span>
 					</>
 				)}

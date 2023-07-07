@@ -52,7 +52,7 @@ export default function Notification(props: NotificationProps) {
 				{props.children}
 			</div>
 			<Button className={styles['close-button']} onClick={onClose} variant={'redirect'}>
-				<Icon type="xmark" alt="close icon" />
+				<Icon type="x" alt="close icon" />
 			</Button>
 		</li>,
 		parentContainer,

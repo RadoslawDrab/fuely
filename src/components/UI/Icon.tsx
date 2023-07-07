@@ -11,7 +11,7 @@ export default function Icon(props: Props) {
 	const iconStyles = className(styles.icon, 'icon', props.className)
 
 	// Imports icon based on `type` from `props`
-	const icon = require(`/public/icons/svg/${props.type}.svg`)
+	const icon = require(`/public/icons/${props.type}.svg`)
 
 	// Checks if icon contains any source
 	if (!icon?.default?.src) {

@@ -35,7 +35,7 @@ export default React.forwardRef(function Header(_, ref: React.ForwardedRef<HTMLE
 				<h1>Fuely</h1>
 			</Button>
 			<Button className={navButtonStyles} onClick={toggleNavigation} variant="dark">
-				<Icon type="equal" alt="navigation icon" />
+				<Icon type="equals" alt="navigation icon" />
 			</Button>
 			<Navigation />
 			<ul className="notifications"></ul>

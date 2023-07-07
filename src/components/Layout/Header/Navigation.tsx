@@ -35,7 +35,7 @@ export default function Navigation() {
 				{isLoggedIn && (
 					<li className="logout-item">
 						<Button className="logout-button" onClick={logoutUser} variant="dark">
-							<Icon type={'arrow.up.right.square'} alt="logout icon" />
+							<Icon type="arrow-square-out" alt="logout icon" />
 							<span>{getText('Logout')}</span>
 						</Button>
 					</li>
