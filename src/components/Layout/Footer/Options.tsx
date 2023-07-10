@@ -32,7 +32,7 @@ export default function Options() {
 		<div className={styles.options}>
 			<ul>
 				<li>
-					<Icon className={styles['globe-item']} type="translate" alt="globe icon" />
+					<Icon className={styles['translation-icon']} type="translate" alt="translate icon" />
 				</li>
 				{languageButtons}
 			</ul>
