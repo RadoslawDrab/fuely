@@ -144,8 +144,11 @@
 			background-color: $grey-300;
 		}
 		&:disabled {
-			background-color: $grey-500;
-			color: $grey-200;
+			background-color: $grey-200;
+			color: $grey-400;
+			img {
+				filter: $grey-400__filter;
+			}
 			&.selected {
 				background-color: $main-600;
 			}

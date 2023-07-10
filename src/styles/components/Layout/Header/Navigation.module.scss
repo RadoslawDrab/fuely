@@ -8,6 +8,9 @@
 
 	background-color: inherit;
 	@include theme(($grey-800, $grey-200), color);
+	border-style: solid;
+	border-color: rgba($color: $grey-200, $alpha: 0.2);
+	border-width: 1px 0 0 1px;
 
 	padding: 2em;
 	padding-right: 0;
@@ -29,7 +32,6 @@
 		align-items: stretch;
 		gap: 1.25em;
 		li {
-			// Button
 			& > button {
 				width: 100%;
 				border-top-right-radius: 0;
@@ -38,14 +40,9 @@
 				align-items: center;
 				gap: 2em;
 				padding: 1em 3em 1em 2em;
-				// Icon
-				img {
-					width: 2.1em;
-				}
-				// Text
 				span {
 					font-size: $size-600;
-					font-weight: 500;
+					letter-spacing: 0.75px;
 				}
 
 				@include global(('.login-button', '.settings-button'), true) {
@@ -60,6 +57,7 @@
 		clip-path: polygon(0 0, 0 100%, 100% 100%, 100% 0);
 		border-bottom-left-radius: 5px;
 		border-bottom-right-radius: 5px;
+		border-width: 1px;
 
 		@include global(('.hidden'), true) {
 			right: 0;
@@ -77,9 +75,6 @@
 					border-radius: 5px;
 					padding: 0.75em 1.6em;
 					gap: 1.4em;
-					img {
-						width: 1.75em;
-					}
 					span {
 						font-size: $size-500;
 					}
