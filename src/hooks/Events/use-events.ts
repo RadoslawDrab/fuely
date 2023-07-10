@@ -35,12 +35,12 @@ export default function useEvents(): EventObject {
 	}, [events])
 
 	const getEvent = useCallback(
-		function (index: number): Promise<FullEvent> {
+		function (index: number, datesArray: string[] = sortedDates): Promise<FullEvent> {
 			return new Promise(async (resolve: (event: FullEvent) => void, reject: (errorMessage: string) => void) => {
-				if (sortedDates.length <= 0) return reject('No events')
+				if (datesArray.length <= 0) return reject('No events')
 
 				// Gets date based on index
-				const date = sortedDates[Math.max(Math.min(index, sortedDates.length - 1), 0)]
+				const date = datesArray[Math.max(Math.min(index, datesArray.length - 1), 0)]
 				const formattedDate = formatDate(date.split(':')[0])
 				const id = +date.split(':')[1]
 

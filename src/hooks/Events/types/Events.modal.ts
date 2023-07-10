@@ -18,7 +18,7 @@ export interface EventObject {
 	sortedDates: string[]
 	isLoading: boolean
 	emptyEvent: FullEvent
-	getEvent: (index: number) => Promise<FullEvent>
+	getEvent: (index: number, datesArray?: string[]) => Promise<FullEvent>
 	getEventById: (eventId: string) => Promise<FullEvent>
 	formatDate: (date: string) => string
 	removeEvent: (eventId: string) => Promise<any>
