@@ -4,6 +4,8 @@ const icons = [
 	'bell',
 	'caret-right',
 	'caret-left',
+	'caret-double-right',
+	'caret-double-left',
 	'chart-line',
 	'check',
 	'equals',
