@@ -1,21 +1,55 @@
 @use '@/styles/library' as *;
 
 .refuel-button {
+	box-shadow: none;
 	align-self: center;
-	display: flex;
-	align-items: center;
-	justify-self: center;
-	padding: 1em 2em;
+	justify-self: flex-end;
+
+	position: fixed;
+	z-index: 5;
+	bottom: 1em;
+	right: 1em;
+	padding: 1em;
+	border-radius: 50%;
+	border: 1.5px solid $grey-300;
+
 	span {
+		position: absolute;
+		right: 50%;
+		top: 50%;
+		height: calc(100% + 3px);
+		transform: translateY(-50%);
+		background-color: inherit;
+		padding: inherit;
+		padding-left: 1.5em;
+		padding-right: 2em;
+		border-radius: 2.5rem 0 0 2.5rem;
+		border: inherit;
+		border-right: 0;
+
+		color: $grey-800;
 		font-size: $size-500;
-		font-weight: 500;
 		letter-spacing: 0.25px;
+
+		transition: inherit;
+
+		clip-path: ellipse(0% 50% at 100% 50%);
+		opacity: 0;
+	}
+	@media screen and (min-width: $size-tablet-l) {
+		right: calc((100% - $size-tablet-l) / 2 + 1.5em);
+	}
+	@media screen and (pointer: fine) {
+		&:hover {
+			span {
+				clip-path: ellipse(150% 70% at 100% 50%);
+				opacity: 1;
+			}
+		}
 	}
 }
 @media screen and (min-width: $size-tablet-xs) {
 	.refuel-button {
-		grid-column: 1 / -1;
-		padding: 1.5em 3em;
 		span {
 			font-size: $size-600;
 		}
