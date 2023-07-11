@@ -74,6 +74,9 @@ export interface LocalAppSettings {
 }
 export interface SessionAppSettings {
 	formData: any
+	filters: {
+		[key: string]: string
+	}
 }
 
 export const emailRegEx = /[^\.@]*@[^\.@]*\.[^\.@]{2,3}/
