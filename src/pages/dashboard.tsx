@@ -9,7 +9,7 @@ import Head from '@/components/Head'
 import Button from '@/components/UI/Button'
 import Icon from '@/components/UI/Icon'
 import LoadingIcon from '@/components/UI/LoadingIcon'
-import MainDashboard from '@/components/pages/Dashboard/MainDashboard'
+import Events from '@/components/pages/Dashboard/Events'
 import Overview from '@/components/pages/Dashboard/Overview'
 
 import styles from '@styles/pages/Dashboard/index.module.scss'
@@ -37,7 +37,7 @@ export default function Dashboard() {
 		<>
 			<Head title={`Fuely | Dashboard - ${user.displayName}`} description={`Dashboard of ${user.displayName} user`} />
 			<Overview className={styles.overview} />
-			<MainDashboard className={styles.dashboard} />
+			<Events className={styles.events} />
 			<Button className={styles['refuel-button']} onClick={refuelButtonClick}>
 				<span>{getText('Refuel')}</span>
 				<Icon type="gas-pump" alt="fuelpump icon" />

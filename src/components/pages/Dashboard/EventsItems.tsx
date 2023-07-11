@@ -4,18 +4,18 @@ import React, { useMemo } from 'react'
 import useUnit from '@/hooks/Other/use-unit'
 import { getRandomKey } from '@/utils'
 
-import { MainDashboardItem, MainDashboardItemsProps as Props } from './types/MainDashboard.modal'
+import { EventsItem, EventsItemsProps as Props } from './types/Events.modal'
 
 import Button from '@/components/UI/Button'
 import Icon from '@/components/UI/Icon'
 
-import styles from '@styles/pages/Dashboard/MainDashboardItems.module.scss'
+import styles from '@styles/pages/Dashboard/EventsItems.module.scss'
 
-export default function MainDashboardItem(props: Props) {
+export default function EventsItem(props: Props) {
 	const router = useRouter()
 	const { convertIfImperial, units } = useUnit()
 
-	const dashboardItems: MainDashboardItem[] = useMemo(() => {
+	const dashboardItems: EventsItem[] = useMemo(() => {
 		return props.events.map((event) => {
 			return {
 				id: event.fullId,

@@ -1,22 +1,22 @@
 import React, { useCallback, useMemo, useState } from 'react'
 
 import Dashboard from '@/components/Layout/Dashboard'
-import MainDashboardItem from '@/components/pages/Dashboard/MainDashboardItems'
+import EventsItems from '@/components/pages/Dashboard/EventsItems'
 
-import { MainDashboardProps as Props } from './types/MainDashboard.modal'
+import { EventsProps as Props } from './types/Events.modal'
 import { FullEvent } from '@/hooks/Events/types/Events.modal'
 
-export default function MainDashboard(props: Props) {
+export default function Events(props: Props) {
 	const [events, setEvents] = useState<FullEvent[]>([])
 
-	const items: any = useMemo(() => <MainDashboardItem events={events} />, [events])
+	const items: any = useMemo(() => <EventsItems events={events} />, [events])
 
 	const onLoad = useCallback((events: FullEvent[]) => {
 		setEvents(events)
 	}, [])
 	return (
 		<>
-			<Dashboard className={props.className} onEventsLoad={onLoad}>
+			<Dashboard name="Events" className={props.className} onEventsLoad={onLoad}>
 				{items}
 			</Dashboard>
 		</>

@@ -59,10 +59,10 @@
 	}
 
 	.overview,
-	.dashboard {
+	.events {
 		grid-column: 1 / -1;
 	}
-	.dashboard {
+	.events {
 		& > div {
 			max-width: $size-tablet-xs;
 			ul {

@@ -1,9 +1,9 @@
 import { FullEvent } from '@/hooks/Events/types/Events.modal'
 
-export interface MainDashboardItemsProps {
+export interface EventsItemsProps {
 	events: FullEvent[]
 }
-export interface MainDashboardItem {
+export interface EventsItem {
 	id: string
 	date: string
 	cost: number
@@ -12,6 +12,6 @@ export interface MainDashboardItem {
 	fuelUnit: string
 }
 
-export interface MainDashboardProps {
+export interface EventsProps {
 	className?: string
 }
