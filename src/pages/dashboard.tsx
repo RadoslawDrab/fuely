@@ -26,7 +26,7 @@ export default function Dashboard() {
 	const { isLoading: eventsAreLoading } = useEvents()
 
 	if (userIsLoading || eventsAreLoading || !isLoggedIn) {
-		return <LoadingIcon />
+		return <LoadingIcon type="car" />
 	}
 
 	function refuelButtonClick() {

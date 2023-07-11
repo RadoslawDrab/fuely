@@ -65,7 +65,7 @@ export default function Register() {
 	})
 
 	if (isLoading) {
-		return <LoadingIcon />
+		return <LoadingIcon type="car" />
 	}
 
 	return (

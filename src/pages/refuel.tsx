@@ -66,7 +66,7 @@ export default function Refuel() {
 	}
 
 	if (isLoading) {
-		return <LoadingIcon />
+		return <LoadingIcon type="car" />
 	}
 
 	return (

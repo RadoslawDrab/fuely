@@ -64,7 +64,7 @@ export default function Login() {
 	}
 
 	if (isLoading) {
-		return <LoadingIcon />
+		return <LoadingIcon type="car" />
 	}
 	return (
 		<>

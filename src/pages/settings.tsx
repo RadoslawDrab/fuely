@@ -29,7 +29,7 @@ export default function Settings() {
 	})
 
 	if (userIsLoading) {
-		return <LoadingIcon />
+		return <LoadingIcon type="car" />
 	}
 
 	async function onEmailChange(newEmail: string) {

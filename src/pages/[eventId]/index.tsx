@@ -62,7 +62,7 @@ export default function Item() {
 			})
 	}
 	if (userIsLoading || isLoading || events.length !== 5 || !events[2]) {
-		return <LoadingIcon />
+		return <LoadingIcon type="car" />
 	}
 	return (
 		<>
