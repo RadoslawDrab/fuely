@@ -1,0 +1,66 @@
+@use '@/styles/library' as *;
+
+.section {
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	max-width: $size-phone-l;
+	width: 100%;
+	ul {
+		--per-page: 6;
+		list-style: none;
+		display: grid;
+		grid-template-rows: repeat(var(--per-page), 1fr);
+	}
+
+	@include global('.loading-icon') {
+		margin: 1em;
+		align-self: center;
+	}
+	.filter {
+		width: 100%;
+		display: flex;
+		justify-content: flex-end;
+		gap: 2em;
+		align-items: center;
+		padding-bottom: 0.75em;
+		border-bottom: 1.5px solid $grey-300;
+		font-size: $size-400;
+		label {
+			color: $grey-500;
+		}
+		select {
+			padding: 0.25em 1em;
+			width: 4rem;
+			color: $grey-500;
+		}
+	}
+	.controls {
+		width: 100%;
+		align-self: center;
+		margin-top: 0.75em;
+		padding: 0.75em 1em;
+		border-top: 1.5px solid $grey-300;
+
+		display: grid;
+		grid-template-columns: repeat(2, auto) 1fr repeat(2, auto);
+		justify-content: space-between;
+		align-items: center;
+		gap: 0.25em;
+		span {
+			font-size: $size-700;
+			color: $grey-800;
+			text-align: center;
+			margin: 0 0.5em;
+		}
+		button {
+			aspect-ratio: 1 / 1;
+			border-radius: 50%;
+			padding: 0.5em;
+			img {
+				width: 1.25rem;
+			}
+		}
+	}
+}
