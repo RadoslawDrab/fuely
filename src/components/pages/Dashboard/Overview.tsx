@@ -67,6 +67,26 @@ export default function Overview(props: Props) {
 						<sup>{units.distance}</sup>/<sub>{units.fuel}</sub>
 					</>
 				)
+			},
+			{
+				label: getText('Cost/Fuel'),
+				currentValue: event0.cost / event0.fuel,
+				previousValue: event1.cost / event1.fuel,
+				unit: (
+					<>
+						<sup>{units.currency.toUpperCase()}</sup>/<sub>{units.fuel}</sub>
+					</>
+				)
+			},
+			{
+				label: getText('Distance/Cost'),
+				currentValue: event0.distance / event0.cost,
+				previousValue: event1.distance / event1.cost,
+				unit: (
+					<>
+						<sup>{units.distance}</sup>/<sub>{units.currency.toUpperCase()}</sub>
+					</>
+				)
 			}
 		]
 	}, [
@@ -79,6 +99,7 @@ export default function Overview(props: Props) {
 		event1.fuel,
 		getText,
 		isMetric,
+		units.currency,
 		units.distance,
 		units.fuel
 	])
