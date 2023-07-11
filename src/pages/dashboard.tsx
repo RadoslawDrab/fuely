@@ -37,7 +37,6 @@ export default function Dashboard() {
 		<>
 			<Head title={`Fuely | Dashboard - ${user.displayName}`} description={`Dashboard of ${user.displayName} user`} />
 			<Overview className={styles.overview} />
-			<hr className={styles.line} />
 			<MainDashboard className={styles.dashboard} />
 			<Button className={styles['refuel-button']} onClick={refuelButtonClick}>
 				<span>{getText('Refuel')}</span>

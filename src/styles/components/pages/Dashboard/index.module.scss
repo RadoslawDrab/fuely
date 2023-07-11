@@ -48,6 +48,9 @@
 		}
 	}
 }
+.overview {
+	margin-bottom: 2rem;
+}
 @media screen and (min-width: $size-tablet-xs) {
 	.refuel-button {
 		span {
@@ -89,8 +92,5 @@
 				padding: 0.5em 10em;
 			}
 		}
-	}
-	hr.line {
-		display: none;
 	}
 }
