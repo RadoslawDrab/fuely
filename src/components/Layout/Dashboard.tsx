@@ -81,7 +81,9 @@ export default function Dashboard(props: Props) {
 				<Button onClick={changeCurrentPage} data={{ amount: -1 }} variant="redirect">
 					<Icon type="caret-left" alt="previous page icon" />
 				</Button>
-				<span>{currentPage + 1}</span>
+				<span>
+					{currentPage + 1} / {pagesCount}
+				</span>
 				<Button onClick={changeCurrentPage} data={{ amount: 1 }} variant="redirect">
 					<Icon type="caret-right" alt="next page icon" />
 				</Button>
