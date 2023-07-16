@@ -127,8 +127,8 @@ export default function Overview(props: Props) {
 					className={styles.graph}
 					max={max}
 					items={[
-						{ name: value, value: currentValue || max },
-						{ name: prevValue, value: previousValue || max }
+						{ tooltip: value, value: currentValue || max },
+						{ tooltip: prevValue, value: previousValue || max }
 					]}
 				/>
 
