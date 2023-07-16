@@ -5,6 +5,7 @@
 	width: 100%;
 	justify-self: center;
 	&-content {
+		width: 100%;
 		.data-section {
 			header {
 				display: flex;
@@ -41,7 +42,7 @@
 		&-content {
 			display: grid;
 			grid-template-columns: 1fr 1fr;
-			gap: 2em;
+			gap: 1em 2.5em;
 		}
 	}
 }
