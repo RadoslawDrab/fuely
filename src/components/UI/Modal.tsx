@@ -23,7 +23,7 @@ export default function Modal(props: Props) {
 					{props.allowClosing && (
 						<form method="dialog">
 							<Button className="close-button" onClick={() => {}}>
-								<Icon type="xmark" alt="close icon" />
+								<Icon type="x" alt="close icon" />
 							</Button>
 						</form>
 					)}
