@@ -3,15 +3,22 @@
 .item {
 	list-style: none;
 	font-size: $size-400;
-	display: grid;
-	grid-template-columns: repeat(3, auto);
-	justify-items: space-between;
-	gap: 1em 1.25em;
+	& > * {
+		width: 100%;
+	}
 	.current {
-		color: $main-600;
-		font-weight: 600;
-		&.percent {
-			opacity: 0;
+		color: $main-700;
+		.percent {
+			color: $main-500;
+		}
+	}
+	label {
+		display: flex;
+		justify-content: space-between;
+		.percent {
+			font-size: $size-200;
+			color: $grey-500;
+			margin-right: 0.5em;
 		}
 	}
 	@media screen and (min-width: $size-phone-m) {
