@@ -1,10 +1,12 @@
+import { Currencies } from '@/utils/currency'
+
 export interface UserData {
 	displayName: string
 	email: string | null
 }
 export interface UserSettings {
 	units: 'metric' | 'imperial'
-	currency: string
+	currency: Currencies
 }
 export interface UserObject extends UserData {
 	settings: UserSettings
