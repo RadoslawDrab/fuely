@@ -30,7 +30,7 @@ export default function Select(props: Props) {
 			onChange={onChange}
 			onFocus={props.onFocus}
 			onBlur={props.onBlur}
-			defaultValue={selectedOption?.value}>
+			value={selectedOption?.value}>
 			{options}
 		</select>
 	)

@@ -8,6 +8,7 @@ export interface FormInputProps {
 	errorText?: string
 	min?: number
 	max?: number
+	value?: any
 	defaultValue?: any
 	defaultChecked?: boolean
 	getValue?: (value: string) => void
