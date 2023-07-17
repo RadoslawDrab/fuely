@@ -33,13 +33,27 @@ export default function Settings() {
 	}
 
 	async function onEmailChange(newEmail: string) {
-		setLoading('settings', true)
-		await fetch('/api/user/update', {
+		setLoading('email', true)
+		const response = await fetch('/api/user/update', {
 			method: 'PATCH',
 			body: JSON.stringify({ email: newEmail })
 		})
+		if (!response.ok) {
+			const error = await response.json()
+			onError('email', error.code)
+			return
+		}
+		loginUsingToken()
+
+		setLoading('email', false)
 	}
-	async function onPasswordChange(newPassword: string) {}
+	async function onPasswordChange(newPassword: string) {
+		setLoading('settings', true)
+		await fetch('/api/user/update', {
+			method: 'PATCH',
+			body: JSON.stringify({ password: newPassword })
+		})
+	}
 
 	async function onSettingsFormSubmit(newDisplayName: string | null, newUnit: string | null, newCurrency: string | null) {
 		if (!(newDisplayName || newUnit || newCurrency)) return
