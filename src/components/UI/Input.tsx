@@ -17,6 +17,7 @@ export default function Input(props: Props) {
 			name={props.name}
 			type={props.type}
 			placeholder={props.placeholder}
+			value={props.value}
 			defaultValue={props.defaultValue}
 			checked={props.checked}
 			defaultChecked={props.defaultChecked}

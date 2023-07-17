@@ -54,6 +54,7 @@ export default function FormInput(props: Props) {
 				placeholder={props.placeholder ?? props.text}
 				min={props.min}
 				max={props.max}
+				value={props.value}
 				defaultValue={props.defaultValue}
 				defaultChecked={props.defaultChecked}
 			/>

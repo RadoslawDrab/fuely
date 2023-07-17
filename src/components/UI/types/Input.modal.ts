@@ -5,6 +5,7 @@ export interface InputProps {
 	className?: string
 	name?: string
 	placeholder?: string
+	value?: string
 	defaultValue?: string
 	defaultChecked?: boolean
 	checked?: boolean
