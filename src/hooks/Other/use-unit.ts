@@ -16,7 +16,7 @@ export default function useUnit() {
 	const units = {
 		distance: 'km',
 		fuel: 'L',
-		currency: user.settings?.currency ?? 'USD'
+		currency: user.settings?.currency ?? 'usd'
 	}
 	if (user) {
 		const system = user.settings?.units
