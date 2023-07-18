@@ -28,15 +28,12 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 				const events = await getEvents(currentUser)
 
 				const eventDatesSorted = Object.keys(events).reverse()
-				const lastEvent = events[eventDatesSorted[0] || ''] || {}
 
-				const distance = Math.max(odometer - (lastEvent.odometer || odometer), 0)
 				const event: Event = {
 					cost,
 					odometer,
 					fuel,
-					currency: currency || userObject.settings.currency,
-					distance
+					currency: currency || userObject.settings.currency
 				}
 
 				const curDate = date && new Date(date) ? new Date(date) : new Date()

@@ -34,6 +34,26 @@ export default function useEvents(): EventObject {
 		setIsLoading(() => events === undefined)
 	}, [events])
 
+	const getDistance = useCallback(
+		async function (eventId: string): Promise<number> {
+			return new Promise((resolve) => {
+				const eventIndex = sortedDates.findIndex((date) => date === eventId)
+				const currentEvent = events[sortedDates[eventIndex]]
+
+				// Checks whether last event exists. If so returns this event. Otherwise returns null
+				const lastEvent = eventIndex + 1 < sortedDates.length ? events[sortedDates[eventIndex + 1]] : null
+
+				if (!lastEvent) {
+					return resolve(0)
+				}
+
+				const distance = Math.max(currentEvent.odometer - lastEvent.odometer, 0)
+
+				return resolve(distance)
+			})
+		},
+		[events, sortedDates]
+	)
 	const getEvent = useCallback(
 		function (index: number, datesArray: string[] = sortedDates): Promise<FullEvent> {
 			return new Promise(async (resolve: (event: FullEvent) => void, reject: (errorMessage: string) => void) => {
@@ -41,19 +61,20 @@ export default function useEvents(): EventObject {
 
 				// Gets date based on index
 				const date = datesArray[Math.max(Math.min(index, datesArray.length - 1), 0)]
+				if (!date) {
+					return reject('No event for this index')
+				}
 				const formattedDate = formatDate(date.split(':')[0])
 				const id = +date.split(':')[1]
 
-				if (!date) {
-					reject('No date for this index')
-				}
-
 				const e = events[date]
+
+				const distance = await getDistance(date)
 
 				// Converts units based on user preference
 				const convertedEvent = {
 					...e,
-					distance: convertIfImperial(e.distance, 'distance'),
+					distance: convertIfImperial(distance, 'distance'),
 					fuel: convertIfImperial(e.fuel, 'fuel'),
 					odometer: convertIfImperial(e.odometer, 'distance')
 				}
@@ -67,45 +88,14 @@ export default function useEvents(): EventObject {
 				resolve({ id, fullId: date, date: formattedDate, ...event })
 			})
 		},
-		[convertIfImperial, events, settings?.currency, sortedDates]
+		[convertIfImperial, events, getDistance, settings?.currency, sortedDates]
 	)
 	const getEventById = useCallback(
-		function (eventId: string): Promise<FullEvent> {
-			return new Promise(async (resolve: (event: FullEvent) => void, reject: (errorMessage: string) => void) => {
-				if (sortedDates.length <= 0) return reject('No events')
-
-				// Gets date based on `eventId`
-				const date = sortedDates.find((date) => date === eventId)
-				if (!date) {
-					return reject(`No event with ${eventId} id`)
-				}
-				const formattedDate = formatDate(date.split(':')[0])
-				const id = +date.split(':')[1]
-
-				if (!date) {
-					reject('No date for this index')
-				}
-
-				const e = events[date]
-
-				// Converts units based on user preference
-				const convertedEvent = {
-					...e,
-					distance: convertIfImperial(e.distance, 'distance'),
-					fuel: convertIfImperial(e.fuel, 'fuel'),
-					odometer: convertIfImperial(e.odometer, 'distance')
-				}
-
-				// Updates cost of an event based on user's currency preference
-				const newCurrency = settings?.currency || 'usd'
-				const newCost = await currencyConvert(convertedEvent.cost, convertedEvent.currency, newCurrency)
-				const event = { ...convertedEvent, cost: newCost, currency: newCurrency }
-
-				// Returns object with date and event data
-				resolve({ id, fullId: date, date: formattedDate, ...event })
-			})
+		function (eventId: string, datesArray: string[] = sortedDates): Promise<FullEvent> {
+			const eventIndex = sortedDates.findIndex((date) => date === eventId)
+			return getEvent(eventIndex, datesArray)
 		},
-		[convertIfImperial, events, settings?.currency, sortedDates]
+		[getEvent, sortedDates]
 	)
 
 	const removeEvent = useCallback(function (eventId: string) {
@@ -127,6 +117,7 @@ export default function useEvents(): EventObject {
 			}
 		})
 	}, [])
+
 	return {
 		events,
 		sortedDates,
@@ -135,6 +126,7 @@ export default function useEvents(): EventObject {
 		getEvent,
 		getEventById,
 		formatDate,
-		removeEvent
+		removeEvent,
+		getDistance
 	}
 }
