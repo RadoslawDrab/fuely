@@ -3,4 +3,5 @@ export interface SectionProps {
 	children?: any
 	className?: string
 	contentClassName?: string
+	disableContent?: boolean
 }
