@@ -4,9 +4,10 @@ import { className, setSessionStorage } from '@/utils'
 
 import { LayoutProps as Props } from './types/Layout.modal'
 
+import { LayoutContextWrapper } from '@/utils/LayoutContextWrapper'
+import Notifications from '../UI/Notifications'
 import Footer from './Footer'
 import Header from './Header'
-import { LayoutContextWrapper } from '@/utils/LayoutContextWrapper'
 
 import styles from '@styles/Layout/Layout.module.scss'
 
@@ -22,6 +23,7 @@ function Layout(props: Props) {
 				<main ref={mainContainerRef}>{props.children}</main>
 				<Footer />
 			</div>
+			<Notifications />
 		</LayoutContextWrapper>
 	)
 }
