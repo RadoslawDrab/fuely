@@ -1,12 +1,12 @@
 import { useState } from 'react'
 
 import { NotificationType } from '@/components/UI/types/Notification.modal'
-import { NotificationData, Notification } from './types/Notification.modal'
+import { NotificationData, Notification, NotificationObject } from './types/Notification.modal'
 
-export default function useNotification() {
+export default function useNotification(): NotificationObject {
 	const [notifications, setNotifications] = useState<NotificationData[]>([])
 
-	function addNotification(notification: Notification, back: boolean = false, index?: number): number {
+	function addNotification(notification: Notification, atTheEnd: boolean = false, index?: number): number {
 		// Checks if `index` prop is in range of 0 to 10000
 		const isInRange: boolean = index !== undefined && index >= 0 && index < 10000
 
@@ -28,8 +28,8 @@ export default function useNotification() {
 			index: notificationIndex,
 			title: notificationTitle
 		}
-		// Reverses appending to array based on `back` prop
-		const newNotifications = back ? [...notifications, newNotification] : [newNotification, ...notifications]
+		// Reverses appending to array based on `atTheEnd` prop
+		const newNotifications = atTheEnd ? [...notifications, newNotification] : [newNotification, ...notifications]
 
 		setNotifications(newNotifications)
 		return newNotification.index
@@ -47,4 +47,12 @@ export default function useNotification() {
 		return notifications
 	}
 	return { addNotification, removeNotification, getNotifications, removeAllNotifications, removeAllOfType }
+}
+
+export const exampleNotificationObject: NotificationObject = {
+	addNotification: () => -1,
+	getNotifications: () => [],
+	removeNotification: () => {},
+	removeAllNotifications: () => {},
+	removeAllOfType: () => {}
 }
