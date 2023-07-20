@@ -5,8 +5,9 @@ import { NotificationData, Notification, NotificationObject } from './types/Noti
 
 export default function useNotification(): NotificationObject {
 	const [notifications, setNotifications] = useState<NotificationData[]>([])
+	const firstTimedNotification = notifications.find((notification) => notification.timer && notification.timer > 0) ?? null
 
-	function addNotification(notification: Notification, atTheEnd: boolean = false, index?: number): number {
+	function addNotification(notification: Notification, synchronousTimer: boolean = true, index?: number): number {
 		// Checks if `index` prop is in range of 0 to 10000
 		const isInRange: boolean = index !== undefined && index >= 0 && index < 10000
 
@@ -23,35 +24,57 @@ export default function useNotification(): NotificationObject {
 				? notification.title
 				: notification.type[0].toUpperCase() + notification.type.slice(1)
 
-		const newNotification = {
-			...notification,
-			index: notificationIndex,
-			title: notificationTitle
-		}
-		// Reverses appending to array based on `atTheEnd` prop
-		const newNotifications = atTheEnd ? [...notifications, newNotification] : [newNotification, ...notifications]
+		setNotifications((notifications) => {
+			const newNotification = {
+				...notification,
+				index: notificationIndex,
+				title: notificationTitle,
+				timer:
+					notification.timer !== undefined && notification.timer >= 0 && notification.timer <= 30000 ? notification.timer : 4000
+			}
+			// Reverses appending to array based on `synchronousTimer` prop.
+			// If `synchronousTimer` is true then notification's timer runs no matter the place in `notifications` array
+			const newNotifications = synchronousTimer ? [...notifications, newNotification] : [newNotification, ...notifications]
+			return newNotifications
+		})
 
-		setNotifications(newNotifications)
-		return newNotification.index
+		return notificationIndex
 	}
 	function removeNotification(index: number) {
-		setNotifications(notifications.filter((not) => not.index !== index))
+		setNotifications((notifications) => notifications.filter((not) => not.index !== index))
 	}
 	function removeAllNotifications() {
 		setNotifications([])
 	}
 	function removeAllOfType(type: NotificationType) {
-		setNotifications(notifications.filter((not) => not.type !== type))
+		setNotifications((notifications) => notifications.filter((not) => not.type !== type))
 	}
 	function getNotifications() {
 		return notifications
 	}
-	return { addNotification, removeNotification, getNotifications, removeAllNotifications, removeAllOfType }
+	function getNotification(index: number) {
+		return notifications.find((notification) => notification.index === index) ?? null
+	}
+	return {
+		firstTimedNotification,
+		addNotification,
+		removeNotification,
+		getNotifications,
+		getNotification,
+		removeAllNotifications,
+		removeAllOfType
+	}
 }
 
 export const exampleNotificationObject: NotificationObject = {
+	firstTimedNotification: {
+		index: -1,
+		type: 'default',
+		content: null
+	},
 	addNotification: () => -1,
 	getNotifications: () => [],
+	getNotification: () => null,
 	removeNotification: () => {},
 	removeAllNotifications: () => {},
 	removeAllOfType: () => {}
