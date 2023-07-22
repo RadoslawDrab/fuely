@@ -29,6 +29,7 @@ export default function Input(props: Props) {
 			maxLength={props.max}
 			min={props.min}
 			minLength={props.min}
+			{...props.inputData}
 			{...data}
 		/>
 	)

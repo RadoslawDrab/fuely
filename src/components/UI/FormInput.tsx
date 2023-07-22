@@ -55,6 +55,7 @@ export default function FormInput(props: Props) {
 				value={props.value}
 				defaultValue={props.defaultValue}
 				defaultChecked={props.defaultChecked}
+				inputData={props.inputData}
 			/>
 			<Error className={styles['form-error']} show={hasError} text={errorMessage} />
 		</>
