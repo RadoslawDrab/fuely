@@ -142,6 +142,11 @@ export default function Overview(props: Props) {
 			</React.Fragment>
 		)
 	})
+
+	const content = (() => {
+		if (!event0.fullId || !event1.fullId) return <span>No data</span>
+		return itemElements
+	})()
 	return (
 		<Section title={getText('Overview')} className={props.className} contentClassName={sectionStyles}>
 			<header>
@@ -149,7 +154,7 @@ export default function Overview(props: Props) {
 				<time dateTime={event0?.date}>{event0?.date}</time>
 			</header>
 			<hr />
-			<div className={styles.main}>{itemElements}</div>
+			<div className={styles.main}>{content}</div>
 		</Section>
 	)
 }
