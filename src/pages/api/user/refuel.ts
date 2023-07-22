@@ -21,7 +21,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 				const { currentUser } = auth
 
 				if (!currentUser) {
-					return returnError(res, 'auth/no-user')
+					return returnError(res, 'auth/not-logged-in')
 				}
 
 				const userObject = await getUserData(currentUser)

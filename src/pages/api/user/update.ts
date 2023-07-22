@@ -13,7 +13,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 				const { currentUser } = auth
 				// Returns error if user is not logged in
 				if (!currentUser) {
-					return returnError(res, 'auth/no-user')
+					return returnError(res, 'auth/not-logged-in')
 				}
 				const { displayName, units, currency } = parseBody(req)
 
