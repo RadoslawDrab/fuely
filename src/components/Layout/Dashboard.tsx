@@ -31,7 +31,7 @@ export default function Dashboard(props: Props) {
 	const [isLoading, setIsLoading] = useState<boolean>(false)
 
 	const { onEventsLoad } = props
-	const pagesCount = Math.ceil(sortedDates.length / perPage)
+	const pagesCount = Math.max(Math.ceil(sortedDates.length / perPage), 1)
 	const perPageOptions = perPageValues.map((value) => ({
 		value: value.toString(),
 		selected: defaultFilterValue === value
