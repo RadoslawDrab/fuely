@@ -1,94 +1,95 @@
 import React, { useEffect, useState } from 'react'
 
-import { checkIfStringIsNumber, getSessionStorage } from '@/utils'
-import useAppContext from '@/hooks/Other/use-app-context'
 import useEvents from '@/hooks/Events/use-events'
+import useAppContext from '@/hooks/Other/use-app-context'
+import { checkIfStringIsNumber } from '@/utils'
+import { currencies } from '@/utils/currency'
 
-import { FullEvent } from '@/hooks/Events/types/Events.modal'
-import { RefuelFormProps as Props } from './types/RefuelForm.modal'
+import { RefuelFormProps as Props, RefuelFormData } from './types/RefuelForm.modal'
 
 import Button from '@/components/UI/Button'
 import FormInput from '@/components/UI/FormInput'
+import Select from '@/components/UI/Select'
 
+import { getMessage } from '@/utils/messages'
 import styles from '@styles/styles.module.scss'
 
 export default function RefuelForm(props: Props) {
-	const formData: FullEvent | null = getSessionStorage()?.formData
-
 	const { user } = useAppContext().Auth
 	const { getEvent } = useEvents()
 
-	const [cost, setCost] = useState(formData?.cost ?? 0)
-	const [currency, setCurrency] = useState(formData?.currency || user.settings.currency || 'usd')
-	const [fuel, setFuel] = useState(formData?.fuel ?? 0)
-	const [odometer, setOdometer] = useState(formData?.odometer ?? 0)
-	const [date, setDate] = useState(formData?.date ?? new Date().toLocaleDateString('en-CA'))
+	const [data, setData] = useState<RefuelFormData>({
+		cost: 0,
+		currency: user.settings.currency || 'usd',
+		fuel: 0,
+		odometer: 0,
+		date: new Date().toLocaleDateString('en-CA')
+	})
+
+	const currencyOptions = currencies.map((c) => ({
+		name: c.toUpperCase(),
+		value: c,
+		selected: c === data.currency
+	}))
 
 	useEffect(() => {
-		if (!formData?.odometer)
-			getEvent(0)
-				.then((event) => {
-					setOdometer(event.odometer)
-				})
-				.catch((error) => {})
-	}, [getEvent, formData?.odometer])
-	useEffect(() => {
-		if (!formData?.currency) setCurrency(user.settings.currency)
-	}, [user.settings.currency, formData?.currency])
+		getEvent(0)
+			.then((event) => {
+				updateData('odometer', event.odometer)
+			})
+			.catch((error) => {})
+	}, [getEvent])
 
 	function onFormSubmit(event: React.FormEvent<HTMLFormElement>) {
 		event.preventDefault()
 
-		props.onSubmit(
-			{
-				distance: 0,
-				cost,
-				currency: currency.toLowerCase(),
-				fuel,
-				odometer
-			},
-			date
-		)
+		props.onSubmit(data)
 	}
 	// Checks if value is proper number and is greather than 0
 	function textInputsCheck(value: string) {
 		return checkIfStringIsNumber(value) && +value >= 0
 	}
+	function updateData<Prop extends keyof RefuelFormData>(prop: Prop, value: any) {
+		setData((values) => ({ ...values, [prop]: value }))
+	}
 
 	return (
 		<form onSubmit={onFormSubmit} className={styles.form}>
 			<FormInput
-				id="cost"
-				type="text"
+				id="cost-input"
+				type="number"
 				text="Cost"
 				min={0}
-				getValue={(value) => setCost(!isNaN(+value) ? +value : 0)}
-				defaultValue={cost}
+				getValue={(value) => updateData('cost', +value)}
+				defaultValue={data.cost}
 				check={textInputsCheck}
-				errorText="Invalid amount"
+				errorText={getMessage('invalid-amount').text}
+				inputData={{ step: 0.01 }}
 			/>
 			<FormInput
-				id="fuel"
-				type="text"
+				id="fuel-input"
+				type="number"
 				text="Fuel Amount"
 				min={0}
-				getValue={(value) => setFuel(!isNaN(+value) ? +value : 0)}
-				defaultValue={fuel}
+				getValue={(value) => updateData('fuel', +value)}
+				defaultValue={data.fuel}
 				check={textInputsCheck}
-				errorText="Invalid amount"
+				errorText={getMessage('invalid-amount').text}
+				inputData={{ step: 0.01 }}
 			/>
 			<FormInput
-				id="odometer"
+				id="odometer-input"
 				type="number"
 				text="Odometer"
 				min={0}
-				getValue={(value) => setOdometer(+value)}
-				defaultValue={odometer}
+				getValue={(value) => updateData('odometer', +value)}
+				value={data.odometer}
 				check={textInputsCheck}
-				errorText="Invalid amount"
+				errorText={getMessage('invalid-amount').text}
 			/>
-			<FormInput id="date" type="date" text="Date" getValue={(value) => setDate(value)} defaultValue={date} />
-			<FormInput id="currency" type="text" text="Currency" getValue={(value) => setCurrency(value)} defaultValue={currency} />
+			<FormInput id="date-input" type="date" text="Date" getValue={(value) => updateData('date', value)} value={data.date} />
+			<label htmlFor="currency-select">Currency</label>
+			<Select id="currency-select" getValue={(value) => updateData('currency', value)} options={currencyOptions} />
 			<Button onClick={() => {}} className={styles['submit-button']}>
 				Send
 			</Button>

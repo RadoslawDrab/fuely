@@ -1,5 +1,12 @@
-import { Event } from '@/hooks/Events/types/Events.modal'
+import { Currencies } from '@/utils/currency'
 
 export interface RefuelFormProps {
-	onSubmit: (event: Event, date: string) => void
+	onSubmit: (data: RefuelFormData) => void
+}
+export interface RefuelFormData {
+	cost: number
+	currency: Currencies
+	fuel: number
+	odometer: number
+	date: string
 }
