@@ -6,7 +6,7 @@ import { SectionProps as Props } from './types/Section.modal'
 
 import styles from '@styles/Layout/Section.module.scss'
 
-export default function Section(props: Props) {
+const Section = React.forwardRef(function Section(props: Props, ref: React.ForwardedRef<HTMLDivElement>) {
 	const sectionStyles = className(styles.section, props.className)
 	const sectionContentStyles = className(
 		styles.content,
@@ -16,7 +16,10 @@ export default function Section(props: Props) {
 	return (
 		<section className={sectionStyles}>
 			{props.title && <h2>{props.title}</h2>}
-			<div className={sectionContentStyles}>{props.children}</div>
+			<div ref={ref} className={sectionContentStyles}>
+				{props.children}
+			</div>
 		</section>
 	)
-}
+})
+export default Section
