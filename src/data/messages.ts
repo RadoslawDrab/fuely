@@ -18,6 +18,10 @@ const messages: Messages = {
 		type: 'error',
 		text: 'Email is not valid'
 	},
+	'email-already-in-use': {
+		type: 'error',
+		text: 'Email is already in use'
+	},
 	'wrong-password': {
 		type: 'error',
 		text: 'Incorrect password'
@@ -30,6 +34,10 @@ const messages: Messages = {
 		type: 'error',
 		text: 'Email is not verified'
 	},
+	'invalid-name': {
+		type: 'error',
+		text: 'Name must contain at least 3 characters'
+	},
 	'invalid-amount': { type: 'error', text: 'Invalid amount' },
 	'event-added': {
 		type: 'success',
@@ -38,6 +46,14 @@ const messages: Messages = {
 	'event-removed': {
 		type: 'success',
 		text: 'Event successfully removed'
+	},
+	'user-created': {
+		type: 'success',
+		text: 'User successfully created'
+	},
+	'verify-email': {
+		type: 'error',
+		text: 'Verify to log in'
 	}
 }
 
