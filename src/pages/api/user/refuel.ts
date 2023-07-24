@@ -15,7 +15,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 			case 'POST': {
 				const { date, cost, currency, odometer, fuel } = parseBody(req)
 
-				if (!cost || !odometer || !fuel) {
+				if ((cost !== undefined && cost <= 0) || (odometer !== undefined && odometer < 0) || (fuel !== undefined && fuel <= 0)) {
 					return returnError(res, 'event/not-enough-data')
 				}
 				const { currentUser } = auth
