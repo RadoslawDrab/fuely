@@ -1,4 +1,4 @@
-import { getAuth, updateProfile } from 'firebase/auth'
+import { getAuth, updateEmail, updatePassword, updateProfile } from 'firebase/auth'
 import { NextApiRequest, NextApiResponse } from 'next'
 
 import { parseBody, returnError } from '../data'
@@ -15,7 +15,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 				if (!currentUser) {
 					return returnError(res, 'auth/not-logged-in')
 				}
-				const { displayName, units, currency } = parseBody(req)
+				const { displayName, units, currency, email, password } = parseBody(req)
 
 				// Updates profile's display name
 				if (displayName) {
@@ -30,6 +30,12 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 				// Updates user's currency preference
 				if (currency) {
 					await updateValue({ currency }, 'users')
+				}
+				if (email) {
+					await updateEmail(currentUser, password)
+				}
+				if (password) {
+					await updatePassword(currentUser, password)
 				}
 				res.status(200).json({ code: 'user/updated' })
 			} catch (error: any) {
