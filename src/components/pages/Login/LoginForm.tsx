@@ -39,6 +39,7 @@ export default function LoginForm(props: Props) {
 				check={(value) => !!value.match(emailRegEx)}
 				errorText="Enter valid email"
 				defaultValue={email}
+				inputData={{ autoComplete: 'email' }}
 			/>
 			<FormInput
 				id="password"
@@ -47,6 +48,7 @@ export default function LoginForm(props: Props) {
 				getValue={(value) => setPassword(() => value)}
 				check={(value) => !!value.match(passwordRegEx)}
 				errorText={passwordInfo}
+				inputData={{ autoComplete: 'current-password' }}
 			/>
 			<hr />
 			<Button className={styles['submit-button']} onClick={() => {}}>
