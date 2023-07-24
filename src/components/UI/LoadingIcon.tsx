@@ -35,6 +35,7 @@ export default function LoadingIcon(props: Props) {
 		</>
 	)
 
-	if (mainContainerRef?.current && props.center) return createPortal(content, mainContainerRef?.current)
+	const parent = props.parent?.current ?? mainContainerRef?.current
+	if (parent && props.center) return createPortal(content, parent)
 	return <>{content}</>
 }
