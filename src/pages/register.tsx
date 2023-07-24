@@ -2,7 +2,7 @@ import { useRouter } from 'next/router'
 
 import useAppContext from '@/hooks/Other/use-app-context'
 import { className } from '@/utils'
-import useNotification from '@/hooks/Other/use-notification'
+import { getMessage } from '@/utils/messages'
 
 import { Status } from './api/data/types/index.modal'
 
@@ -10,7 +10,6 @@ import Head from '@/components/Head'
 import Section from '@/components/Layout/Section'
 import LoadingIcon from '@/components/UI/LoadingIcon'
 import RegisterForm from '@/components/pages/Register/RegisterForm'
-import Notification from '@/components/UI/Notification'
 
 import styles from '@styles/styles.module.scss'
 
@@ -22,8 +21,8 @@ export default function Register() {
 		state: { isLoggedIn, isLoading }
 	} = useAppContext().Auth
 	const { getText } = useAppContext().Language
+	const { removeAllOfType, addNotification } = useAppContext().Notification
 
-	const { addNotification, removeNotification, getNotifications, removeAllOfType } = useNotification()
 	const sectionStyles = className(styles.section, styles.center)
 
 	if (isLoggedIn) {
@@ -34,47 +33,24 @@ export default function Register() {
 		register(email, password, name)
 			.then(() => {
 				removeAllOfType('error')
-				addNotification({ type: 'success', content: 'User created. Verify to log in.' })
+				addNotification({ type: 'success', content: getMessage('user-created').text + '. ' + getMessage('verify-email').text })
 			})
 			.catch((error: Status) => {
 				const status = error.code.replace('auth/', '')
-				switch (status) {
-					case 'email-already-in-use': {
-						setFormError('Email is already in use', false, 0)
-						break
-					}
-					default: {
-						setFormError(status)
-						break
-					}
-				}
+				setFormError(getMessage(status).text)
 			})
 	}
-	function setFormError(message: string, back: boolean = false, index?: number) {
-		addNotification({ type: 'error', content: message }, back, index)
-	}
-	const notifications = getNotifications().map((not) => {
-		function removeCurrentNotification(index: number) {
-			removeNotification(index)
-		}
-		return (
-			<Notification key={not.index} index={not.index} title={not.title} onClose={removeCurrentNotification} type={not.type}>
-				{not.content}
-			</Notification>
-		)
-	})
-
-	if (isLoading) {
-		return <LoadingIcon type="car" />
+	function setFormError(message: string, timer: number = 0, synchronousTimer: boolean = true, index?: number) {
+		addNotification({ type: 'error', content: message, timer }, synchronousTimer, index)
 	}
 
 	return (
 		<>
 			<Head title="Fuely | Register" description="Fuely register page" />
-			<Section title={getText('Register')} className={sectionStyles}>
+			<Section title={getText('Register')} className={sectionStyles} disableContent={isLoading}>
 				<RegisterForm onRegister={registerUser} onError={setFormError} onInputChange={() => removeAllOfType('error')} />
 			</Section>
-			{notifications}
+			{isLoading && <LoadingIcon type="car" center />}
 		</>
 	)
 }
