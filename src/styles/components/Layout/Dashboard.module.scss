@@ -36,31 +36,4 @@
 			color: $grey-500;
 		}
 	}
-	.controls {
-		width: 100%;
-		align-self: center;
-		margin-top: 0.75em;
-		padding: 0.75em 1em;
-		border-top: 1.5px solid $grey-300;
-
-		display: grid;
-		grid-template-columns: repeat(2, auto) 1fr repeat(2, auto);
-		justify-content: space-between;
-		align-items: center;
-		gap: 0.25em;
-		span {
-			font-size: $size-700;
-			color: $grey-800;
-			text-align: center;
-			margin: 0 0.5em;
-		}
-		button {
-			aspect-ratio: 1 / 1;
-			border-radius: 50%;
-			padding: 0.5em;
-			img {
-				width: 1.25rem;
-			}
-		}
-	}
 }

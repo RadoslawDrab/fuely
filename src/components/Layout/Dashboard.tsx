@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useMemo, useState } from 'react'
 
 import useEvents from '@/hooks/Events/use-events'
 import useAppContext from '@/hooks/Other/use-app-context'
@@ -7,10 +7,9 @@ import { className, getSessionStorage, setSessionStorage } from '@/utils'
 import { DashboardProps as Props } from './types/Dashboard.modal'
 
 import Section from '@/components/Layout/Section'
-import Button from '@/components/UI/Button'
-import Icon from '@/components/UI/Icon'
 import LoadingIcon from '@/components/UI/LoadingIcon'
 import Select from '@/components/UI/Select'
+import DashboardControls from './Dashboard/DashboardControls'
 
 import styles from '@styles/Layout/Dashboard.module.scss'
 import defaultStyles from '@styles/styles.module.scss'
@@ -31,11 +30,23 @@ export default function Dashboard(props: Props) {
 	const [isLoading, setIsLoading] = useState<boolean>(false)
 
 	const { onEventsLoad } = props
-	const pagesCount = Math.max(Math.ceil(sortedDates.length / perPage), 1)
+	const pagesCount = useMemo(() => Math.max(Math.ceil(sortedDates.length / perPage), 1), [perPage, sortedDates.length])
 	const perPageOptions = perPageValues.map((value) => ({
 		value: value.toString(),
 		selected: defaultFilterValue === value
 	}))
+
+	const clamp = useCallback(
+		(value: number): number => {
+			return Math.max(Math.min(value, pagesCount - 1), 0)
+		},
+		[pagesCount]
+	)
+
+	// Clamps current page
+	useEffect(() => {
+		setCurrentPage((page) => clamp(page))
+	}, [clamp])
 
 	useEffect(() => {
 		if (!onEventsLoad) return
@@ -53,9 +64,6 @@ export default function Dashboard(props: Props) {
 
 	const sectionStyles = className('' ?? defaultStyles.section, styles.section)
 
-	function clamp(value: number): number {
-		return Math.max(Math.min(value, pagesCount - 1), 0)
-	}
 	function changeCurrentPage(event: React.MouseEvent<HTMLButtonElement>) {
 		const pageChangeAmount = +(event.currentTarget.dataset.amount || 1)
 		setCurrentPage((page) => clamp(page + pageChangeAmount))
@@ -74,23 +82,12 @@ export default function Dashboard(props: Props) {
 			</div>
 			{isLoading && <LoadingIcon />}
 			{!isLoading && <ul style={{ '--per-page': perPage } as React.CSSProperties}>{props.children}</ul>}
-			<div className={className(styles.controls, 'controls')}>
-				<Button onClick={changeCurrentPage} data={{ amount: -maxSkip }} variant="redirect">
-					<Icon type="caret-double-left" alt="previous page icon" />
-				</Button>
-				<Button onClick={changeCurrentPage} data={{ amount: -1 }} variant="redirect">
-					<Icon type="caret-left" alt="previous page icon" />
-				</Button>
-				<span>
-					{currentPage + 1} / {pagesCount}
-				</span>
-				<Button onClick={changeCurrentPage} data={{ amount: 1 }} variant="redirect">
-					<Icon type="caret-right" alt="next page icon" />
-				</Button>
-				<Button onClick={changeCurrentPage} data={{ amount: maxSkip }} variant="redirect">
-					<Icon type="caret-double-right" alt="next page icon" />
-				</Button>
-			</div>
+			<DashboardControls
+				changeCurrentPage={changeCurrentPage}
+				maxSkip={maxSkip}
+				currentPage={currentPage}
+				pagesCount={pagesCount}
+			/>
 		</Section>
 	)
 }
