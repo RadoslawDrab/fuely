@@ -22,6 +22,10 @@ const messages: Messages = {
 		type: 'error',
 		text: 'Email is already in use'
 	},
+	'same-email': {
+		type: 'error',
+		text: 'Old and new emails have to be different'
+	},
 	'wrong-password': {
 		type: 'error',
 		text: 'Incorrect password'
@@ -30,9 +34,17 @@ const messages: Messages = {
 		type: 'error',
 		text: passwordInfo
 	},
+	'same-passwords': {
+		type: 'error',
+		text: 'Old and new passwords have to be different'
+	},
 	'email-not-verified': {
 		type: 'error',
 		text: 'Email is not verified'
+	},
+	'requires-recent-login': {
+		type: 'error',
+		text: 'Change requires recent login'
 	},
 	'invalid-name': {
 		type: 'error',
@@ -50,6 +62,14 @@ const messages: Messages = {
 	'user-created': {
 		type: 'success',
 		text: 'User successfully created'
+	},
+	'user-updated': {
+		type: 'success',
+		text: 'User successfully updated'
+	},
+	'user-authenticated': {
+		type: 'success',
+		text: 'User successfully authenticated'
 	},
 	'verify-email': {
 		type: 'error',
