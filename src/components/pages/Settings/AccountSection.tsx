@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useRef } from 'react'
 
 import useAppContext from '@/hooks/Other/use-app-context'
 import { className } from '@/utils'
@@ -6,10 +6,8 @@ import { className } from '@/utils'
 import { AccountSectionProps as Props } from './types/AccountSection.modal'
 
 import Section from '@/components/Layout/Section'
-import Error from '@/components/UI/Error'
-import EmailChangeForm from './AccountSection/EmailChangeForm'
-import PasswordChangeForm from './AccountSection/PasswordChangeForm'
 import LoadingIcon from '@/components/UI/LoadingIcon'
+import AccountForm from './AccountSection/AccountForm'
 
 import styles from '@styles/pages/Settings/index.module.scss'
 import defaultStyles from '@styles/styles.module.scss'
@@ -17,17 +15,20 @@ import defaultStyles from '@styles/styles.module.scss'
 export default function AccountSection(props: Props) {
 	const { getText } = useAppContext().Language
 
+	const sectionRef = useRef(null)
+
 	const sectionStyles = className(defaultStyles.section, styles.section, 'not-grow')
 
+	function onFormSubmit(newEmail: string | null, newPassword: string | null) {
+		props.onAccountFormSubmit({
+			newEmail,
+			newPassword
+		})
+	}
 	return (
-		<Section title={getText('Account')} contentClassName={sectionStyles}>
-			<EmailChangeForm onEmailChange={props.onEmailChange} onError={(error) => props.onError('email', error)} />
-			<Error show={props.errorWith.email !== null} text={props.errorWith.email ? props.errorWith.email : ''} />
-			{props.isLoading.email && <LoadingIcon center />}
-			<hr />
-			<PasswordChangeForm onPasswordChange={props.onPasswordChange} onError={(error) => props.onError('password', error)} />
-			<Error show={props.errorWith.password !== null} text={props.errorWith.password ? props.errorWith.password : ''} />
-			{props.isLoading.password && <LoadingIcon center />}
+		<Section ref={sectionRef} title={getText('Account')} contentClassName={sectionStyles} disableContent={props.isLoading}>
+			<AccountForm onError={props.onError} onFormSubmit={onFormSubmit} />
+			{props.isLoading && <LoadingIcon parent={sectionRef} center />}
 		</Section>
 	)
 }

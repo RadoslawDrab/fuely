@@ -2,109 +2,80 @@ import { useState } from 'react'
 
 import useAppContext from '@/hooks/Other/use-app-context'
 import useUserRedirect from '@/hooks/Other/use-user-redirect'
+import { Currencies } from '@/utils/currency'
+import { getMessage } from '@/utils/messages'
+
+import { Units } from './api/data/types/index.modal'
 
 import Head from '@/components/Head'
-import LoadingIcon from '@/components/UI/LoadingIcon'
 import AccountSection from '@/components/pages/Settings/AccountSection'
 import UserSettingsSection from '@/components/pages/Settings/UserSettingsSection'
+import LoadingIcon from '@/components/UI/LoadingIcon'
 
 export default function Settings() {
 	useUserRedirect()
 
 	const {
 		user,
-		state: { isLoading: userIsLoading },
-		loginUsingToken
+		loginUsingToken,
+		state: { isLoading: authIsLoading }
 	} = useAppContext().Auth
+	const { addNotification } = useAppContext().Notification
 
-	const [errorWith, setErrorWith] = useState<SettingsFormsError>({
-		email: null,
-		password: null,
-		settings: null
-	})
-	const [isLoading, setIsLoading] = useState<SettingsFormsLoading>({
-		email: false,
-		password: false,
-		settings: false
-	})
+	const [isLoading, setIsLoading] = useState<boolean>(false)
 
-	if (userIsLoading) {
-		return <LoadingIcon type="car" />
-	}
+	async function onFormSubmit(formData: Partial<FormData>) {
+		if (!Object.values(formData).find((data) => data !== null)) return
 
-	async function onEmailChange(newEmail: string) {
-		setLoading('email', true)
-		const response = await fetch('/api/user/update', {
-			method: 'PATCH',
-			body: JSON.stringify({ email: newEmail })
-		})
-		if (!response.ok) {
-			const error = await response.json()
-			onError('email', error.code)
-			return
+		setIsLoading(true)
+
+		try {
+			const body = {
+				displayName: formData.newDisplayName,
+				units: formData.newUnit,
+				currency: formData.newCurrency,
+				email: formData.newEmail,
+				password: formData.newPassword
+			}
+
+			const response = await fetch('/api/user/update', {
+				method: 'PATCH',
+				body: JSON.stringify(body)
+			})
+			if (!response.ok) {
+				const error = await response.json()
+				onError(error.code)
+				return
+			}
+			await response.json()
+			loginUsingToken()
+			addNotification({ type: 'success', content: getMessage('user-updated').text })
+		} finally {
+			setIsLoading(false)
 		}
-		loginUsingToken()
-
-		setLoading('email', false)
-	}
-	async function onPasswordChange(newPassword: string) {
-		setLoading('settings', true)
-		await fetch('/api/user/update', {
-			method: 'PATCH',
-			body: JSON.stringify({ password: newPassword })
-		})
 	}
 
-	async function onSettingsFormSubmit(newDisplayName: string | null, newUnit: string | null, newCurrency: string | null) {
-		if (!(newDisplayName || newUnit || newCurrency)) return
-		setLoading('settings', true)
-		const response = await fetch('/api/user/update', {
-			method: 'PATCH',
-			body: JSON.stringify({ displayName: newDisplayName, units: newUnit, currency: newCurrency })
-		})
-		if (!response.ok) {
-			const error = await response.json()
-			onError('settings', error.code)
-			return
-		}
-		await response.json()
-		loginUsingToken()
-
-		setLoading('settings', false)
+	function onError(err: string) {
+		addNotification({ type: 'error', content: getMessage(err).text })
 	}
 
-	function onError(type: keyof typeof errorWith, err: string | null) {
-		setErrorWith((prevError) => ({ ...prevError, [type]: err }))
+	if (authIsLoading) {
+		return <LoadingIcon center type="car" />
 	}
-	function setLoading(type: keyof typeof isLoading, value: boolean) {
-		setIsLoading((prevState) => ({ ...prevState, [type]: value }))
-	}
+
 	return (
 		<>
 			<Head title={`Fuely | Settings - ${user.displayName}`} description={`${user.displayName} settings page`} />
-			<AccountSection
-				onEmailChange={onEmailChange}
-				onPasswordChange={onPasswordChange}
-				onError={onError}
-				errorWith={errorWith}
-				isLoading={isLoading}
-			/>
-			<UserSettingsSection
-				onSettingsFormSubmit={onSettingsFormSubmit}
-				onError={onError}
-				errorWith={errorWith}
-				isLoading={isLoading}
-			/>
+			<AccountSection onAccountFormSubmit={onFormSubmit} onError={onError} isLoading={isLoading} />
+			<UserSettingsSection onUserSettingsFormSubmit={onFormSubmit} onError={onError} isLoading={isLoading} />
 		</>
 	)
 }
-export interface SettingsFormsError {
-	email: string | null
-	password: string | null
-	settings: string | null
-}
-export interface SettingsFormsLoading {
-	email: boolean
-	password: boolean
-	settings: boolean
+
+export interface FormData {
+	newDisplayName: string | null
+	newUnit: Units | null
+	newCurrency: Currencies | null
+	newEmail: string | null
+	newPassword: string | null
 }

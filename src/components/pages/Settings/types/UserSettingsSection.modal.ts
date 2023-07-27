@@ -1,18 +1,19 @@
-import { SettingsFormsError, SettingsFormsLoading } from '@/pages/settings'
+import { Units } from '@/pages/api/data/types/index.modal'
+import { FormData } from '@/pages/settings'
+import { Currencies } from '@/utils/currency'
 
 export interface UserSettingsSectionProps {
-	onError: (type: keyof SettingsFormsError, error: string | null) => void
-	onSettingsFormSubmit: (newDisplayName: string | null, newUnit: string | null, newCurrency: string | null) => void
-	errorWith: SettingsFormsError
-	isLoading: SettingsFormsLoading
+	isLoading: boolean
+	onError: (error: string) => void
+	onUserSettingsFormSubmit: (formData: Partial<FormData>) => void
 }
 
 export interface UserSettingsFormProps {
-	onSubmit: (newDisplayName: string | null, newUnit: string | null, newCurrency: string | null) => void
-	onError: (error: string | null) => void
+	onFormSubmit: (newDisplayName: string | null, newUnit: Units | null, newCurrency: Currencies | null) => void
+	onError: (error: string) => void
 }
 export interface UserSettingsFormSettings {
 	displayName: string | null
-	units: string | null
-	currency: string | null
+	units: Units | null
+	currency: Currencies | null
 }
