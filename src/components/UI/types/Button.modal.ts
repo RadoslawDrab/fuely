@@ -1,7 +1,7 @@
 export type ButtonVariant = 'default' | 'dark' | 'link' | 'redirect' | 'error'
 
 export interface ButtonProps {
-	onClick: (event: React.MouseEvent<HTMLButtonElement>) => void
+	onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void
 	onFocus?: (event: React.FocusEvent<HTMLButtonElement>) => void
 	onBlur?: (event: React.FocusEvent<HTMLButtonElement>) => void
 	children?: any
