@@ -39,7 +39,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 				}
 				res.status(200).json({ code: 'user/updated' })
 			} catch (error: any) {
-				return returnError(res, error)
+				return returnError(res, error.code)
 			}
 		}
 	}
