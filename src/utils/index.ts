@@ -91,15 +91,15 @@ export function checkEmailAndPassword(email: string, password: string): { ok: bo
 	}
 	if (!email || !password) {
 		status.ok = false
-		status.message = 'Some inputs are empty'
+		status.message = 'empty-inputs'
 	}
 	if (!email.match(emailRegEx)) {
 		status.ok = false
-		status.message = 'Email is not valid'
+		status.message = 'invalid-email'
 	}
 	if (!password.match(passwordRegEx)) {
 		status.ok = false
-		status.message = passwordInfo
+		status.message = 'invalid-password'
 	}
 
 	return status
