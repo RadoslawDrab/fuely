@@ -33,6 +33,7 @@ export default function Login() {
 		login(email, password)
 			.then(() => {
 				removeAllOfType('error')
+				addNotification({ type: 'success', content: getMessage('user-authenticated').text })
 			})
 			.catch((error: Status) => {
 				addNotification({ type: 'error', content: getMessage(error.code).text })
