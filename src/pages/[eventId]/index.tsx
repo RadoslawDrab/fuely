@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router'
-import { useEffect, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 
 import useAppContext from '@/hooks/Other/use-app-context'
 import useEvents from '@/hooks/Events/use-events'
@@ -26,7 +26,10 @@ export default function Item() {
 	const [events, setEvents] = useState<EventSiblings>([null, null, emptyEvent, null, null])
 	const [isLoading, setIsLoading] = useState(false)
 
-	const eventId: any = router.query.eventId
+	const eventId: string = useMemo(
+		() => (typeof router.query.eventId === 'string' ? router.query.eventId : ''),
+		[router.query.eventId]
+	)
 
 	useEffect(() => {
 		if (eventId) {
@@ -62,7 +65,7 @@ export default function Item() {
 			})
 	}
 	if (userIsLoading || isLoading || events.length !== 5 || !events[2]) {
-		return <LoadingIcon type="car" />
+		return <LoadingIcon center type="car" />
 	}
 	return (
 		<>
