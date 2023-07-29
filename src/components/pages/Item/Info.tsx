@@ -1,16 +1,17 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 import useCalculate from '@/hooks/Events/use-calculate'
-import { getProp } from '@/utils'
 import useAppContext from '@/hooks/Other/use-app-context'
+import { className, getProp } from '@/utils'
 
+import { CalculateData, FullEvent } from '@/hooks/Events/types/Events.modal'
 import { InfoProps as Props } from './types/Info.modal'
-import { FullEvent } from '@/hooks/Events/types/Events.modal'
-import { CalculateData } from '@/hooks/Events/types/Events.modal'
 
 import Section from '@/components/Layout/Section'
+import Button from '@/components/UI/Button'
 import InfoItem from './InfoItem'
 
+import Icon from '@/components/UI/Icon'
 import styles from '@styles/pages/Item/Info.module.scss'
 
 export default function Info(props: Props) {
@@ -18,11 +19,19 @@ export default function Info(props: Props) {
 
 	const currentEvent = props.events[2]
 	const { getData, compare, keys } = useCalculate(currentEvent)
+	const [itemOpenStates, setItemOpenStates] = useState<boolean[]>(keys.map(() => false))
 
 	const sections = keys.map((key, index) => {
 		const data: CalculateData = getProp(getData(currentEvent), key)
 		const itemKey = `${key}-${index}`
 
+		const isOpen = itemOpenStates[index] === true
+		const sectionStyles = className(styles['data-section'], isOpen ? styles.show : '')
+
+		function toggleInfoClickHandler() {
+			// Returns state of other sections and toggles state of current section
+			setItemOpenStates((states) => states.map((state, id) => (id !== index ? state : !state)))
+		}
 		const infoItems = props.events
 			.filter((event): event is FullEvent => event !== null)
 			.map((event) => {
@@ -39,16 +48,19 @@ export default function Info(props: Props) {
 			})
 
 		return (
-			<div key={itemKey} className={styles['data-section']}>
+			<div key={itemKey} className={sectionStyles}>
 				<header>
 					<span className={styles.name}>{data.name}</span>
 					<span className={styles.value}>
 						{data.value.toFixed(data.decimals ?? 2)} {data.unitType}
 					</span>
+					<Button variant="redirect" className={styles.button} onClick={toggleInfoClickHandler}>
+						<Icon type="caret-left" alt="unfold icon" className={styles.icon} />
+					</Button>
 				</header>
-				<hr />
-				<InfoItem item={data} items={infoItems} />
-				<hr />
+				<Section>
+					<InfoItem item={data} items={infoItems} />
+				</Section>
 			</div>
 		)
 	})
