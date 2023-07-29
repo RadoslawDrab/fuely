@@ -1,8 +1,10 @@
+import { Currencies } from '@/utils/currency'
+
 export interface Event {
 	cost: number
 	fuel: number
 	odometer: number
-	currency: string
+	currency: Currencies
 }
 export interface FullEvent extends Event {
 	id: number
