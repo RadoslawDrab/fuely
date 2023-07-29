@@ -1,5 +1,5 @@
 export interface SectionProps {
-	title: string
+	title?: string
 	children?: any
 	className?: string
 	contentClassName?: string
