@@ -19,7 +19,7 @@ export default function RemoveButton(props: Props) {
 				<Icon type="x" alt="remove icon" />
 				<span>{getText('Remove')}</span>
 			</Button>
-			<Modal title="Confirmation" show={confirmationIsOpen} type="center" className={styles.modal}>
+			<Modal title="Confirmation" show={confirmationIsOpen} className={styles.modal}>
 				<p>
 					{getText('Remove')} <span>{props.event}</span>
 				</p>
