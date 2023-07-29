@@ -9,7 +9,7 @@ import { Units } from './api/data/types/index.modal'
 
 import Head from '@/components/Head'
 import AccountSection from '@/components/pages/Settings/AccountSection'
-import UserSettingsSection from '@/components/pages/Settings/UserSettingsSection'
+import PreferencesSection from '@/components/pages/Settings/PreferencesSection'
 import LoadingIcon from '@/components/UI/LoadingIcon'
 
 export default function Settings() {
@@ -67,7 +67,7 @@ export default function Settings() {
 		<>
 			<Head title={`Fuely | Settings - ${user.displayName}`} description={`${user.displayName} settings page`} />
 			<AccountSection onAccountFormSubmit={onFormSubmit} onError={onError} isLoading={isLoading} />
-			<UserSettingsSection onUserSettingsFormSubmit={onFormSubmit} onError={onError} isLoading={isLoading} />
+			<PreferencesSection onPreferencesFormSubmit={onFormSubmit} onError={onError} isLoading={isLoading} />
 		</>
 	)
 }

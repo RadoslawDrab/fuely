@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 
 import { emailRegEx, passwordInfo, passwordRegEx } from '@/utils'
 
-import { AccountFormProps as Props } from '../types/AccountSection.modal'
+import { AccountFormProps as Props } from './types/AccountSection.modal'
 
 import Button from '@/components/UI/Button'
 import FormInput from '@/components/UI/FormInput'

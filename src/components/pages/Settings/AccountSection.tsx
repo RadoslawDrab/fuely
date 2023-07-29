@@ -7,7 +7,7 @@ import { AccountSectionProps as Props } from './types/AccountSection.modal'
 
 import Section from '@/components/Layout/Section'
 import LoadingIcon from '@/components/UI/LoadingIcon'
-import AccountForm from './AccountSection/AccountForm'
+import AccountForm from './AccountForm'
 
 import styles from '@styles/pages/Settings/index.module.scss'
 import defaultStyles from '@styles/styles.module.scss'

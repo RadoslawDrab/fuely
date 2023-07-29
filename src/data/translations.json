@@ -33,5 +33,6 @@
 	"Cost/Distance": { "pl": "Koszt/Dystans", "de": "Kosten/Distanz" },
 	"Distance/Cost": { "pl": "Dystans/Koszt", "de": "Distanz/Kosten" },
 	"Event": { "pl": "Wydarzenie", "de": "Fall" },
-	"Last refuel": { "pl": "Ostatnie tankowanie", "de": "Letztes Auftanken" }
+	"Last refuel": { "pl": "Ostatnie tankowanie", "de": "Letztes Auftanken" },
+	"Preferences": { "pl": "Preferencje", "de": "" }
 }

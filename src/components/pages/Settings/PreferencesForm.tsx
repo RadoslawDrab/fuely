@@ -4,17 +4,16 @@ import useAppContext from '@/hooks/Other/use-app-context'
 import { currencies } from '@/utils/currency'
 import { getMessage } from '@/utils/messages'
 
-import { UserSettingsFormProps as Props, UserSettingsFormSettings as Settings } from '../types/UserSettingsSection.modal'
+import { PreferencesFormProps as Props, PreferencesFormSettings as Settings } from './types/PreferencesSection.modal'
 import { units } from '@/pages/api/data/types/index.modal'
 
 import Button from '@/components/UI/Button'
 import FormInput from '@/components/UI/FormInput'
 import Select from '@/components/UI/Select'
 
-import styles from '@styles/pages/Settings/UserSettingsForm.module.scss'
 import defaultStyles from '@styles/styles.module.scss'
 
-export default function UserSettingsForm(props: Props) {
+export default function PreferencesForm(props: Props) {
 	const { user } = useAppContext().Auth
 
 	const [settings, setSettings] = useState<Settings>({
