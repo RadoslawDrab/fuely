@@ -33,6 +33,7 @@ export default function Item() {
 
 	useEffect(() => {
 		if (eventId) {
+			setIsLoading(true)
 			// Current event index
 			const eventIndex = sortedDates.findIndex((date) => date == eventId)
 
@@ -44,10 +45,14 @@ export default function Item() {
 					eventsPromises.push(date ? getEventById(date) : null)
 				}
 				// Resolves all event promises and sets events object
-				Promise.all(eventsPromises).then((events) => {
-					const e: any = events
-					setEvents(e)
-				})
+				Promise.all(eventsPromises)
+					.then((events) => {
+						const e: any = events
+						setEvents(e)
+					})
+					.finally(() => {
+						setIsLoading(false)
+					})
 			}
 		}
 	}, [eventId, getEventById, sortedDates])
