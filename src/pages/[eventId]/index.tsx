@@ -24,7 +24,7 @@ export default function Item() {
 	const { getEventById, sortedDates, emptyEvent, removeEvent } = useEvents()
 
 	const [events, setEvents] = useState<EventSiblings>([null, null, emptyEvent, null, null])
-	const [isLoading, setIsLoading] = useState(false)
+	const [isLoading, setIsLoading] = useState<boolean>(false)
 
 	const eventId: string = useMemo(
 		() => (typeof router.query.eventId === 'string' ? router.query.eventId : ''),
@@ -69,14 +69,17 @@ export default function Item() {
 				setIsLoading(false)
 			})
 	}
+
 	if (userIsLoading || isLoading || events.length !== 5 || !events[2]) {
 		return <LoadingIcon center type="car" />
 	}
+	const currentEvent = events[2]
+
 	return (
 		<>
-			<Head title={`Fuely | ${events[2].date}`} description={`Fuely ${events[2].date} event page`} />
+			<Head title={`Fuely | ${currentEvent.date}`} description={`Fuely ${currentEvent.date} event page`} />
 			<Info events={events} />
-			<RemoveButton onClick={onEventRemove} event={events[2].date} />
+			<RemoveButton onClick={onEventRemove} event={currentEvent.date} />
 		</>
 	)
 }
