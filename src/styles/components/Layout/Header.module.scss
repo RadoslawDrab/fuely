@@ -46,8 +46,8 @@
 	@include global('.notifications') {
 		width: max-content;
 		position: absolute;
-		top: calc(100% + 2em);
-		left: 2em;
+		top: calc(100% + 1em);
+		left: 1em;
 		display: flex;
 		flex-direction: column;
 		align-items: flex-start;
