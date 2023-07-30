@@ -4,6 +4,7 @@ import useEvents from '@/hooks/Events/use-events'
 import useAppContext from '@/hooks/Other/use-app-context'
 import { checkIfStringIsNumber } from '@/utils'
 import { currencies } from '@/utils/currency'
+import { getMessage } from '@/utils/messages'
 
 import { RefuelFormProps as Props, RefuelFormData } from './types/RefuelForm.modal'
 
@@ -11,7 +12,6 @@ import Button from '@/components/UI/Button'
 import FormInput from '@/components/UI/FormInput'
 import Select from '@/components/UI/Select'
 
-import { getMessage } from '@/utils/messages'
 import styles from '@styles/styles.module.scss'
 
 export default function RefuelForm(props: Props) {
@@ -19,11 +19,11 @@ export default function RefuelForm(props: Props) {
 	const { getEvent } = useEvents()
 
 	const [data, setData] = useState<RefuelFormData>({
-		cost: 0,
-		currency: user.settings.currency || 'usd',
-		fuel: 0,
-		odometer: 0,
-		date: new Date().toLocaleDateString('en-CA')
+		cost: props.default?.cost ?? 0,
+		currency: props.default?.currency ?? user.settings.currency ?? 'usd',
+		fuel: props.default?.fuel ?? 0,
+		odometer: props.default?.odometer ?? 0,
+		date: props.default?.date ?? new Date().toLocaleDateString('en-CA')
 	})
 
 	const currencyOptions = currencies.map((c) => ({
@@ -33,12 +33,13 @@ export default function RefuelForm(props: Props) {
 	}))
 
 	useEffect(() => {
-		getEvent(0)
-			.then((event) => {
-				updateData('odometer', event.odometer)
-			})
-			.catch((error) => {})
-	}, [getEvent])
+		if (!props.default?.odometer)
+			getEvent(0)
+				.then((event) => {
+					updateData('odometer', event.odometer)
+				})
+				.catch((error) => {})
+	}, [getEvent, props.default?.odometer])
 
 	function onFormSubmit(event: React.FormEvent<HTMLFormElement>) {
 		event.preventDefault()
