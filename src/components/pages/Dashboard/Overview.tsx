@@ -121,25 +121,36 @@ export default function Overview(props: Props) {
 		const percentString = isFinite(percent) ? `${percent >= 0 ? '+' : '-'}${Math.abs(percent * 100).toFixed(1)}` : '0'
 
 		return (
-			<React.Fragment key={key}>
+			<li key={key}>
 				<label className={styles.label}>{item.label}</label>
+				<span className={styles.percent}>{percentString}</span>
+				<hr />
 				<Graph
 					className={styles.graph}
 					max={max}
+					alignVertically
 					items={[
-						{ tooltip: value, value: currentValue || max },
-						{ tooltip: prevValue, value: previousValue || max }
+						{
+							name: (
+								<data value={currentValue}>
+									{value}
+									<span>{item.unit}</span>
+								</data>
+							),
+							value: currentValue || max
+						},
+						{
+							name: (
+								<data value={previousValue}>
+									{prevValue}
+									<span>{item.unit}</span>
+								</data>
+							),
+							value: previousValue || max
+						}
 					]}
 				/>
-
-				<data value={value}>
-					<span className={styles.data}>
-						{value}
-						<span>{item.unit}</span>
-					</span>
-					<span className={styles.percent}>{percentString}</span>
-				</data>
-			</React.Fragment>
+			</li>
 		)
 	})
 
@@ -154,7 +165,7 @@ export default function Overview(props: Props) {
 				<time dateTime={event0?.date}>{event0?.date}</time>
 			</header>
 			<hr />
-			<div className={styles.main}>{content}</div>
+			<ul className={styles.main}>{content}</ul>
 		</Section>
 	)
 }
