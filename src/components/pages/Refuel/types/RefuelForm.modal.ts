@@ -1,7 +1,7 @@
 import { Currencies } from '@/utils/currency'
 
 export interface RefuelFormProps {
-	onSubmit: (data: RefuelFormData) => void
+	onSubmit: (data: RefuelFormData | null) => void
 	default?: Partial<RefuelFormData>
 }
 export interface RefuelFormData {

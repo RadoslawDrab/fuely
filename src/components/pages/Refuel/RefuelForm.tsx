@@ -27,6 +27,7 @@ export default function RefuelForm(props: Props) {
 		odometer: Math.round(props.default?.odometer ?? 0),
 		date: props.default?.date ?? new Date().toLocaleDateString('en-CA')
 	})
+	const [dataUpdated, setDataUpdated] = useState<boolean>(false)
 
 	const currencyOptions = currencies.map((c) => ({
 		name: c.toUpperCase(),
@@ -45,12 +46,13 @@ export default function RefuelForm(props: Props) {
 
 	function onFormSubmit(event: React.FormEvent<HTMLFormElement>) {
 		event.preventDefault()
-
-		props.onSubmit({
-			...data,
-			fuel: !isMetric ? convert(data.fuel, 'fuel', true) : data.fuel,
-			odometer: !isMetric ? convert(data.odometer, 'distance', true) : data.odometer
-		})
+		if (dataUpdated)
+			props.onSubmit({
+				...data,
+				fuel: !isMetric ? convert(data.fuel, 'fuel', true) : data.fuel,
+				odometer: !isMetric ? convert(data.odometer, 'distance', true) : data.odometer
+			})
+		else props.onSubmit(null)
 	}
 	// Checks if value is proper number and is greather than 0
 	function textInputsCheck(value: string) {
@@ -58,6 +60,7 @@ export default function RefuelForm(props: Props) {
 	}
 	function updateData<Prop extends keyof RefuelFormData>(prop: Prop, value: any) {
 		setData((values) => ({ ...values, [prop]: value }))
+		setDataUpdated(true)
 	}
 
 	return (
