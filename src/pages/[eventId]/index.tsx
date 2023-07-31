@@ -1,16 +1,17 @@
 import { useRouter } from 'next/router'
 import { useEffect, useMemo, useState } from 'react'
 
-import useAppContext from '@/hooks/Other/use-app-context'
 import useEvents from '@/hooks/Events/use-events'
+import useAppContext from '@/hooks/Other/use-app-context'
 import useUserRedirect from '@/hooks/Other/use-user-redirect'
 
+import { RefuelFormData } from '@/components/pages/Refuel/types/RefuelForm.modal'
 import { FullEvent } from '@/hooks/Events/types/Events.modal'
 
 import Head from '@/components/Head'
 import LoadingIcon from '@/components/UI/LoadingIcon'
+import ActionsContainer from '@/components/pages/Item/ActionsContainer'
 import Info from '@/components/pages/Item/Info'
-import RemoveButton from '@/components/pages/Item/RemoveButton'
 
 export type EventSiblings = [FullEvent | null, FullEvent | null, FullEvent, FullEvent | null, FullEvent | null]
 export default function Item() {
@@ -57,6 +58,13 @@ export default function Item() {
 		}
 	}, [eventId, getEventById, sortedDates])
 
+	function onEventEdit(data: RefuelFormData) {
+		setIsLoading(true)
+
+		// Fetching
+
+		setIsLoading(false)
+	}
 	function onEventRemove() {
 		setIsLoading(true)
 		removeEvent(eventId)
@@ -79,7 +87,7 @@ export default function Item() {
 		<>
 			<Head title={`Fuely | ${currentEvent.date}`} description={`Fuely ${currentEvent.date} event page`} />
 			<Info events={events} />
-			<RemoveButton onClick={onEventRemove} event={currentEvent.date} />
+			<ActionsContainer currentEvent={currentEvent} onEventEdit={onEventEdit} onEventRemove={onEventRemove} />
 		</>
 	)
 }
