@@ -51,8 +51,8 @@ export default function Info(props: Props) {
 			<div key={itemKey} className={sectionStyles}>
 				<header>
 					<span className={styles.name}>{data.name}</span>
-					<span className={styles.value}>
-						{data.value.toFixed(data.decimals ?? 2)} {data.unitType}
+					<span className={styles.value} data-unit={data.unitType}>
+						{data.value.toFixed(data.decimals ?? 2)}
 					</span>
 					<Button variant="redirect" className={styles.button} onClick={toggleInfoClickHandler}>
 						<Icon type="caret-left" alt="unfold icon" className={styles.icon} />

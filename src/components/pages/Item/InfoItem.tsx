@@ -16,13 +16,13 @@ export default function InfoItem(props: Props) {
 		return {
 			name: (
 				<>
-					<span className={currentClassName}>{item.date}</span>
-					<span className={currentClassName}>
-						{!item.isCurrent && <span className={className(currentClassName, styles.percent)}>({percentString})</span>}
-						{item.value} {item.unit}
+					<span className={className(currentClassName, styles.date)}>{item.date}</span>
+					<span className={className(currentClassName, styles.value)} data-unit={item.unit}>
+						{item.value}
 					</span>
 				</>
 			),
+			tooltip: !item.isCurrent ? percentString : '',
 			value: +item.value
 		}
 	})

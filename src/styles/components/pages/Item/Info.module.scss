@@ -26,6 +26,10 @@
 					color: $grey-600;
 					text-align: right;
 					padding: 0 1.5em;
+					&::after {
+						content: attr(data-unit);
+						margin-left: 0.25em;
+					}
 				}
 				.button {
 					aspect-ratio: 1 / 1;
