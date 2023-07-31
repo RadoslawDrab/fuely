@@ -22,7 +22,6 @@ export interface EventObject {
 	emptyEvent: FullEvent
 	getEvent: (index: number, datesArray?: string[]) => Promise<FullEvent>
 	getEventById: (eventId: string) => Promise<FullEvent>
-	formatDate: (date: string) => string
 	removeEvent: (eventId: string) => Promise<any>
 	getDistance: (eventId: string) => Promise<number>
 }

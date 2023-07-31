@@ -1,7 +1,6 @@
 import { useCallback, useEffect, useMemo, useState } from 'react'
 
 import { currencyConvert } from '@/utils/currency'
-import { formatDate } from '@/utils'
 import useAppContext from '../Other/use-app-context'
 import useUnit from '../Other/use-unit'
 
@@ -64,7 +63,7 @@ export default function useEvents(): EventObject {
 				if (!date) {
 					return reject('No event for this index')
 				}
-				const formattedDate = formatDate(date.split(':')[0])
+				const formattedDate = date.split(':')[0]
 				const id = +date.split(':')[1]
 
 				const e = events[date]
@@ -125,7 +124,6 @@ export default function useEvents(): EventObject {
 		emptyEvent,
 		getEvent,
 		getEventById,
-		formatDate,
 		removeEvent,
 		getDistance
 	}
