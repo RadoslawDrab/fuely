@@ -2,7 +2,8 @@ import React, { useEffect, useState } from 'react'
 
 import useEvents from '@/hooks/Events/use-events'
 import useAppContext from '@/hooks/Other/use-app-context'
-import { checkIfStringIsNumber } from '@/utils'
+import useUnit from '@/hooks/Other/use-unit'
+import { checkIfStringIsNumber, round } from '@/utils'
 import { currencies } from '@/utils/currency'
 import { getMessage } from '@/utils/messages'
 
@@ -17,12 +18,13 @@ import styles from '@styles/styles.module.scss'
 export default function RefuelForm(props: Props) {
 	const { user } = useAppContext().Auth
 	const { getEvent } = useEvents()
+	const { convert, isMetric } = useUnit()
 
 	const [data, setData] = useState<RefuelFormData>({
-		cost: props.default?.cost ?? 0,
+		cost: round(props.default?.cost ?? 0, 2),
 		currency: props.default?.currency ?? user.settings.currency ?? 'usd',
-		fuel: props.default?.fuel ?? 0,
-		odometer: props.default?.odometer ?? 0,
+		fuel: round(props.default?.fuel ?? 0, 2),
+		odometer: Math.round(props.default?.odometer ?? 0),
 		date: props.default?.date ?? new Date().toLocaleDateString('en-CA')
 	})
 
@@ -44,7 +46,11 @@ export default function RefuelForm(props: Props) {
 	function onFormSubmit(event: React.FormEvent<HTMLFormElement>) {
 		event.preventDefault()
 
-		props.onSubmit(data)
+		props.onSubmit({
+			...data,
+			fuel: !isMetric ? convert(data.fuel, 'fuel', true) : data.fuel,
+			odometer: !isMetric ? convert(data.odometer, 'distance', true) : data.odometer
+		})
 	}
 	// Checks if value is proper number and is greather than 0
 	function textInputsCheck(value: string) {
