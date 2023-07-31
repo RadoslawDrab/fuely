@@ -1,15 +1,17 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 
-const useToggle = (defaultState: boolean = false) => {
-	const [toggle, setToggle] = useState<boolean>(defaultState)
+import { ReturnObject } from './types/Toggle.modal'
 
-	function toggleState() {
-		setToggle((t) => !t)
+const useToggle = (defaultState: boolean = false): ReturnObject => {
+	const [state, setState] = useState<boolean>(defaultState)
+
+	function toggle() {
+		setState((t) => !t)
 	}
-	function setState(value: boolean) {
-		setToggle(value)
+	function set(value: boolean) {
+		setState(value)
 	}
-	return { toggle, toggleState, setState }
+	return [state, set, toggle]
 }
 
 export default useToggle
