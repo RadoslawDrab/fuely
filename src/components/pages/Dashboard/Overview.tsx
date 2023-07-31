@@ -132,7 +132,7 @@ export default function Overview(props: Props) {
 					items={[
 						{
 							name: (
-								<data value={currentValue}>
+								<data value={currentValue} className={styles.current}>
 									{value}
 									<span>{item.unit}</span>
 								</data>
