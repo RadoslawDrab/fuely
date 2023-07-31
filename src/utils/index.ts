@@ -128,3 +128,8 @@ interface ObjectData {
 export function getProp<Key extends keyof ObjectData>(obj: ObjectData, key: Key): ObjectData[Key] {
 	return obj[key]
 }
+
+export function round(number: number, round: number): number {
+	const rounding = Math.max(Math.round(round), 1)
+	return Math.floor(number * Math.pow(10, rounding)) / Math.pow(10, rounding)
+}
