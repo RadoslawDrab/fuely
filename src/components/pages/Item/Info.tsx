@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 
 import useCalculate from '@/hooks/Events/use-calculate'
 import useAppContext from '@/hooks/Other/use-app-context'
-import { className, getProp } from '@/utils'
+import { className, formatDate, getProp } from '@/utils'
 
 import { CalculateData, FullEvent } from '@/hooks/Events/types/Events.modal'
 import { InfoProps as Props } from './types/Info.modal'
@@ -10,8 +10,8 @@ import { InfoProps as Props } from './types/Info.modal'
 import Section from '@/components/Layout/Section'
 import Button from '@/components/UI/Button'
 import InfoItem from './InfoItem'
-
 import Icon from '@/components/UI/Icon'
+
 import styles from '@styles/pages/Item/Info.module.scss'
 
 export default function Info(props: Props) {
@@ -41,7 +41,7 @@ export default function Info(props: Props) {
 				return {
 					value: data.value.toFixed(data.decimals ?? 2),
 					unit: data.unitType,
-					date: event.date,
+					date: formatDate(event.date),
 					isCurrent,
 					percent
 				}
