@@ -9,9 +9,7 @@
 		align-items: center;
 		color: $grey-800;
 		letter-spacing: 0.2px;
-		h3 {
-			font-size: $size-700;
-		}
+		h3,
 		time {
 			font-size: $size-600;
 		}
@@ -39,13 +37,13 @@
 			}
 			.label {
 				font-size: $size-500;
-				@media screen and (min-width: 25rem) {
-					font-size: $size-600;
-				}
 			}
 			.percent {
 				text-align: right;
 				font-size: $size-400;
+				@media screen and (min-width: 25rem) {
+					font-size: $size-500;
+				}
 				&::after {
 					margin-left: 0.15em;
 					font-size: $size-300;
@@ -69,10 +67,13 @@
 						}
 
 						@media screen and (min-width: 25rem) {
-							font-size: $size-600;
+							font-size: $size-500;
 							span {
 								font-size: $size-400;
 							}
+						}
+						&.current {
+							color: $main-800;
 						}
 					}
 				}
