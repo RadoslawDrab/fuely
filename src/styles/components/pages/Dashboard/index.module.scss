@@ -51,6 +51,9 @@
 .overview {
 	margin-bottom: 2rem;
 }
+.events > div {
+	max-width: $size-tablet-xs;
+}
 @media screen and (min-width: $size-tablet-xs) {
 	.refuel-button {
 		span {
