@@ -71,6 +71,10 @@ const messages: Messages = {
 		type: 'success',
 		text: 'User successfully authenticated'
 	},
+	'password-reset-sent': {
+		type: 'success',
+		text: 'Password reset email successfully sent'
+	},
 	'verify-email': {
 		type: 'error',
 		text: 'Verify to log in'

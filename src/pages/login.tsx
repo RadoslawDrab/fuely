@@ -39,15 +39,27 @@ export default function Login() {
 				addNotification({ type: 'error', content: getMessage(error.code).text })
 			})
 	}
+	async function resetPassword(resetEmail: string) {
+		try {
+			const response = await fetch('/api/auth/password-reset', {
+				method: 'POST',
+				body: JSON.stringify({ email: resetEmail })
+			})
+			const status: any = await response.json()
+			addNotification({ type: 'success', content: getMessage(status.code).text })
+		} catch (error: any) {
+			setError(error.code)
+		}
+	}
 	function setError(message: string) {
-		addNotification({ type: 'error', content: message })
+		addNotification({ type: 'error', content: getMessage(message).text })
 	}
 
 	return (
 		<>
 			<Head title="Fuely | Login" description="Fuely login page" />
 			<Section title={getText('Log in')} className={sectionStyles} disableContent={isLoading}>
-				<LoginForm onLogin={loginUser} onError={setError} onInputChange={() => {}} />
+				<LoginForm onLogin={loginUser} onError={setError} onPasswordReset={resetPassword} />
 			</Section>
 			{isLoading && <LoadingIcon type="car" center />}
 		</>
