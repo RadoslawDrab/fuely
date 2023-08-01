@@ -3,14 +3,14 @@ import messages from '@/data/messages'
 export function getMessage(message: string): Message | EmptyMessage {
 	return (
 		messages[message.replace(/[a-z]*\//g, '')] || {
-			type: null,
+			type: 'error',
 			text: 'Something went wrong'
 		}
 	)
 }
 
 interface EmptyMessage {
-	readonly type: null
+	readonly type: 'error'
 	readonly text: 'Something went wrong'
 }
 interface Message {
