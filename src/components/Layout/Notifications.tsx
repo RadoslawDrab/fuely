@@ -2,7 +2,7 @@ import React from 'react'
 
 import useAppContext from '@/hooks/Other/use-app-context'
 
-import Notification from './Notification'
+import Notification from '../UI/Notification'
 
 export default function Notifications() {
 	const { getNotifications } = useAppContext().Notification

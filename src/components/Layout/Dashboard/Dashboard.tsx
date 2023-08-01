@@ -4,14 +4,14 @@ import useEvents from '@/hooks/Events/use-events'
 import useAppContext from '@/hooks/Other/use-app-context'
 import { className, getSessionStorage, setSessionStorage } from '@/utils'
 
-import { DashboardProps as Props } from './types/Dashboard.modal'
+import { DashboardProps as Props } from '../types/Dashboard.modal'
 
 import Section from '@/components/Layout/Section'
 import LoadingIcon from '@/components/UI/LoadingIcon'
 import Select from '@/components/UI/Select'
-import DashboardControls from './Dashboard/DashboardControls'
+import DashboardControls from './DashboardControls'
 
-import styles from '@styles/Layout/Dashboard.module.scss'
+import styles from '@styles/Layout/Dashboard/Dashboard.module.scss'
 import defaultStyles from '@styles/styles.module.scss'
 
 const maxSkip = 5

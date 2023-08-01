@@ -2,7 +2,7 @@ import React from 'react'
 
 import { className } from '@/utils'
 
-import { InfoItemProps as Props } from './types/Info.modal'
+import { InfoItemProps as Props } from '../types/Info/Info.modal'
 
 import Graph from '@/components/UI/Graph'
 

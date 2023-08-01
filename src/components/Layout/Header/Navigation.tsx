@@ -4,7 +4,7 @@ import { useRouter } from 'next/router'
 import useAppContext from '@/hooks/Other/use-app-context'
 import { className } from '@/utils'
 
-import NavigationButtons from '../NavigationButtons'
+import NavigationButtons from './NavigationButtons'
 import Button from '@/components/UI/Button'
 import Icon from '@/components/UI/Icon'
 

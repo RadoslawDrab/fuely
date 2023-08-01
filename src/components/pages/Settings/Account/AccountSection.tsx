@@ -3,7 +3,7 @@ import React, { useRef } from 'react'
 import useAppContext from '@/hooks/Other/use-app-context'
 import { className } from '@/utils'
 
-import { AccountSectionProps as Props } from './types/AccountSection.modal'
+import { AccountSectionProps as Props } from '../types/AccountSection.modal'
 
 import Section from '@/components/Layout/Section'
 import LoadingIcon from '@/components/UI/LoadingIcon'

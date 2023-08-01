@@ -5,7 +5,7 @@ import { className } from '@/utils'
 
 import { Units } from '@/pages/api/data/types/index.modal'
 import { Currencies } from '@/utils/currency'
-import { PreferencesSectionProps as Props } from './types/PreferencesSection.modal'
+import { PreferencesSectionProps as Props } from '../types/PreferencesSection.modal'
 
 import Section from '@/components/Layout/Section'
 import LoadingIcon from '@/components/UI/LoadingIcon'

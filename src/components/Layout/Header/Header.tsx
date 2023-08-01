@@ -6,9 +6,9 @@ import { className } from '@/utils'
 
 import Button from '@/components/UI/Button'
 import Icon from '@/components/UI/Icon'
-import Navigation from './Header/Navigation'
+import Navigation from './Navigation'
 
-import styles from '@styles/Layout/Header.module.scss'
+import styles from '@styles/Layout/Header/Header.module.scss'
 
 export default React.forwardRef(function Header(_, ref: React.ForwardedRef<HTMLElement>) {
 	const router = useRouter()

@@ -10,8 +10,8 @@ import { FullEvent } from '@/hooks/Events/types/Events.modal'
 
 import Head from '@/components/Head'
 import LoadingIcon from '@/components/UI/LoadingIcon'
-import ActionsContainer from '@/components/pages/Item/ActionsContainer'
-import Info from '@/components/pages/Item/Info'
+import ActionsContainer from '@/components/pages/Item/ActionsContainer/ActionsContainer'
+import Info from '@/components/pages/Item/Info/Info'
 
 export type EventSiblings = [FullEvent | null, FullEvent | null, FullEvent, FullEvent | null, FullEvent | null]
 export default function Item() {

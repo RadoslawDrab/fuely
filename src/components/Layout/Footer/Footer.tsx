@@ -4,12 +4,12 @@ import Link from 'next/link'
 import useAppContext from '@/hooks/Other/use-app-context'
 import { className, getRandomKey } from '@/utils'
 
-import Column from './Footer/Column'
-import NavigationButtons from './NavigationButtons'
-import Copywrite from './Footer/Copywrite'
-import Options from './Footer/Options'
+import Column from './Column'
+import NavigationButtons from '../Header/NavigationButtons'
+import Copywrite from './Copywrite'
+import Options from './Options'
 
-import styles from '@styles/Layout/Footer.module.scss'
+import styles from '@styles/Layout/Footer/Footer.module.scss'
 import buttonStyles from '@styles/UI/Button.module.scss'
 
 const contactInfo = [

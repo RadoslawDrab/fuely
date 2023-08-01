@@ -5,9 +5,9 @@ import { className, setSessionStorage } from '@/utils'
 import { LayoutProps as Props } from './types/Layout.modal'
 
 import { LayoutContextWrapper } from '@/utils/LayoutContextWrapper'
-import Notifications from '../UI/Notifications'
-import Footer from './Footer'
-import Header from './Header'
+import Notifications from './Notifications'
+import Footer from './Footer/Footer'
+import Header from './Header/Header'
 
 import styles from '@styles/Layout/Layout.module.scss'
 

@@ -4,10 +4,10 @@ import React from 'react'
 import useAppContext from '@/hooks/Other/use-app-context'
 import usePages from '@/hooks/Pages/use-pages'
 
-import { NavigationButtonsProps as Props } from './types/NavigationButtons.modal'
+import { NavigationButtonsProps as Props } from '../types/NavigationButtons.modal'
 
-import Button from '../UI/Button'
-import Icon from '../UI/Icon'
+import Button from '../../UI/Button'
+import Icon from '../../UI/Icon'
 
 export default function NavigationButtons(props: Props) {
 	const router = useRouter()

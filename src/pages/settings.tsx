@@ -8,8 +8,8 @@ import { getMessage } from '@/utils/messages'
 import { Units } from './api/data/types/index.modal'
 
 import Head from '@/components/Head'
-import AccountSection from '@/components/pages/Settings/AccountSection'
-import PreferencesSection from '@/components/pages/Settings/PreferencesSection'
+import AccountSection from '@/components/pages/Settings/Account/AccountSection'
+import PreferencesSection from '@/components/pages/Settings/Preferences/PreferencesSection'
 import LoadingIcon from '@/components/UI/LoadingIcon'
 
 export default function Settings() {

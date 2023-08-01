@@ -3,7 +3,7 @@ import React from 'react'
 import useToggle from '@/hooks/Other/use-toggle'
 import useAppContext from '@/hooks/Other/use-app-context'
 
-import { ActionsContainerProps as Props } from './types/ActionsContainer.modal'
+import { ActionsContainerProps as Props } from '../types/ActionsContainer/ActionsContainer.modal'
 
 import Button from '@/components/UI/Button'
 import Icon from '@/components/UI/Icon'

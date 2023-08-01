@@ -4,7 +4,7 @@ import useAppContext from '@/hooks/Other/use-app-context'
 import { currencies } from '@/utils/currency'
 import { getMessage } from '@/utils/messages'
 
-import { PreferencesFormProps as Props, PreferencesFormSettings as Settings } from './types/PreferencesSection.modal'
+import { PreferencesFormProps as Props, PreferencesFormSettings as Settings } from '../types/PreferencesSection.modal'
 import { units } from '@/pages/api/data/types/index.modal'
 
 import Button from '@/components/UI/Button'

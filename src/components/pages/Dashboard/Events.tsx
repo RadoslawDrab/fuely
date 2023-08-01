@@ -1,6 +1,6 @@
 import React, { useCallback, useMemo, useState } from 'react'
 
-import Dashboard from '@/components/Layout/Dashboard'
+import Dashboard from '@/components/Layout/Dashboard/Dashboard'
 import EventsItems from '@/components/pages/Dashboard/EventsItems'
 
 import { EventsProps as Props } from './types/Events.modal'

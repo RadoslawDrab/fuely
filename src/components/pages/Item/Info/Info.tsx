@@ -5,7 +5,7 @@ import useAppContext from '@/hooks/Other/use-app-context'
 import { className, formatDate, getProp } from '@/utils'
 
 import { CalculateData, FullEvent } from '@/hooks/Events/types/Events.modal'
-import { InfoProps as Props } from './types/Info.modal'
+import { InfoProps as Props } from '../types/Info/Info.modal'
 
 import Section from '@/components/Layout/Section'
 import Button from '@/components/UI/Button'

@@ -2,7 +2,7 @@ import React from 'react'
 
 import useAppContext from '@/hooks/Other/use-app-context'
 
-import { RemoveConfirmationModalProps as Props } from './types/RemoveConfirmationModal.modal'
+import { RemoveConfirmationModalProps as Props } from '../types/ActionsContainer/RemoveConfirmationModal.modal'
 
 import Button from '@/components/UI/Button'
 import Modal from '@/components/UI/Modal'
