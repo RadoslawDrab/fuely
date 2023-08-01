@@ -18,7 +18,7 @@ export default function ActionsContainer(props: Props) {
 	const [showRemoveModal, setShowRemoveModal, toggleShowRemoveModal] = useToggle(false)
 
 	return (
-		<>
+		<div className={styles.container}>
 			<Button onClick={toggleIsEditing} className={styles.button} variant="error">
 				<Icon type="gear" alt="edit icon" />
 				<span>{getText('Edit')}</span>
@@ -34,6 +34,6 @@ export default function ActionsContainer(props: Props) {
 				setIsShown={setShowRemoveModal}
 				onConfirm={props.onEventRemove}
 			/>
-		</>
+		</div>
 	)
 }
