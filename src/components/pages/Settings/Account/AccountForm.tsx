@@ -65,6 +65,7 @@ export default function AccountForm(props: Props) {
 				inputData={{ title: passwordInfo }}
 				notRequired
 			/>
+			<hr />
 			<Button className={defaultStyles['submit-button']}>Save</Button>
 		</form>
 	)

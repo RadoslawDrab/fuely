@@ -18,7 +18,7 @@ import styles from '@styles/styles.module.scss'
 export default function RefuelForm(props: Props) {
 	const { user } = useAppContext().Auth
 	const { getEvent } = useEvents()
-	const { convert, isMetric } = useUnit()
+	const { convert, isMetric, units } = useUnit()
 
 	const [data, setData] = useState<RefuelFormData>({
 		cost: round(props.default?.cost ?? 0, 2),
@@ -68,21 +68,25 @@ export default function RefuelForm(props: Props) {
 			<FormInput
 				id="cost-input"
 				type="number"
-				text="Cost"
+				text={`Cost (${data.currency.toUpperCase()})`}
 				min={0}
+				placeholder={data.currency.toUpperCase()}
 				getValue={(value) => updateData('cost', +value)}
-				defaultValue={data.cost}
+				defaultValue={round(data.cost, 2)}
 				check={textInputsCheck}
 				errorText={getMessage('invalid-amount').text}
 				inputData={{ step: 0.01 }}
 			/>
+			<label htmlFor="currency-select">Currency</label>
+			<Select id="currency-select" getValue={(value) => updateData('currency', value)} options={currencyOptions} />
 			<FormInput
 				id="fuel-input"
 				type="number"
-				text="Fuel Amount"
+				text={`Fuel Amount (${units.fuel})`}
+				placeholder={units.fuel}
 				min={0}
 				getValue={(value) => updateData('fuel', +value)}
-				defaultValue={data.fuel}
+				defaultValue={round(data.fuel, 2)}
 				check={textInputsCheck}
 				errorText={getMessage('invalid-amount').text}
 				inputData={{ step: 0.01 }}
@@ -90,16 +94,16 @@ export default function RefuelForm(props: Props) {
 			<FormInput
 				id="odometer-input"
 				type="number"
-				text="Odometer"
+				text={`Odometer (${units.distance})`}
+				placeholder={units.distance}
 				min={0}
 				getValue={(value) => updateData('odometer', +value)}
-				value={data.odometer}
+				value={Math.round(data.odometer)}
 				check={textInputsCheck}
 				errorText={getMessage('invalid-amount').text}
 			/>
 			<FormInput id="date-input" type="date" text="Date" getValue={(value) => updateData('date', value)} value={data.date} />
-			<label htmlFor="currency-select">Currency</label>
-			<Select id="currency-select" getValue={(value) => updateData('currency', value)} options={currencyOptions} />
+			<hr />
 			<Button onClick={() => {}} className={styles['submit-button']}>
 				Send
 			</Button>
