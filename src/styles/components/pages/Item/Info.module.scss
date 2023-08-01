@@ -96,7 +96,7 @@
 		&-content {
 			display: grid;
 			grid-template-columns: 1fr 1fr;
-			column-gap: 1.5em;
+			gap: 0.25em 1.5em;
 			.data-section {
 				header {
 					.value {
