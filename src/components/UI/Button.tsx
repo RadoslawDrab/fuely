@@ -26,6 +26,7 @@ export default function Button(props: Props) {
 
 	return (
 		<button
+			type={props.type ?? 'button'}
 			className={buttonClass}
 			onClick={props.onClick}
 			onFocus={props.onFocus}

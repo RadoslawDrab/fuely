@@ -10,4 +10,5 @@ export interface ButtonProps {
 	disabled?: boolean
 	selected?: boolean
 	variant?: ButtonVariant[] | ButtonVariant
+	type?: 'button' | 'submit' | 'reset'
 }
