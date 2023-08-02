@@ -20,6 +20,7 @@ const icons = [
 	'sun',
 	'translate',
 	'info',
-	'x'
+	'x',
+	'lock'
 ] as const
 export default icons
