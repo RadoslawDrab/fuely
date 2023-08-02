@@ -167,6 +167,9 @@
 		background-color: $main-500;
 		color: $grey-50;
 		box-shadow: none;
+		img {
+			filter: $grey-50__filter;
+		}
 		&:hover {
 			background-color: $main-400;
 		}
