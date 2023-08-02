@@ -68,7 +68,7 @@ export default function RefuelForm(props: Props) {
 			<FormInput
 				id="cost-input"
 				type="number"
-				text={`Cost (${data.currency.toUpperCase()})`}
+				text={'Cost'}
 				min={0}
 				placeholder={data.currency.toUpperCase()}
 				getValue={(value) => updateData('cost', +value)}
@@ -76,13 +76,14 @@ export default function RefuelForm(props: Props) {
 				check={textInputsCheck}
 				errorText={getMessage('invalid-amount').text}
 				inputData={{ step: 0.01 }}
+				rightText={data.currency.toUpperCase()}
 			/>
 			<label htmlFor="currency-select">Currency</label>
 			<Select id="currency-select" getValue={(value) => updateData('currency', value)} options={currencyOptions} />
 			<FormInput
 				id="fuel-input"
 				type="number"
-				text={`Fuel Amount (${units.fuel})`}
+				text={'Fuel Amount'}
 				placeholder={units.fuel}
 				min={0}
 				getValue={(value) => updateData('fuel', +value)}
@@ -90,17 +91,19 @@ export default function RefuelForm(props: Props) {
 				check={textInputsCheck}
 				errorText={getMessage('invalid-amount').text}
 				inputData={{ step: 0.01 }}
+				rightText={units.fuel}
 			/>
 			<FormInput
 				id="odometer-input"
 				type="number"
-				text={`Odometer (${units.distance})`}
+				text={'Odometer'}
 				placeholder={units.distance}
 				min={0}
 				getValue={(value) => updateData('odometer', +value)}
 				value={Math.round(data.odometer)}
 				check={textInputsCheck}
 				errorText={getMessage('invalid-amount').text}
+				rightText={units.distance}
 			/>
 			<FormInput id="date-input" type="date" text="Date" getValue={(value) => updateData('date', value)} value={data.date} />
 			<Button className={styles['submit-button']} variant="accent">
