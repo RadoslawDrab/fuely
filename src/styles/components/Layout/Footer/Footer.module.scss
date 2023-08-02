@@ -2,7 +2,7 @@
 .footer {
 	position: relative;
 	width: 100%;
-	max-width: $size-phone-l;
+	max-width: $size-tablet-xs;
 	margin: 0 auto;
 
 	background-color: $grey-800;
@@ -30,5 +30,10 @@
 		height: 100%;
 		transform: translateX(-50%);
 		background-color: inherit;
+	}
+
+	@media screen and (min-width: $size-tablet-xs) {
+		grid-template-columns: repeat(3, auto);
+		padding-bottom: 4em;
 	}
 }

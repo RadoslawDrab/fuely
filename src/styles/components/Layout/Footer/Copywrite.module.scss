@@ -3,6 +3,7 @@
 .copywrite {
 	grid-column: 1 / -1;
 	width: 100%;
+	margin-top: 2rem;
 	border-top: 1.5px solid $grey-400;
 	padding: 2em 0;
 	display: flex;
@@ -20,6 +21,27 @@
 		}
 		img {
 			filter: none;
+		}
+	}
+	@media screen and (min-width: $size-tablet-xs) {
+		grid-column: 1 / 2;
+		grid-row: 2 / 3;
+		border: none;
+		margin: 0;
+		padding: 0;
+
+		flex-direction: column;
+		align-items: flex-start;
+		justify-content: flex-start;
+		gap: 1rem;
+
+		.logo {
+			span {
+				font-size: $size-600;
+			}
+			img {
+				width: 2rem;
+			}
 		}
 	}
 }
