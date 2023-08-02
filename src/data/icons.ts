@@ -21,6 +21,7 @@ const icons = [
 	'translate',
 	'info',
 	'x',
-	'lock'
+	'lock',
+	'identification-card'
 ] as const
 export default icons
