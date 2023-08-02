@@ -20,12 +20,13 @@ export default React.forwardRef(function Header(_, ref: React.ForwardedRef<HTMLE
 
 	const navButtonStyles = className(styles['nav-button'], navigationState ? styles['active'] : '')
 
-	function redirect() {
+	async function redirect() {
 		if (isLoggedIn) {
-			router.push(`/dashboard`)
+			await router.push(`/dashboard`)
 		} else {
-			router.push('/')
+			await router.push('/')
 		}
+		document.body.scrollTo({ top: 0, behavior: 'smooth' })
 	}
 
 	return (

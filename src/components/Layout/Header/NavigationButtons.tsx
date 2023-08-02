@@ -16,9 +16,10 @@ export default function NavigationButtons(props: Props) {
 	const { availablePages } = usePages()
 
 	// Changes url based on path
-	function navigate(event: React.MouseEvent<HTMLButtonElement>) {
+	async function navigate(event: React.MouseEvent<HTMLButtonElement>) {
 		const url = event.currentTarget.dataset.path ?? '/'
-		router.push(url)
+		await router.push(url)
+		document.body.scrollTo({ top: 0, behavior: 'smooth' })
 	}
 
 	const navigationButtons = availablePages.map((item, i) => {

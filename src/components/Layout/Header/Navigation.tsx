@@ -22,10 +22,10 @@ export default function Navigation() {
 
 	const navigationStyles = className(styles.nav, !navigationState ? 'hidden' : '')
 
-	function logoutUser() {
-		logout().then(() => {
-			router.replace('/login')
-		})
+	async function logoutUser() {
+		await logout()
+		await router.replace('/login')
+		document.body.scrollTo({ top: 0, behavior: 'smooth' })
 	}
 
 	return (
