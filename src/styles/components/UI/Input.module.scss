@@ -35,3 +35,17 @@
 		background-color: $grey-200;
 	}
 }
+.input-wrapper.icon {
+	position: relative;
+	.input {
+		padding-left: 3.5em;
+	}
+	img {
+		position: absolute;
+		top: 50%;
+		left: 1em;
+		transform: translateY(-50%);
+		width: 1.4rem;
+		filter: $grey-400__filter;
+	}
+}
