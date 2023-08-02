@@ -163,6 +163,36 @@
 			}
 		}
 	}
+	&_accent {
+		background-color: $main-500;
+		color: $grey-50;
+		box-shadow: none;
+		&:hover {
+			background-color: $main-400;
+		}
+		&:active {
+			background-color: $main-600;
+		}
+		&:disabled {
+			background-color: $grey-200;
+			color: $grey-400;
+			img {
+				filter: $grey-400__filter;
+			}
+			&.selected {
+				background-color: $main-600;
+			}
+		}
+		&.selected {
+			background-color: $accent-500;
+			&:hover {
+				background-color: $accent-400;
+			}
+			&:active {
+				background-color: $accent-600;
+			}
+		}
+	}
 	&_error {
 		box-shadow: none;
 		background-color: $grey-100;

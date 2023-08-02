@@ -1,4 +1,4 @@
-export type ButtonVariant = 'default' | 'dark' | 'link' | 'redirect' | 'error'
+export type ButtonVariant = 'default' | 'dark' | 'link' | 'redirect' | 'error' | 'accent'
 
 export interface ButtonProps {
 	onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void
