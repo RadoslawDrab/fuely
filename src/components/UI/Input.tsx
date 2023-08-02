@@ -14,7 +14,7 @@ export default function Input(props: Props) {
 	const data = props.data ? createDatasetObject(props.data) : {}
 
 	return (
-		<div className={className(styles['input-wrapper'], props.icon ? styles.icon : '')}>
+		<div className={className(styles['input-wrapper'], props.icon ? styles.icon : '')} data-right-text={props.rightText ?? ''}>
 			{props.icon && <Icon type={props.icon} alt={`${props.icon} alt`} />}
 			<input
 				id={props.id}

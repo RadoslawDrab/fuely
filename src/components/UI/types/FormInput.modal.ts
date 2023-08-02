@@ -14,6 +14,7 @@ export interface FormInputProps {
 	defaultValue?: any
 	defaultChecked?: boolean
 	icon?: Icons
+	rightText?: string
 	inputData?: React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>
 	getValue?: (value: string) => void
 	getValueOnBlur?: (value: string) => void

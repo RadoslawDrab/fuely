@@ -16,6 +16,7 @@ export interface InputProps {
 	max?: number
 	data?: { [key: string]: number | string | boolean | object }
 	icon?: Icons
+	rightText?: string
 	inputData?: React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>
 	onChange: (event: ChangeEvent<HTMLInputElement>) => void
 	onBlur?: (event: FocusEvent<HTMLInputElement>) => void

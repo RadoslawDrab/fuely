@@ -54,6 +54,7 @@ export default function FormInput(props: Props) {
 				max={props.max}
 				value={props.value}
 				icon={props.icon}
+				rightText={props.rightText}
 				defaultValue={props.defaultValue}
 				defaultChecked={props.defaultChecked}
 				inputData={props.inputData}
