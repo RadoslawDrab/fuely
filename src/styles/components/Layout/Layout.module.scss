@@ -35,6 +35,9 @@
 			display: flex;
 			gap: 0.5em;
 			flex-direction: column;
+			@media screen and (min-width: $size-tablet-l) {
+				right: calc((100% - $size-tablet-l) / 2 + 1.5em);
+			}
 		}
 	}
 }

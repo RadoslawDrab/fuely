@@ -34,9 +34,6 @@
 		clip-path: ellipse(0% 50% at 100% 50%);
 		opacity: 0;
 	}
-	@media screen and (min-width: $size-tablet-l) {
-		right: calc((100% - $size-tablet-l) / 2 + 1.5em);
-	}
 	@media screen and (pointer: fine) {
 		&:hover {
 			span {
