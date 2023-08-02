@@ -27,5 +27,14 @@
 			grid-template-columns: 1fr 1fr;
 			gap: 1em;
 		}
+		.floating-buttons {
+			position: fixed;
+			z-index: 5;
+			bottom: 1em;
+			right: 1em;
+			display: flex;
+			gap: 0.5em;
+			flex-direction: column;
+		}
 	}
 }

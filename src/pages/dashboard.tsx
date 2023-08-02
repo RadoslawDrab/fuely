@@ -6,8 +6,6 @@ import useEvents from '@/hooks/Events/use-events'
 import useUserRedirect from '@/hooks/Other/use-user-redirect'
 
 import Head from '@/components/Head'
-import Button from '@/components/UI/Button'
-import Icon from '@/components/UI/Icon'
 import LoadingIcon from '@/components/UI/LoadingIcon'
 import Events from '@/components/pages/Dashboard/Events'
 import Overview from '@/components/pages/Dashboard/Overview'
@@ -29,19 +27,11 @@ export default function Dashboard() {
 		return <LoadingIcon type="car" />
 	}
 
-	function refuelButtonClick() {
-		router.push('/refuel')
-	}
-
 	return (
 		<>
 			<Head title={`Fuely | Dashboard - ${user.displayName}`} description={`Dashboard of ${user.displayName} user`} />
 			<Overview className={styles.overview} />
 			<Events className={styles.events} />
-			<Button className={styles['refuel-button']} onClick={refuelButtonClick}>
-				<span>{getText('Refuel')}</span>
-				<Icon type="gas-pump" alt="fuelpump icon" />
-			</Button>
 		</>
 	)
 }
