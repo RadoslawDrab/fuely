@@ -65,13 +65,16 @@ export default function PreferencesForm(props: Props) {
 				placeholder={user.displayName}
 				notRequired
 				inputData={{ title: getMessage('invalid-name').text }}
+				icon="identification-card"
 			/>
 			<label htmlFor="units-select">Units</label>
 			<Select id="units-select" getValue={unitsValueHandler} options={unitsOptions} />
 			<label htmlFor="currency-select">Currency</label>
 			<Select id="currency-select" getValue={currencyValueHandler} options={currencyOptions} />
 			<hr />
-			<Button className={defaultStyles['submit-button']}>Save</Button>
+			<Button className={defaultStyles['submit-button']} variant="accent">
+				Save
+			</Button>
 		</form>
 	)
 }

@@ -50,23 +50,29 @@ export default function AccountForm(props: Props) {
 			<FormInput
 				id="email"
 				text="New Email"
+				placeholder="email@gmail.com"
 				type="email"
 				getValueOnBlur={(value) => setNewEmail(value)}
 				defaultValue={newEmail}
 				inputData={{ title: 'e.g. email@gmail.com' }}
 				notRequired
+				icon="user"
 			/>
 			<hr />
 			<FormInput
 				id="new-password"
 				text="New Password"
+				placeholder="Password"
 				type="password"
 				getValueOnBlur={(value) => setNewPassword(value)}
 				inputData={{ title: passwordInfo }}
 				notRequired
+				icon="lock"
 			/>
 			<hr />
-			<Button className={defaultStyles['submit-button']}>Save</Button>
+			<Button className={defaultStyles['submit-button']} variant="accent">
+				Save
+			</Button>
 		</form>
 	)
 }

@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 
 import useAppContext from '@/hooks/Other/use-app-context'
-import { checkEmailAndPassword, emailRegEx, getSessionStorage, passwordInfo, passwordRegEx } from '@/utils'
+import { checkEmailAndPassword, className, emailRegEx, getSessionStorage, passwordInfo, passwordRegEx } from '@/utils'
 
 import { LoginFormProps as Props } from './types/LoginForm.modal'
 
@@ -38,11 +38,13 @@ export default function LoginForm(props: Props) {
 					id="email"
 					type="text"
 					text={'Email'}
+					placeholder={'user@mail.com'}
 					getValue={(value) => setEmail(() => value)}
 					check={(value) => !!value.match(emailRegEx)}
 					errorText="Enter valid email"
 					defaultValue={email}
 					inputData={{ autoComplete: 'email' }}
+					icon="user"
 				/>
 				<FormInput
 					id="password"
@@ -52,12 +54,16 @@ export default function LoginForm(props: Props) {
 					check={(value) => !!value.match(passwordRegEx)}
 					errorText={passwordInfo}
 					inputData={{ autoComplete: 'current-password' }}
+					icon="lock"
 				/>
-				<hr />
-				<Button onClick={() => setShowPasswordResetModal(true)}>Reset password</Button>
-				<hr />
-				<Button type="submit" className={styles['submit-button']}>
-					{getText('Send')}
+				<Button
+					onClick={() => setShowPasswordResetModal(true)}
+					className={className(styles.button, styles.span, styles.right)}
+					variant="redirect">
+					Forgot password?
+				</Button>
+				<Button type="submit" className={styles['submit-button']} variant="accent">
+					Log in
 				</Button>
 			</form>
 			<ResetPasswordModal

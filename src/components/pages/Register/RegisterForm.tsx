@@ -44,8 +44,10 @@ export default function RegisterForm(props: Props) {
 				type="text"
 				getValue={(value) => setEmail(() => value)}
 				text={'Email'}
+				placeholder="email@gmail.com"
 				check={(value) => !!value.match(emailRegEx)}
 				errorText={getMessage('invalid-email').text}
+				icon="user"
 			/>
 			<FormInput
 				id="password"
@@ -54,6 +56,7 @@ export default function RegisterForm(props: Props) {
 				text={getText('Password')}
 				check={(value) => !!value.match(passwordRegEx)}
 				errorText={getMessage('invalid-password').text}
+				icon="lock"
 			/>
 			<hr />
 			<FormInput
@@ -64,9 +67,9 @@ export default function RegisterForm(props: Props) {
 				placeholder="e.g. John"
 				check={(value) => value.length >= 3}
 				errorText={getMessage('invalid-name').text}
+				icon="identification-card"
 			/>
-			<hr />
-			<Button className={styles['submit-button']} onClick={() => {}}>
+			<Button className={styles['submit-button']} variant="accent">
 				{getText('Send')}
 			</Button>
 		</form>

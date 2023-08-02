@@ -103,9 +103,8 @@ export default function RefuelForm(props: Props) {
 				errorText={getMessage('invalid-amount').text}
 			/>
 			<FormInput id="date-input" type="date" text="Date" getValue={(value) => updateData('date', value)} value={data.date} />
-			<hr />
-			<Button onClick={() => {}} className={styles['submit-button']}>
-				Send
+			<Button className={styles['submit-button']} variant="accent">
+				Add
 			</Button>
 		</form>
 	)
