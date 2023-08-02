@@ -29,11 +29,18 @@
 	button {
 		font-size: $size-400;
 	}
-	.submit-button {
-		grid-column: 1 / -1;
+	.button {
 		justify-self: center;
-		font-size: $size-500;
-		padding: 0.75em 1.25em;
+		letter-spacing: 0.3px;
+	}
+	.submit-button {
+		display: inline;
+		margin-top: 0.5em;
+		grid-column: 1 / -1;
+		justify-self: stretch;
+		text-align: center;
+		font-size: $size-600;
+		padding: 0.8em 1.25em;
 	}
 	@media screen and (min-width: $size-phone-l) {
 		column-gap: 2.5em;
@@ -45,9 +52,17 @@
 			font-size: $size-500;
 		}
 	}
-	@media screen and (min-width: $size-tablet-xs) {
-		column-gap: 3em;
-		grid-template-columns: auto auto;
+	.left {
+		justify-self: start;
+	}
+	.right {
+		justify-self: end;
+	}
+	.center {
+		justify-self: center;
+	}
+	.span {
+		grid-column: 1 / -1;
 	}
 }
 .section {
