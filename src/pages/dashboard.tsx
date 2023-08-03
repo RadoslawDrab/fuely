@@ -1,4 +1,3 @@
-import { useRouter } from 'next/router'
 import React from 'react'
 
 import useAppContext from '@/hooks/Other/use-app-context'
@@ -13,8 +12,6 @@ import Overview from '@/components/pages/Dashboard/Overview'
 import styles from '@styles/pages/Dashboard/index.module.scss'
 
 export default function Dashboard() {
-	const router = useRouter()
-
 	useUserRedirect()
 	const {
 		user,
