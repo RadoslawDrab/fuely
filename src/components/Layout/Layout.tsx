@@ -24,6 +24,7 @@ function Layout(props: Props) {
 	const {
 		state: { isLoggedIn }
 	} = useAppContext().Auth
+	const { isDarkTheme, toggleTheme } = useAppContext().Theme
 
 	const layoutStyles = className(styles.layout, 'layout')
 	const floatingButtonsStyles = className(styles['floating-buttons'], 'floating-buttons')
@@ -39,6 +40,13 @@ function Layout(props: Props) {
 				<main ref={mainContainerRef}>
 					{props.children}
 					<div className={floatingButtonsStyles}>
+						<FloatingButton
+							useParent
+							iconType={isDarkTheme ? 'moon' : 'sun'}
+							iconAlt="theme icon"
+							text={isDarkTheme ? 'Dark' : 'Light'}
+							onClick={toggleTheme}
+						/>
 						{isLoggedIn && (
 							<FloatingButton useParent iconType="gas-pump" iconAlt="refuel icon" text="Refuel" onClick={refuelButtonClick} />
 						)}
