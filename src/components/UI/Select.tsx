@@ -4,6 +4,8 @@ import { className } from '@/utils'
 
 import { SelectProps as Props } from './types/Select.modal'
 
+import Icon from './Icon'
+
 import styles from '@styles/UI/Select.module.scss'
 import inputStyles from '@styles/UI/Input.module.scss'
 
@@ -23,15 +25,18 @@ export default function Select(props: Props) {
 		if (props.onChange) props.onChange(e)
 	}
 	return (
-		<select
-			className={selectStyles}
-			id={props.id}
-			name={props.name}
-			onChange={onChange}
-			onFocus={props.onFocus}
-			onBlur={props.onBlur}
-			value={selectedOption?.value}>
-			{options}
-		</select>
+		<div className={styles.wrapper}>
+			<select
+				className={selectStyles}
+				id={props.id}
+				name={props.name}
+				onChange={onChange}
+				onFocus={props.onFocus}
+				onBlur={props.onBlur}
+				value={selectedOption?.value}>
+				{options}
+			</select>
+			<Icon type="caret-left" alt="caret icon" />
+		</div>
 	)
 }
