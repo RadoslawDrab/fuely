@@ -87,7 +87,7 @@ function Notification(props: NotificationProps) {
 
 	return createPortal(
 		<li ref={notificationRef} className={notificationStyles}>
-			<Icon className={styles['notification-icon']} type={notificationIconType} alt="info icon" />
+			<Icon className={styles['notification-icon']} type={notificationIconType} alt={`${props.type} icon`} />
 			<div className={styles.content}>
 				<span className={styles.title}>{props.title ?? 'Notification'}</span>
 				{props.children}
