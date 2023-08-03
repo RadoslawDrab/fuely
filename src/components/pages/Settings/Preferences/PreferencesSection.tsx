@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useRef } from 'react'
 
 import useAppContext from '@/hooks/Other/use-app-context'
 import { className } from '@/utils'
@@ -15,6 +15,7 @@ import styles from '@styles/pages/Settings/index.module.scss'
 import defaultStyles from '@styles/styles.module.scss'
 
 export default function PreferencesSection(props: Props) {
+	const sectionRef = useRef(null)
 	const { getText } = useAppContext().Language
 
 	const sectionStyles = className(defaultStyles.section, styles.section, 'not-grow')
@@ -26,9 +27,9 @@ export default function PreferencesSection(props: Props) {
 		})
 	}
 	return (
-		<Section title={getText('Preferences')} contentClassName={sectionStyles} disableContent={props.isLoading}>
+		<Section ref={sectionRef} title={getText('Preferences')} contentClassName={sectionStyles} disableContent={props.isLoading}>
 			<PreferencesForm onFormSubmit={onFormSubmit} onError={props.onError} />
-			{props.isLoading && <LoadingIcon center />}
+			{props.isLoading && <LoadingIcon parent={sectionRef} center />}
 		</Section>
 	)
 }
