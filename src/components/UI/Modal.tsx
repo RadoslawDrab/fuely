@@ -27,7 +27,7 @@ export default function Modal(props: Props) {
 				<div className={styles['modal-bar']}>
 					<span>{props.title}</span>
 					{props.allowClosing && (
-						<Button className="close-button" onClick={closeButtonClickHandler}>
+						<Button className="close-button" onClick={closeButtonClickHandler} variant="redirect">
 							<Icon type="x" alt="close icon" />
 						</Button>
 					)}
