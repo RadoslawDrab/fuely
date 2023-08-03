@@ -20,7 +20,7 @@ export default function Navigation() {
 	} = useAppContext().Auth
 	const { getText } = useAppContext().Language
 
-	const navigationStyles = className(styles.nav, !navigationState ? 'hidden' : '')
+	const navigationStyles = className(styles.nav, !navigationState ? styles.hidden : '')
 
 	async function logoutUser() {
 		await logout()

@@ -33,7 +33,7 @@
 		letter-spacing: 0.3px;
 		span {
 			font-weight: 600;
-			color: $main-500;
+			@include theme(($main-500, $main-400), color);
 		}
 	}
 	form {

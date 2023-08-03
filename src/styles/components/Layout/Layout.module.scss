@@ -1,4 +1,5 @@
 @use '@/styles/library' as *;
+
 .layout {
 	position: relative;
 	width: 100%;
@@ -13,7 +14,7 @@
 		width: 100%;
 		max-width: $size-tablet-l;
 
-		margin: 2em 0;
+		margin: 2em 0 4em 0;
 		padding: 0.75em;
 
 		display: grid;
@@ -33,7 +34,7 @@
 			bottom: 1em;
 			right: 1em;
 			display: flex;
-			gap: 0.5em;
+			gap: 0.75em;
 			flex-direction: column;
 			@media screen and (min-width: $size-tablet-l) {
 				right: calc((100% - $size-tablet-l) / 2 + 1.5em);

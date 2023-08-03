@@ -1,11 +1,12 @@
 @use '@/styles/library' as *;
+
 .column {
 	display: flex;
 	flex-direction: column;
 
 	& > span {
 		margin-bottom: 1em;
-		color: $grey-300;
+		@include theme(($grey-300, $grey-400), color);
 		font-size: $size-500;
 		letter-spacing: 0.6px;
 		padding: 0 0.65rem;

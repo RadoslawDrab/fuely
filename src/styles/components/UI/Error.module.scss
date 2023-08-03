@@ -1,15 +1,23 @@
 @use '@/styles/library' as *;
+
 .error {
-	display: block;
-	padding: 0.55em 0.75em;
+	$colors: (
+		'error-300': $error-300 $error-900,
+		'error-400': $error-400 $error-800,
+		'error-900': $error-900 $error-100
+	);
+	@include theme-content($colors) using ($error-300_theme, $error-400_theme, $error-900_theme) {
+		display: block;
+		padding: 0.55em 0.75em;
 
-	background-color: $error-50;
-	border: 1.5px solid $error-600;
-	border-radius: 4px;
+		background-color: $error-300_theme;
+		border: 1.5px solid $error-400_theme;
+		border-radius: 4px;
 
-	color: $error-800;
-	font-size: $size-400;
-	letter-spacing: 0.5px;
-	line-height: 1.5;
-	font-weight: 500;
+		color: $error-900_theme;
+		font-size: $size-400;
+		letter-spacing: 0.5px;
+		line-height: 1.5;
+		font-weight: 500;
+	}
 }

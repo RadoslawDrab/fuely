@@ -32,7 +32,7 @@
 			}
 			img {
 				width: 100%;
-				filter: $grey-800__filter;
+				@include theme(($grey-800__filter, $grey-400__filter), filter);
 			}
 		}
 		&::before {
@@ -40,6 +40,9 @@
 			$road-length: 10%;
 			$road-color-1: $grey-800;
 			$road-color-2: transparent;
+			html.dark-theme {
+				$road-color-1: $grey-400;
+			}
 
 			content: '';
 			position: absolute;
@@ -90,7 +93,7 @@
 			left: -#{$border};
 			width: calc(100% + $border * 2);
 			height: calc(100% + $border * 2);
-			border-color: $main-500;
+			@include theme(($main-500, $main-600), border-color);
 		}
 		&::after {
 			$offset: 35%;
@@ -99,6 +102,7 @@
 			width: calc(100% - $offset + $border * 2);
 			height: calc(100% - $offset + $border * 2);
 			border-color: $main-600;
+			@include theme(($main-600, $main-700), border-color);
 			animation-direction: reverse;
 		}
 		@keyframes rotation {
@@ -115,6 +119,6 @@
 		position: absolute;
 		top: 50%;
 		left: 50%;
-		transform: translate(-50%, 50%);
+		transform: translate(-50%, -50%);
 	}
 }

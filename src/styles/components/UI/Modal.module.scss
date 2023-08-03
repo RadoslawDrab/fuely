@@ -6,8 +6,9 @@
 	top: 50%;
 	left: 50%;
 	transform: translate(-50%, -50%);
-	background-color: $grey-50;
-	border: 1.5px solid $grey-300;
+	@include theme(($grey-50, $grey-900), background-color);
+	border: 1.5px solid;
+	@include theme(($grey-300, $grey-700), border-color);
 	border-radius: 4px;
 	width: max-content;
 	min-width: min(75vw, 25rem);
@@ -23,8 +24,8 @@
 		justify-content: space-between;
 		align-items: center;
 
-		background-color: $grey-100;
-		padding: 0.5em 0.75em;
+		@include theme(($grey-100, $grey-950), background-color);
+		padding: 0.75em 1.5em;
 		border-bottom: inherit;
 		span {
 			font-size: $size-600;
@@ -34,14 +35,14 @@
 		@include global('.close-button') {
 			padding: 0.6em;
 			img {
-				width: 1.25em;
+				width: 1.25rem;
 			}
 		}
 	}
 	&-content {
 		flex: 1;
 		font-size: $size-500;
-		padding: 0.75em;
+		padding: 1.5em;
 		overflow-y: auto;
 	}
 }
@@ -50,7 +51,7 @@
 	position: fixed;
 	top: 0;
 	left: 0;
-	background-color: $grey-200;
+	@include theme(($grey-200, $grey-800), background-color);
 	opacity: 0.6;
 	width: 100%;
 	height: 100%;

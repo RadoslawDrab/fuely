@@ -1,12 +1,13 @@
 @use '@/styles/library' as *;
+
 .button {
-	border: none;
+	border: 1.5px solid transparent;
 	border-radius: 5px;
 
-	background-color: $grey-200;
-	color: $grey-800;
+	@include theme(($grey-200, $grey-700), background-color);
+	@include theme(($grey-800, $grey-200), color);
 	img {
-		filter: $grey-800__filter;
+		@include theme(($grey-800__filter, $grey-200__filter), filter);
 	}
 
 	box-shadow: 0 0 0.09rem 0.1rem rgba($color: $grey-950, $alpha: 0.1);
@@ -28,96 +29,99 @@
 
 	&:hover {
 		cursor: pointer;
-		background-color: $grey-100;
+		@include theme(($grey-100, $grey-600), background-color);
 	}
 	&:active {
-		background-color: $grey-300;
+		@include theme(($grey-300, $grey-800), background-color);
 	}
 	&:focus-visible {
-		outline: 2px solid $accent-500;
+		outline: 2px solid;
+		@include theme(($accent-500, $accent-600), outline-color);
 	}
 	&:disabled {
 		cursor: initial;
-		background-color: $grey-400;
+		@include theme(($grey-400, $grey-800), background-color);
 
 		img {
 			filter: $grey-900__filter;
 		}
 	}
 	&.selected {
-		background-color: $main-500;
-		color: $grey-200;
+		@include theme(($main-500, $main-700), background-color);
+		@include theme(($grey-200, $grey-200), color);
 		img {
 			filter: $grey-200__filter;
 		}
+		&:disabled {
+			@include theme(($main-700, $main-900), background-color);
+		}
 	}
 	&_dark {
-		background-color: $grey-600;
-		color: $grey-300;
+		@include theme(($grey-600, $grey-700), background-color);
+		@include theme(($grey-300, $grey-200), color);
 		img {
-			filter: $grey-300__filter;
+			@include theme(($grey-300__filter, $grey-200__filter), filter);
 		}
 		&:hover {
-			background-color: $grey-500;
+			@include theme(($grey-500, $grey-600), background-color);
 		}
 		&:active {
-			background-color: $grey-800;
+			@include theme(($grey-800, $grey-800), background-color);
 		}
 		&:disabled {
-			background-color: $grey-700;
-			color: $grey-400;
+			@include theme(($grey-700, $grey-800), background-color);
+			@include theme(($grey-400, $grey-400), color);
 			img {
-				filter: $grey-400__filter;
-			}
-			&.selected {
-				background-color: $main-800;
+				@include theme(($grey-400__filter, $grey-300__filter), filter);
 			}
 		}
 		&.selected {
-			background-color: $main-600;
+			@include theme(($main-600, $main-700), background-color);
 			&:hover {
-				background-color: $main-500;
+				@include theme(($main-500, $main-600), background-color);
 			}
 			&:active {
-				background-color: $main-700;
+				@include theme(($main-700, $main-800), background-color);
 			}
 		}
 	}
 	&_link {
 		position: relative;
-		background-color: transparent;
-		color: $grey-400;
+		@include theme((inherit, transparent), background-color);
+		@include theme(($grey-400, $grey-500), color);
 		border-radius: 0;
 		box-shadow: none;
 		&:hover {
-			color: $grey-500;
-			background-color: $grey-700;
+			@include theme(($grey-300, $grey-400), color);
+			@include theme((transparent, transparent), background-color);
 		}
 		&:active {
-			background-color: $grey-600;
+			@include theme((transparent, transparent), background-color);
 		}
 		&:disabled {
-			background-color: $grey-700;
-			color: $grey-500;
+			@include theme((transparent, transparent), background-color);
+			@include theme(($grey-500, $grey-600), color);
 			&.selected {
 				background-color: $main-900;
+				@include theme(($main-900, $main-950), background-color);
 			}
 		}
 		&.selected {
-			background-color: transparent;
+			@include theme((inherit, transparent), background-color);
+
 			&::before {
-				background-color: $main-500;
+				@include theme(($main-500, $main-600), background-color);
 			}
 			&:hover {
-				background-color: $grey-700;
+				@include theme(($grey-100, $grey-300), color);
 				&::before {
-					background-color: $main-600;
+					@include theme(($main-600, $main-500), background-color);
 				}
 			}
 			&:active {
-				background-color: $grey-600;
+				@include theme(($grey-600, $grey-700), background-color);
 				&::before {
-					background-color: $main-400;
+					@include theme(($main-400, $main-500), background-color);
 				}
 			}
 		}
@@ -133,120 +137,123 @@
 		}
 	}
 	&_redirect {
-		background-color: transparent;
-		color: $grey-400;
+		@include theme((transparent, transparent), background-color);
+		@include theme(($grey-400, $grey-300), color);
 		box-shadow: none;
 		&:hover {
-			color: $grey-500;
-			background-color: $grey-200;
+			@include theme(($grey-500, $grey-200), color);
+			@include theme(($grey-200, $grey-700), background-color);
 		}
 		&:active {
-			background-color: $grey-300;
+			@include theme(($grey-300, $grey-800), background-color);
 		}
 		&:disabled {
-			background-color: $grey-200;
-			color: $grey-400;
+			@include theme(($grey-200, $grey-700), background-color);
+			@include theme(($grey-400, $grey-500), color);
 			img {
 				filter: $grey-400__filter;
 			}
 			&.selected {
-				background-color: $main-600;
+				@include theme(($main-600, $main-800), background-color);
 			}
 		}
 		&.selected {
-			background-color: $main-400;
+			@include theme(($main-400, $main-700), background-color);
 			&:hover {
-				background-color: $main-500;
+				@include theme(($main-300, $main-600), background-color);
 			}
 			&:active {
-				background-color: $main-600;
+				@include theme(($main-500, $main-800), background-color);
 			}
 		}
 	}
 	&_accent {
-		background-color: $main-500;
-		color: $grey-50;
+		@include theme(($main-500, $main-700), background-color);
+		@include theme(($grey-50, $grey-200), color);
 		box-shadow: none;
 		img {
-			filter: $grey-50__filter;
+			@include theme(($grey-50__filter, $grey-200__filter), filter);
 		}
 		&:hover {
-			background-color: $main-400;
+			@include theme(($main-400, $main-600), background-color);
 		}
 		&:active {
-			background-color: $main-600;
+			@include theme(($main-600, $main-800), background-color);
 		}
 		&:disabled {
-			background-color: $grey-200;
-			color: $grey-400;
+			@include theme(($grey-200, $grey-700), background-color);
+			@include theme(($grey-400, $grey-400), color);
 			img {
-				filter: $grey-400__filter;
+				@include theme(($grey-400__filter, $grey-300__filter), filter);
 			}
 			&.selected {
-				background-color: $main-600;
+				@include theme(($main-600, $main-800), background-color);
 			}
 		}
 		&.selected {
-			background-color: $accent-500;
+			@include theme(($accent-500, $accent-700), background-color);
 			&:hover {
-				background-color: $accent-400;
+				@include theme(($accent-400, $accent-600), background-color);
 			}
 			&:active {
-				background-color: $accent-600;
+				@include theme(($accent-600, $accent-800), background-color);
 			}
 		}
 	}
 	&_error {
 		box-shadow: none;
-		background-color: $grey-100;
-		border: 1.5px solid $grey-300;
-		color: $grey-700;
-		@include global('img.icon') {
-			filter: $grey-700__filter;
+		border: 1.5px solid;
+		@include theme(($grey-100, $grey-700), background-color);
+		@include theme(($grey-300, $grey-500), border-color);
+		@include theme(($grey-700, $grey-300), color);
+		img {
+			@include theme(($grey-700__filter, $grey-300__filter), filter);
 			transition: inherit;
 		}
 		&:hover,
 		&:active,
 		&.selected {
-			border-color: $accent-600;
+			@include theme(($accent-600, $accent-600), border-color);
 		}
 		&:hover {
-			color: $accent-700;
-			background-color: $accent-100;
-			@include global('img.icon') {
-				filter: $accent-700__filter;
+			@include theme(($accent-700, $grey-200), color);
+			@include theme(($accent-100, $accent-800), background-color);
+			img {
+				@include theme(($accent-700__filter, $grey-200__filter), filter);
 			}
 		}
 		&:active {
-			background-color: $accent-200;
+			@include theme(($accent-200, $accent-900), background-color);
 		}
 		&:disabled {
-			background-color: $grey-300;
-			color: $grey-600;
-			border-color: $grey-400;
-			@include global('img.icon') {
-				filter: $grey-600__filter;
+			@include theme(($grey-300, $grey-800), background-color);
+			@include theme(($grey-600, $grey-500), color);
+			@include theme(($grey-400, $grey-700), border-color);
+			img {
+				@include theme(($grey-600__filter, $grey-500__filter), filter);
 			}
 			&.selected {
-				background-color: $accent-300;
+				@include theme(($accent-300, $accent-800), background-color);
+				@include theme(($grey-600, $grey-500), color);
+				@include theme(($accent-400, $accent-900), border-color);
 			}
 		}
 		&.selected {
-			background-color: $accent-300;
-			color: $grey-800;
-			border-color: $accent-400;
+			@include theme(($accent-300, $accent-800), background-color);
+			@include theme(($grey-800, $grey-200), color);
+			@include theme(($accent-400, $accent-700), border-color);
 			&:hover,
 			&:active {
-				border-color: $accent-600;
+				@include theme(($accent-600, $accent-500), border-color);
 			}
-			@include global('img.icon') {
-				filter: $grey-800__filter;
+			img {
+				@include theme(($grey-800__filter, $grey-200__filter), filter);
 			}
 			&:hover {
-				background-color: $accent-200;
+				@include theme(($accent-200, $accent-700), background-color);
 			}
 			&:active {
-				background-color: $accent-500;
+				@include theme(($accent-500, $accent-900), background-color);
 			}
 		}
 	}

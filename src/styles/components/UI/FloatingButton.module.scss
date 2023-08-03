@@ -9,7 +9,7 @@
 	padding: 1em;
 	border-radius: 50%;
 	border: 1.5px solid;
-	border-color: inherit;
+	@include theme(($grey-300, $grey-500), border-color);
 
 	span {
 		position: absolute;

@@ -4,7 +4,8 @@
 	grid-column: 1 / -1;
 	width: 100%;
 	margin-top: 2rem;
-	border-top: 1.5px solid $grey-400;
+	border-top: 1.5px solid;
+	@include theme(($grey-400, $grey-700), border-color);
 	padding: 2em 0;
 	display: flex;
 	justify-content: space-between;

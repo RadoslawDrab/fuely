@@ -1,16 +1,18 @@
 @use '@/styles/library' as *;
+
 .footer {
 	position: relative;
 	width: 100%;
 	max-width: $size-tablet-xs;
 	margin: 0 auto;
 
-	background-color: $grey-800;
+	@include theme(($grey-800, $grey-900), background-color);
 	display: grid;
 	grid-template-columns: repeat(2, 1fr);
 	gap: 1.5em;
 	padding: 3em 1.5em;
 	padding-bottom: 0;
+	@include theme((0, 1.5px solid $grey-700), border-top);
 
 	@include global(('.pages-column')) {
 		ul {

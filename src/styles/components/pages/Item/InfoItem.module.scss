@@ -12,11 +12,7 @@
 		gap: 0.75em;
 		span {
 			&.current {
-				color: $main-700;
-				.percent {
-					font-size: $size-200;
-					color: $main-500;
-				}
+				@include theme(($main-700, $main-400), color);
 			}
 			&.value::after {
 				content: attr(data-unit);

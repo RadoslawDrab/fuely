@@ -33,7 +33,7 @@
 						width: 1.5px;
 						right: calc(-1 * $gap / 2);
 						top: calc($height-decrease / 2);
-						background-color: $grey-300;
+						@include theme(($grey-300, $grey-700), background-color);
 					}
 				}
 			}
