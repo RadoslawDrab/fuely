@@ -26,18 +26,16 @@ html.light-theme {
 }
 html.dark-theme {
 	color-scheme: dark;
+	body {
+		background-color: $grey-900;
+	}
+	hr {
+		background-color: $grey-700;
+	}
 }
 hr {
 	border: none;
 	width: auto;
 	height: 1.5px;
 	background-color: $grey-300;
-}
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-	font-weight: 400;
 }
