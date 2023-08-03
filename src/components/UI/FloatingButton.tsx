@@ -14,7 +14,7 @@ export default function FloatingButton(props: Props) {
 	const { mainContainerRef } = useLayoutContext()
 
 	const content = (
-		<Button className={styles.button} onClick={props.onClick} variant="accent">
+		<Button className={styles.button} onClick={props.onClick} variant="default">
 			<span>{props.text}</span>
 			<Icon type={props.iconType} alt={props.iconAlt} />
 		</Button>
