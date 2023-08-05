@@ -8,7 +8,7 @@
 	padding: 1.5em 0;
 	border-bottom: 1.5px solid;
 	@include theme(($grey-400, $grey-700), border-color);
-	gap: 1em;
+	gap: 0.5em;
 	.theme-button img,
 	ul .translation-icon {
 		@include theme(($grey-300__filter, $grey-400__filter), filter);
@@ -27,14 +27,19 @@
 		display: flex;
 		align-items: center;
 		list-style: none;
-		gap: 0.5em;
+		gap: 0.4em;
 		.translation-icon {
 			display: flex;
 			justify-content: center;
 			align-items: center;
 
-			margin-right: 0.5em;
 			width: 1.25rem;
+		}
+		@media screen and (min-width: $size-phone-m) {
+			gap: 0.5em;
+			.translation-icon {
+				margin-right: 0.35em;
+			}
 		}
 	}
 }
