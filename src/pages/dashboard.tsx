@@ -26,7 +26,10 @@ export default function Dashboard() {
 
 	return (
 		<>
-			<Head title={`Fuely | Dashboard - ${user.displayName}`} description={`Dashboard of ${user.displayName} user`} />
+			<Head
+				title={`Fuely | ${getText('Dashboard')} - ${user.displayName}`}
+				description={`Dashboard of ${user.displayName} user`}
+			/>
 			<Overview className={styles.overview} />
 			<Events className={styles.events} />
 		</>

@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 
-import { emailRegEx, passwordInfo, passwordRegEx } from '@/utils'
+import { emailRegEx, passwordRegEx } from '@/utils'
+import useAppContext from '@/hooks/Other/use-app-context'
 
 import { AccountFormProps as Props } from '../types/AccountSection.modal'
 
@@ -8,8 +9,12 @@ import Button from '@/components/UI/Button'
 import FormInput from '@/components/UI/FormInput'
 
 import defaultStyles from '@styles/styles.module.scss'
+import { getMessage } from '@/utils/messages'
 
 export default function AccountForm(props: Props) {
+	const { getText } = useAppContext().Language
+	const { user } = useAppContext().Auth
+
 	const [newEmail, setNewEmail] = useState<string | null>(null)
 	const [newPassword, setNewPassword] = useState<string | null>(null)
 
@@ -22,6 +27,10 @@ export default function AccountForm(props: Props) {
 			}
 			if (!newEmail?.match(emailRegEx)) {
 				props.onError('invalid-email')
+				return null
+			}
+			if (newEmail === user.email) {
+				props.onError('same-email')
 				return null
 			}
 
@@ -39,7 +48,7 @@ export default function AccountForm(props: Props) {
 			return newPassword
 		})()
 		// If neither of inputs are filled returns error
-		if (!email && !password) {
+		if (!newEmail && !newPassword) {
 			return props.onError('not-enough-data')
 		}
 
@@ -49,7 +58,7 @@ export default function AccountForm(props: Props) {
 		<form className={defaultStyles.form} onSubmit={onFormSubmit}>
 			<FormInput
 				id="email"
-				text="New Email"
+				text={getText('New Email')}
 				placeholder="email@gmail.com"
 				type="email"
 				getValueOnBlur={(value) => setNewEmail(value)}
@@ -61,17 +70,21 @@ export default function AccountForm(props: Props) {
 			<hr />
 			<FormInput
 				id="new-password"
-				text="New Password"
-				placeholder="Password"
+				text={getText('New Password')}
+				placeholder={getText('Password')}
 				type="password"
 				getValueOnBlur={(value) => setNewPassword(value)}
-				inputData={{ title: passwordInfo }}
+				inputData={{
+					title: getMessage(
+						'Password must contain: minimum 8 characters, uppercase letter, lowercase letter, number and special character'
+					).text
+				}}
 				notRequired
 				icon="lock"
 			/>
 			<hr />
-			<Button className={defaultStyles['submit-button']} variant="accent">
-				Save
+			<Button type="submit" className={defaultStyles['submit-button']} variant="accent">
+				{getText('Save')}
 			</Button>
 		</form>
 	)

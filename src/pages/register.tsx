@@ -46,7 +46,7 @@ export default function Register() {
 
 	return (
 		<>
-			<Head title="Fuely | Register" description="Fuely register page" />
+			<Head title={`Fuely | ${getText('Register')}`} description="Fuely register page" />
 			<Section title={getText('Register')} className={sectionStyles} disableContent={isLoading}>
 				<RegisterForm onRegister={registerUser} onError={setFormError} onInputChange={() => removeAllOfType('error')} />
 			</Section>

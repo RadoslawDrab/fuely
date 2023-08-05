@@ -36,7 +36,7 @@ export default function Navigation() {
 					<li className="logout-item">
 						<Button className="logout-button" onClick={logoutUser} variant="dark">
 							<Icon type="arrow-square-out" alt="logout icon" />
-							<span>{getText('Logout')}</span>
+							<span>{getText('Log out')}</span>
 						</Button>
 					</li>
 				)}

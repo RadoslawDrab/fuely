@@ -14,14 +14,14 @@ export default function usePages(): Pages {
 	const allPages: Page[] = [
 		{
 			name: 'home',
-			display: 'Home',
+			display: 'Homepage',
 			icon: 'house',
 			path: '/',
 			condition: () => true
 		},
 		{
 			name: 'about',
-			display: 'About',
+			display: 'About app',
 			icon: 'info',
 			path: '/about',
 			condition: () => true

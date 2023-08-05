@@ -63,14 +63,14 @@ export default function RegisterForm(props: Props) {
 				id="name"
 				type="text"
 				getValue={(value) => setName(() => value)}
-				text={getText('Name')}
+				text={getText('Username')}
 				placeholder="e.g. John"
 				check={(value) => value.length >= 3}
 				errorText={getMessage('invalid-name').text}
 				icon="identification-card"
 			/>
-			<Button className={styles['submit-button']} variant="accent">
-				{getText('Send')}
+			<Button type="submit" className={styles['submit-button']} variant="accent">
+				{getText('Register')}
 			</Button>
 		</form>
 	)

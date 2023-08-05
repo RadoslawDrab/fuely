@@ -15,6 +15,7 @@ import defaultStyles from '@styles/styles.module.scss'
 
 export default function PreferencesForm(props: Props) {
 	const { user } = useAppContext().Auth
+	const { getText } = useAppContext().Language
 
 	const [settings, setSettings] = useState<Settings>({
 		displayName: user.displayName,
@@ -22,14 +23,15 @@ export default function PreferencesForm(props: Props) {
 		currency: user.settings.currency
 	})
 
-	const unitsOptions = units.map((c) => ({
-		value: c,
-		selected: c === settings.units ?? c === user.settings.units
+	const unitsOptions = units.map((unit) => ({
+		name: getText((unit.substring(0, 1).toUpperCase() + unit.substring(1) + ' system') as any),
+		value: unit,
+		selected: unit === settings.units ?? unit === user.settings.units
 	}))
-	const currencyOptions = currencies.map((c) => ({
-		name: c.toUpperCase(),
-		value: c,
-		selected: c === user.settings.currency
+	const currencyOptions = currencies.map((currency) => ({
+		name: currency.toUpperCase(),
+		value: currency,
+		selected: currency === user.settings.currency
 	}))
 
 	function displayNameValueHandler(value: string) {
@@ -58,7 +60,7 @@ export default function PreferencesForm(props: Props) {
 		<form className={defaultStyles.form} onSubmit={onSubmit}>
 			<FormInput
 				id="name"
-				text="Name"
+				text={getText('Username')}
 				type="text"
 				getValueOnBlur={displayNameValueHandler}
 				defaultValue={user.displayName}
@@ -67,13 +69,13 @@ export default function PreferencesForm(props: Props) {
 				inputData={{ title: getMessage('invalid-name').text }}
 				icon="identification-card"
 			/>
-			<label htmlFor="units-select">Units</label>
+			<label htmlFor="units-select">{getText('Units')}</label>
 			<Select id="units-select" getValue={unitsValueHandler} options={unitsOptions} />
-			<label htmlFor="currency-select">Currency</label>
+			<label htmlFor="currency-select">{getText('Currency')}</label>
 			<Select id="currency-select" getValue={currencyValueHandler} options={currencyOptions} />
 			<hr />
-			<Button className={defaultStyles['submit-button']} variant="accent">
-				Save
+			<Button type="submit" className={defaultStyles['submit-button']} variant="accent">
+				{getText('Save')}
 			</Button>
 		</form>
 	)

@@ -1,10 +1,14 @@
 import { useState } from 'react'
 
+import { getText } from '../Language/use-language'
+import { isClient } from '@/utils'
+
 import { NotificationType } from '@/components/UI/types/Notification.modal'
 import { NotificationData, Notification, NotificationObject } from './types/Notification.modal'
 
 export default function useNotification(): NotificationObject {
 	const [notifications, setNotifications] = useState<NotificationData[]>([])
+	const currentLang = isClient() ? document.querySelector('html')?.lang || 'en' : 'en'
 	const firstTimedNotification = notifications.find((notification) => notification.timer && notification.timer > 0) ?? null
 
 	function addNotification(notification: Notification, synchronousTimer: boolean = true, index?: number): number {
@@ -22,7 +26,7 @@ export default function useNotification(): NotificationObject {
 		const notificationTitle =
 			notification.title || notification.type === 'default'
 				? notification.title
-				: notification.type[0].toUpperCase() + notification.type.slice(1)
+				: getText((notification.type[0].toUpperCase() + notification.type.slice(1)) as any, currentLang)
 
 		setNotifications((notifications) => {
 			const newNotification = {

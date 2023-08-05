@@ -57,7 +57,7 @@ export default function Login() {
 
 	return (
 		<>
-			<Head title="Fuely | Login" description="Fuely login page" />
+			<Head title={`Fuely | ${getText('Log in')}`} description="Fuely login page" />
 			<Section title={getText('Log in')} className={sectionStyles} disableContent={isLoading}>
 				<LoginForm onLogin={loginUser} onError={setError} onPasswordReset={resetPassword} />
 			</Section>

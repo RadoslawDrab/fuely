@@ -1,13 +1,14 @@
 import { useEffect, useState } from 'react'
 
 import translations from '@data/translations.json'
-import { getLocalStorage, setLocalStorage } from '@/utils'
+import { getLocalStorage, isClient, setLocalStorage } from '@/utils'
 
 import { LanguageObject, Languages, Texts, Translations } from './types/Language.modal'
 
 const translationsObject: Translations = translations
 
 const allLanguages: any = ['en', ...Object.keys(translations.Button)]
+
 function useLanguage(): LanguageObject {
 	const [currentLang, setCurrentLanguage] = useState<Languages>('en')
 
@@ -19,7 +20,7 @@ function useLanguage(): LanguageObject {
 	useEffect(() => {
 		// Changes `html` element language based on current language
 		const htmlElement = document.querySelector('html')
-		if (htmlElement) htmlElement.lang = currentLang
+		if (htmlElement) htmlElement.lang = currentLang as string
 	}, [currentLang])
 
 	// Sets language
@@ -47,4 +48,15 @@ export const exampleLanguageObject: LanguageObject = {
 	getText: () => '',
 	language: allLanguages[0],
 	languages: [...allLanguages]
+}
+
+export const currentLang: Languages = isClient() ? document.querySelector('html')?.lang || 'en' : 'en'
+export function getText(text: Texts, language: Languages = currentLang): string {
+	// Returns current text with English language is selected
+	if (language === 'en') return text
+
+	// Translation found for `text`
+	const foundTranslation = translationsObject[text]
+	// Translation for current language
+	return foundTranslation[language] || text
 }

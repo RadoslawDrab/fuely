@@ -2,7 +2,7 @@ import { useRouter } from 'next/router'
 import React, { useRef } from 'react'
 
 import useAppContext from '@/hooks/Other/use-app-context'
-import { className, setSessionStorage } from '@/utils'
+import { className } from '@/utils'
 
 import { LayoutProps as Props } from './types/Layout.modal'
 
@@ -14,8 +14,6 @@ import Notifications from './Notifications'
 
 import styles from '@styles/Layout/Layout.module.scss'
 
-setSessionStorage({ formData: undefined })
-
 function Layout(props: Props) {
 	const router = useRouter()
 	const mainContainerRef = useRef<HTMLElement>(null)
@@ -25,6 +23,7 @@ function Layout(props: Props) {
 		state: { isLoggedIn }
 	} = useAppContext().Auth
 	const { isDarkTheme, toggleTheme } = useAppContext().Theme
+	const { getText } = useAppContext().Language
 
 	const layoutStyles = className(styles.layout, 'layout')
 	const floatingButtonsStyles = className(styles['floating-buttons'], 'floating-buttons')
@@ -40,16 +39,22 @@ function Layout(props: Props) {
 				<main ref={mainContainerRef}>
 					{props.children}
 					<div className={floatingButtonsStyles}>
+						{isLoggedIn && (
+							<FloatingButton
+								useParent
+								iconType="gas-pump"
+								iconAlt="refuel icon"
+								text={getText('Refuel')}
+								onClick={refuelButtonClick}
+							/>
+						)}
 						<FloatingButton
 							useParent
-							iconType={isDarkTheme ? 'moon' : 'sun'}
+							iconType={isDarkTheme ? 'sun' : 'moon'}
 							iconAlt="theme icon"
-							text={isDarkTheme ? 'Dark' : 'Light'}
+							text={isDarkTheme ? getText('Light') : getText('Dark')}
 							onClick={toggleTheme}
 						/>
-						{isLoggedIn && (
-							<FloatingButton useParent iconType="gas-pump" iconAlt="refuel icon" text="Refuel" onClick={refuelButtonClick} />
-						)}
 					</div>
 				</main>
 				<Footer />

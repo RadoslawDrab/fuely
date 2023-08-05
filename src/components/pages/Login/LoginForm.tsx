@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
 
 import useAppContext from '@/hooks/Other/use-app-context'
-import { checkEmailAndPassword, className, emailRegEx, getSessionStorage, passwordInfo, passwordRegEx } from '@/utils'
+import { checkEmailAndPassword, className, emailRegEx, getSessionStorage, passwordRegEx } from '@/utils'
+import { getMessage } from '@/utils/messages'
 
 import { LoginFormProps as Props } from './types/LoginForm.modal'
 
@@ -41,7 +42,7 @@ export default function LoginForm(props: Props) {
 					placeholder={'user@mail.com'}
 					getValue={(value) => setEmail(() => value)}
 					check={(value) => !!value.match(emailRegEx)}
-					errorText="Enter valid email"
+					errorText={getMessage('invalid-email').text}
 					defaultValue={email}
 					inputData={{ autoComplete: 'email' }}
 					icon="user"
@@ -52,7 +53,7 @@ export default function LoginForm(props: Props) {
 					text={getText('Password')}
 					getValue={(value) => setPassword(() => value)}
 					check={(value) => !!value.match(passwordRegEx)}
-					errorText={passwordInfo}
+					errorText={getMessage('invalid-password').text}
 					inputData={{ autoComplete: 'current-password' }}
 					icon="lock"
 				/>
@@ -60,10 +61,10 @@ export default function LoginForm(props: Props) {
 					onClick={() => setShowPasswordResetModal(true)}
 					className={className(styles.button, styles.span, styles.right)}
 					variant="redirect">
-					Forgot password?
+					{getText('Forgot password?')}
 				</Button>
 				<Button type="submit" className={styles['submit-button']} variant="accent">
-					Log in
+					{getText('Log in')}
 				</Button>
 			</form>
 			<ResetPasswordModal

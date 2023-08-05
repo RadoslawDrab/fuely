@@ -1,4 +1,4 @@
-import React, { memo, useCallback, useEffect, useMemo, useRef, useState } from 'react'
+import React, { useCallback, useEffect, useRef, useState } from 'react'
 import { createPortal } from 'react-dom'
 
 import { useLayoutContext } from '@/context/layoutContext'
@@ -14,12 +14,13 @@ import Icon from './Icon'
 import styles from '@styles/UI/Notification.module.scss'
 
 function Notification(props: NotificationProps) {
+	const { getText } = useAppContext().Language
+	const { headerRef } = useLayoutContext()
+	const { removeNotification, firstTimedNotification } = useAppContext().Notification
+
 	const notificationRef = useRef<HTMLLIElement>(null)
 	const [show, setShow] = useState(true)
 	const [timer, setTimer] = useState(0)
-
-	const { headerRef } = useLayoutContext()
-	const { removeNotification, firstTimedNotification } = useAppContext().Notification
 
 	const closeAnimDuration = (() => {
 		if (notificationRef.current) {
@@ -89,7 +90,7 @@ function Notification(props: NotificationProps) {
 		<li ref={notificationRef} className={notificationStyles}>
 			<Icon className={styles['notification-icon']} type={notificationIconType} alt={`${props.type} icon`} />
 			<div className={styles.content}>
-				<span className={styles.title}>{props.title ?? 'Notification'}</span>
+				<span className={styles.title}>{props.title ?? getText('Notification')}</span>
 				{props.children}
 			</div>
 			<Button className={styles['close-button']} onClick={onClose} variant={'redirect'}>

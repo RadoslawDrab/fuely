@@ -21,8 +21,12 @@ export default function Options() {
 		const key = `${lang.toString()}-${getRandomKey()}`
 		return (
 			<li key={key}>
-				<Button onClick={onLanguageChange} selected={currentLanguage === lang} data={{ language: lang }} variant="dark">
-					{lang.toUpperCase()}
+				<Button
+					onClick={onLanguageChange}
+					selected={currentLanguage === lang}
+					data={{ language: lang.toString() }}
+					variant="dark">
+					{lang.toString().toUpperCase()}
 				</Button>
 			</li>
 		)
@@ -37,13 +41,13 @@ export default function Options() {
 				{languageButtons}
 			</ul>
 			<Button className={styles['theme-button']} onClick={toggleTheme} variant="dark">
-				{!isDarkTheme && (
+				{isDarkTheme && (
 					<>
 						<Icon type="sun" alt="sun icon" />
 						<span>{getText('Light')}</span>
 					</>
 				)}
-				{isDarkTheme && (
+				{!isDarkTheme && (
 					<>
 						<Icon type="moon" alt="moon icon" />
 						<span>{getText('Dark')}</span>

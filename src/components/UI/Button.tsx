@@ -1,12 +1,15 @@
 import React from 'react'
 
 import { className, createDatasetObject } from '@/utils'
+import useAppContext from '@/hooks/Other/use-app-context'
 
 import { ButtonProps as Props } from '@/components/UI/types/Button.modal'
 
 import styles from '@styles/UI/Button.module.scss'
 
 export default function Button(props: Props) {
+	const { getText } = useAppContext().Language
+
 	const variant = (() => {
 		if (props.variant) {
 			switch (typeof props.variant) {
@@ -33,7 +36,7 @@ export default function Button(props: Props) {
 			onBlur={props.onBlur}
 			{...data}
 			disabled={props.disabled}>
-			{props.children || 'Button'}
+			{props.children || getText('Button')}
 		</button>
 	)
 }

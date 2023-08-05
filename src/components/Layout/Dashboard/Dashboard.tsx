@@ -77,7 +77,7 @@ export default function Dashboard(props: Props) {
 	return (
 		<Section title={props.name ?? getText('Dashboard')} className={props.className} contentClassName={sectionStyles}>
 			<div className={styles.filter}>
-				<label htmlFor="per-page-select">Show</label>
+				<label htmlFor="per-page-select">{getText('Show')}</label>
 				<Select id="per-page-select" options={perPageOptions} getValue={onFilterValueChange} />
 			</div>
 			{isLoading && <LoadingIcon />}

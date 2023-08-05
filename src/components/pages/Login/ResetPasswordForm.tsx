@@ -28,13 +28,13 @@ export default function ResetPasswordForm(props: Props) {
 				placeholder="email@gmail.com"
 				getValue={(value) => setEmail(() => value)}
 				check={(value) => !!value.match(emailRegEx)}
-				errorText="Enter valid email"
+				errorText={getText('Enter valid email')}
 				defaultValue={email}
 				inputData={{ autoComplete: 'email' }}
 				icon="user"
 			/>
 			<Button type="submit" className={styles['submit-button']} variant="accent">
-				{getText('Send')}
+				{getText('Reset password')}
 			</Button>
 		</form>
 	)

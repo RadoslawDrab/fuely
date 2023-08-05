@@ -17,6 +17,7 @@ import styles from '@styles/styles.module.scss'
 
 export default function RefuelForm(props: Props) {
 	const { user } = useAppContext().Auth
+	const { getText } = useAppContext().Language
 	const { getEvent } = useEvents()
 	const { convert, isMetric, units } = useUnit()
 
@@ -68,7 +69,7 @@ export default function RefuelForm(props: Props) {
 			<FormInput
 				id="cost-input"
 				type="number"
-				text={'Cost'}
+				text={getText('Cost')}
 				min={0}
 				placeholder={data.currency.toUpperCase()}
 				getValue={(value) => updateData('cost', +value)}
@@ -78,12 +79,12 @@ export default function RefuelForm(props: Props) {
 				inputData={{ step: 0.01 }}
 				rightText={data.currency.toUpperCase()}
 			/>
-			<label htmlFor="currency-select">Currency</label>
+			<label htmlFor="currency-select">{getText('Currency')}</label>
 			<Select id="currency-select" getValue={(value) => updateData('currency', value)} options={currencyOptions} />
 			<FormInput
 				id="fuel-input"
 				type="number"
-				text={'Fuel Amount'}
+				text={getText('Fuel')}
 				placeholder={units.fuel}
 				min={0}
 				getValue={(value) => updateData('fuel', +value)}
@@ -96,7 +97,7 @@ export default function RefuelForm(props: Props) {
 			<FormInput
 				id="odometer-input"
 				type="number"
-				text={'Odometer'}
+				text={getText('Odometer')}
 				placeholder={units.distance}
 				min={0}
 				getValue={(value) => updateData('odometer', +value)}
@@ -105,9 +106,15 @@ export default function RefuelForm(props: Props) {
 				errorText={getMessage('invalid-amount').text}
 				rightText={units.distance}
 			/>
-			<FormInput id="date-input" type="date" text="Date" getValue={(value) => updateData('date', value)} value={data.date} />
-			<Button className={styles['submit-button']} variant="accent">
-				Add
+			<FormInput
+				id="date-input"
+				type="date"
+				text={getText('Date')}
+				getValue={(value) => updateData('date', value)}
+				value={data.date}
+			/>
+			<Button type="submit" className={styles['submit-button']} variant="accent">
+				{getText('Add')}
 			</Button>
 		</form>
 	)

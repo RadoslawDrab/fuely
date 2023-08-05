@@ -21,13 +21,17 @@ export default function Refuel() {
 
 	useUserRedirect()
 	const { getEvents } = useAppContext().Auth
+	const { getText } = useAppContext().Language
 	const { addNotification } = useAppContext().Notification
 
 	const [isLoading, setIsLoading] = useState(false)
 
 	const sectionStyles = className(styles.section, styles.center)
 
-	async function onSubmit(data: RefuelFormData) {
+	async function onSubmit(data: RefuelFormData | null) {
+		if (!data) {
+			return addNotification({ type: 'error', content: getMessage('not-enough-data').text })
+		}
 		setIsLoading(true)
 
 		const response = await fetch('/api/user/refuel', {
@@ -59,8 +63,8 @@ export default function Refuel() {
 
 	return (
 		<>
-			<Head title="Fuely | Refuel" description="Fuely refuel form page" />
-			<Section title="Refuel" className={sectionStyles} disableContent={isLoading}>
+			<Head title={`Fuely | ${getText('Refuel')}`} description="Fuely refuel form page" />
+			<Section title={getText('Refuel')} className={sectionStyles} disableContent={isLoading}>
 				<RefuelForm onSubmit={onSubmit} />
 			</Section>
 			{isLoading && <LoadingIcon type="car" center />}

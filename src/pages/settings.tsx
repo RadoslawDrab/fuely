@@ -21,6 +21,7 @@ export default function Settings() {
 		state: { isLoading: authIsLoading }
 	} = useAppContext().Auth
 	const { addNotification } = useAppContext().Notification
+	const { getText } = useAppContext().Language
 
 	const [isLoading, setIsLoading] = useState<boolean>(false)
 
@@ -65,7 +66,7 @@ export default function Settings() {
 
 	return (
 		<>
-			<Head title={`Fuely | Settings - ${user.displayName}`} description={`${user.displayName} settings page`} />
+			<Head title={`Fuely | ${getText('Settings')} - ${user.displayName}`} description={`${user.displayName} settings page`} />
 			<AccountSection onAccountFormSubmit={onFormSubmit} onError={onError} isLoading={isLoading} />
 			<PreferencesSection onPreferencesFormSubmit={onFormSubmit} onError={onError} isLoading={isLoading} />
 		</>

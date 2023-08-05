@@ -4,6 +4,7 @@ import { createPortal } from 'react-dom'
 
 import { useLayoutContext } from '@/context/layoutContext'
 import { className } from '@/utils'
+import useAppContext from '@/hooks/Other/use-app-context'
 
 import { LoadingIconProps as Props } from './types/LoadingIcon.modal'
 
@@ -12,6 +13,7 @@ import Icon from './Icon'
 import styles from '@styles/UI/LoadingIcon.module.scss'
 
 export default function LoadingIcon(props: Props) {
+	const { getText } = useAppContext().Language
 	const { mainContainerRef } = useLayoutContext()
 
 	const loadingIconStyles = className(styles.loading, 'loading-icon', props.center ? styles.center : '')
@@ -20,7 +22,7 @@ export default function LoadingIcon(props: Props) {
 	const content = (
 		<>
 			<Head>
-				<title>Fuely | Loading</title>
+				<title>Fuely | {getText('Loading')}</title>
 			</Head>
 			<div className={loadingIconStyles} role="status">
 				{type === 'spinner' && <div className={styles.spinner}></div>}

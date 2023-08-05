@@ -1,10 +1,12 @@
 import React, { useCallback, useMemo, useState } from 'react'
 
-import Dashboard from '@/components/Layout/Dashboard/Dashboard'
-import EventsItems from '@/components/pages/Dashboard/EventsItems'
+import useAppContext from '@/hooks/Other/use-app-context'
 
 import { EventsProps as Props } from './types/Events.modal'
 import { FullEvent } from '@/hooks/Events/types/Events.modal'
+
+import Dashboard from '@/components/Layout/Dashboard/Dashboard'
+import EventsItems from '@/components/pages/Dashboard/EventsItems'
 
 import styles from '@styles/pages/Dashboard/EventsItems.module.scss'
 
@@ -12,6 +14,7 @@ export default function Events(props: Props) {
 	const [events, setEvents] = useState<FullEvent[]>([])
 
 	const items: any = useMemo(() => <EventsItems events={events} />, [events])
+	const { getText } = useAppContext().Language
 
 	const onLoad = useCallback((events: FullEvent[]) => {
 		setEvents(events)
@@ -21,7 +24,7 @@ export default function Events(props: Props) {
 		if (events.length === 0)
 			return (
 				<li className={styles.item}>
-					<span>No data</span>
+					<span>{getText('No data')}</span>
 				</li>
 			)
 		return items
@@ -29,7 +32,7 @@ export default function Events(props: Props) {
 
 	return (
 		<>
-			<Dashboard name="Events" className={props.className} onEventsLoad={onLoad}>
+			<Dashboard name={getText('Events')} className={props.className} onEventsLoad={onLoad}>
 				{content}
 			</Dashboard>
 		</>
