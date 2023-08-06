@@ -4,13 +4,15 @@ import { useRouter } from 'next/router'
 import useAppContext from '@/hooks/Other/use-app-context'
 import { className } from '@/utils'
 
+import { HeaderProps as Props } from '../types/Header.modal'
+
 import Button from '@/components/UI/Button'
 import Icon from '@/components/UI/Icon'
 import Navigation from './Navigation'
 
 import styles from '@styles/Layout/Header/Header.module.scss'
 
-export default React.forwardRef(function Header(_, ref: React.ForwardedRef<HTMLElement>) {
+export default React.forwardRef(function Header(props: Props, ref: React.ForwardedRef<HTMLElement>) {
 	const router = useRouter()
 
 	const { toggleNavigation, navigationState } = useAppContext().Navigation
@@ -18,6 +20,7 @@ export default React.forwardRef(function Header(_, ref: React.ForwardedRef<HTMLE
 		state: { isLoggedIn }
 	} = useAppContext().Auth
 
+	const headerStyles = className(styles.header, props.disableStickiness ? styles['disable-stickiness'] : '')
 	const navButtonStyles = className(styles['nav-button'], navigationState ? styles['active'] : '')
 
 	async function redirect() {
@@ -30,7 +33,7 @@ export default React.forwardRef(function Header(_, ref: React.ForwardedRef<HTMLE
 	}
 
 	return (
-		<header ref={ref} className={styles.header}>
+		<header ref={ref} className={headerStyles}>
 			<Button className={styles['logo-button']} onClick={redirect} variant="dark">
 				<Icon type="logo" alt="logo icon" />
 				<h1>Fuely</h1>

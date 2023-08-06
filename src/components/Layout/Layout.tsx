@@ -28,6 +28,8 @@ function Layout(props: Props) {
 	const layoutStyles = className(styles.layout, 'layout')
 	const floatingButtonsStyles = className(styles['floating-buttons'], 'floating-buttons')
 
+	const disableGenericStyling = router.asPath === '/'
+
 	function refuelButtonClick() {
 		router.push('/refuel')
 	}
@@ -35,8 +37,8 @@ function Layout(props: Props) {
 	return (
 		<LayoutContextWrapper value={{ mainContainerRef, headerRef }}>
 			<div className={layoutStyles}>
-				<Header ref={headerRef} />
-				<main ref={mainContainerRef}>
+				<Header ref={headerRef} disableStickiness={disableGenericStyling} />
+				<main ref={mainContainerRef} className={disableGenericStyling ? styles['disable-generic-styling'] : ''}>
 					{props.children}
 					<div className={floatingButtonsStyles}>
 						{isLoggedIn && (

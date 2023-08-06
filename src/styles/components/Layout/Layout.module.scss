@@ -40,5 +40,10 @@
 				right: calc((100% - $size-tablet-l) / 2 + 1.5em);
 			}
 		}
+		&.disable-generic-styling {
+			margin: 0;
+			padding: 0;
+			grid-template-columns: 1fr;
+		}
 	}
 }

@@ -4,13 +4,12 @@
 	$colors: (
 		'grey-800': $grey-800 $grey-900
 	);
+	z-index: 10;
+	position: sticky;
+	top: 0;
+	left: 0;
 	@include theme((0, 1.5px solid $grey-700), border-bottom);
 	@include theme-content($colors) using ($grey-800_theme) {
-		z-index: 10;
-		position: sticky;
-		top: 0;
-		left: 0;
-
 		width: 100%;
 		max-width: $size-tablet-l;
 		margin: 0 auto;
@@ -35,6 +34,7 @@
 			@include global(('.icon')) {
 				filter: none;
 				width: 2rem;
+				transition: all 0.4s;
 			}
 		}
 		.nav-button {
@@ -72,5 +72,8 @@
 			transform: translateX(-50%);
 			background-color: inherit;
 		}
+	}
+	&.disable-stickiness {
+		position: relative;
 	}
 }
