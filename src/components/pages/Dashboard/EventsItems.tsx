@@ -1,7 +1,7 @@
-import { useRouter } from 'next/router'
 import React, { useMemo } from 'react'
 
 import useUnit from '@/hooks/Other/use-unit'
+import usePages from '@/hooks/Pages/use-pages'
 import { getRandomKey } from '@/utils'
 
 import { EventsItem, EventsItemsProps as Props } from './types/Events.modal'
@@ -12,8 +12,8 @@ import Icon from '@/components/UI/Icon'
 import styles from '@styles/pages/Dashboard/EventsItems.module.scss'
 
 export default function EventsItem(props: Props) {
-	const router = useRouter()
 	const { convertIfImperial, units } = useUnit()
+	const { redirect } = usePages()
 
 	const dashboardItems: EventsItem[] = useMemo(() => {
 		return props.events.map((event) => {
@@ -52,9 +52,8 @@ export default function EventsItem(props: Props) {
 		)
 	})
 	function navigate(event: React.MouseEvent<HTMLButtonElement>) {
-		const path = `/${event.currentTarget.dataset.id}` || '/dashboard'
-
-		router.push(path)
+		const path: any = `/${event.currentTarget.dataset.id}` || '/dashboard'
+		redirect(path)
 	}
 	return <>{rows}</>
 }

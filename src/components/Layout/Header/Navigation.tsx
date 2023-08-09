@@ -1,31 +1,29 @@
 import React from 'react'
-import { useRouter } from 'next/router'
 
 import useAppContext from '@/hooks/Other/use-app-context'
+import usePages from '@/hooks/Pages/use-pages'
 import { className } from '@/utils'
 
-import NavigationButtons from './NavigationButtons'
 import Button from '@/components/UI/Button'
 import Icon from '@/components/UI/Icon'
+import NavigationButtons from './NavigationButtons'
 
 import styles from '@styles/Layout/Header/Navigation.module.scss'
 
 export default function Navigation() {
-	const router = useRouter()
-
 	const { navigationState } = useAppContext().Navigation
 	const {
 		state: { isLoggedIn },
 		logout
 	} = useAppContext().Auth
 	const { getText } = useAppContext().Language
+	const { redirect } = usePages()
 
 	const navigationStyles = className(styles.nav, !navigationState ? styles.hidden : '')
 
 	async function logoutUser() {
 		await logout()
-		await router.replace('/login')
-		document.body.scrollTo({ top: 0, behavior: 'smooth' })
+		redirect('/login', 'replace')
 	}
 
 	return (

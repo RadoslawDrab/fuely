@@ -1,10 +1,10 @@
 import { useEffect } from 'react'
-import { useRouter } from 'next/router'
 
+import usePages from '../Pages/use-pages'
 import useAppContext from './use-app-context'
 
 export default function useUserRedirect() {
-	const router = useRouter()
+	const { redirect } = usePages()
 
 	const {
 		state: { errorMessage }
@@ -12,7 +12,7 @@ export default function useUserRedirect() {
 
 	useEffect(() => {
 		if (errorMessage.includes('no-data')) {
-			router.replace('/login')
+			redirect('/login')
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [errorMessage])

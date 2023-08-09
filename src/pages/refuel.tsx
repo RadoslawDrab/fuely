@@ -1,8 +1,8 @@
-import { useRouter } from 'next/router'
 import React, { useState } from 'react'
 
 import useAppContext from '@/hooks/Other/use-app-context'
 import useUserRedirect from '@/hooks/Other/use-user-redirect'
+import usePages from '@/hooks/Pages/use-pages'
 import { className } from '@/utils'
 import { getMessage } from '@/utils/messages'
 
@@ -17,8 +17,7 @@ import RefuelForm from '@/components/pages/Refuel/RefuelForm'
 import styles from '@styles/styles.module.scss'
 
 export default function Refuel() {
-	const router = useRouter()
-
+	const { redirect } = usePages()
 	useUserRedirect()
 	const { getEvents } = useAppContext().Auth
 	const { getText } = useAppContext().Language
@@ -49,7 +48,7 @@ export default function Refuel() {
 
 		try {
 			await getEvents()
-			router.replace('/dashboard')
+			redirect('/dashboard')
 		} catch (error: any) {
 			addNotification({
 				type: 'error',

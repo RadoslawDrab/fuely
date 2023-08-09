@@ -2,7 +2,7 @@ import { useRouter } from 'next/router'
 
 import useAppContext from '../Other/use-app-context'
 
-import { Page, Pages } from './types/Pages.modal'
+import { Page, Pages, Path } from './types/Pages.modal'
 
 export default function usePages(): Pages {
 	const router = useRouter()
@@ -58,5 +58,10 @@ export default function usePages(): Pages {
 	const availablePages: Page[] = allPages.filter((page) => page.condition())
 	const currentPage: Page | undefined = allPages.find((page) => page.path === router.pathname)
 
-	return { allPages, availablePages, currentPage }
+	async function redirect(path: Path, type: 'push' | 'replace' = 'push') {
+		await router[type](path)
+		document.body.scrollTo({ behavior: 'smooth', top: 0 })
+	}
+
+	return { allPages, availablePages, currentPage, redirect }
 }

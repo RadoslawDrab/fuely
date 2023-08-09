@@ -1,6 +1,5 @@
-import { useRouter } from 'next/router'
-
 import useAppContext from '@/hooks/Other/use-app-context'
+import usePages from '@/hooks/Pages/use-pages'
 import { className } from '@/utils'
 import { getMessage } from '@/utils/messages'
 
@@ -14,8 +13,7 @@ import LoginForm from '@/components/pages/Login/LoginForm'
 import styles from '@styles/styles.module.scss'
 
 export default function Login() {
-	const router = useRouter()
-
+	const { redirect } = usePages()
 	const {
 		login,
 		state: { isLoggedIn, isLoading }
@@ -26,7 +24,7 @@ export default function Login() {
 	const sectionStyles = className(styles.section, styles.center)
 
 	if (isLoggedIn) {
-		router.replace('/dashboard')
+		redirect('/dashboard')
 	}
 
 	function loginUser(email: string, password: string) {

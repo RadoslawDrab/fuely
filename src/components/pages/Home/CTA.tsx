@@ -1,21 +1,21 @@
-import { useRouter } from 'next/router'
 import React from 'react'
 
+import usePages from '@/hooks/Pages/use-pages'
 import { className } from '@/utils'
 
 import Button from '@/components/UI/Button'
 
-import defaultStyles from '@styles/styles.module.scss'
 import styles from '@styles/pages/Home/CTA.module.scss'
+import defaultStyles from '@styles/styles.module.scss'
 
 const CTA = React.forwardRef(function CTA(_, ref: React.ForwardedRef<any>) {
-	const router = useRouter()
+	const { redirect } = usePages()
 
 	function onRegister() {
-		router.push('/register')
+		redirect('/register')
 	}
 	function onLogin() {
-		router.push('/login')
+		redirect('/login')
 	}
 	return (
 		<section ref={ref} className={styles.section}>

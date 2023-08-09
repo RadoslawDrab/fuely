@@ -4,6 +4,7 @@ import { useEffect, useMemo, useState } from 'react'
 import useEvents from '@/hooks/Events/use-events'
 import useAppContext from '@/hooks/Other/use-app-context'
 import useUserRedirect from '@/hooks/Other/use-user-redirect'
+import usePages from '@/hooks/Pages/use-pages'
 
 import { RefuelFormData } from '@/components/pages/Refuel/types/RefuelForm.modal'
 import { FullEvent } from '@/hooks/Events/types/Events.modal'
@@ -17,6 +18,7 @@ export type EventSiblings = [FullEvent | null, FullEvent | null, FullEvent, Full
 export default function Item() {
 	const router = useRouter()
 
+	const { redirect } = usePages()
 	useUserRedirect()
 	const {
 		state: { isLoading: userIsLoading },
@@ -70,7 +72,7 @@ export default function Item() {
 		removeEvent(eventId)
 			.then(async () => {
 				await getEvents()
-				router.replace('/dashboard')
+				redirect('/dashboard')
 			})
 			.catch(() => {})
 			.finally(() => {

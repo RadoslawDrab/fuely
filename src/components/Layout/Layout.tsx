@@ -2,6 +2,7 @@ import { useRouter } from 'next/router'
 import React, { useRef } from 'react'
 
 import useAppContext from '@/hooks/Other/use-app-context'
+import usePages from '@/hooks/Pages/use-pages'
 import { className } from '@/utils'
 
 import { LayoutProps as Props } from './types/Layout.modal'
@@ -24,6 +25,7 @@ function Layout(props: Props) {
 	} = useAppContext().Auth
 	const { isDarkTheme, toggleTheme } = useAppContext().Theme
 	const { getText } = useAppContext().Language
+	const { redirect } = usePages()
 
 	const layoutStyles = className(styles.layout, 'layout')
 	const floatingButtonsStyles = className(styles['floating-buttons'], 'floating-buttons')
@@ -31,7 +33,7 @@ function Layout(props: Props) {
 	const disableGenericStyling = router.asPath === '/'
 
 	function refuelButtonClick() {
-		router.push('/refuel')
+		redirect('/refuel')
 	}
 
 	return (

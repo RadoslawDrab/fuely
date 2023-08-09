@@ -13,12 +13,12 @@ export default function NavigationButtons(props: Props) {
 	const router = useRouter()
 
 	const { getText } = useAppContext().Language
-	const { availablePages } = usePages()
+	const { availablePages, redirect } = usePages()
 
 	// Changes url based on path
 	async function navigate(event: React.MouseEvent<HTMLButtonElement>) {
-		const url = event.currentTarget.dataset.path ?? '/'
-		await router.push(url)
+		const url: any = event.currentTarget.dataset.path ?? '/'
+		await redirect(url)
 		document.body.scrollTo({ top: 0, behavior: 'smooth' })
 	}
 
