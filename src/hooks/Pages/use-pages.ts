@@ -20,13 +20,6 @@ export default function usePages(): Pages {
 			condition: () => true
 		},
 		{
-			name: 'about',
-			display: 'About app',
-			icon: 'info',
-			path: '/about',
-			condition: () => true
-		},
-		{
 			name: 'dashboard',
 			display: 'Dashboard',
 			icon: 'chart-line',
