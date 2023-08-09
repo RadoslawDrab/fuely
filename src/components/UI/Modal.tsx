@@ -1,7 +1,7 @@
 import React from 'react'
 import { createPortal } from 'react-dom'
 
-import { className, xorGate } from '@/utils'
+import { className } from '@/utils'
 import { useLayoutContext } from '@/context/layoutContext'
 
 import { ModalProps as Props } from './types/Modal.modal'
