@@ -1,39 +1,41 @@
 import React from 'react'
 
+import useAppContext from '@/hooks/Other/use-app-context'
 import { className } from '@/utils'
 
 import { Feature } from './types/Features.modal'
 
 import Icon from '@/components/UI/Icon'
 
-import defaultStyles from '@styles/styles.module.scss'
 import styles from '@styles/pages/Home/Features.module.scss'
+import defaultStyles from '@styles/styles.module.scss'
 
 export default function Features() {
+	const { getText } = useAppContext().Language
 	const features: Feature[] = [
 		{
-			title: 'Track Fuel Consumption',
+			title: getText('Track Fuel Consumption'),
 			icon: 'chart-line',
 			alt: 'chart icon',
-			text: "Keep a record of your fuel usage and calculate your vehicle's fuel efficiency with ease."
+			text: getText("Keep a record of your fuel usage and calculate your vehicle's fuel efficiency with ease.")
 		},
 		{
-			title: 'Monitor Distance Traveled',
+			title: getText('Monitor Distance Traveled'),
 			icon: 'presentation-chart',
 			alt: 'monitor icon',
-			text: "Stay informed about the total distance you've covered on your journeys."
+			text: getText("Stay informed about the total distance you've covered on your journeys.")
 		},
 		{
-			title: 'Estimate Fuel Costs',
+			title: getText('Estimate Fuel Costs'),
 			icon: 'calculator',
 			alt: 'calculator icon',
-			text: 'Plan your trips better with accurate fuel cost estimates for your upcoming adventures.'
+			text: getText('Plan your trips better with accurate fuel cost estimates for your upcoming adventures.')
 		},
 		{
-			title: 'Graphical Analytics',
+			title: getText('Graphical Analytics'),
 			icon: 'graph',
 			alt: 'graph icon',
-			text: 'Visualize your fuel consumption trends and expenses through easy-to-understand graphs.'
+			text: getText('Visualize your fuel consumption trends and expenses through easy-to-understand graphs.')
 		}
 	]
 
@@ -49,7 +51,7 @@ export default function Features() {
 	return (
 		<section className={styles.section}>
 			<header className={defaultStyles.header}>
-				<h2>Key features</h2>
+				<h2>{getText('Key features')}</h2>
 			</header>
 			<ul>{content}</ul>
 		</section>

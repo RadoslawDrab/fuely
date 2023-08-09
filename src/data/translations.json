@@ -98,5 +98,105 @@
 
 	"Error": { "pl": "Błąd", "de": "Fehler" },
 	"Info": { "pl": "Informacja", "de": "Info" },
-	"Success": { "pl": "Sukces", "de": "Erfolg" }
+	"Success": { "pl": "Sukces", "de": "Erfolg" },
+	"Fuely is a user-friendly online tool designed to help you accurately calculate your fuel consumption, track distance traveled, estimate fuel costs, and more!": {
+		"pl": "Fuely to przyjazne użytkownikowi narzędzie online, które pomaga dokładnie obliczyć zużycie paliwa, śledzić przejechaną odległość, oszacować koszty paliwa i wiele więcej!",
+		"de": "Fuely ist ein benutzerfreundliches Online-Tool, das Ihnen dabei hilft, Ihren Kraftstoffverbrauch genau zu berechnen, zurückgelegte Strecken zu verfolgen, Kraftstoffkosten zu schätzen und vieles mehr!"
+	},
+	"Whether you are planning a road trip, managing your fleet, or simply curious about your vehicle's fuel efficiency, Fuely has got you covered.": {
+		"pl": "Nie ważne, czy planujesz podróż samochodem, zarządzasz flotą czy po prostu jesteś ciekawy efektywności paliwowej swojego pojazdu – Fuely ma to wszystko objęte.",
+		"de": "Egal ob Sie eine Reise planen, Ihre Flotte verwalten oder einfach neugierig auf die Kraftstoffeffizienz Ihres Fahrzeugs sind, Fuely hat alles für Sie im Griff."
+	},
+	"About us": {
+		"pl": "O nas",
+		"de": "Über uns"
+	},
+	"Join now!": {
+		"pl": "Dołącz teraz!",
+		"de": "Jetzt beitreten!"
+	},
+	"Join Fuely today and take control of your fuel expenses! Start saving money and optimizing your journeys like never before.": {
+		"pl": "Przyłącz się do Fuely już dziś i przejmij kontrolę nad wydatkami na paliwo! Zacznij oszczędzać pieniądze i optymalizować swoje podróże jak nigdy dotąd.",
+		"de": "Treten Sie noch heute Fuely bei und übernehmen Sie die Kontrolle über Ihre Kraftstoffausgaben! Sparen Sie Geld und optimieren Sie Ihre Fahrten wie nie zuvor."
+	},
+	"Sign up now for a free account and unlock the power of Fuely!": {
+		"pl": "Zarejestruj się teraz i odblokuj moc Fuely!",
+		"de": "Melden Sie sich jetzt für ein kostenloses Konto an und entfesseln Sie die Kraft von Fuely!"
+	},
+	"Track Fuel Consumption": {
+		"pl": "Śledź Zużycie Paliwa",
+		"de": "Verfolge Kraftstoffverbrauch"
+	},
+	"Keep a record of your fuel usage and calculate your vehicle's fuel efficiency with ease.": {
+		"pl": "Zachowaj rekord zużycia paliwa i oblicz efektywność paliwową swojego pojazdu w prosty sposób.",
+		"de": "Behalte einen Überblick über deinen Kraftstoffverbrauch und berechne die Kraftstoffeffizienz deines Fahrzeugs mühelos."
+	},
+	"Monitor Distance Traveled": {
+		"pl": "Monitoruj Przejechaną Odległość",
+		"de": "Überwache zurückgelegte Strecken"
+	},
+	"Stay informed about the total distance you've covered on your journeys.": {
+		"pl": "Bądź na bieżąco z całkowitą odległością, którą pokonałeś w trakcie podróży.",
+		"de": "Bleibe informiert über die Gesamtdistanz, die du auf deinen Fahrten zurückgelegt hast."
+	},
+	"Estimate Fuel Costs": {
+		"pl": "Szacuj Koszty Paliwa",
+		"de": "Schätze Kraftstoffkosten"
+	},
+	"Plan your trips better with accurate fuel cost estimates for your upcoming adventures.": {
+		"pl": "Planuj swoje podróże lepiej, korzystając z dokładnych szacunków kosztów paliwa na nadchodzące przygody.",
+		"de": "Plane deine Reisen besser mit genauen Schätzungen der Kraftstoffkosten für deine kommenden Abenteuer."
+	},
+	"Graphical Analytics": {
+		"pl": "Analiza Graficzna",
+		"de": "Grafische Auswertung"
+	},
+	"Visualize your fuel consumption trends and expenses through easy-to-understand graphs.": {
+		"pl": "Wizualizuj trendy dotyczące zużycia paliwa oraz wydatków za pomocą łatwych do zrozumienia wykresów.",
+		"de": "Visualisiere die Trends deines Kraftstoffverbrauchs und deine Ausgaben durch leicht verständliche Grafiken."
+	},
+	"Key features": {
+		"pl": "Główne cechy",
+		"de": "Hauptmerkmale"
+	},
+	"Privacy": {
+		"pl": "Prywatność",
+		"de": "Datenschutz"
+	},
+	"At Fuely, we value your privacy and security. Your data is encrypted and stored securely, and we never share your personal information with third parties.": {
+		"pl": "W Fuely cenimy twoją prywatność i bezpieczeństwo. Twoje dane są szyfrowane i przechowywane w sposób bezpieczny, a nigdy nie udostępniamy twoich danych osobowych osobom trzecim.",
+		"de": "Bei Fuely legen wir großen Wert auf deine Privatsphäre und Sicherheit. Deine Daten werden verschlüsselt und sicher gespeichert, und wir teilen deine persönlichen Informationen niemals mit Dritten."
+	},
+	"How it works?": {
+		"pl": "Jak to działa?",
+		"de": "Wie funktioniert es?"
+	},
+	"Sign up for a free account or log in to your existing account.": {
+		"pl": "Zarejestruj się na darmowe konto lub zaloguj się na istniejące konto.",
+		"de": "Registriere dich für ein kostenloses Konto oder melde dich in deinem bestehenden Konto an."
+	},
+	"Start recording your trips and fuel purchases.": {
+		"pl": "Rozpocznij rejestrowanie swoich podróży i zakupów paliwa.",
+		"de": "Beginne, deine Fahrten und Kraftstoffkäufe aufzuzeichnen."
+	},
+	"Get insights into your expenses and fuel consumption patterns with easy-to-read graphs.": {
+		"pl": "Otrzymuj wgląd w wydatki oraz wzorce zużycia paliwa za pomocą czytelnych wykresów.",
+		"de": "Erhalte Einblicke in deine Ausgaben und Kraftstoffverbrauchsmuster mit leicht verständlichen Grafiken."
+	},
+	"Plan your trips smarter.": {
+		"pl": "Planuj swoje podróże mądrzej.",
+		"de": "Plane deine Reisen intelligenter."
+	},
+	"Track. Analyze. Optimize.": {
+		"pl": "Śledź. Analizuj. Optymalizuj.",
+		"de": "Verfolgen. Analysieren. Optimieren."
+	},
+	"Unlock the Power of Fuel Efficiency": {
+		"pl": "Odblokuj Moc Efektywności Paliwowej",
+		"de": "Entfalte die Kraft der Kraftstoffeffizienz"
+	},
+	"Get Started": {
+		"pl": "Zacznij",
+		"de": "Los geht's"
+	}
 }
