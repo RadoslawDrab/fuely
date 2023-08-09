@@ -1,0 +1,145 @@
+@use '@/styles/library' as *;
+
+.section {
+	$background-color: $grey-800;
+	position: relative;
+	scroll-snap-align: start;
+	padding: 9rem 2rem;
+	height: min(100vh, 40rem);
+	background-color: $background-color;
+	border-top: solid $grey-700;
+	@include theme((1.5px, 0), border-width);
+
+	overflow: hidden;
+	header {
+		position: relative;
+		z-index: 1;
+		top: 50%;
+		transform: translateY(-50%);
+		width: fit-content;
+		display: flex;
+		flex-direction: column;
+		align-items: flex-start;
+		text-shadow: 1px 1px 2px rgba($color: $grey-700, $alpha: 0.3);
+		h1.heading {
+			color: $grey-100;
+			font-size: $size-950;
+			line-height: 1.3;
+		}
+		h2.heading {
+			margin-top: 0.25em;
+
+			color: $main-200;
+			font-size: $size-800;
+			line-height: 1.4;
+			width: min-content;
+			@media screen and (min-width: $size-phone-m) {
+				width: fit-content;
+			}
+		}
+		span.subheading {
+			margin-top: 0.75em;
+			color: $grey-200;
+			font-size: $size-600;
+			line-height: 1.7;
+			font-weight: 500;
+			letter-spacing: 0.6px;
+		}
+		.button {
+			display: flex;
+			align-items: center;
+			gap: 0.75em;
+			margin-top: 2em;
+			padding: 0.75em 1.1em 0.75em 1.5em;
+			border: 0;
+			border-radius: 4px;
+			background-color: $main-600;
+
+			font-size: $size-500;
+			color: $grey-100;
+			letter-spacing: 0.75px;
+
+			transition: all 0.4s;
+			&:hover {
+				cursor: pointer;
+				background-color: $main-500;
+			}
+			&:active {
+				background-color: $main-700;
+			}
+			img {
+				width: 1.4rem;
+				filter: $grey-100__filter;
+			}
+		}
+
+		& > *:not(.button) {
+			position: relative;
+			&::before {
+				$space-x: 2rem;
+				$space-y: 1rem;
+				content: '';
+				z-index: -1;
+				position: absolute;
+				top: 50%;
+				left: 50%;
+				transform: translate(-50%, -50%);
+				border-radius: 1rem;
+				width: calc(100% + $space-x);
+				height: calc(100% + $space-y);
+				background-color: rgba($background-color, 0.3);
+				filter: blur(20px);
+			}
+		}
+	}
+	--road-line-width: 1rem;
+	--road-line-height: 10rem;
+	@media screen and (min-width: $size-tablet-sm) {
+		--road-line-width: 1.5rem;
+		--road-line-height: 12rem;
+	}
+	$road-width: max(40%, 12rem);
+	$road-line-width: var(--road-line-width);
+	$road-line-height: var(--road-line-height);
+	$road-line-color: $grey-300;
+	$road-rotation: 10deg;
+	$road-offset: max(45%, 10rem);
+	$road-color: $grey-800;
+	&::before {
+		content: '';
+		position: absolute;
+		top: 50%;
+		left: $road-offset;
+		width: $road-width;
+		height: 150%;
+		transform: translateY(-50%) rotate($road-rotation);
+		background: linear-gradient(
+			to right,
+			$road-line-color $road-line-width,
+			$road-color $road-line-width,
+			$road-color calc(100% - $road-line-width),
+			$road-line-color calc(100% - $road-line-width)
+		);
+		background-size: 100% 200%;
+	}
+	&::after {
+		content: '';
+		position: absolute;
+		top: 50%;
+		left: calc(#{$road-width} / 2 + #{$road-offset});
+		transform: translate(-50%, -50%) rotate($road-rotation);
+		width: $road-line-width;
+		height: 150%;
+		background: repeating-linear-gradient(to bottom, $road-line-color, $road-line-color 50%, transparent 50%, transparent);
+		background-size: 100% $road-line-height;
+		animation: road-movement 4s infinite linear;
+		@keyframes road-movement {
+			from {
+				background-position-y: 0%;
+			}
+			to {
+				background-position-y: calc($road-line-height);
+			}
+		}
+	}
+}
