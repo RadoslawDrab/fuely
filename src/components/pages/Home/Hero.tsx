@@ -6,9 +6,9 @@ import Icon from '@/components/UI/Icon'
 
 import styles from '@styles/pages/Home/Hero.module.scss'
 
-const Hero = React.forwardRef(function Hero(props: Props, ref: React.ForwardedRef<any>) {
+export default function Hero(props: Props) {
 	return (
-		<section ref={ref} className={styles.section}>
+		<section className={styles.section}>
 			<header>
 				<h1 className={styles.heading}>Fuely</h1>
 				<h2 className={styles.heading}>Track. Analyze. Optimize.</h2>
@@ -21,5 +21,4 @@ const Hero = React.forwardRef(function Hero(props: Props, ref: React.ForwardedRe
 			<div className={styles.background}></div>
 		</section>
 	)
-})
-export default Hero
+}
