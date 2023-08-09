@@ -3,7 +3,9 @@
 .copywrite {
 	grid-column: 1 / -1;
 	width: 100%;
-	border-top: 1.5px solid $grey-400;
+	margin-top: 2rem;
+	border-top: 1.5px solid;
+	@include theme(($grey-400, $grey-700), border-color);
 	padding: 2em 0;
 	display: flex;
 	justify-content: space-between;
@@ -20,6 +22,27 @@
 		}
 		img {
 			filter: none;
+		}
+	}
+	@media screen and (min-width: $size-tablet-xs) {
+		grid-column: 1 / 2;
+		grid-row: 2 / 3;
+		border: none;
+		margin: 0;
+		padding: 0;
+
+		flex-direction: column;
+		align-items: flex-start;
+		justify-content: flex-start;
+		gap: 1rem;
+
+		.logo {
+			span {
+				font-size: $size-600;
+			}
+			img {
+				width: 2rem;
+			}
 		}
 	}
 }

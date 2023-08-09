@@ -1,0 +1,19 @@
+@use '@/styles/library' as *;
+
+.section {
+	max-width: 100vw;
+	margin-top: 2em;
+	padding: 4em 1.25em;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+
+	p {
+		max-width: 50ch;
+	}
+	@media screen and (min-width: $size-tablet-sm) {
+		p {
+			font-size: $size-700;
+		}
+	}
+}

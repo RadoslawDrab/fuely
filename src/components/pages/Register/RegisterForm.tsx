@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
 
 import useAppContext from '@/hooks/Other/use-app-context'
-import { emailRegEx, passwordRegEx, passwordInfo, checkEmailAndPassword } from '@/utils'
+import { emailRegEx, passwordRegEx, checkEmailAndPassword } from '@/utils'
+import { getMessage } from '@/utils/messages'
 
 import { RegisterFormProps as Props } from './types/RegisterForm.modal'
 
@@ -25,11 +26,11 @@ export default function RegisterForm(props: Props) {
 			return
 		}
 		if (!name) {
-			props.onError('Some inputs are empty')
+			props.onError('not-enough-data')
 			return
 		}
 		if (name.length < 3) {
-			props.onError('Name must contain at least 3 characters')
+			props.onError('invalid-name')
 			return
 		}
 
@@ -43,8 +44,10 @@ export default function RegisterForm(props: Props) {
 				type="text"
 				getValue={(value) => setEmail(() => value)}
 				text={'Email'}
+				placeholder="email@gmail.com"
 				check={(value) => !!value.match(emailRegEx)}
-				errorText="Enter valid email"
+				errorText={getMessage('invalid-email').text}
+				icon="user"
 			/>
 			<FormInput
 				id="password"
@@ -52,21 +55,22 @@ export default function RegisterForm(props: Props) {
 				getValue={(value) => setPassword(() => value)}
 				text={getText('Password')}
 				check={(value) => !!value.match(passwordRegEx)}
-				errorText={passwordInfo}
+				errorText={getMessage('invalid-password').text}
+				icon="lock"
 			/>
 			<hr />
 			<FormInput
 				id="name"
 				type="text"
 				getValue={(value) => setName(() => value)}
-				text={getText('Name')}
+				text={getText('Username')}
 				placeholder="e.g. John"
 				check={(value) => value.length >= 3}
-				errorText="Name must contain at least 3 characters"
+				errorText={getMessage('invalid-name').text}
+				icon="identification-card"
 			/>
-			<hr />
-			<Button className={styles['submit-button']} onClick={() => {}}>
-				{getText('Send')}
+			<Button type="submit" className={styles['submit-button']} variant="accent">
+				{getText('Register')}
 			</Button>
 		</form>
 	)

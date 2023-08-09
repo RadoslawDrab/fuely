@@ -1,0 +1,146 @@
+@use '@/styles/library' as *;
+
+.notification {
+	--timer-height: 7px;
+	background-color: var(--background-color);
+	z-index: 4;
+	position: relative;
+	opacity: 0;
+	padding: 0.75em 1em calc(0.75em + var(--timer-height)) 1em;
+	min-width: 14rem;
+	max-width: min(30rem, 100vw - 2rem);
+	border: 2px solid;
+	border-color: var(--border-clr);
+	border-radius: 4px;
+	@include theme(($grey-200, $grey-800), --shadow-color);
+	box-shadow: 0 0 0.25rem 0.15rem rgba($color: var(--shadow-color), $alpha: 0.08);
+
+	display: grid;
+	grid-template-columns: auto 1fr auto;
+	gap: 0.25em 1.2em;
+
+	.close-button {
+		aspect-ratio: 1 / 1;
+		border-radius: 50%;
+		width: 2rem;
+		padding: 0.4rem;
+		img {
+			width: 100%;
+			filter: var(--icon-clr__filter);
+		}
+		&:hover {
+			background-color: var(--border-clr);
+		}
+	}
+	.notification-icon {
+		filter: var(--icon-clr__filter);
+		width: 1.75rem;
+		grid-row: 1 / -1;
+		align-self: center;
+	}
+	.timer {
+		position: absolute;
+		bottom: 0;
+		left: 0;
+		width: 100%;
+		height: var(--timer-height);
+		background-color: var(--border-clr);
+		border-radius: 0 0 0 1.5px;
+		animation: timerDecrease 4s linear forwards;
+		@keyframes timerDecrease {
+			from {
+				width: 100%;
+			}
+			to {
+				width: 0%;
+			}
+		}
+	}
+	.content {
+		grid-column: 2 / 3;
+		color: var(--content-clr);
+		font-size: $size-400;
+		letter-spacing: 0.5px;
+		.title {
+			color: var(--header-clr);
+			font-size: $size-600;
+			font-weight: 500;
+			letter-spacing: 0.2px;
+			display: block;
+			margin-bottom: 0.4em;
+		}
+		@media screen and (min-width: $size-phone-l) {
+			font-size: $size-500;
+		}
+	}
+	&.show {
+		animation: crossIn 500ms forwards;
+		@keyframes crossIn {
+			0% {
+				transform: translateY(-100%);
+				opacity: 0;
+				pointer-events: none;
+			}
+			50% {
+				opacity: 0;
+			}
+			100% {
+				transform: translateY(0%);
+				opacity: 1;
+				pointer-events: auto;
+			}
+		}
+	}
+	&.hide {
+		animation: crossOut 750ms forwards;
+		@keyframes crossOut {
+			0% {
+				transform: translateY(0%);
+				opacity: 1;
+				pointer-events: auto;
+			}
+			25% {
+				opacity: 0;
+			}
+			100% {
+				transform: translateY(-100%);
+				opacity: 0;
+				pointer-events: none;
+			}
+		}
+	}
+
+	&.notification {
+		&-default {
+			@include theme(($grey-800, $grey-200), --header-clr);
+			@include theme(($grey-700, $grey-300), --content-clr);
+			@include theme(($grey-800__filter, $grey-200__filter), --icon-clr__filter);
+			@include theme(($grey-300, $grey-600), --border-clr);
+			@include theme(($grey-200, $grey-700), --background-color);
+		}
+		&-info {
+			@include theme(($grey-800, $grey-200), --header-clr);
+			@include theme(($grey-700, $grey-300), --content-clr);
+			@include theme(($grey-800__filter, $grey-200__filter), --icon-clr__filter);
+			@include theme(($main-300, $main-800), --border-clr);
+			@include theme(($main-200, $main-900), --background-color);
+		}
+		&-error {
+			@include theme(($grey-800, $grey-200), --header-clr);
+			@include theme(($grey-700, $grey-300), --content-clr);
+			@include theme(($grey-800__filter, $grey-200__filter), --icon-clr__filter);
+			@include theme(($error-300, $error-800), --border-clr);
+			@include theme(($error-200, $error-900), --background-color);
+		}
+		&-success {
+			@include theme(($grey-800, $grey-200), --header-clr);
+			@include theme(($grey-700, $grey-300), --content-clr);
+			@include theme(($grey-800__filter, $grey-200__filter), --icon-clr__filter);
+			@include theme(($success-300, $success-800), --border-clr);
+			@include theme(($success-200, $success-900), --background-color);
+		}
+	}
+	@media screen and (min-width: $size-phone-l) {
+		--timer-height: 6px;
+	}
+}

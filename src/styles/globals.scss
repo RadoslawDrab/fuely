@@ -26,6 +26,12 @@ html.light-theme {
 }
 html.dark-theme {
 	color-scheme: dark;
+	body {
+		background-color: $grey-900;
+	}
+	hr {
+		background-color: $grey-700;
+	}
 }
 hr {
 	border: none;

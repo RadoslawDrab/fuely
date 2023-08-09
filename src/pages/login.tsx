@@ -1,74 +1,65 @@
-import { useRouter } from 'next/router'
-import { useState } from 'react'
-
 import useAppContext from '@/hooks/Other/use-app-context'
+import usePages from '@/hooks/Pages/use-pages'
 import { className } from '@/utils'
+import { getMessage } from '@/utils/messages'
 
 import { Status } from './api/data/types/index.modal'
 
 import Head from '@/components/Head'
 import Section from '@/components/Layout/Section'
-import Error from '@/components/UI/Error'
 import LoadingIcon from '@/components/UI/LoadingIcon'
 import LoginForm from '@/components/pages/Login/LoginForm'
 
 import styles from '@styles/styles.module.scss'
 
 export default function Login() {
-	const router = useRouter()
-
+	const { redirect } = usePages()
 	const {
 		login,
 		state: { isLoggedIn, isLoading }
 	} = useAppContext().Auth
 	const { getText } = useAppContext().Language
-
-	const [error, setError] = useState('')
+	const { addNotification, removeAllOfType } = useAppContext().Notification
 
 	const sectionStyles = className(styles.section, styles.center)
 
 	if (isLoggedIn) {
-		router.replace('/dashboard')
+		redirect('/dashboard')
 	}
 
 	function loginUser(email: string, password: string) {
 		login(email, password)
 			.then(() => {
-				setError(() => '')
+				removeAllOfType('error')
+				addNotification({ type: 'success', content: getMessage('user-authenticated').text })
 			})
 			.catch((error: Status) => {
-				const status = error.code?.replace('auth/', '') || ''
-
-				switch (status) {
-					case 'user-not-found': {
-						setError(() => 'Incorrect login or password')
-						break
-					}
-					case 'wrong-password': {
-						setError(() => 'Incorrect login or password')
-						break
-					}
-					default: {
-						setError(() => error.code)
-						break
-					}
-				}
+				addNotification({ type: 'error', content: getMessage(error.code).text })
 			})
 	}
-	function onFormError(message: string) {
-		setError(() => message)
+	async function resetPassword(resetEmail: string) {
+		try {
+			const response = await fetch('/api/auth/password-reset', {
+				method: 'POST',
+				body: JSON.stringify({ email: resetEmail })
+			})
+			const status: any = await response.json()
+			addNotification({ type: 'success', content: getMessage(status.code).text })
+		} catch (error: any) {
+			setError(error.code)
+		}
+	}
+	function setError(message: string) {
+		addNotification({ type: 'error', content: getMessage(message).text })
 	}
 
-	if (isLoading) {
-		return <LoadingIcon />
-	}
 	return (
 		<>
-			<Head title="Fuely | Login" description="Fuely login page" />
-			<Section title={getText('Log in')} className={sectionStyles}>
-				<LoginForm onLogin={loginUser} onError={onFormError} onInputChange={() => setError(() => '')} />
-				<Error className={styles.error} show={error ? true : false} text={error} />
+			<Head title={`Fuely | ${getText('Log in')}`} description="Fuely login page" />
+			<Section title={getText('Log in')} className={sectionStyles} disableContent={isLoading}>
+				<LoginForm onLogin={loginUser} onError={setError} onPasswordReset={resetPassword} />
 			</Section>
+			{isLoading && <LoadingIcon type="car" center />}
 		</>
 	)
 }

@@ -3,7 +3,6 @@ export interface ModalProps {
 	show: boolean
 	allowClosing?: boolean
 	className?: string
-	type?: 'center' | 'flow'
 	title: string
-	state?: (isOpen: boolean) => void
+	getState?: (isOpen: boolean) => void
 }

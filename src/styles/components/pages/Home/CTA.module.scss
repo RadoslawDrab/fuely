@@ -1,0 +1,28 @@
+@use '@/styles/library' as *;
+@use '@styles/pages/Home/index.module.scss';
+
+.section {
+	position: relative;
+	background-color: $grey-800;
+	div {
+		margin-top: 2rem;
+		display: flex;
+		gap: 1rem;
+		button span {
+			font-size: $size-600;
+			font-weight: 500;
+			padding: 0.25em 0.75em;
+		}
+	}
+	&::before {
+		content: '';
+		position: absolute;
+		z-index: -10;
+		top: 0;
+		left: 50%;
+		width: 100vw;
+		height: 100%;
+		transform: translateX(-50%);
+		background-color: inherit;
+	}
+}

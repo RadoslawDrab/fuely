@@ -1,37 +1,86 @@
 @use '@/styles/library' as *;
 
 .input {
-	background-color: $grey-50;
-	border: 1.5px solid $grey-300;
-	border-radius: 4px;
+	$colors: (
+		'grey-50': $grey-50 $grey-800,
+		'grey-200': $grey-200 $grey-700,
+		'grey-300': $grey-300 $grey-700,
+		'grey-400': $grey-400 $grey-600,
+		'grey-600': $grey-600 $grey-400,
+		'grey-700': $grey-700 $grey-300,
+		'main-500': $main-500 $main-600
+	);
+	@include theme-content($colors) using
+		($grey-50_theme, $grey-200_theme, $grey-300_theme, $grey-400_theme, $grey-600_theme, $grey-700_theme, $main-500_theme) {
+		background-color: $grey-50_theme;
+		border: 1.5px solid $grey-300_theme;
+		border-radius: 4px;
 
-	padding: 0.75em 1em;
+		padding: 0.6rem 0.75rem;
 
-	color: $grey-700;
-	font-size: $size-400;
-	font-weight: 500;
-	letter-spacing: 0.3px;
-
-	transition: all 0.4s;
-
-	&::placeholder {
-		color: $grey-400;
+		color: $grey-700_theme;
 		font-size: $size-400;
-	}
-	&:hover {
-		background-color: $grey-200;
-	}
-	&:disabled {
-		color: $grey-600;
-		background-color: $grey-400;
-		border-color: $grey-500;
+		font-weight: 500;
+		letter-spacing: 0.3px;
+
+		transition: all 0.4s;
+
 		&::placeholder {
-			color: $grey-500;
+			color: $grey-400;
+			font-size: $size-400;
+		}
+		&:hover {
+			background-color: $grey-200_theme;
+		}
+		&:disabled {
+			color: $grey-600_theme;
+			background-color: $grey-400_theme;
+			border-color: $grey-500;
+			&::placeholder {
+				color: $grey-500;
+			}
+		}
+		&:focus {
+			outline: none;
+			border-color: $main-500_theme;
+			background-color: $grey-200_theme;
+		}
+		// Removes input arrows
+		/* Chrome, Safari, Edge, Opera */
+		&::-webkit-outer-spin-button,
+		&::-webkit-inner-spin-button {
+			-webkit-appearance: none;
+			margin: 0;
+		}
+		/* Firefox */
+		&[type='number'] {
+			-moz-appearance: textfield;
 		}
 	}
-	&:focus {
-		outline: none;
-		border-color: $main-500;
-		background-color: $grey-200;
+}
+.input-wrapper {
+	position: relative;
+	&.icon {
+		.input {
+			padding-left: 3.5em;
+		}
+		img {
+			position: absolute;
+			top: 50%;
+			left: 1em;
+			transform: translateY(-50%);
+			width: 1.4rem;
+			@include theme(($grey-400__filter, $grey-500__filter), filter);
+		}
+	}
+	&::before {
+		content: attr(data-right-text);
+		position: absolute;
+		right: 0.75rem;
+		top: 50%;
+		transform: translateY(-50%);
+		@include theme(($grey-500, $grey-400), color);
+		font-size: $size-300;
+		letter-spacing: 0.3px;
 	}
 }

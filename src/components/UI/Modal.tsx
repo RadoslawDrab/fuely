@@ -1,6 +1,8 @@
 import React from 'react'
+import { createPortal } from 'react-dom'
 
 import { className } from '@/utils'
+import { useLayoutContext } from '@/context/layoutContext'
 
 import { ModalProps as Props } from './types/Modal.modal'
 
@@ -10,27 +12,30 @@ import Icon from './Icon'
 import styles from '@styles/UI/Modal.module.scss'
 
 export default function Modal(props: Props) {
-	const modalType = props.type ?? 'flow'
-	const modalStyles = className(styles.modal, styles[`modal__${modalType}`], props.className)
+	const { mainContainerRef } = useLayoutContext()
 
-	if (!props.show) return <></>
+	const modalStyles = className(styles.modal, props.className)
 
-	return (
+	if (!props.show || !mainContainerRef?.current) return <></>
+
+	function closeButtonClickHandler() {
+		if (props.getState) props.getState(false)
+	}
+	return createPortal(
 		<>
-			<dialog open={props.show} className={modalStyles}>
+			<dialog open={true} className={modalStyles}>
 				<div className={styles['modal-bar']}>
 					<span>{props.title}</span>
 					{props.allowClosing && (
-						<form method="dialog">
-							<Button className="close-button" onClick={() => {}}>
-								<Icon type="xmark" alt="close icon" />
-							</Button>
-						</form>
+						<Button className="close-button" onClick={closeButtonClickHandler} variant="redirect">
+							<Icon type="x" alt="close icon" />
+						</Button>
 					)}
 				</div>
 				<div className={styles['modal-content']}>{props.children}</div>
 			</dialog>
-			{props.show && modalType === 'center' && <div className={styles['modal-background']}></div>}
-		</>
+			<div className={styles.background}></div>
+		</>,
+		mainContainerRef?.current
 	)
 }

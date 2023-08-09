@@ -1,31 +1,29 @@
 import React from 'react'
-import { useRouter } from 'next/router'
 
 import useAppContext from '@/hooks/Other/use-app-context'
+import usePages from '@/hooks/Pages/use-pages'
 import { className } from '@/utils'
 
-import NavigationButtons from '../NavigationButtons'
 import Button from '@/components/UI/Button'
 import Icon from '@/components/UI/Icon'
+import NavigationButtons from './NavigationButtons'
 
 import styles from '@styles/Layout/Header/Navigation.module.scss'
 
 export default function Navigation() {
-	const router = useRouter()
-
 	const { navigationState } = useAppContext().Navigation
 	const {
 		state: { isLoggedIn },
 		logout
 	} = useAppContext().Auth
 	const { getText } = useAppContext().Language
+	const { redirect } = usePages()
 
-	const navigationStyles = className(styles.nav, !navigationState ? 'hidden' : '')
+	const navigationStyles = className(styles.nav, !navigationState ? styles.hidden : '')
 
-	function logoutUser() {
-		logout().then(() => {
-			router.replace('/login')
-		})
+	async function logoutUser() {
+		await logout()
+		redirect('/login', 'replace')
 	}
 
 	return (
@@ -35,8 +33,8 @@ export default function Navigation() {
 				{isLoggedIn && (
 					<li className="logout-item">
 						<Button className="logout-button" onClick={logoutUser} variant="dark">
-							<Icon type={'arrow.up.right.square'} alt="logout icon" />
-							<span>{getText('Logout')}</span>
+							<Icon type="arrow-square-out" alt="logout icon" />
+							<span>{getText('Log out')}</span>
 						</Button>
 					</li>
 				)}

@@ -1,0 +1,47 @@
+@use '@/styles/library' as *;
+
+.container {
+	grid-column: 1 / -1;
+	display: flex;
+	gap: 1em;
+	justify-content: center;
+}
+.button {
+	grid-column: 1 / -1;
+	justify-self: center;
+	display: flex;
+	align-items: center;
+	gap: 1em;
+	padding: 0.75em 1.25em;
+	img {
+		height: 1.4rem;
+	}
+	span {
+		font-size: $size-500;
+	}
+	@media screen and (min-width: $size-phone-m) {
+		img {
+			height: 1.5rem;
+		}
+		span {
+			font-size: $size-600;
+		}
+	}
+}
+.modal {
+	p {
+		letter-spacing: 0.3px;
+		span {
+			font-weight: 600;
+			@include theme(($main-500, $main-400), color);
+		}
+	}
+	form {
+		width: max-content;
+		margin: 0 auto;
+		button {
+			display: inline;
+			margin: 1em;
+		}
+	}
+}

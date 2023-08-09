@@ -1,76 +1,93 @@
 @use '@/styles/library' as *;
+
 .section {
 	display: flex;
 	flex-direction: column;
 	gap: 1em;
-	max-height: 22.25rem;
 	header {
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
-		h3 {
-			font-size: $size-700;
-			font-weight: 600;
-		}
+		@include theme(($grey-800, $grey-300), color);
+		letter-spacing: 0.3px;
+		h3,
 		time {
-			font-size: $size-500;
-			letter-spacing: 0.5px;
+			font-size: $size-600;
+			font-weight: 500;
 		}
 	}
 	.main {
+		--columns-count: 1;
 		display: grid;
-		grid-template-columns: 35fr 30fr 35fr;
-		align-items: center;
+		grid-template-columns: repeat(var(--columns-count), 1fr);
+		list-style: none;
 		gap: 1em;
 		@media screen and (min-width: 23rem) {
 			gap: 1.5em;
 		}
 
-		.label {
-			width: fit-content;
-			color: $grey-800;
-			font-size: $size-500;
-			letter-spacing: 0.5px;
-			@media screen and (min-width: 25rem) {
-				font-size: $size-600;
+		& > li {
+			padding-bottom: 1em;
+			border-bottom: 1.5px solid;
+			@include theme(($grey-300, $grey-700), border-color);
+			display: grid;
+			grid-template-columns: repeat(2, auto);
+			gap: 0.75em;
+			.label,
+			.percent {
+				@include theme(($grey-700, $grey-300), color);
+				letter-spacing: 0.3px;
 			}
-		}
-		.graph {
-			width: auto;
-		}
-		data {
-			width: fit-content;
-			display: flex;
-			flex-direction: column;
-			justify-content: center;
-			.data {
-				color: $grey-800;
+			.label {
 				font-size: $size-500;
-				letter-spacing: 0.5px;
-				span {
-					margin-left: 0.3em;
-					font-size: $size-300;
-				}
-				@media screen and (min-width: 25rem) {
-					font-size: $size-600;
-					span {
-						font-size: $size-400;
-					}
-				}
 			}
 			.percent {
-				color: $grey-600;
+				text-align: right;
 				font-size: $size-400;
-				font-weight: 300;
+				@media screen and (min-width: 25rem) {
+					font-size: $size-500;
+				}
 				&::after {
 					margin-left: 0.15em;
-					font-size: $size-200;
+					font-size: $size-300;
 					content: '%';
+				}
+			}
+			hr {
+				grid-column: 1 / -1;
+			}
+			.graph {
+				grid-column: 1 / -1;
+				width: auto;
+				label {
+					data {
+						@include theme(($grey-600, $grey-400), color);
+						font-size: $size-400;
+						letter-spacing: 0.5px;
+						span {
+							margin-left: 0.3em;
+							font-size: $size-300;
+						}
+
+						@media screen and (min-width: 25rem) {
+							font-size: $size-500;
+							span {
+								font-size: $size-400;
+							}
+						}
+						&.current {
+							color: $main-800;
+							@include theme(($main-800, $main-400), color);
+						}
+					}
 				}
 			}
 		}
 	}
-	@media screen and (min-width: $size-tablet-xs) {
-		height: 100%;
+	@media screen and (min-width: 37.5rem) {
+		max-width: $size-tablet-xs;
+		.main {
+			--columns-count: 2;
+		}
 	}
 }

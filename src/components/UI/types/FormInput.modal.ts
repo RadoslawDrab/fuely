@@ -1,3 +1,5 @@
+import { Icons } from './Icon.modal'
+
 export interface FormInputProps {
 	name?: string
 	id: string
@@ -8,8 +10,12 @@ export interface FormInputProps {
 	errorText?: string
 	min?: number
 	max?: number
+	value?: any
 	defaultValue?: any
 	defaultChecked?: boolean
+	icon?: Icons
+	rightText?: string
+	inputData?: React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>
 	getValue?: (value: string) => void
 	getValueOnBlur?: (value: string) => void
 	check?: (value: string) => boolean

@@ -1,17 +1,11 @@
-import { SettingsFormsError, SettingsFormsLoading } from '@/pages/settings'
+import { FormData } from '@/pages/settings'
 
 export interface AccountSectionProps {
-	onError: (type: keyof SettingsFormsError, error: string | null) => void
-	onEmailChange: (newEmail: string) => void
-	onPasswordChange: (newPassword: string) => void
-	errorWith: SettingsFormsError
-	isLoading: SettingsFormsLoading
+	isLoading: boolean
+	onError: (error: string) => void
+	onAccountFormSubmit: (formData: Partial<FormData>) => void
 }
-export interface EmailChangeFormProps {
-	onEmailChange: (newEmail: string) => void
-	onError: (error: string | null) => void
-}
-export interface PasswordChangeFormProps {
-	onPasswordChange: (newPassword: string) => void
-	onError: (error: string | null) => void
+export interface AccountFormProps {
+	onError: (error: string) => void
+	onFormSubmit: (newEmail: string | null, newPassword: string | null) => void
 }

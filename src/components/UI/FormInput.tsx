@@ -16,18 +16,16 @@ export default function FormInput(props: Props) {
 	const inputId = `input-${props.id}`
 
 	function onChange(event: React.ChangeEvent<HTMLInputElement>) {
-		const value = event.currentTarget.value
+		const value = event.target.value
 
-		if (value) {
-			props.getValue && props.getValue(value)
-			setHasError(false)
-		}
+		props.getValue && props.getValue(value)
 	}
 	function onFocus() {
 		setIsTouched(true)
+		setHasError(false)
 	}
 	function onBlur(event: React.FocusEvent<HTMLInputElement>) {
-		const value = event.currentTarget.value
+		const value = event.target.value
 
 		if (isTouched && !value && !props.notRequired) {
 			setHasError(true)
@@ -54,8 +52,12 @@ export default function FormInput(props: Props) {
 				placeholder={props.placeholder ?? props.text}
 				min={props.min}
 				max={props.max}
+				value={props.value}
+				icon={props.icon}
+				rightText={props.rightText}
 				defaultValue={props.defaultValue}
 				defaultChecked={props.defaultChecked}
+				inputData={props.inputData}
 			/>
 			<Error className={styles['form-error']} show={hasError} text={errorMessage} />
 		</>

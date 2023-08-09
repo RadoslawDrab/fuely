@@ -11,11 +11,16 @@ import { Navigation } from '@/hooks/Navigation/types/Navigation.modal'
 
 import { exampleAuthObject } from '@/hooks/Auth/use-auth'
 import { Auth } from '@/hooks/Auth/types/Auth.modal'
+
+import { exampleNotificationObject } from '@/hooks/Other/use-notification'
+import { NotificationObject } from '@/hooks/Other/types/Notification.modal'
+
 import { AppContext as Context } from './appContext.modal'
 
 const Language: LanguageObject = exampleLanguageObject
 const Theme: Theme = exampleThemeObject
 const Navigation: Navigation = exampleNavigationObject
 const Auth: Auth = exampleAuthObject
+const Notification: NotificationObject = exampleNotificationObject
 
-export const AppContext = React.createContext<Context>({ Language, Theme, Navigation, Auth })
+export const AppContext = React.createContext<Context>({ Language, Theme, Navigation, Auth, Notification })

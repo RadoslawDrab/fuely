@@ -1,0 +1,44 @@
+@use '@/styles/library' as *;
+
+.section {
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	max-width: $size-phone-l;
+	width: 100%;
+	ul {
+		--per-page: 6;
+		list-style: none;
+		display: grid;
+		grid-template-rows: repeat(var(--per-page), 1fr);
+	}
+
+	@include global('.loading-icon') {
+		margin: 1em;
+		align-self: center;
+	}
+	.filter {
+		width: 100%;
+		display: flex;
+		justify-content: flex-end;
+		gap: 2em;
+		align-items: center;
+		padding-bottom: 0.75em;
+		border-bottom: 1.5px solid;
+		@include theme(($grey-300, $grey-700), border-color);
+		font-size: $size-400;
+		label {
+			@include theme(($grey-500, $grey-400), color);
+		}
+		select {
+			padding: 0.25rem 0.75rem;
+			width: 4rem;
+			@include theme(($grey-500, $grey-400), color);
+		}
+		img {
+			right: 0.5rem;
+			@include theme((inherit, $grey-400__filter), filter);
+		}
+	}
+}

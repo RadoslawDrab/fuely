@@ -5,31 +5,87 @@
 	width: 100%;
 	justify-self: center;
 	&-content {
+		width: 100%;
+		display: flex;
+		flex-direction: column;
 		.data-section {
 			header {
 				display: flex;
 				justify-content: space-between;
+				align-items: center;
+				border-bottom: 1.5px solid;
+				@include theme(($grey-300, $grey-700), border-color);
+				padding: 0.6em 0;
 				span {
 					font-size: $size-400;
-					font-weight: 500;
+					@include theme(($grey-800, $grey-200), color);
 					letter-spacing: 0.3px;
 				}
 				.value {
-					font-size: $size-500;
-					font-weight: 500;
+					flex: 1;
+					font-size: $size-300;
+					@include theme(($grey-600, $grey-300), color);
+					text-align: right;
+					padding: 0 1.5em;
+					&::after {
+						content: attr(data-unit);
+						margin-left: 0.25em;
+					}
+				}
+				.button {
+					aspect-ratio: 1 / 1;
+					border-radius: 50%;
+					padding: 0.6em;
+					.icon {
+						width: 1.2rem;
+						transition: all 0.4s;
+						@include theme(($grey-600__filter, $grey-400__filter), filter);
+					}
 				}
 				@media screen and (min-width: $size-phone-m) {
 					span {
 						font-size: $size-500;
 					}
+					.value {
+						font-size: $size-400;
+					}
 				}
 			}
-			hr {
-				margin: 0.75em auto;
+			section {
+				position: relative;
+				margin: 1em 0;
+				display: none;
+				opacity: 0;
+				transition: all 0.4s;
+				&::before {
+					content: '';
+					position: absolute;
+					left: 0;
+					top: calc(100% + 1em);
+					width: 100%;
+					height: 1.5px;
+					@include theme(($grey-300, $grey-700), background-color);
+				}
+			}
+			&.show {
+				.button .icon {
+					transform: rotate(-90deg);
+				}
+				section {
+					display: block;
+					opacity: 1;
+					pointer-events: auto;
+				}
+			}
+			&:first-child {
+				header {
+					padding-top: 0;
+				}
 			}
 			&:last-child {
-				hr:last-child {
-					display: none;
+				header {
+					border-bottom: 0;
+					padding-bottom: 0;
 				}
 			}
 		}
@@ -41,7 +97,26 @@
 		&-content {
 			display: grid;
 			grid-template-columns: 1fr 1fr;
-			gap: 2em;
+			gap: 0.25em 1.5em;
+			.data-section {
+				header {
+					.value {
+						padding: 0;
+					}
+					.button {
+						display: none;
+					}
+				}
+				section {
+					display: block;
+					opacity: 1;
+				}
+				&:nth-child(even):nth-child(2) {
+					header {
+						padding-top: 0;
+					}
+				}
+			}
 		}
 	}
 }

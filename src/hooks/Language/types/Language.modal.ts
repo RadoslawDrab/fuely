@@ -4,7 +4,7 @@ import translations from '@data/translations.json'
 export type Texts = keyof typeof translations
 
 // Languages other than English
-type OtherLanguages = keyof (typeof translations)['Theme']
+type OtherLanguages = keyof (typeof translations)['Button']
 // All languages
 export type Languages = 'en' | OtherLanguages
 

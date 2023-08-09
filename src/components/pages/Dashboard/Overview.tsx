@@ -67,6 +67,26 @@ export default function Overview(props: Props) {
 						<sup>{units.distance}</sup>/<sub>{units.fuel}</sub>
 					</>
 				)
+			},
+			{
+				label: getText('Cost/Fuel'),
+				currentValue: event0.cost / event0.fuel,
+				previousValue: event1.cost / event1.fuel,
+				unit: (
+					<>
+						<sup>{units.currency.toUpperCase()}</sup>/<sub>{units.fuel}</sub>
+					</>
+				)
+			},
+			{
+				label: getText('Distance/Cost'),
+				currentValue: event0.distance / event0.cost,
+				previousValue: event1.distance / event1.cost,
+				unit: (
+					<>
+						<sup>{units.distance}</sup>/<sub>{units.currency.toUpperCase()}</sub>
+					</>
+				)
 			}
 		]
 	}, [
@@ -79,6 +99,7 @@ export default function Overview(props: Props) {
 		event1.fuel,
 		getText,
 		isMetric,
+		units.currency,
 		units.distance,
 		units.fuel
 	])
@@ -100,27 +121,43 @@ export default function Overview(props: Props) {
 		const percentString = isFinite(percent) ? `${percent >= 0 ? '+' : '-'}${Math.abs(percent * 100).toFixed(1)}` : '0'
 
 		return (
-			<React.Fragment key={key}>
+			<li key={key}>
 				<label className={styles.label}>{item.label}</label>
+				<span className={styles.percent}>{percentString}</span>
+				<hr />
 				<Graph
 					className={styles.graph}
 					max={max}
+					alignVertically
 					items={[
-						{ name: value, value: currentValue || max },
-						{ name: prevValue, value: previousValue || max }
+						{
+							name: (
+								<data value={currentValue} className={styles.current}>
+									{value}
+									<span>{item.unit}</span>
+								</data>
+							),
+							value: currentValue || max
+						},
+						{
+							name: (
+								<data value={previousValue}>
+									{prevValue}
+									<span>{item.unit}</span>
+								</data>
+							),
+							value: previousValue || max
+						}
 					]}
 				/>
-
-				<data value={value}>
-					<span className={styles.data}>
-						{value}
-						<span>{item.unit}</span>
-					</span>
-					<span className={styles.percent}>{percentString}</span>
-				</data>
-			</React.Fragment>
+			</li>
 		)
 	})
+
+	const content = (() => {
+		if (!event0.fullId || !event1.fullId) return <span>No data</span>
+		return itemElements
+	})()
 	return (
 		<Section title={getText('Overview')} className={props.className} contentClassName={sectionStyles}>
 			<header>
@@ -128,7 +165,7 @@ export default function Overview(props: Props) {
 				<time dateTime={event0?.date}>{event0?.date}</time>
 			</header>
 			<hr />
-			<div className={styles.main}>{itemElements}</div>
+			<ul className={styles.main}>{content}</ul>
 		</Section>
 	)
 }

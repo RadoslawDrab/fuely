@@ -1,0 +1,51 @@
+@use '@/styles/library' as *;
+@use '@styles/pages/Home/index.module.scss';
+
+.section {
+	ul {
+		--columns: 1;
+		margin-top: 2rem;
+		display: grid;
+		grid-template-columns: repeat(var(--columns), 1fr);
+		gap: 0.75rem 1rem;
+		list-style: none;
+		li {
+			background-color: $grey-800;
+			padding: 1.5rem;
+			border-radius: 4px;
+			header {
+				display: flex;
+				gap: 1.5em;
+				align-items: center;
+				margin-bottom: 1em;
+				img {
+					filter: $grey-200__filter;
+					width: 1.6rem;
+				}
+				h3 {
+					font-size: $size-600;
+					color: $grey-200;
+					line-height: 1.4;
+					letter-spacing: 0.3px;
+				}
+			}
+			p {
+				color: $grey-300;
+				font-size: $size-500;
+			}
+		}
+		@media screen and (min-width: 37rem) {
+			--columns: 2;
+		}
+		@media screen and (min-width: $size-tablet-sm) {
+			li {
+				header h3 {
+					font-size: $size-700;
+				}
+				p {
+					font-size: $size-600;
+				}
+			}
+		}
+	}
+}

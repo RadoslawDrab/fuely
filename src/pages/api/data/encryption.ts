@@ -1,16 +1,8 @@
-import { NextApiRequest, NextApiResponse } from 'next'
 import CryptoJS from 'crypto-js'
 
 import { ReturnObject } from './types/index.modal'
 
 const DATA_ENCRYPTION_KEY = process.env.DATA_ENCRYPTION_KEY || 'DATA_KEY'
-
-export default async function handler(req: NextApiRequest, res: NextApiResponse) {
-	res.status(200).json({
-		encrypt: encrypt.toString(),
-		decrypt: decrypt.toString()
-	})
-}
 
 export function encrypt<Data>(data: Data) {
 	// Encrypts data and returns it

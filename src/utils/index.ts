@@ -74,12 +74,13 @@ export interface LocalAppSettings {
 }
 export interface SessionAppSettings {
 	formData: any
+	filters: {
+		[key: string]: string
+	}
 }
 
 export const emailRegEx = /[^\.@]*@[^\.@]*\.[^\.@]{2,3}/
 export const passwordRegEx = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/
-export const passwordInfo =
-	'Password must contain: minimum 8 characters, uppercase letter, lowercase letter, number and special character'
 
 export function checkEmailAndPassword(email: string, password: string): { ok: boolean; message: string } {
 	const status = {
@@ -88,15 +89,15 @@ export function checkEmailAndPassword(email: string, password: string): { ok: bo
 	}
 	if (!email || !password) {
 		status.ok = false
-		status.message = 'Some inputs are empty'
+		status.message = 'empty-inputs'
 	}
 	if (!email.match(emailRegEx)) {
 		status.ok = false
-		status.message = 'Email is not valid'
+		status.message = 'invalid-email'
 	}
 	if (!password.match(passwordRegEx)) {
 		status.ok = false
-		status.message = passwordInfo
+		status.message = 'invalid-password'
 	}
 
 	return status
@@ -105,13 +106,9 @@ export function checkEmailAndPassword(email: string, password: string): { ok: bo
 export function checkIfStringIsNumber(value: string): boolean {
 	return !!value.match(/(?<!.)[\d\.]*(?!.)/)
 }
-export function formatDate(date: string) {
-	const d = new Date(date)
-	const formattedDate = `${d.getDate().toString().padStart(2, '0')}.${(d.getMonth() + 1)
-		.toString()
-		.padStart(2, '0')}.${d.getFullYear()}`
 
-	return formattedDate
+export function formatDate(date: string) {
+	return new Date(date).toLocaleDateString()
 }
 
 export function sortDate(a: string, b: string) {
@@ -128,4 +125,9 @@ interface ObjectData {
 }
 export function getProp<Key extends keyof ObjectData>(obj: ObjectData, key: Key): ObjectData[Key] {
 	return obj[key]
+}
+
+export function round(number: number, round: number): number {
+	const rounding = Math.max(Math.round(round), 1)
+	return Math.floor(number * Math.pow(10, rounding)) / Math.pow(10, rounding)
 }

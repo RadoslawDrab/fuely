@@ -2,7 +2,7 @@ import { useRouter } from 'next/router'
 
 import useAppContext from '../Other/use-app-context'
 
-import { Page, Pages } from './types/Pages.modal'
+import { Page, Pages, Path } from './types/Pages.modal'
 
 export default function usePages(): Pages {
 	const router = useRouter()
@@ -14,50 +14,43 @@ export default function usePages(): Pages {
 	const allPages: Page[] = [
 		{
 			name: 'home',
-			display: 'Home',
+			display: 'Homepage',
 			icon: 'house',
 			path: '/',
 			condition: () => true
 		},
 		{
-			name: 'about',
-			display: 'About',
-			icon: 'gearshape',
-			path: '/about',
-			condition: () => true
-		},
-		{
 			name: 'dashboard',
 			display: 'Dashboard',
-			icon: 'rectangle.3.group',
+			icon: 'chart-line',
 			path: '/dashboard',
 			condition: () => isLoggedIn
 		},
 		{
 			name: 'refuel',
 			display: 'Refuel',
-			icon: 'fuelpump',
+			icon: 'gas-pump',
 			path: '/refuel',
 			condition: () => isLoggedIn
 		},
 		{
 			name: 'login',
 			display: 'Log in',
-			icon: 'person.crop.circle',
+			icon: 'user',
 			path: '/login',
 			condition: () => !isLoggedIn
 		},
 		{
 			name: 'register',
 			display: 'Register',
-			icon: 'person.crop.circle.badge.plus',
+			icon: 'user-plus',
 			path: '/register',
 			condition: () => !isLoggedIn
 		},
 		{
 			name: 'settings',
 			display: 'Settings',
-			icon: 'gearshape',
+			icon: 'gear',
 			path: '/settings',
 			condition: () => isLoggedIn
 		}
@@ -65,5 +58,10 @@ export default function usePages(): Pages {
 	const availablePages: Page[] = allPages.filter((page) => page.condition())
 	const currentPage: Page | undefined = allPages.find((page) => page.path === router.pathname)
 
-	return { allPages, availablePages, currentPage }
+	async function redirect(path: Path, type: 'push' | 'replace' = 'push') {
+		await router[type](path)
+		document.body.scrollTo({ behavior: 'smooth', top: 0 })
+	}
+
+	return { allPages, availablePages, currentPage, redirect }
 }

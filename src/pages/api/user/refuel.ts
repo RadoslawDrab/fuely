@@ -15,28 +15,25 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 			case 'POST': {
 				const { date, cost, currency, odometer, fuel } = parseBody(req)
 
-				if (!cost || !odometer || !fuel) {
+				if ((cost !== undefined && cost <= 0) || (odometer !== undefined && odometer < 0) || (fuel !== undefined && fuel <= 0)) {
 					return returnError(res, 'event/not-enough-data')
 				}
 				const { currentUser } = auth
 
 				if (!currentUser) {
-					return returnError(res, 'auth/no-user')
+					return returnError(res, 'auth/not-logged-in')
 				}
 
 				const userObject = await getUserData(currentUser)
 				const events = await getEvents(currentUser)
 
 				const eventDatesSorted = Object.keys(events).reverse()
-				const lastEvent = events[eventDatesSorted[0] || ''] || {}
 
-				const distance = Math.max(odometer - (lastEvent.odometer || odometer), 0)
 				const event: Event = {
 					cost,
 					odometer,
 					fuel,
-					currency: currency || userObject.settings.currency,
-					distance
+					currency: currency || userObject.settings.currency
 				}
 
 				const curDate = date && new Date(date) ? new Date(date) : new Date()

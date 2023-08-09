@@ -5,69 +5,120 @@
 	grid-column: 1 / -1;
 	justify-self: center;
 	align-self: start;
-	min-width: 10rem;
-	max-width: 14rem;
-	width: 60%;
+	margin: 0 auto;
 
 	.car {
-		margin: 0 auto;
-		width: 50%;
-		display: flex;
+		min-width: 10rem;
+		max-width: 14rem;
+		width: 60%;
+		.vehicle {
+			margin: 0 auto;
+			width: 50%;
+			display: flex;
 
-		animation: carMovement 3s infinite ease-in-out;
+			animation: carMovement 3s infinite ease-in-out;
 
-		$car-movement: 5%;
-		@keyframes carMovement {
-			0% {
-				transform: translateX(-#{$car-movement});
+			$car-movement: 5%;
+			@keyframes carMovement {
+				0% {
+					transform: translateX(-#{$car-movement});
+				}
+				50% {
+					transform: translateX($car-movement);
+				}
+				100% {
+					transform: translateX(-#{$car-movement});
+				}
 			}
-			50% {
-				transform: translateX($car-movement);
-			}
-			100% {
-				transform: translateX(-#{$car-movement});
+			img {
+				width: 100%;
+				@include theme(($grey-800__filter, $grey-400__filter), filter);
 			}
 		}
-		img {
+		&::before {
+			$road-size: 7.5%;
+			$road-length: 10%;
+			$road-color-1: $grey-800;
+			$road-color-2: transparent;
+			html.dark-theme {
+				$road-color-1: $grey-400;
+			}
+
+			content: '';
+			position: absolute;
+			left: 50%;
+			bottom: calc(-#{$road-size} + 1px);
 			width: 100%;
-			filter: $grey-800__filter;
+			height: $road-size;
+			transform: translateX(-50%);
+
+			background: linear-gradient(
+				90deg,
+				$road-color-1 calc(50% + #{$road-length}),
+				$road-color-2 calc(50% + #{$road-length}),
+				$road-color-2 100%
+			);
+			background-repeat: repeat-x;
+			background-size: 25% 100%;
+
+			animation: roadMovement 2s infinite linear;
+
+			@keyframes roadMovement {
+				0% {
+					background-position-x: 0%;
+				}
+				100% {
+					background-position-x: calc(100%);
+				}
+			}
 		}
 	}
-	&::before {
-		$road-size: 7.5%;
-		$road-length: 10%;
-		$road-color-1: $grey-800;
-		$road-color-2: transparent;
-
-		content: '';
-		position: absolute;
-		left: 50%;
-		bottom: calc(-#{$road-size} + 1px);
-		width: 100%;
-		height: $road-size;
-		transform: translateX(-50%);
-
-		background: linear-gradient(
-			90deg,
-			$road-color-1 calc(50% + #{$road-length}),
-			$road-color-2 calc(50% + #{$road-length}),
-			$road-color-2 100%
-		);
-		background-repeat: repeat-x;
-		background-size: 25% 100%;
-
-		animation: roadMovement 2s infinite linear;
-
-		@keyframes roadMovement {
-			0% {
-				background-position-x: 0%;
+	.spinner {
+		$border: 3px;
+		position: relative;
+		width: 2.5rem;
+		height: 2.5rem;
+		border-radius: 50%;
+		&::before,
+		&::after {
+			content: '';
+			position: absolute;
+			border: $border solid;
+			border-radius: inherit;
+			clip-path: polygon(50% 50%, 100% 0, 100% 100%, 0 100%, 0 0);
+			animation: rotation 1.5s infinite ease-in-out;
+		}
+		&::before {
+			top: -#{$border};
+			left: -#{$border};
+			width: calc(100% + $border * 2);
+			height: calc(100% + $border * 2);
+			@include theme(($main-500, $main-600), border-color);
+		}
+		&::after {
+			$offset: 35%;
+			top: calc(-#{$border} + #{$offset} / 2);
+			left: calc(-#{$border} + #{$offset} / 2);
+			width: calc(100% - $offset + $border * 2);
+			height: calc(100% - $offset + $border * 2);
+			border-color: $main-600;
+			@include theme(($main-600, $main-700), border-color);
+			animation-direction: reverse;
+		}
+		@keyframes rotation {
+			from {
+				transform: rotate(0);
 			}
-			100% {
-				background-position-x: calc(100%);
+			to {
+				transform: rotate(360deg);
 			}
 		}
 	}
 	&.center {
-		margin: 0 auto;
+		z-index: 6;
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
 	}
 }

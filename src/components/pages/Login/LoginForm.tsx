@@ -1,12 +1,14 @@
 import React, { useState } from 'react'
 
 import useAppContext from '@/hooks/Other/use-app-context'
-import { checkEmailAndPassword, emailRegEx, getSessionStorage, passwordInfo, passwordRegEx } from '@/utils'
+import { checkEmailAndPassword, className, emailRegEx, getSessionStorage, passwordRegEx } from '@/utils'
+import { getMessage } from '@/utils/messages'
 
 import { LoginFormProps as Props } from './types/LoginForm.modal'
 
 import Button from '@/components/UI/Button'
 import FormInput from '@/components/UI/FormInput'
+import ResetPasswordModal from './ResetPasswordModal'
 
 import styles from '@styles/styles.module.scss'
 
@@ -15,8 +17,9 @@ export default function LoginForm(props: Props) {
 
 	const { getText } = useAppContext().Language
 
-	const [email, setEmail] = useState(emailFromLS ?? '')
-	const [password, setPassword] = useState('')
+	const [email, setEmail] = useState<string>(emailFromLS ?? '')
+	const [password, setPassword] = useState<string>('')
+	const [showPasswordResetModal, setShowPasswordResetModal] = useState<boolean>(false)
 
 	function onSubmit(event: React.FormEvent<HTMLFormElement>) {
 		event.preventDefault()
@@ -30,28 +33,45 @@ export default function LoginForm(props: Props) {
 		props.onLogin(email, password)
 	}
 	return (
-		<form onSubmit={onSubmit} className={styles.form}>
-			<FormInput
-				id="email"
-				type="text"
-				text={'Email'}
-				getValue={(value) => setEmail(() => value)}
-				check={(value) => !!value.match(emailRegEx)}
-				errorText="Enter valid email"
-				defaultValue={email}
+		<>
+			<form onSubmit={onSubmit} className={styles.form}>
+				<FormInput
+					id="email"
+					type="text"
+					text={'Email'}
+					placeholder={'user@mail.com'}
+					getValue={(value) => setEmail(() => value)}
+					check={(value) => !!value.match(emailRegEx)}
+					errorText={getMessage('invalid-email').text}
+					defaultValue={email}
+					inputData={{ autoComplete: 'email' }}
+					icon="user"
+				/>
+				<FormInput
+					id="password"
+					type="password"
+					text={getText('Password')}
+					getValue={(value) => setPassword(() => value)}
+					check={(value) => !!value.match(passwordRegEx)}
+					errorText={getMessage('invalid-password').text}
+					inputData={{ autoComplete: 'current-password' }}
+					icon="lock"
+				/>
+				<Button
+					onClick={() => setShowPasswordResetModal(true)}
+					className={className(styles.button, styles.span, styles.right)}
+					variant="redirect">
+					{getText('Forgot password?')}
+				</Button>
+				<Button type="submit" className={styles['submit-button']} variant="accent">
+					{getText('Log in')}
+				</Button>
+			</form>
+			<ResetPasswordModal
+				onPasswordReset={props.onPasswordReset}
+				showModal={showPasswordResetModal}
+				setShowModal={setShowPasswordResetModal}
 			/>
-			<FormInput
-				id="password"
-				type="password"
-				text={getText('Password')}
-				getValue={(value) => setPassword(() => value)}
-				check={(value) => !!value.match(passwordRegEx)}
-				errorText={passwordInfo}
-			/>
-			<hr />
-			<Button className={styles['submit-button']} onClick={() => {}}>
-				{getText('Send')}
-			</Button>
-		</form>
+		</>
 	)
 }

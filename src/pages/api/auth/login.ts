@@ -1,5 +1,5 @@
 import { NextApiRequest, NextApiResponse } from 'next'
-import { getAuth, signInWithEmailAndPassword } from 'firebase/auth'
+import { getAuth, sendEmailVerification, signInWithEmailAndPassword, signOut } from 'firebase/auth'
 
 import { parseBody, returnError } from '../data'
 import { getUserData } from '../data/database'
@@ -12,8 +12,14 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 			case 'POST': {
 				const { email, password } = parseBody(req)
 
+				await signOut(auth)
 				const credential = await signInWithEmailAndPassword(auth, email, password)
 				const user = credential.user
+
+				if (!user.emailVerified) {
+					await sendEmailVerification(user)
+					return returnError(res, 'auth/email-not-verified')
+				}
 
 				const userObject = await getUserData(user)
 

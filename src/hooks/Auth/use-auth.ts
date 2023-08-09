@@ -102,8 +102,8 @@ export default function useAuth(): Auth {
 		return new Promise(async (resolve, reject) => {
 			// Checks if user is logged in. If no then resolves
 			if (!authState.state.isLoggedIn) resolve({ code: 'auth/not-logged-in' })
-			dispatch({ type: 'LOG_OUT' })
 			const response = await fetch('/api/auth/logout')
+			dispatch({ type: 'LOG_OUT' })
 
 			errorHandler(response)
 				.then((data: any) => resolve(data))

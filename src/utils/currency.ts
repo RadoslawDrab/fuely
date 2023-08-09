@@ -29,7 +29,7 @@ export const currencies = [
 	'syp',
 	'uah',
 	'uyu'
-]
+] as const
 
 export function getCurrencies(): Promise<{ [key: string]: string }> {
 	return new Promise(async (resolve) => {
@@ -54,3 +54,5 @@ export function currencyConvert(value: number, valueCurrency: string, endpointCu
 		resolve(data[endpointCurrency] * value)
 	})
 }
+
+export type Currencies = (typeof currencies)[number]

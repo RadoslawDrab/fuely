@@ -1,31 +1,45 @@
 @use '@/styles/library' as *;
 
-.refuel-button {
-	align-self: center;
-	display: flex;
-	align-items: center;
-	justify-self: center;
-	padding: 1em 2em;
-	span {
-		font-size: $size-500;
-		font-weight: 500;
-		letter-spacing: 0.25px;
-	}
+.overview {
+	margin-bottom: 2rem;
+}
+.events > div {
+	max-width: $size-tablet-xs;
 }
 @media screen and (min-width: $size-tablet-xs) {
-	.refuel-button {
-		grid-column: 1 / -1;
-		padding: 1.5em 3em;
-		span {
-			font-size: $size-600;
-		}
-	}
-
 	.overview,
-	.dashboard {
-		grid-row: 1 / 2;
+	.events {
+		grid-column: 1 / -1;
 	}
-	hr.line {
-		display: none;
+	.events {
+		& > div {
+			max-width: $size-tablet-xs;
+			ul {
+				$gap: 2em;
+				grid-template-rows: repeat(calc(var(--per-page) / 2), 1fr);
+				grid-template-columns: repeat(2, 1fr);
+				column-gap: $gap;
+				li:nth-child(odd):nth-last-child(2),
+				li:nth-child(even):nth-last-child(1) {
+					border-bottom: none;
+				}
+				li:nth-child(odd) {
+					position: relative;
+					&::before {
+						$height-decrease: 1em;
+						content: '';
+						position: absolute;
+						height: calc(100% - $height-decrease);
+						width: 1.5px;
+						right: calc(-1 * $gap / 2);
+						top: calc($height-decrease / 2);
+						@include theme(($grey-300, $grey-700), background-color);
+					}
+				}
+			}
+			@include global('.controls') {
+				padding: 0.5em 10em;
+			}
+		}
 	}
 }

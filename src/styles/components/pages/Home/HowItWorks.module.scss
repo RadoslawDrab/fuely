@@ -1,0 +1,29 @@
+@use '@/styles/library' as *;
+@use '@styles/pages/Home/index.module.scss';
+
+.section {
+	ol {
+		--columns: 1;
+		list-style: none;
+		display: grid;
+		grid-template-columns: repeat(var(--columns), 1fr);
+		gap: 1.5em;
+		padding: 0.5em 1em;
+		li {
+			display: flex;
+			max-width: 40ch;
+			margin: 0;
+			&::before {
+				content: attr(data-index) '.';
+				color: $main-500;
+				font-size: $size-800;
+				font-weight: 600;
+				margin-right: 1rem;
+			}
+		}
+		@media screen and (min-width: $size-tablet-sm) {
+			--columns: 2;
+			padding: 1em 2em;
+		}
+	}
+}
