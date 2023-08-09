@@ -50,7 +50,7 @@ export const exampleLanguageObject: LanguageObject = {
 	languages: [...allLanguages]
 }
 
-export const currentLang: Languages = isClient() ? document.querySelector('html')?.lang || 'en' : 'en'
+export const currentLang: Languages = (isClient() ? document.querySelector('html')?.lang || 'en' : 'en') as Languages
 export function getText(text: Texts, language: Languages = currentLang): string {
 	// Returns current text with English language is selected
 	if (language === 'en') return text
