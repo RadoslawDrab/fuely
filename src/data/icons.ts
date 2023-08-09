@@ -22,6 +22,9 @@ const icons = [
 	'info',
 	'x',
 	'lock',
-	'identification-card'
+	'identification-card',
+	'presentation-chart',
+	'graph',
+	'calculator'
 ] as const
 export default icons
