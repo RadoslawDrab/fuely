@@ -18,6 +18,7 @@ const Hero = React.forwardRef(function Hero(props: Props, ref: React.ForwardedRe
 					<Icon type="caret-right" alt="get started icon" />
 				</button>
 			</header>
+			<div className={styles.background}></div>
 		</section>
 	)
 })
