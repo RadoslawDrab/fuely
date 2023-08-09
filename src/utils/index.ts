@@ -81,8 +81,6 @@ export interface SessionAppSettings {
 
 export const emailRegEx = /[^\.@]*@[^\.@]*\.[^\.@]{2,3}/
 export const passwordRegEx = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/
-export const passwordInfo =
-	'Password must contain: minimum 8 characters, uppercase letter, lowercase letter, number and special character'
 
 export function checkEmailAndPassword(email: string, password: string): { ok: boolean; message: string } {
 	const status = {
