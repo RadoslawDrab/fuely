@@ -76,3 +76,26 @@
 		justify-self: center;
 	}
 }
+header.header {
+	margin-bottom: 1rem;
+	h2 {
+		font-size: $size-800;
+		@include theme(($grey-800, $grey-200), color);
+		line-height: 1.4;
+		text-align: center;
+	}
+	&.dark {
+		h2 {
+			@include theme(($grey-200, $grey-200), color);
+		}
+	}
+}
+.text {
+	margin-top: 0.75rem;
+	@include theme(($grey-700, $grey-300), color);
+	line-height: 1.8;
+	letter-spacing: 0.65px;
+	&.dark {
+		@include theme(($grey-300, $grey-300), color);
+	}
+}
