@@ -23,7 +23,7 @@ export default function ResetPasswordForm(props: Props) {
 		<form onSubmit={onSubmit} className={styles.form}>
 			<FormInput
 				id="email"
-				type="text"
+				type="email"
 				text={'Email'}
 				placeholder="email@gmail.com"
 				getValue={(value) => setEmail(() => value)}

@@ -41,7 +41,7 @@ export default function RegisterForm(props: Props) {
 		<form className={styles.form} onSubmit={onSubmit}>
 			<FormInput
 				id="email"
-				type="text"
+				type="email"
 				getValue={(value) => setEmail(() => value)}
 				text={'Email'}
 				placeholder="email@gmail.com"

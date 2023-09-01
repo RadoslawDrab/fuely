@@ -22,7 +22,6 @@
 			border-radius: 4px;
 			border: 1.5px solid $grey-300_theme;
 			padding: 1em;
-			flex-grow: 1;
 			width: 100%;
 
 			@include global('.not-grow', true) {
