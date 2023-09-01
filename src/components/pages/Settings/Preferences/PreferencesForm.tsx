@@ -31,7 +31,7 @@ export default function PreferencesForm(props: Props) {
 	const currencyOptions = currencies.map((currency) => ({
 		name: currency.toUpperCase(),
 		value: currency,
-		selected: currency === user.settings.currency
+		selected: currency === settings.currency
 	}))
 
 	function displayNameValueHandler(value: string) {
