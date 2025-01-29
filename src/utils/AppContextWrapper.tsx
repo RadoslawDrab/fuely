@@ -6,6 +6,7 @@ import useNavigation from '@/hooks/Navigation/use-navigation'
 import useTheme from '@/hooks/Theme/use-theme'
 import useAuth from '@/hooks/Auth/use-auth'
 import useNotification from '@/hooks/Other/use-notification'
+import useVehicle from '@/hooks/Vehicles/use-vehicle'
 
 interface Props {
 	children?: any
@@ -16,8 +17,9 @@ function AppContextWrapper(props: Props) {
 	const Navigation = useNavigation()
 	const Auth = useAuth()
 	const Notification = useNotification()
+	const Vehicle = useVehicle()
 
-	return <AppContext.Provider value={{ Language, Theme, Navigation, Auth, Notification }}>{props.children}</AppContext.Provider>
+	return <AppContext.Provider value={{ Language, Theme, Navigation, Auth, Notification, Vehicle }}>{props.children}</AppContext.Provider>
 }
 
 export default AppContextWrapper
