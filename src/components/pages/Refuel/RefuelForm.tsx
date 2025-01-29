@@ -40,6 +40,7 @@ export default function RefuelForm(props: Props) {
 		if (!props.default?.odometer)
 			getEvent(0)
 				.then((event) => {
+					if (event)
 					updateData('odometer', event.odometer)
 				})
 				.catch((error) => {})
