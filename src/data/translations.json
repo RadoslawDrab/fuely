@@ -198,5 +198,9 @@
 	"Get Started": {
 		"pl": "Zacznij",
 		"de": "Los geht's"
+	},
+  	"Add vehicle first": {
+	  "pl": "Dodaj najpierw pojazd",
+	  "de": "Zuerst Fahrzeug hinzufügen"
 	}
 }
