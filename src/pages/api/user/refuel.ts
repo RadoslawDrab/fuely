@@ -13,9 +13,9 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 	try {
 		switch (req.method) {
 			case 'POST': {
-				const { date, cost, currency, odometer, fuel } = parseBody(req)
+				const { date, cost, currency, odometer, fuel, vehicleId } = parseBody(req)
 
-				if ((cost !== undefined && cost <= 0) || (odometer !== undefined && odometer < 0) || (fuel !== undefined && fuel <= 0)) {
+				if ((cost !== undefined && cost <= 0) || (odometer !== undefined && odometer < 0) || (fuel !== undefined && fuel <= 0) || !vehicleId) {
 					return returnError(res, 'event/not-enough-data')
 				}
 				const { currentUser } = auth
@@ -33,7 +33,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 					cost,
 					odometer,
 					fuel,
-					currency: currency || userObject.settings.currency
+					currency: currency || userObject.settings.currency,
+					vehicleId
 				}
 
 				const curDate = date && new Date(date) ? new Date(date) : new Date()
