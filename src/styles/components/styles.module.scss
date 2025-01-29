@@ -99,3 +99,24 @@ header.header {
 		@include theme(($grey-300, $grey-300), color);
 	}
 }
+.select {
+	$colors: (
+			'grey-200': $grey-200 $grey-800,
+			'grey-300': $grey-300 $grey-700,
+			'grey-800': $grey-800 $grey-200
+	);
+	position: relative;
+	@include theme-content($colors) using ($grey-200_theme, $grey-300_theme, $grey-800_theme) {
+		background-color: $grey-200_theme;
+		border: 1.5px solid $grey-300_theme;
+		border-radius: 4px;
+		padding: 0.5em 0.75em;
+		color: $grey-800_theme;
+
+		-webkit-appearance: none;
+		-moz-appearance: none;
+		background-image: url("data:image/svg+xml;utf8,<svg fill='#{to-rgb($grey-300_theme)}' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/><path d='M0 0h24v24H0z' fill='none'/></svg>");
+		background-repeat: no-repeat;
+		background-position: right center;
+	}
+}

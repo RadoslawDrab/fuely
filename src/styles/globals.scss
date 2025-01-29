@@ -39,3 +39,20 @@ hr {
 	height: 1.5px;
 	background-color: $grey-300;
 }
+.border-none {
+	border: none;
+}
+.text-center {
+	text-align: center;
+}
+.fs-50 { font-size: $size-50; }
+.fs-100 { font-size: $size-100; }
+.fs-200 { font-size: $size-200; }
+.fs-300 { font-size: $size-300; }
+.fs-400 { font-size: $size-400; }
+.fs-500 { font-size: $size-500; }
+.fs-600 { font-size: $size-600; }
+.fs-700 { font-size: $size-700; }
+.fs-800 { font-size: $size-800; }
+.fs-900 { font-size: $size-900; }
+.fs-950 { font-size: $size-950; }

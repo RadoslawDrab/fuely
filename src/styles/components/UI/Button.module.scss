@@ -175,6 +175,7 @@
 			@include theme(($grey-50__filter, $grey-200__filter), filter);
 		}
 		&:hover {
+			cursor: pointer;
 			@include theme(($main-400, $main-600), background-color);
 		}
 		&:active {

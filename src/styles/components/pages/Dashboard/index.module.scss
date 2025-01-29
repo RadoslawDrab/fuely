@@ -1,19 +1,24 @@
 @use '@/styles/library' as *;
 
-.overview {
+.overview, .selector {
 	margin-bottom: 2rem;
 }
-.events > div {
+.events > div, .selector {
+	justify-self: center;
 	max-width: $size-tablet-xs;
+	width: 100%;
 }
 @media screen and (min-width: $size-tablet-xs) {
 	.overview,
-	.events {
+	.events,
+	.selector {
 		grid-column: 1 / -1;
+	}
+	.events > div, .selector {
+		max-width: $size-tablet-xs;
 	}
 	.events {
 		& > div {
-			max-width: $size-tablet-xs;
 			ul {
 				$gap: 2em;
 				grid-template-rows: repeat(calc(var(--per-page) / 2), 1fr);
