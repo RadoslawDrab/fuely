@@ -13,6 +13,7 @@ import Head from '@/components/Head'
 import Section from '@/components/Layout/Section'
 import LoadingIcon from '@/components/UI/LoadingIcon'
 import RefuelForm from '@/components/pages/Refuel/RefuelForm'
+import VehicleSelector from '@comp/Layout/Dashboard/VehicleSelector.tsx'
 
 import styles from '@styles/styles.module.scss'
 
@@ -22,20 +23,21 @@ export default function Refuel() {
 	const { getEvents } = useAppContext().Auth
 	const { getText } = useAppContext().Language
 	const { addNotification } = useAppContext().Notification
+	const { currentVehicle } = useAppContext().Vehicle
 
 	const [isLoading, setIsLoading] = useState(false)
 
 	const sectionStyles = className(styles.section, styles.center)
 
 	async function onSubmit(data: RefuelFormData | null) {
-		if (!data) {
+		if (!data || !currentVehicle) {
 			return addNotification({ type: 'error', content: getMessage('not-enough-data').text })
 		}
 		setIsLoading(true)
 
 		const response = await fetch('/api/user/refuel', {
 			method: 'POST',
-			body: JSON.stringify(data)
+			body: JSON.stringify({...data, vehicleId: currentVehicle.id}),
 		})
 
 		if (!response.ok) {
@@ -64,6 +66,7 @@ export default function Refuel() {
 		<>
 			<Head title={`Fuely | ${getText('Refuel')}`} description="Fuely refuel form page" />
 			<Section title={getText('Refuel')} className={sectionStyles} disableContent={isLoading}>
+				<VehicleSelector />
 				<RefuelForm onSubmit={onSubmit} />
 			</Section>
 			{isLoading && <LoadingIcon type="car" center />}
