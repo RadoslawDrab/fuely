@@ -33,7 +33,7 @@ export const currencies = [
 
 export function getCurrencies(): Promise<{ [key: string]: string }> {
 	return new Promise(async (resolve) => {
-		const response = await fetch(`https://cdn.jsdelivr.net/gh/fawazahmed0/currency-api@1/latest/currencies.json`)
+		const response = await fetch(`https://cdn.jsdelivr.net/npm/@fawazahmed0/currency-api@latest/v1/currencies.min.json`)
 
 		const data = await response.json()
 
@@ -46,12 +46,11 @@ export function currencyConvert(value: number, valueCurrency: string, endpointCu
 			resolve(value)
 		}
 		const response = await fetch(
-			`https://cdn.jsdelivr.net/gh/fawazahmed0/currency-api@1/latest/currencies/${valueCurrency}/${endpointCurrency}.json`
+			`https://cdn.jsdelivr.net/npm/@fawazahmed0/currency-api@latest/v1/currencies/${valueCurrency}.min.json`
 		)
 
 		const data = await response.json()
-
-		resolve(data[endpointCurrency] * value)
+		resolve(data[valueCurrency][endpointCurrency] * value)
 	})
 }
 
