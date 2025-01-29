@@ -5,6 +5,7 @@ import useAppContext from '@/hooks/Other/use-app-context'
 import { className, getSessionStorage, setSessionStorage } from '@/utils'
 
 import { DashboardProps as Props } from '../types/Dashboard.modal'
+import { FullEvent } from '@/hooks/Events/types/Events.modal.ts'
 
 import Section from '@/components/Layout/Section'
 import LoadingIcon from '@/components/UI/LoadingIcon'
@@ -55,7 +56,7 @@ export default function Dashboard(props: Props) {
 		setIsLoading(true)
 		Promise.all(dates.map((_, i) => getEvent(i, dates)))
 			.then((events) => {
-				onEventsLoad(events)
+				onEventsLoad(events.filter<FullEvent>((e): e is FullEvent => e !== null))
 			})
 			.finally(() => {
 				setIsLoading(false)
