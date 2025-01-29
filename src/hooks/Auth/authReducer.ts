@@ -5,6 +5,7 @@ const initialState: State = {
 		isLoading: false,
 		isLoggedIn: false,
 		hasError: false,
+		hasVehicles: false,
 		errorMessage: ''
 	},
 	user: {
@@ -12,7 +13,8 @@ const initialState: State = {
 		email: '',
 		settings: {
 			currency: 'usd',
-			units: 'metric'
+			units: 'metric',
+			vehicles: []
 		},
 		events: {}
 	}
@@ -23,28 +25,25 @@ function reducer(state: State, action: Actions): State {
 		case 'SET_USER': {
 			return {
 				...state,
-				state: { ...state.state, isLoggedIn: true },
-				user: { ...state.user, ...action.user }
+				state: {
+					...state.state,
+					isLoggedIn: true,
+					hasVehicles: action.user.settings.vehicles.length > 0
+				},
+				user: {
+					...state.user,
+					...action.user,
+					settings: {
+						...state.user.settings,
+						...action.user.settings,
+						vehicles: action.user.settings.vehicles
+					}
+				}
 			}
 		}
 		// Logs user out while return default data
 		case 'LOG_OUT': {
-			return {
-				...state,
-				state: {
-					...state.state,
-					isLoggedIn: false
-				},
-				user: {
-					displayName: 'User',
-					email: '',
-					settings: {
-						currency: 'usd',
-						units: 'metric'
-					},
-					events: {}
-				}
-			}
+			return Object.assign({}, initialState)
 		}
 		// Updates user's events object
 		case 'SET_EVENTS': {
@@ -54,7 +53,7 @@ function reducer(state: State, action: Actions): State {
 		case 'SET_ERROR': {
 			return {
 				...state,
-				state: { ...state.state, hasError: action.errorMessage ? true : false, errorMessage: action.errorMessage || '' }
+				state: { ...state.state, hasError: !!action.errorMessage, errorMessage: action.errorMessage || '' }
 			}
 		}
 		// Set's loading state
