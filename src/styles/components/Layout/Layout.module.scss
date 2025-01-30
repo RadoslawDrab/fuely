@@ -12,7 +12,7 @@
 		position: relative;
 		flex-grow: 1;
 		width: 100%;
-		max-width: $size-tablet-l;
+		max-width: $size-tablet-xs;
 
 		margin: 2em 0 4em 0;
 		padding: 0.75em;
@@ -27,6 +27,8 @@
 		@media screen and (min-width: $size-tablet-xs) {
 			grid-template-columns: 1fr 1fr;
 			gap: 1em;
+			padding-left: 0;
+			padding-right: 0;
 		}
 		.floating-buttons {
 			position: fixed;

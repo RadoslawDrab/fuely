@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react'
 import useEvents from '@/hooks/Events/use-events'
 import useAppContext from '@/hooks/Other/use-app-context'
 import useUnit from '@/hooks/Other/use-unit'
-import { checkIfStringIsNumber, round } from '@/utils'
+import { checkIfStringIsNumber, className, round } from '@/utils'
 import { currencies } from '@/utils/currency'
 import { getMessage } from '@/utils/messages'
 
@@ -66,7 +66,7 @@ export default function RefuelForm(props: Props) {
 	}
 
 	return (
-		<form onSubmit={onFormSubmit} className={styles.form}>
+		<form onSubmit={onFormSubmit} className={className(styles.form, styles.columns)}>
 			<FormInput
 				id="cost-input"
 				type="number"

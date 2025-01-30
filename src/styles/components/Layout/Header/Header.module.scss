@@ -10,19 +10,23 @@
 	top: 0;
 	left: 0;
 	border-bottom: 1.5px solid;
+
+	width: 100%;
+	max-width: $size-tablet-xs;
+	margin: 0 auto;
+
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+
+	padding: 1em;
+
 	@include theme((inherit, $grey-700), border-color);
 	@include theme-content($colors) using ($grey-700_theme, $grey-800_theme) {
 		border-color: $grey-700_theme;
-		width: 100%;
-		max-width: $size-tablet-l;
-		margin: 0 auto;
 
 		background-color: $grey-800_theme;
-		display: flex;
-		justify-content: space-between;
-		align-items: center;
 
-		padding: 1em 1.5em;
 		.nav-button,
 		.logo-button {
 			background-color: transparent;
@@ -79,5 +83,9 @@
 	}
 	&.disable-stickiness {
 		position: relative;
+	}
+	@media screen and (min-width: $size-tablet-xs) {
+		padding-left: 0;
+		padding-right: 0;
 	}
 }

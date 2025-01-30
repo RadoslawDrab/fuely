@@ -64,12 +64,14 @@
 	.center {
 		justify-self: center;
 	}
+	&.columns {
+		grid-template-columns: max-content 1fr;
+	}
 	.span {
 		grid-column: 1 / -1;
 	}
 }
 .section {
-	max-width: 27rem;
 	width: 100%;
 	&.center {
 		grid-column: 1 / -1;
