@@ -14,6 +14,7 @@ export interface InputProps {
 	disabled?: boolean
 	min?: number
 	max?: number
+	required?: boolean
 	data?: { [key: string]: number | string | boolean | object }
 	icon?: Icons
 	rightText?: string

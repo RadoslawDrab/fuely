@@ -17,6 +17,7 @@
 		border-radius: 4px;
 
 		padding: 0.6rem 0.75rem;
+		padding-right: calc(0.75rem + var(--right-length) * 1ch);
 
 		color: $grey-700_theme;
 		font-size: $size-400;
@@ -83,4 +84,5 @@
 		font-size: $size-300;
 		letter-spacing: 0.3px;
 	}
+
 }

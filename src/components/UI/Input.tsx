@@ -34,8 +34,10 @@ export default function Input(props: Props) {
 				maxLength={props.max}
 				min={props.min}
 				minLength={props.min}
+				required={props.required}
 				{...props.inputData}
 				{...data}
+				style={{'--right-length': props.rightText?.length ?? 0} as React.CSSProperties}
 			/>
 		</div>
 	)
