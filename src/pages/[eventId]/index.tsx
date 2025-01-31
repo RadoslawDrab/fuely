@@ -24,7 +24,8 @@ export default function Item() {
 		state: { isLoading: userIsLoading },
 		getEvents
 	} = useAppContext().Auth
-	const { getEventById, sortedDates, emptyEvent, removeEvent } = useEvents()
+	const { getEventById, sortedDates, emptyEvent, removeEvent, editEvent } = useEvents()
+	const vehicle = useAppContext().Vehicle
 
 	const [events, setEvents] = useState<EventSiblings>([null, null, emptyEvent, null, null])
 	const [isLoading, setIsLoading] = useState<boolean>(false)
@@ -60,9 +61,18 @@ export default function Item() {
 		}
 	}, [eventId, getEventById, sortedDates])
 
-	function onEventEdit(data: RefuelFormData) {
+	async function onEventEdit(data: RefuelFormData | null, vehicleId: string | null) {
 		setIsLoading(true)
 
+		await editEvent(currentEvent.fullId, {
+			...data,
+			vehicleId,
+		})
+		await getEvents()
+		if (vehicleId !== currentEvent.vehicleId) {
+			vehicle.changeVehicle(vehicleId)
+			await redirect('/dashboard')
+		}
 		// Fetching
 
 		setIsLoading(false)
@@ -72,7 +82,7 @@ export default function Item() {
 		removeEvent(eventId)
 			.then(async () => {
 				await getEvents()
-				redirect('/dashboard')
+				await redirect('/dashboard')
 			})
 			.catch(() => {})
 			.finally(() => {
