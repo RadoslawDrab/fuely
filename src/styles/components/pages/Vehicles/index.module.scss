@@ -1,0 +1,61 @@
+@use '@/styles/library' as *;
+
+.list {
+	list-style: none;
+	grid-column: 1 / -1;
+	.label {
+		color: $grey-500;
+		padding: 0 0.75em;
+	}
+	.item {
+		margin-bottom: 1em;
+		padding-bottom: 1em;
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
+		gap: 0.5em 1em;
+		border-bottom: 1px solid;
+		@include theme(($grey-300, $grey-700), border-color);
+		transition: all $anim-duration-500;
+		.input {
+			background-color: transparent;
+			user-select: none;
+			align-self: stretch;
+			&:hover {
+				background-color: transparent;
+			}
+		}
+		&.selected {
+			//@include theme(($error-400, $error-800), background-color)
+		}
+
+		@media screen and (max-width: $size-tablet-xs) {
+			& > * {
+				&:nth-child(5n) {
+					justify-self: end;
+				}
+
+				&:nth-child(5n - 1) {
+					justify-self: start;
+					grid-column: span 2;
+				}
+			}
+		}
+		@media screen and (min-width: $size-tablet-xs) {
+			grid-template-columns: repeat(3, 1fr) auto auto;
+		}
+	}
+	.add-item {
+		width: 100%;
+
+		display: flex;
+		gap: 1em;
+		align-items: center;
+		justify-content: center;
+		padding: 0.75em;
+
+		font-size: $size-500;
+	}
+	@media screen and (min-width: 37.5rem) {
+		max-width: $size-tablet-xs;
+	}
+}

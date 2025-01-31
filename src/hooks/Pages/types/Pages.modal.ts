@@ -1,7 +1,7 @@
 import { Icons } from '@/components/UI/types/Icon.modal'
 import { Texts } from '../../Language/types/Language.modal'
 
-export type Path = '/' | '/login' | '/register' | '/refuel' | '/dashboard' | '/settings'
+export type Path = '/' | '/login' | '/register' | '/refuel' | '/dashboard' | '/settings' | '/vehicles'
 export interface Page {
 	name: string
 	display: Texts

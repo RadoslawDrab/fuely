@@ -34,6 +34,13 @@ export default function usePages(): Pages {
 			condition: () => isLoggedIn
 		},
 		{
+			name: 'vehicles',
+			display: 'Vehicles',
+			icon: 'car-profile',
+			path: '/vehicles',
+			condition: () => isLoggedIn
+		},
+		{
 			name: 'login',
 			display: 'Log in',
 			icon: 'user',
