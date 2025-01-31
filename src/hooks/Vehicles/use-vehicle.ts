@@ -1,4 +1,5 @@
-import useNotification from '@/hooks/Other/use-notification.ts'
+import useLanguage from '@/hooks/Language/use-language.ts'
+import { getMessage } from '@/utils/messages.ts'
 import { useEffect, useState } from 'react'
 
 import useAuth from '@/hooks/Auth/use-auth.ts'
@@ -8,53 +9,74 @@ import { VehicleData } from './types/Vehicle.modal.ts'
 
 export default function useVehicle(): VehicleData {
     const { user } = useAuth()
-    const { addNotification } = useNotification()
+    const { getText } = useLanguage()
     const [vehicles, setVehicles] = useState<Vehicle[]>([])
     const [hasVehicles, setHasVehicles] = useState<boolean>(false)
     const [currentVehicle, setCurrentVehicle] = useState<Vehicle | null>(null)
 
-    async function add(vehicle: Vehicle) {
-        try {
-            setVehicles([...vehicles, vehicle])
-            const response = await fetch('/api/user/update', {
-                method: 'POST',
-                body: JSON.stringify({ vehicle })
-            })
-            await response.json()
-        } catch(error: any) {
-            addNotification({type: 'error', content: error.message})
-        }
+    function add(vehicle: Omit<Vehicle, 'id'>): Promise<string> {
+        return new Promise(async (resolve, reject) => {
+            try {
+                const response = await fetch('/api/user/vehicle', {
+                    method: 'POST',
+                    body: JSON.stringify({ vehicle })
+                })
+                const body = await response.json()
+                if (!response.ok) {
+                    throw body
+                }
+                const {vehicleId, code} = body
+
+                setVehicles((v) => [...v, {...vehicle, id: vehicleId}])
+                resolve(getText('Added'))
+            } catch(error: any) {
+                reject(getMessage(error.code).text)
+            }
+        })
     }
-    async function update(vehicle: Vehicle) {
-        try {
-            setVehicles((vehicles) => {
-                return vehicles.map((v) => v.id === vehicle.id ? vehicle : v)
-            })
-            const response = await fetch('/api/user/update', {
-                method: 'POST',
-                body: JSON.stringify({ vehicle })
-            })
-            await response.json()
-        } catch(error: any) {
-            addNotification({type: 'error', content: error.message})
-        }
+    function update(vehicle: Partial<Vehicle>): Promise<string> {
+        return new Promise(async (resolve, reject) => {
+            try {
+                const response = await fetch('/api/user/vehicle', {
+                    method: 'PATCH',
+                    body: JSON.stringify({ vehicle })
+                })
+                const body = await response.json()
+                if (!response.ok) {
+                    throw body
+                }
+
+                // setVehicles((vehicles) => {
+                //     return vehicles.map((v) => v.id === vehicle.id ? vehicle : v)
+                // })
+                resolve(getText('Updated'))
+            } catch(error: any) {
+                reject(getMessage(error.code).text)
+            }
+        })
     }
 
-    async function remove(vehicleId: string) {
-        try {
-            setVehicles((vehicles) => vehicles.filter((v) => v.id !== vehicleId))
-            const response = await fetch('/api/user/update', {
-                method: 'DELETE',
-                body: JSON.stringify({ vehicleId })
-            })
-            await response.json()
-        } catch(error: any) {
-            addNotification({type: 'error', content: error.message})
-        }
+    async function remove(vehicleId: string): Promise<string> {
+        return new Promise(async (resolve, reject) => {
+            try {
+                const response = await fetch(`/api/user/vehicle?vehicleId=${vehicleId}`, {
+                    method: 'DELETE',
+                })
+                const body = await response.json()
+                if (!response.ok) {
+                    throw body
+                }
+
+                setVehicles((vehicles) => vehicles.filter((v) => v.id !== vehicleId))
+                resolve(getText('Removed'))
+            } catch(error: any) {
+                reject(getMessage(error.code).text)
+            }
+        })
     }
 
-    function changeVehicle(id: string) {
-        setCurrentVehicle(vehicles.find((v) => v.id === id) ?? null)
+    function changeVehicle(id: string | null) {
+        setCurrentVehicle(id !== null ? vehicles.find((v) => v.id === id) ?? null : null)
     }
 
     useEffect(() => {
@@ -83,8 +105,8 @@ export const exampleVehiclesObject: VehicleData = {
     vehicles: [],
     hasVehicles: false,
 
-    add: () => {},
-    update: () => {},
-    remove: () => {},
+    add: async () => '',
+    update: async () => '',
+    remove: async () => '',
     changeVehicle: () => {}
 }

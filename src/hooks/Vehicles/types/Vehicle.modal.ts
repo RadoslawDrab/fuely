@@ -5,8 +5,8 @@ export interface VehicleData {
     vehicles: Vehicle[];
     hasVehicles: boolean;
 
-    add: (vehicle: Vehicle) => void;
-    update: (vehicle: Vehicle) => void;
-    remove: (vehicleId: string) => void;
-    changeVehicle: (id: string) => void;
+    add: (vehicle: Omit<Vehicle, 'id'>) => Promise<string>;
+    update: (vehicle: Partial<Vehicle>) => Promise<string>;
+    remove: (vehicleId: string) => Promise<string>;
+    changeVehicle: (id: string | null) => void;
 }

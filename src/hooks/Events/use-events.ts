@@ -4,7 +4,7 @@ import { currencyConvert } from '@/utils/currency'
 import useAppContext from '../Other/use-app-context'
 import useUnit from '../Other/use-unit'
 
-import { EventObject, Events, FullEvent } from './types/Events.modal'
+import { EventObject, Events, FullEvent, Event } from './types/Events.modal'
 
 const emptyEvent: FullEvent = {
 	id: -1,
@@ -100,40 +100,61 @@ export default function useEvents(): EventObject {
 		[getEvent, sortedDates]
 	)
 
-	const removeEvent = useCallback(function (eventId: string) {
+	const removeEvent = useCallback(function (eventId: string): Promise<void> {
 		return new Promise(async (resolve, reject) => {
 			try {
-				const response = await fetch('/api/user/events', {
-					method: 'PATCH',
-					body: JSON.stringify(eventId)
+				const response = await fetch(`/api/user/events?eventId=${eventId}`, {
+					method: 'DELETE',
 				})
 
-				let func = resolve
+				const body = await response.json()
 				if (!response.ok) {
-					func = reject
+					reject(body)
 				}
-				const value = await response.json()
-				func(value)
+				resolve()
+			} catch (error) {
+				console.log(error)
+			}
+		})
+	}, [])
+	const editEvent = useCallback((eventId: string, event: Partial<Event>): Promise<void> => {
+		return new Promise(async (resolve, reject) => {
+			try {
+				const response = await fetch(`/api/user/events?eventId=${eventId}`, {
+					method: 'PATCH',
+					body: JSON.stringify(event)
+				})
+
+				const body = await response.json()
+				if (!response.ok) {
+					reject(body)
+				}
+				resolve()
 			} catch (error) {
 				console.log(error)
 			}
 		})
 	}, [])
 
-	const setVehicleFilterId = useCallback((id: string) => {
+	const setVehicleFilterId = useCallback((id: string | null) => {
 		setEvents(() => {
-			const filteredKeys = Object.keys(userEvents).filter((key) => id === userEvents[key].vehicleId)
+			const filteredKeys = Object.keys(userEvents).filter((key) => {
+				const event = userEvents[key]
+				if (id === null) {
+					return !vehicle.vehicles.some(vehicle => vehicle.id === event.vehicleId)
+				}
+
+				return id === event.vehicleId
+			})
 			return filteredKeys.reduce((acc, key) => ({ ...acc, [key]: userEvents[key] }), {})
 		})
-	}, [userEvents])
+	}, [userEvents, vehicle.vehicles])
 
 	useEffect(() => {
-		if(!vehicle.currentVehicle) return
-		setVehicleFilterId(vehicle.currentVehicle.id)
+		setVehicleFilterId(vehicle.currentVehicle?.id ?? null)
 	}, [setVehicleFilterId, vehicle.currentVehicle]);
 
 	return {
-		setVehicleFilterId,
 		events,
 		sortedDates,
 		isLoading,
@@ -141,6 +162,7 @@ export default function useEvents(): EventObject {
 		getEvent,
 		getEventById,
 		removeEvent,
+		editEvent,
 		getDistance
 	}
 }
