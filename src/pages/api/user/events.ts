@@ -1,8 +1,11 @@
 import { NextApiRequest, NextApiResponse } from 'next'
 import { getAuth } from 'firebase/auth'
 
-import { parseBody, returnError } from '../data'
-import { getEvents, removeValue } from '../data/database'
+import { currencies } from '@/utils/currency.ts'
+import { returnError } from '../data'
+import { getEvents, getUserData, removeValue, updateValue } from '../data/database'
+
+import { Event } from '@/hooks/Events/types/Events.modal.ts'
 
 const auth = getAuth()
 
@@ -19,8 +22,46 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 				break
 			}
 			case 'PATCH': {
-				const eventId = parseBody(req)
-				await removeValue('events', eventId)
+				const eventIds = getEventIds()
+				const userObject = await getUserData(currentUser)
+
+				const event: Partial<Event> = JSON.parse(req.body)
+
+				if (!((typeof event.cost === 'number' && event.cost > 0) ||
+					(typeof event.fuel === 'number' && event.fuel > 0) ||
+					(typeof event.odometer === 'number' && event.odometer > 0) ||
+					(typeof event.currency === 'string' && currencies.includes(event.currency)) ||
+					((typeof event.vehicleId === 'string' && userObject.settings.vehicles.some((v) => v.id === event.vehicleId)) || event.vehicleId === null)
+				)) return returnError(res, 'events/invalid-object')
+
+				const events = await getEvents(currentUser)
+
+				try {
+
+				for (const id of eventIds) {
+					if (!Object.keys(events).includes(id)) return returnError(res, 'events/invalid-id')
+
+					await updateValue(event, 'events', id)
+				}
+
+				res.status(200).json({
+					code: 'events/event-edited'
+				})
+				} catch (error: any) {
+					return returnError(res, error.code)
+				}
+				break
+			}
+			case 'DELETE': {
+				const eventId = req.query.eventId ?? null
+
+				if (!eventId) {
+					return returnError(res, 'eventId is missing')
+				}
+				const eventIds = getEventIds()
+				for (const eventId of eventIds) {
+					await removeValue('events', eventId)
+				}
 				res.status(200).json({
 					code: 'events/event-removed'
 				})
@@ -30,5 +71,15 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 		}
 	} catch (error: any) {
 		returnError(res, error.code, error.message)
+	}
+
+	function getEventIds() {
+		const eventId = req.query.eventId ?? null
+
+		if (!eventId) {
+			returnError(res, 'eventId is missing')
+			return []
+		}
+		return Array.isArray(eventId) ? eventId : [eventId]
 	}
 }
