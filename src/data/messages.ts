@@ -78,6 +78,18 @@ const messages: Messages = {
 	'verify-email': {
 		type: 'error',
 		text: getText('Verify to log in')
+	},
+	'no-vehicle-name': {
+		type: 'error',
+		text: getText('No vehicle name provided')
+	},
+	'vehicle-name-exists': {
+		type: 'error',
+		text: getText('Vehicle with this name exists')
+	},
+	'vehicle-added': {
+		type: 'success',
+		text: getText('Added')
 	}
 }
 
