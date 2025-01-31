@@ -13,6 +13,7 @@ export default function NavigationButtons(props: Props) {
 	const router = useRouter()
 
 	const { getText } = useAppContext().Language
+	const {setNavigation} = useAppContext().Navigation
 	const { availablePages, redirect } = usePages()
 
 	// Changes url based on path
@@ -20,6 +21,7 @@ export default function NavigationButtons(props: Props) {
 		const url: any = event.currentTarget.dataset.path ?? '/'
 		await redirect(url)
 		document.body.scrollTo({ top: 0, behavior: 'smooth' })
+		setNavigation(false)
 	}
 
 	const navigationButtons = availablePages.map((item, i) => {

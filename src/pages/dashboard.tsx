@@ -31,7 +31,7 @@ export default function Dashboard() {
 				title={`Fuely | ${getText('Dashboard')} - ${user.displayName}`}
 				description={`Dashboard of ${user.displayName} user`}
 			/>
-			<VehicleSelector />
+			<VehicleSelector allowNull />
 			<Overview className={styles.overview} />
 			<Events className={styles.events} />
 		</>

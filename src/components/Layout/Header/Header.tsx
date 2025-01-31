@@ -23,11 +23,7 @@ export default React.forwardRef(function Header(props: Props, ref: React.Forward
 	const navButtonStyles = className(styles['nav-button'], navigationState ? styles['active'] : '')
 
 	function redirectToHome() {
-		if (isLoggedIn) {
-			redirect(`/dashboard`)
-		} else {
-			redirect('/')
-		}
+		redirect(isLoggedIn ? `/dashboard` : '/')
 	}
 
 	return (

@@ -37,7 +37,7 @@ export default function Refuel() {
 
 		const response = await fetch('/api/user/refuel', {
 			method: 'POST',
-			body: JSON.stringify({...data, vehicleId: currentVehicle.id}),
+			body: JSON.stringify({ ...data, vehicleId: currentVehicle.id }),
 		})
 
 		if (!response.ok) {
