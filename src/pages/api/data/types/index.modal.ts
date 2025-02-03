@@ -18,8 +18,6 @@ export interface UserObject extends UserData {
 export interface Vehicle {
 	id: string
 	name: string
-	brand?: string
-	model?: string
 }
 
 export interface Status {
