@@ -6,10 +6,8 @@ import { getAuth } from 'firebase/auth'
 
 import { parseBody, returnError } from '@api/data'
 
-const auth = getAuth()
-
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
-    const { currentUser } = auth
+    const { currentUser } = getAuth()
     // Returns error if user is not logged in
     if (!currentUser) {
         return returnError(res, 'auth/not-logged-in')
