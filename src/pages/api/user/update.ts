@@ -4,17 +4,17 @@ import { NextApiRequest, NextApiResponse } from 'next'
 import { parseBody, returnError } from '../data'
 import { updateValue } from '../data/database'
 
-const auth = getAuth()
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
+	const { currentUser } = getAuth()
+	// Returns error if user is not logged in
+	if (!currentUser) {
+		return returnError(res, 'auth/not-logged-in')
+	}
+
 	switch (req.method) {
 		case 'PATCH': {
 			try {
-				const { currentUser } = auth
-				// Returns error if user is not logged in
-				if (!currentUser) {
-					return returnError(res, 'auth/not-logged-in')
-				}
 				const { displayName, units, currency, email, password } = parseBody(req)
 
 				// Updates profile's display name

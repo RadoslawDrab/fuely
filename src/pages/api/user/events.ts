@@ -7,11 +7,10 @@ import { getEvents, getUserData, removeValue, updateValue } from '../data/databa
 
 import { Event } from '@/hooks/Events/types/Events.modal.ts'
 
-const auth = getAuth()
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
 	try {
-		const { currentUser } = auth
+		const { currentUser } = getAuth()
 		if (!currentUser) {
 			return returnError(res, 'auth/not-logged-in')
 		}
