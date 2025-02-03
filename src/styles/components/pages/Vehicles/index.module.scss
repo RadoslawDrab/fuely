@@ -59,3 +59,13 @@
 		max-width: $size-tablet-xs;
 	}
 }
+.modal {
+	.actions {
+		display: flex;
+		gap: $size-200;
+		margin-top: 1em;
+		& > * {
+			font-size: $size-400;
+		}
+	}
+}
