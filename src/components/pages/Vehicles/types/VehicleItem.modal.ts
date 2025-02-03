@@ -7,5 +7,5 @@ export interface Props {
     editedVehicleId: string | null
     onEdit: (event: React.MouseEvent<HTMLButtonElement>) => void
     onRemove: (event: React.MouseEvent<HTMLButtonElement>) => void
-    onValueChange: (event: React.ChangeEvent<HTMLInputElement>) => void
+    onValueChange: (event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => void
 }
