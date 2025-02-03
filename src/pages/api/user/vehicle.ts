@@ -24,16 +24,14 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
                 if (!vehicle.id || !userObject.settings.vehicles.some((v) => v.id === vehicle.id)) {
                     return returnError(res, 'vehicle-not-found')
                 }
+                const newVehicle = {...userObject.settings.vehicles.find((v) => v.id === vehicle.id), ...vehicle}
                 await updateValue({vehicles: userObject.settings.vehicles.map((v) => {
                     if (v.id !== vehicle.id) return v
 
-                    return {
-                        ...v,
-                        ...vehicle
-                    }
+                    return newVehicle
                 })}, 'users')
 
-                res.status(200).json({ code: 'updated' })
+                res.status(200).json({ code: 'updated', data: newVehicle })
             } catch (error: any) {
                 return returnError(res, error.code)
             }
