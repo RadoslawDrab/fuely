@@ -41,7 +41,7 @@
 			}
 		}
 		@media screen and (min-width: $size-tablet-xs) {
-			grid-template-columns: repeat(3, 1fr) auto auto;
+			grid-template-columns: repeat(2, 1fr) auto auto;
 		}
 	}
 	.add-item {
