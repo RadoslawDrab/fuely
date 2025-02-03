@@ -246,5 +246,13 @@
   	"Unassigned": {
 	  "pl": "Nieprzypisane",
 	  "de": "Nicht zugewiesen"
+	},
+  	"Removal Confirmation": {
+	  "pl": "Potwierdzenie usunięcia",
+	  "de": "Bestätigung der Löschung"
+	},
+  	"Are you sure you want to remove": {
+	  "pl": "Czy jesteś pewien, że chcesz usunąć",
+	  "de": "Möchten Sie wirklich löschen"
 	}
 }
