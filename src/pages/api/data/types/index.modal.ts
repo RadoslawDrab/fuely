@@ -18,6 +18,7 @@ export interface UserObject extends UserData {
 export interface Vehicle {
 	id: string
 	name: string
+	archived?: boolean
 }
 
 export interface Status {
