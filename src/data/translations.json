@@ -254,5 +254,9 @@
   	"Are you sure you want to remove": {
 	  "pl": "Czy jesteś pewien, że chcesz usunąć",
 	  "de": "Möchten Sie wirklich löschen"
+	},
+  	"Archived": {
+	  "pl": "Zarchiwizowano",
+	  "de": "A"
 	}
 }
