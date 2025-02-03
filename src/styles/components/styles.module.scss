@@ -122,3 +122,24 @@ header.header {
 		background-position: right center;
 	}
 }
+.badge {
+	display: inline-block;
+	margin: auto 0.25em;
+	padding: 0.15em 0.25em;
+	border-radius: 5px;
+	@include theme(($main-600, $main-700), background-color);
+	font-weight: 600;
+	letter-spacing: 1px;
+	color: $grey-200;
+	&-border {
+		@include theme((transparent, transparent), background-color);
+		color: $main-600;
+		border: 2px solid $main-600;
+	}
+	&-transparent {
+		background-color: transparent;
+		color: $main-600;
+		padding: 0;
+		margin: 0;
+	}
+}
