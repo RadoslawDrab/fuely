@@ -45,10 +45,10 @@ export default function useVehicle(): VehicleData {
                 if (!response.ok) {
                     throw body
                 }
-
-                // setVehicles((vehicles) => {
-                //     return vehicles.map((v) => v.id === vehicle.id ? vehicle : v)
-                // })
+                const newVehicle = body.data
+                setVehicles((vehicles) => {
+                    return vehicles.map((v) => v.id === newVehicle.id ? newVehicle : v)
+                })
                 resolve(getText('Updated'))
             } catch(error: any) {
                 reject(getMessage(error.code).text)
