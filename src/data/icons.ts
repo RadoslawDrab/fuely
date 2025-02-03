@@ -1,6 +1,7 @@
 const icons = [
 	'logo',
 	'car',
+	'car-profile',
 	'bell',
 	'caret-right',
 	'caret-left',
