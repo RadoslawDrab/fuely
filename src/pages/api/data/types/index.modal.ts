@@ -10,9 +10,16 @@ export interface UserData {
 export interface UserSettings {
 	units: Units
 	currency: Currencies
+	vehicles: Vehicle[]
 }
 export interface UserObject extends UserData {
 	settings: UserSettings
+}
+export interface Vehicle {
+	id: string
+	name: string
+	brand?: string
+	model?: string
 }
 
 export interface Status {

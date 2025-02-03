@@ -13,12 +13,10 @@ import styles from '@styles/pages/Dashboard/EventsItems.module.scss'
 export default function Events(props: Props) {
 	const [events, setEvents] = useState<FullEvent[]>([])
 
-	const items: any = useMemo(() => <EventsItems events={events} />, [events])
+	const items = useMemo(() => <EventsItems events={events} />, [events])
 	const { getText } = useAppContext().Language
 
-	const onLoad = useCallback((events: FullEvent[]) => {
-		setEvents(events)
-	}, [])
+	const onLoad = useCallback((events: FullEvent[]) => setEvents(events), [])
 
 	const content = (() => {
 		if (events.length === 0)

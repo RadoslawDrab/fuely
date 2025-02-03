@@ -64,6 +64,9 @@ $error-800: #991b1b;
 $error-900: #7f1d1d;
 $error-950: #450a0a;
 
+$error-100__filter: invert(71%) sepia(31%) saturate(142%) hue-rotate(314deg) brightness(122%) contrast(99%);
+$error-700__filter: invert(18%) sepia(95%) saturate(2217%) hue-rotate(345deg) brightness(94%) contrast(103%);
+
 $success-50: #f0fdf4;
 $success-100: #dcfce7;
 $success-200: #bbf7d0;
@@ -75,3 +78,6 @@ $success-700: #15803d;
 $success-800: #166534;
 $success-900: #14532d;
 $success-950: #052e16;
+
+$success-100__filter: invert(88%) sepia(25%) saturate(184%) hue-rotate(85deg) brightness(106%) contrast(98%);
+$success-700__filter: invert(36%) sepia(98%) saturate(422%) hue-rotate(90deg) brightness(87%) contrast(87%);

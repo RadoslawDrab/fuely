@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react'
 import useEvents from '@/hooks/Events/use-events'
 import useAppContext from '@/hooks/Other/use-app-context'
 import useUnit from '@/hooks/Other/use-unit'
-import { checkIfStringIsNumber, round } from '@/utils'
+import { checkIfStringIsNumber, className, round } from '@/utils'
 import { currencies } from '@/utils/currency'
 import { getMessage } from '@/utils/messages'
 
@@ -40,6 +40,7 @@ export default function RefuelForm(props: Props) {
 		if (!props.default?.odometer)
 			getEvent(0)
 				.then((event) => {
+					if (event)
 					updateData('odometer', event.odometer)
 				})
 				.catch((error) => {})
@@ -55,7 +56,7 @@ export default function RefuelForm(props: Props) {
 			})
 		else props.onSubmit(null)
 	}
-	// Checks if value is proper number and is greather than 0
+	// Checks if value is proper number and is greater than 0
 	function textInputsCheck(value: string) {
 		return checkIfStringIsNumber(value) && +value >= 0
 	}
@@ -65,7 +66,7 @@ export default function RefuelForm(props: Props) {
 	}
 
 	return (
-		<form onSubmit={onFormSubmit} className={styles.form}>
+		<form onSubmit={onFormSubmit} className={className(styles.form, styles.columns)}>
 			<FormInput
 				id="cost-input"
 				type="number"

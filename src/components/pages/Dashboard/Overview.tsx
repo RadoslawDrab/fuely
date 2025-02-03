@@ -28,15 +28,23 @@ export default function Overview(props: Props) {
 	useEffect(() => {
 		getEvent(0)
 			.then((event) => {
+				if(!event) {
+					setEvent0(emptyEvent)
+					return
+				}
 				setEvent0(() => event)
 			})
 			.catch(() => {})
 		getEvent(1)
 			.then((event) => {
+				if(!event) {
+					setEvent1(emptyEvent)
+					return
+				}
 				setEvent1(() => event)
 			})
 			.catch(() => {})
-	}, [isLoading, events, getEvent])
+	}, [isLoading, events, getEvent, emptyEvent])
 
 	const items: OverviewItem[] = useMemo(() => {
 		// Last consumption

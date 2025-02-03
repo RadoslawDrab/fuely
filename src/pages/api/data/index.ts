@@ -4,7 +4,8 @@ import { UserSettings } from './types/index.modal'
 
 export const defaultUserSettings: UserSettings = {
 	units: 'metric',
-	currency: 'usd'
+	currency: 'usd',
+	vehicles: []
 }
 
 export function returnError(res: NextApiResponse, code: string, message?: string) {

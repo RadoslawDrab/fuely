@@ -6,6 +6,7 @@ import useUserRedirect from '@/hooks/Other/use-user-redirect'
 
 import Head from '@/components/Head'
 import LoadingIcon from '@/components/UI/LoadingIcon'
+import VehicleSelector from '@/components/Layout/Dashboard/VehicleSelector.tsx'
 import Events from '@/components/pages/Dashboard/Events'
 import Overview from '@/components/pages/Dashboard/Overview'
 
@@ -30,6 +31,7 @@ export default function Dashboard() {
 				title={`Fuely | ${getText('Dashboard')} - ${user.displayName}`}
 				description={`Dashboard of ${user.displayName} user`}
 			/>
+			<VehicleSelector allowNull />
 			<Overview className={styles.overview} />
 			<Events className={styles.events} />
 		</>

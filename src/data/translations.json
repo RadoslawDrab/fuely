@@ -198,5 +198,61 @@
 	"Get Started": {
 		"pl": "Zacznij",
 		"de": "Los geht's"
+	},
+  	"Add vehicle first": {
+	  "pl": "Dodaj najpierw pojazd",
+	  "de": "Zuerst Fahrzeug hinzufügen"
+	},
+  	"Add vehicle": {
+	  "pl": "Dodaj pojazd",
+	  "de": "Fahrzeug hinzufügen"
+	},
+  	"Vehicles": {
+	  "pl": "Pojazdy",
+	  "de": "Fahrzeuge"
+	},
+	"Name": {
+	  "pl": "Nazwa",
+	  "de": "Name"
+	},
+	"Brand": {
+	  "pl": "Marka",
+	  "de": "Marke"
+	},
+	"Model": {
+	  "pl": "Model",
+	  "de": "Modell"
+	},
+	"No vehicle name provided": {
+	  "pl": "Nie wprowadzono nazwy pojazdu",
+	  "de": "Kein Fahrzeugname angegeben"
+	},
+	"Vehicle with this name exists": {
+	  "pl": "Pojazd o tej nazwie istnieje",
+	  "de": "Fahrzeug mit diesem Namen existiert"
+	},
+  	"Added": {
+	  "pl": "Dodano",
+	  "de": "Hinzugefügt"
+	},
+  	"Updated": {
+	  "pl": "Zaktualizowano",
+	  "de": "Aktualisiert"
+	},
+  	"Removed": {
+	  "pl": "Usunięto",
+	  "de": "Entfernt"
+	},
+  	"Unassigned": {
+	  "pl": "Nieprzypisane",
+	  "de": "Nicht zugewiesen"
+	},
+  	"Removal Confirmation": {
+	  "pl": "Potwierdzenie usunięcia",
+	  "de": "Bestätigung der Löschung"
+	},
+  	"Are you sure you want to remove": {
+	  "pl": "Czy jesteś pewien, że chcesz usunąć",
+	  "de": "Möchten Sie wirklich löschen"
 	}
 }

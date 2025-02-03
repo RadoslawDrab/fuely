@@ -32,6 +32,7 @@ export interface AuthState {
 	isLoading: boolean
 	isLoggedIn: boolean
 	hasError: boolean
+	hasVehicles: boolean
 	errorMessage: string
 }
 

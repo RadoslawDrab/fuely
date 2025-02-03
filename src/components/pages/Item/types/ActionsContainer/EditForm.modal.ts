@@ -5,5 +5,5 @@ export interface EditFormProps {
 	show: boolean
 	currentEvent: FullEvent
 	setShow: (state: boolean) => void
-	onSubmit: (data: RefuelFormData) => void
+	onSubmit: (data: RefuelFormData | null, vehicleId: string | null) => void
 }

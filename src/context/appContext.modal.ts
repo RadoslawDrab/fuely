@@ -3,6 +3,7 @@ import { Navigation } from '@/hooks/Navigation/types/Navigation.modal'
 import { Theme } from '@/hooks/Theme/types/Theme.modal'
 import { Auth } from '@/hooks/Auth/types/Auth.modal'
 import { NotificationObject } from '@/hooks/Other/types/Notification.modal'
+import { VehicleData } from '@/hooks/Vehicles/types/Vehicle.modal.ts'
 
 export interface AppContext {
 	Language: LanguageObject
@@ -10,4 +11,5 @@ export interface AppContext {
 	Navigation: Navigation
 	Auth: Auth
 	Notification: NotificationObject
+	Vehicle: VehicleData
 }

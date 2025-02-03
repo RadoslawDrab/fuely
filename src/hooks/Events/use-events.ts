@@ -4,12 +4,13 @@ import { currencyConvert } from '@/utils/currency'
 import useAppContext from '../Other/use-app-context'
 import useUnit from '../Other/use-unit'
 
-import { EventObject, FullEvent } from './types/Events.modal'
+import { EventObject, Events, FullEvent, Event } from './types/Events.modal'
 
 const emptyEvent: FullEvent = {
 	id: -1,
 	date: '',
 	fullId: '',
+	vehicleId: '',
 	cost: -1,
 	distance: -1,
 	fuel: -1,
@@ -19,11 +20,13 @@ const emptyEvent: FullEvent = {
 
 export default function useEvents(): EventObject {
 	const {
-		user: { events, settings }
+		user: { events: userEvents, settings }
 	} = useAppContext().Auth
+	const vehicle = useAppContext().Vehicle
 	const { convertIfImperial } = useUnit()
 
 	const [isLoading, setIsLoading] = useState(false)
+	const [events, setEvents] = useState<Events>(userEvents)
 
 	// Dates sorted descending
 	const sortedDates = useMemo(() => Object.keys(events).reverse(), [events])
@@ -54,14 +57,14 @@ export default function useEvents(): EventObject {
 		[events, sortedDates]
 	)
 	const getEvent = useCallback(
-		function (index: number, datesArray: string[] = sortedDates): Promise<FullEvent> {
-			return new Promise(async (resolve: (event: FullEvent) => void, reject: (errorMessage: string) => void) => {
-				if (datesArray.length <= 0) return reject('No events')
+		function (index: number, datesArray: string[] = sortedDates): Promise<FullEvent | null> {
+			return new Promise(async (resolve: (event: FullEvent | null) => void, reject: (errorMessage: string) => void) => {
+				if (datesArray.length <= 0) return resolve(null)
 
 				// Gets date based on index
 				const date = datesArray[Math.max(Math.min(index, datesArray.length - 1), 0)]
 				if (!date) {
-					return reject('No event for this index')
+					return resolve(null)
 				}
 				const formattedDate = date.split(':')[0]
 				const id = +date.split(':')[1]
@@ -77,10 +80,10 @@ export default function useEvents(): EventObject {
 					fuel: convertIfImperial(e.fuel, 'fuel'),
 					odometer: convertIfImperial(e.odometer, 'distance')
 				}
-
 				// Updates cost of an event based on user's currency preference
 				const newCurrency = settings?.currency || 'usd'
 				const newCost = await currencyConvert(convertedEvent.cost, convertedEvent.currency, newCurrency)
+
 				const event = { ...convertedEvent, cost: newCost, currency: newCurrency }
 
 				// Returns object with date and event data
@@ -90,32 +93,66 @@ export default function useEvents(): EventObject {
 		[convertIfImperial, events, getDistance, settings?.currency, sortedDates]
 	)
 	const getEventById = useCallback(
-		function (eventId: string, datesArray: string[] = sortedDates): Promise<FullEvent> {
+		function (eventId: string, datesArray: string[] = sortedDates): Promise<FullEvent | null> {
 			const eventIndex = sortedDates.findIndex((date) => date === eventId)
 			return getEvent(eventIndex, datesArray)
 		},
 		[getEvent, sortedDates]
 	)
 
-	const removeEvent = useCallback(function (eventId: string) {
+	const removeEvent = useCallback(function (eventId: string): Promise<void> {
 		return new Promise(async (resolve, reject) => {
 			try {
-				const response = await fetch('/api/user/events', {
-					method: 'PATCH',
-					body: JSON.stringify(eventId)
+				const response = await fetch(`/api/user/events?eventId=${eventId}`, {
+					method: 'DELETE',
 				})
 
-				let func = resolve
+				const body = await response.json()
 				if (!response.ok) {
-					func = reject
+					reject(body)
 				}
-				const value = await response.json()
-				func(value)
+				resolve()
 			} catch (error) {
 				console.log(error)
 			}
 		})
 	}, [])
+	const editEvent = useCallback((eventId: string, event: Partial<Event>): Promise<void> => {
+		return new Promise(async (resolve, reject) => {
+			try {
+				const response = await fetch(`/api/user/events?eventId=${eventId}`, {
+					method: 'PATCH',
+					body: JSON.stringify(event)
+				})
+
+				const body = await response.json()
+				if (!response.ok) {
+					reject(body)
+				}
+				resolve()
+			} catch (error) {
+				console.log(error)
+			}
+		})
+	}, [])
+
+	const setVehicleFilterId = useCallback((id: string | null) => {
+		setEvents(() => {
+			const filteredKeys = Object.keys(userEvents).filter((key) => {
+				const event = userEvents[key]
+				if (id === null) {
+					return !vehicle.vehicles.some(vehicle => vehicle.id === event.vehicleId)
+				}
+
+				return id === event.vehicleId
+			})
+			return filteredKeys.reduce((acc, key) => ({ ...acc, [key]: userEvents[key] }), {})
+		})
+	}, [userEvents, vehicle.vehicles])
+
+	useEffect(() => {
+		setVehicleFilterId(vehicle.currentVehicle?.id ?? null)
+	}, [setVehicleFilterId, vehicle.currentVehicle]);
 
 	return {
 		events,
@@ -125,6 +162,7 @@ export default function useEvents(): EventObject {
 		getEvent,
 		getEventById,
 		removeEvent,
+		editEvent,
 		getDistance
 	}
 }

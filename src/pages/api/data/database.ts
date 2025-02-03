@@ -9,10 +9,13 @@ import { Base } from './types/database.modal.ts'
 
 const auth = getAuth()
 
+const isProduction = process.env.NODE_ENV === 'production'
+const dbPrefix = isProduction ? '' : 'dev/'
+
 export function getEvents(user: User): Promise<Events> {
 	return new Promise(async (resolve) => {
 		let data = {}
-		const snapshot = await get(child(databaseRef, `events/${user.uid}`))
+		const snapshot = await get(child(databaseRef, `${dbPrefix}events/${user.uid}`))
 
 		if (snapshot.exists()) {
 			data = snapshot.val()
@@ -27,7 +30,7 @@ export function setValue(value: any, base: Base, path: string = ''): Promise<voi
 			reject()
 			return
 		}
-		set(child(databaseRef, `${base}/${currentUser.uid}${path ? '/' + path : ''}`), value)
+		set(child(databaseRef, `${dbPrefix}${base}/${currentUser.uid}${path ? '/' + path : ''}`), value)
 			.then(() => {
 				resolve()
 			})
@@ -43,7 +46,7 @@ export function updateValue(value: any, base: Base, path: string = ''): Promise<
 			reject()
 			return
 		}
-		update(child(databaseRef, `${base}/${currentUser.uid}${path ? '/' + path : ''}`), value)
+		update(child(databaseRef, `${dbPrefix}${base}/${currentUser.uid}${path ? '/' + path : ''}`), value)
 			.then(() => {
 				resolve()
 			})
@@ -59,7 +62,7 @@ export function removeValue(base: Base, path: string): Promise<void> {
 			reject()
 			return
 		}
-		remove(child(databaseRef, `${base}/${currentUser.uid}${path ? '/' + path : ''}`))
+		remove(child(databaseRef, `${dbPrefix}${base}/${currentUser.uid}${path ? '/' + path : ''}`))
 			.then(() => {
 				resolve()
 			})
@@ -69,22 +72,26 @@ export function removeValue(base: Base, path: string): Promise<void> {
 	})
 }
 export function getUserData(user: User): Promise<UserObject> {
-	return new Promise(async (resolve) => {
-		const userData: UserObject = {
-			displayName: user.displayName || 'User',
-			email: user.email,
-			settings: {
-				units: 'metric',
-				currency: 'usd'
+	return new Promise(async (resolve, reject) => {
+		try {
+			const userData: UserObject = {
+				displayName: user.displayName || 'User',
+				email: user.email,
+				settings: {
+					units: 'metric',
+					currency: 'usd',
+					vehicles: [],
+				}
 			}
-		}
-		const snapshot = await get(child(databaseRef, `users/${user.uid}`))
+			const snapshot = await get(child(databaseRef, `${dbPrefix}users/${user.uid}`))
+			if (snapshot.exists()) {
+				const value = snapshot.val()
 
-		if (snapshot.exists()) {
-			const value = snapshot.val()
-
-			userData.settings = value
+				userData.settings = { ...userData.settings, ...value}
+			}
+			resolve(userData)
+		} catch(error: any) {
+			reject({code: error.name, message: error.message})
 		}
-		resolve(userData)
 	})
 }

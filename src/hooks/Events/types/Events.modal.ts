@@ -5,6 +5,7 @@ export interface Event {
 	fuel: number
 	odometer: number
 	currency: Currencies
+	vehicleId: string | null
 }
 export interface FullEvent extends Event {
 	id: number
@@ -20,9 +21,10 @@ export interface EventObject {
 	sortedDates: string[]
 	isLoading: boolean
 	emptyEvent: FullEvent
-	getEvent: (index: number, datesArray?: string[]) => Promise<FullEvent>
-	getEventById: (eventId: string) => Promise<FullEvent>
-	removeEvent: (eventId: string) => Promise<any>
+	getEvent: (index: number, datesArray?: string[]) => Promise<FullEvent | null>
+	getEventById: (eventId: string) => Promise<FullEvent | null>
+	removeEvent: (eventId: string) => Promise<void>
+	editEvent: (eventId: string, event: Partial<Event>) => Promise<void>
 	getDistance: (eventId: string) => Promise<number>
 }
 export interface CalculateData {
