@@ -1,8 +1,10 @@
 @use '@/styles/library' as *;
 
 .wrapper {
+	$caret-width: 1.15rem;
 	position: relative;
 	.select {
+		--caret-width: calc(#{$caret-width} * 1.5);
 		width: 100%;
 		height: 100%;
 		appearance: none;
@@ -10,9 +12,9 @@
 	img {
 		position: absolute;
 		top: 50%;
-		right: 1rem;
+		right: 0.75rem;
 		transform: translateY(-50%);
-		width: 1.15rem;
+		width: $caret-width;
 		@include theme(($grey-700__filter, $grey-300__filter), filter);
 	}
 }

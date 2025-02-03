@@ -1,20 +1,26 @@
 @use '@/styles/library' as *;
 
-.overview, .selector {
+.overview, .bar, .gap {
 	margin-bottom: 2rem;
 }
-.events > div, .selector {
+.events > div {
 	justify-self: center;
 	max-width: $size-tablet-xs;
 	width: 100%;
 }
+.bar {
+	display: grid;
+	align-items: center;
+	grid-template-columns: 1fr 1fr auto;
+	gap: 1em;
+}
 @media screen and (min-width: $size-tablet-xs) {
 	.overview,
 	.events,
-	.selector {
+	.bar {
 		grid-column: 1 / -1;
 	}
-	.events > div, .selector {
+	.events > div {
 		max-width: $size-tablet-xs;
 	}
 	.events {

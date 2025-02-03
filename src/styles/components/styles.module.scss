@@ -121,6 +121,9 @@ header.header {
 		background-repeat: no-repeat;
 		background-position: right center;
 	}
+	&-special {
+		background-color: $grey-500;
+	}
 }
 .badge {
 	display: inline-block;

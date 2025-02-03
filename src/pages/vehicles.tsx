@@ -75,11 +75,12 @@ export default function Vehicles() {
             }
         }, event)
     }
-    function onValueChange(event: React.ChangeEvent<HTMLInputElement>) {
+    function onValueChange(event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) {
         const value = event.target.value
+        const isBoolean = value === 'true' || value === 'false'
         const {key, vehicleId} = event.target.dataset
         if (!key || !vehicleId) return
-        setValues((v) => ({ ...v, [key]: value, id: vehicleId }))
+        setValues((v) => ({ ...v, [key]: isBoolean ? value === 'true' : value, id: vehicleId }))
     }
     
     return (

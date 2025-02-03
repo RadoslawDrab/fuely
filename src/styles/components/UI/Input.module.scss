@@ -1,6 +1,10 @@
 @use '@/styles/library' as *;
 
 .input {
+	--right-length: 0;
+	--caret-width: 0;
+	padding: 0.6rem 0.75rem;
+	padding-right: calc(0.75rem + (var(--right-length) * 1ch) + var(--caret-width));
 	$colors: (
 		'grey-50': $grey-50 $grey-800,
 		'grey-200': $grey-200 $grey-700,
@@ -16,8 +20,6 @@
 		border: 1.5px solid $grey-300_theme;
 		border-radius: 4px;
 
-		padding: 0.6rem 0.75rem;
-		padding-right: calc(0.75rem + var(--right-length) * 1ch);
 
 		color: $grey-700_theme;
 		font-size: $size-400;
