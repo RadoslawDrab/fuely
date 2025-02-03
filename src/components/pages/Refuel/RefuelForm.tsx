@@ -56,7 +56,7 @@ export default function RefuelForm(props: Props) {
 			})
 		else props.onSubmit(null)
 	}
-	// Checks if value is proper number and is greather than 0
+	// Checks if value is proper number and is greater than 0
 	function textInputsCheck(value: string) {
 		return checkIfStringIsNumber(value) && +value >= 0
 	}
