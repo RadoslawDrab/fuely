@@ -1,17 +1,17 @@
-import { Vehicle } from '@api/data/types/index.modal.ts'
 import React, { useState } from 'react'
 
-import { className, getRandomKey } from '@/utils'
+import { getRandomKey } from '@/utils'
 import useAppContext from '@/hooks/Other/use-app-context.ts'
 import useUserRedirect from '@/hooks/Other/use-user-redirect.ts'
 
+import { Vehicle } from '@api/data/types/index.modal.ts'
+
+import VehicleRemovalModal from '@comp/pages/Vehicles/VehicleRemovalModal.tsx'
+import VehicleItem from '@comp/pages/Vehicles/VehicleItem.tsx'
 import Button from '@comp/UI/Button.tsx'
-import Input from '@comp/UI/Input.tsx'
 import Icon from '@comp/UI/Icon.tsx'
 
-import generalStyles from '@styles/styles.module.scss'
 import styles from '@styles/pages/Vehicles/index.module.scss'
-import inputStyles from '@styles/UI/Input.module.scss'
 
 export default function Vehicles() {
     useUserRedirect()
@@ -20,6 +20,8 @@ export default function Vehicles() {
     const {addNotification} = useAppContext().Notification
 
     const [editedVehicleId, setEditedVehicleId] = useState<string | null>(null)
+    const [removeVehicleId, setRemoveVehicleId] = useState<string | null>(null)
+
     const [values, setValues] = useState<Partial<Vehicle>>({})
 
     function onButtonEvent(this: (btn: HTMLButtonElement | null, id: string | null) => void, event: React.MouseEvent<HTMLButtonElement>) {
@@ -31,7 +33,6 @@ export default function Vehicles() {
         onButtonEvent.call((_, id) => {
             setEditedVehicleId((v) => {
                 if(v === id && v !== null) {
-                    // if (vehicle.currentVehicle)
                     if (Object.keys(values).length > 0) {
                         vehicle.update({ ...values }).then(() => setValues({}))
                     }
@@ -44,6 +45,12 @@ export default function Vehicles() {
     function onRemove(event: React.MouseEvent<HTMLButtonElement>) {
         onButtonEvent.call(async (_, id) => {
             if (!id) return
+
+            // Checks if `removeVehicleId` is set. If so it removes it. Otherwise, sets confirmation
+            if (!removeVehicleId) {
+                setRemoveVehicleId(id)
+                return
+            } else setRemoveVehicleId(null)
             try {
                 const status = await vehicle.remove(id)
                 addNotification({type: 'success', content: status})
@@ -55,10 +62,12 @@ export default function Vehicles() {
     function onAdd(event: React.MouseEvent<HTMLButtonElement>) {
         onButtonEvent.call(async () => {
             try {
-                const currentIds = vehicle.vehicles.filter((v) => v.name.match(/Vehicle-\d+/)).map((v) => v.name.split('-')[1])
+                // Gets ids of current vehicles which names weren't changed
+                const currentIds = vehicle.vehicles.filter((v) => v.name.match(/V-\d+/)).map((v) => v.name.split('-')[1])
+                // Gets random id excluding current ids
                 const id = getRandomKey(5, currentIds)
                 const status = await vehicle.add({
-                    name: `Vehicle-${id}`,
+                    name: `V-${id}`,
                 })
                 addNotification({type: 'success', content: status})
             } catch (error) {
@@ -69,55 +78,24 @@ export default function Vehicles() {
     function onValueChange(event: React.ChangeEvent<HTMLInputElement>) {
         const value = event.target.value
         const {key, vehicleId} = event.target.dataset
-        setValues((v) => ({...v, [key]: value, id: vehicleId}))
+        if (!key || !vehicleId) return
+        setValues((v) => ({ ...v, [key]: value, id: vehicleId }))
     }
     
     return (
         <ul className={styles.list}>
             {
                 vehicle.vehicles.map((vehicle, i) => (
-                    <li key={vehicle.id}>
-                        <form className={className(generalStyles.form, styles.item, editedVehicleId === vehicle.id ? styles.selected : '')}>
-                            {
-                                i === 0 ?
-                                <>
-                                    <span className={styles.label}>{getText('Name')}</span>
-                                    <span className={styles.label}>{getText('Brand')}</span>
-                                    <span className={styles.label}>{getText('Model')}</span>
-                                    <span></span>
-                                    <span></span>
-                                </> : <></>
-                            }
-                            {
-                                editedVehicleId !== vehicle.id || editedVehicleId === null ?
-                                <>
-                                    <span className={className(styles.input, inputStyles.input)}>{vehicle.name}</span>
-                                    <span className={className(styles.input, inputStyles.input)}>{vehicle.brand}</span>
-                                    <span className={className(styles.input, inputStyles.input)}>{vehicle.model}</span>
-                                </>
-                                :
-                                <>
-                                    <Input type='text' data={{key: 'name', 'vehicle-id': vehicle.id}} onChange={onValueChange} defaultValue={vehicle.name} rightText='*' required={true} inputData={{pattern: '.+'}} />
-                                    <Input type='text' data={{key: 'brand', 'vehicle-id': vehicle.id}} onChange={onValueChange} defaultValue={vehicle.brand} />
-                                    <Input type='text' data={{key: 'model', 'vehicle-id': vehicle.id}} onChange={onValueChange} defaultValue={vehicle.model} />
-                                </>
-                            }
-                            <Button onClick={onEdit} data={{id: vehicle.id}} variant={vehicle.id === editedVehicleId ? 'accent' : 'error'}>
-                                <Icon alt='Edit icon' type='gear' />
-                            </Button>
-                            <Button onClick={onRemove} data={{id: vehicle.id}} variant='error'>
-                                <Icon alt='Remove icon' type='x' />
-                            </Button>
-                        </form>
-                    </li>
+                    <VehicleItem key={vehicle.id} vehicle={vehicle} index={i} editedVehicleId={editedVehicleId} onEdit={onEdit} onRemove={onRemove} onValueChange={onValueChange} />
                 ))
             }
             <li>
-                <Button onClick={onAdd} variant='error' className={styles['add-item']}>
+                <Button onClick={onAdd} variant='success' className={styles['add-item']}>
                     <Icon alt='Add icon' type='plus' />
                     <span>{getText('Add vehicle')}</span>
                 </Button>
             </li>
+            <VehicleRemovalModal vehicleId={removeVehicleId} onRemove={onRemove} onCancel={() => setRemoveVehicleId(null)} />
         </ul>
     )
 }
