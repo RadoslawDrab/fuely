@@ -23,23 +23,11 @@ function reducer(state: State, action: Actions): State {
 	switch (action.type) {
 		// Updates user's state and data
 		case 'SET_USER': {
-			return {
-				...state,
-				state: {
-					...state.state,
-					isLoggedIn: true,
-					hasVehicles: action.user.settings.vehicles.length > 0
-				},
-				user: {
-					...state.user,
-					...action.user,
-					settings: {
-						...state.user.settings,
-						...action.user.settings,
-						vehicles: action.user.settings.vehicles
-					}
-				}
-			}
+			state.state.isLoggedIn = true
+			state.state.hasVehicles = action.user.settings.vehicles.length > 0
+
+			state.user = { ...state.user, ...action.user }
+			return state
 		}
 		// Logs user out while return default data
 		case 'LOG_OUT': {
