@@ -17,7 +17,7 @@ function AppContextWrapper(props: Props) {
 	const Navigation = useNavigation()
 	const Auth = useAuth()
 	const Notification = useNotification()
-	const Vehicle = useVehicle()
+	const Vehicle = useVehicle(Auth)
 
 	return <AppContext.Provider value={{ Language, Theme, Navigation, Auth, Notification, Vehicle }}>{props.children}</AppContext.Provider>
 }

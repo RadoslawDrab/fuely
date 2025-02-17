@@ -10,12 +10,12 @@ import { Events } from '../Events/types/Events.modal'
 export default function useAuth(): Auth {
 	const [authState, dispatch] = useReducer(authReducer.reducer, authReducer.initialState)
 
-	const setUserData = useCallback(function (data: UserObject): Status {
+	const setUserData = useCallback(async function (data: UserObject): Promise<Status> {
 		// Updates auth state user data
 		dispatch({ type: 'SET_USER', user: data })
 
 		// Updates user's events
-		getEvents().catch(() => {})
+		await getEvents()
 
 		// Disables loading and removes any errors
 		setLoading(false)

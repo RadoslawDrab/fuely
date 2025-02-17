@@ -1,17 +1,14 @@
+import { useEffect, useState } from 'react'
 import useLanguage from '@/hooks/Language/use-language.ts'
 import { getMessage } from '@/utils/messages.ts'
-import { useEffect, useState } from 'react'
-
-import useAuth from '@/hooks/Auth/use-auth.ts'
 
 import { Vehicle } from '@api/data/types/index.modal.ts'
 import { VehicleData } from './types/Vehicle.modal.ts'
+import type { Auth } from '@/hooks/Auth/types/Auth.modal.ts'
 
-export default function useVehicle(): VehicleData {
-    const { user } = useAuth()
+export default function useVehicle({user, state}: Auth): VehicleData {
     const { getText } = useLanguage()
     const [vehicles, setVehicles] = useState<Vehicle[]>([])
-    const [hasVehicles, setHasVehicles] = useState<boolean>(false)
     const [currentVehicle, setCurrentVehicle] = useState<Vehicle | null>(null)
 
     function add(vehicle: Omit<Vehicle, 'id'>): Promise<string> {
@@ -80,10 +77,6 @@ export default function useVehicle(): VehicleData {
     }
 
     useEffect(() => {
-        setHasVehicles(vehicles.length > 0)
-    }, [setHasVehicles, vehicles, currentVehicle])
-
-    useEffect(() => {
         const vehicles = user?.settings?.vehicles
         if (vehicles && vehicles.length > 0)
             setVehicles(vehicles)
@@ -92,7 +85,7 @@ export default function useVehicle(): VehicleData {
     return {
         currentVehicle,
         vehicles,
-        hasVehicles,
+        hasVehicles: state.hasVehicles,
         add,
         update,
         remove,
@@ -108,5 +101,5 @@ export const exampleVehiclesObject: VehicleData = {
     add: async () => '',
     update: async () => '',
     remove: async () => '',
-    changeVehicle: () => {}
+    changeVehicle: () => {},
 }
