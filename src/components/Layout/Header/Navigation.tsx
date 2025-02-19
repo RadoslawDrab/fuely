@@ -11,7 +11,7 @@ import NavigationButtons from './NavigationButtons'
 import styles from '@styles/Layout/Header/Navigation.module.scss'
 
 export default function Navigation() {
-	const { navigationState } = useAppContext().Navigation
+	const { navigationState, setNavigation } = useAppContext().Navigation
 	const {
 		state: { isLoggedIn },
 		logout
@@ -24,6 +24,7 @@ export default function Navigation() {
 	async function logoutUser() {
 		await logout()
 		redirect('/login', 'replace')
+		setNavigation(false)
 	}
 
 	return (

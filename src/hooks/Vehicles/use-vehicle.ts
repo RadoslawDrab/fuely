@@ -6,7 +6,7 @@ import { Vehicle } from '@api/data/types/index.modal.ts'
 import { VehicleData } from './types/Vehicle.modal.ts'
 import type { Auth } from '@/hooks/Auth/types/Auth.modal.ts'
 
-export default function useVehicle({user, state}: Auth): VehicleData {
+export default function useVehicle({ user, state }: Auth): VehicleData {
     const { getText } = useLanguage()
     const [vehicles, setVehicles] = useState<Vehicle[]>([])
     const [currentVehicle, setCurrentVehicle] = useState<Vehicle | null>(null)
@@ -78,9 +78,10 @@ export default function useVehicle({user, state}: Auth): VehicleData {
 
     useEffect(() => {
         const vehicles = user?.settings?.vehicles
+
         if (vehicles && vehicles.length > 0)
             setVehicles(vehicles)
-    }, [user.settings, user.settings?.vehicles]);
+    }, [user, user.settings, user.settings?.vehicles]);
 
     return {
         currentVehicle,
