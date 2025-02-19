@@ -59,19 +59,18 @@ export default function useAuth(): Auth {
 				.catch((error) => reject(error))
 		})
 	}
-	const loginUsingToken = useCallback(
-		function (): Promise<Status> {
-			return new Promise(async (resolve, reject) => {
-				// Checks if user is logged in. If yes then resolves
-				if (authState.state.isLoggedIn) return resolve({ code: 'auth/already-logged-in' })
-				setLoading(true)
+	const loginUsingToken = useCallback((): Promise<Status> => {
+		return new Promise(async (resolve, reject) => {
+			// Checks if user is logged in. If yes then resolves
+			if (authState.state.isLoggedIn) return resolve({ code: 'auth/already-logged-in' })
+			setLoading(true)
 
-				const response = await fetch('/api/auth/login-token')
+			const response = await fetch('/api/auth/login-token')
 
-				errorHandler<UserObject>(response)
-					.then((data: any) => resolve(setUserData(data)))
-					.catch((error) => reject(error))
-			})
+			errorHandler<UserObject>(response)
+				.then((data: any) => resolve(setUserData(data)))
+				.catch((error) => reject(error))
+		})
 		},
 		[authState.state.isLoggedIn, errorHandler, setUserData]
 	)
@@ -105,8 +104,8 @@ export default function useAuth(): Auth {
 			const response = await fetch('/api/auth/logout')
 			dispatch({ type: 'LOG_OUT' })
 
-			errorHandler(response)
-				.then((data: any) => resolve(data))
+			errorHandler<Status>(response)
+				.then((data) => resolve(data))
 				.catch((error) => reject(error))
 		})
 	}
