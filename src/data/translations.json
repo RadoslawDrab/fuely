@@ -257,6 +257,10 @@
 	},
   	"Archived": {
 	  "pl": "Zarchiwizowano",
-	  "de": "A"
+	  "de": "Archiviert"
+	},
+  	"No vehicle selected": {
+	  "pl": "Nie wybrano pojazdu",
+	  "de": "Kein Fahrzeug ausgewählt"
 	}
 }
