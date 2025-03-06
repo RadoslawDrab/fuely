@@ -30,6 +30,9 @@ export default function Refuel() {
 	const sectionStyles = className(styles.section, styles.center)
 
 	async function onSubmit(data: RefuelFormData | null) {
+		if (!currentVehicle) {
+			return addNotification({type: 'error', content: getMessage('no-vehicle-selected').text})
+		}
 		if (!data || !currentVehicle) {
 			return addNotification({ type: 'error', content: getMessage('not-enough-data').text })
 		}
