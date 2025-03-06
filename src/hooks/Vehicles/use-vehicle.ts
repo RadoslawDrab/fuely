@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import useLanguage from '@/hooks/Language/use-language.ts'
 import { getMessage } from '@/utils/messages.ts'
 
@@ -72,16 +72,18 @@ export default function useVehicle({ user, state }: Auth): VehicleData {
         })
     }
 
-    function changeVehicle(id: string | null) {
+    const changeVehicle = useCallback((id: string | null) => {
         setCurrentVehicle(id !== null ? vehicles.find((v) => v.id === id) ?? null : null)
-    }
+    }, [vehicles])
 
     useEffect(() => {
         const vehicles = user?.settings?.vehicles
 
-        if (vehicles && vehicles.length > 0)
+        if (vehicles && vehicles.length > 0) {
             setVehicles(vehicles)
-    }, [user, user.settings, user.settings?.vehicles]);
+            changeVehicle(vehicles[0].id)
+        }
+    }, [changeVehicle, user, user?.settings, user?.settings?.vehicles]);
 
     return {
         currentVehicle,

@@ -17,8 +17,9 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 		switch (req.method) {
 			case 'POST': {
 				const { date, cost, currency, odometer, fuel, vehicleId } = parseBody(req)
+				if(!vehicleId) return returnError(res, 'event/no-vehicle-selected')
 
-				if ((cost !== undefined && cost <= 0) || (odometer !== undefined && odometer < 0) || (fuel !== undefined && fuel <= 0) || !vehicleId) {
+				if ((cost !== undefined && cost <= 0) || (odometer !== undefined && odometer < 0) || (fuel !== undefined && fuel <= 0)) {
 					return returnError(res, 'event/not-enough-data')
 				}
 

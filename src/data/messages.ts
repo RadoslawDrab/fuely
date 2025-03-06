@@ -79,6 +79,10 @@ const messages: Messages = {
 		type: 'error',
 		text: getText('Verify to log in')
 	},
+	'no-vehicle-selected': {
+		type: 'error',
+		text: getText('No vehicle selected')
+	},
 	'no-vehicle-name': {
 		type: 'error',
 		text: getText('No vehicle name provided')
